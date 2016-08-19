@@ -1,0 +1,6 @@
+.settings/*
+classes/*
+target/*
+WebContent/bower_components/*
+.project
+*.swp
