@@ -6,3 +6,6 @@ WebContent/bower_components/*
 *.swp
 /build/
 /target/
+.idea/*
+WebsiteStore.iml
+/node_modules/*
