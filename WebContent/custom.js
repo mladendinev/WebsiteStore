@@ -6,7 +6,6 @@ $(function() {
 
     // Request a token from Stripe:
     Stripe.card.createToken($form, stripeResponseHandler);
-    console.log('gasg')
     // Prevent the form from being submitted:
     return false;
   });
@@ -27,8 +26,8 @@ function stripeResponseHandler(status, response) {
 
     // Get the token ID:
     var token = response.id;
-
-    // Insert the token ID into the form so it gets submitted to the server:
+    console.log(token)
+//     Insert the token ID into the form so it gets submitted to the server:
     $form.append($('<input type="hidden" name="stripeToken">').val(token));
 
     // Submit the form:
