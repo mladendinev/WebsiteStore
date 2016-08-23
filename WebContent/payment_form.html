@@ -1,3 +1,29 @@
+<html>
+<head>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+  Stripe.setPublishableKey('pk_test_10mTaueKFQ7Vuu0qxUt6b4wA');
+</script>
+    <script type="text/javascript" src="custom.js"></script>
+<!--<script>-->
+<!--$(document).ready(function () {-->
+  <!--var $form = $('#payment-form');-->
+  <!--$form.submit(function(event) {-->
+    <!--// Disable the submit button to prevent repeated clicks:-->
+    <!--$form.find('.submit').prop('disabled', true);-->
+
+    <!--// Request a token from Stripe:-->
+    <!--Stripe.card.createToken($form, stripeResponseHandler);-->
+
+    <!--// Prevent the form from being submitted:-->
+    <!--return false;-->
+  <!--});-->
+<!--});-->
+<!--</script>-->
+</head>
+
 <form action="" method="POST" id="payment-form">
   <span class="payment-errors"></span>
 
@@ -24,6 +50,22 @@
     </label>
   </div>
 
+    <div class="form-row">
+        <label>
+            <span> Billing Address </span>
+            <input type="text"  name="line1" id="line1"  maxlength="50" data-stripe="address_line1">
+
+        </label>
+    </div>
+
+    <div class="form-row">
+        <label>
+            <span> Postcode </span>
+            <input type="text"  name="postcode" id="postcode" maxlength="9" data-stripe="address_zip_check">
+        </label>
+    </div>
+
 
   <input type="submit" class="submit" value="Submit Payment">
 </form>
+</html>
