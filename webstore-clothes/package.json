@@ -1,0 +1,11 @@
+{
+  "name": "webstore-clothes",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "imports": "^1.0.0",
+    "meteor-node-stubs": "~0.2.0"
+  }
+}
