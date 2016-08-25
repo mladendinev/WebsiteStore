@@ -10,13 +10,19 @@ body {
   margin-bottom: 20px;
 }
 
-.theme-showcase > p > .btn {
-  margin: 5px 0;
-}
 
 .theme-showcase .navbar .container {
   width: auto;
 }
+
+.nav-padding {
+  padding-left: 10%;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
 
 .theme-header-div-black {
   background-color: black;
@@ -24,22 +30,31 @@ body {
   float: left;
  }
 
-.theme-header-div-white {
-  padding-left: 4%;
-  background-color: white;
-  color: black;
-  float: left;
-}
+ .theme-header-div-white {
+   padding-left: 4%;
+   background-color: white;
+   color: black;
+   float: left;
+ }
 
 .margin-top-div {
   margin-top: 0.2%;
 }
 
-.theme-content-inner-div-white {
+.white-box {
   padding-top: 15%;
   padding-bottom: 15%;
   background-color: white;
 }
+
+.large-image-box-height{
+  height:80%;
+}
+
+.shopping-card-box-height{
+  height:20%;
+}
+
 
 .inner-div-margin-top {
   margin-top: 0.7%;
@@ -52,32 +67,23 @@ body {
   background-color: white;
 }
 
-.left-floating-div {
-  float: left;
-}
-
-.right-floating-div {
-
-  float: right;
-  
-}
-
 .width-div {
- 
-  width:33.2%; 
-
+  width:33.2%;
 }
 
-.high-content-padding {
-  padding-left: 6%;
-  padding-top: 5%;
-  padding-bottom: 6.55%;
+.height-div{
+  height:100px;
+}
+.div-margin-left {
+ margin-left: 0.2%;
 }
 
+
+
+/* EXTRA */
 .clear-left {
   clear: left;
 }
-
 .clear-right {
   clear: right;
 }
@@ -86,16 +92,37 @@ body {
   clear: both;
 }
 
-.div-margin-left {
- margin-left: 0.2%;
+.left-floating-div {
+  float: left;
+    height:800px;
+}
+.right-floating-div {
+  float: right;
 }
 
-.nav-padding {
-  padding-left: 10%;
+.padding-left-menu {
+  padding-left:180px;
 }
+
+.padding-right-menu {
+  padding-left:120px;
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+
 
 /* Shopping Page */
 
 .footer {
     height: 155px; /* .push must be the same height as .footer */
+}
+
+.div-clothes-container-padding {
+    padding-top:10px;
 }

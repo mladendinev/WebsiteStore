@@ -9,3 +9,4 @@ WebContent/bower_components/*
 .idea/*
 WebsiteStore.iml
 /node_modules/*
+/webstore-clothes/*
