@@ -1,3 +1,4 @@
+
 body {
   padding-top: 0px;
   padding-bottom: 30px;
@@ -42,8 +43,8 @@ body {
 }
 
 .white-box {
-  padding-top: 15%;
-  padding-bottom: 15%;
+  padding:3%;
+
   background-color: white;
 }
 
@@ -94,10 +95,13 @@ body {
 
 .left-floating-div {
   float: left;
-    height:800px;
+  height:800px;
 }
 .right-floating-div {
   float: right;
+  width:66.8%;
+  height:800px;
+  margin-bottom: 0.7%;
 }
 
 .padding-left-menu {
@@ -105,7 +109,7 @@ body {
 }
 
 .padding-right-menu {
-  padding-left:120px;
+  padding-left:11%;
 }
 
 html {
@@ -115,8 +119,6 @@ body {
   min-height: 100%;
 }
 
-
-
 /* Shopping Page */
 
 .footer {
@@ -125,4 +127,13 @@ body {
 
 .div-clothes-container-padding {
     padding-top:10px;
+}
+
+.border-style-top {
+    border-top: 3px solid;
+}
+
+
+.border-style-left {
+    border-left: 3px solid;
 }
