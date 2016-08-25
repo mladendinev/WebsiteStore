@@ -1,15 +1,15 @@
-body {
-  padding-top: 0px;
+.body-main {
+   padding-top: 0px;
   padding-bottom: 30px;
-  background-color: black;
+  background-color: black; 
 }
 
 .landing-main {
   background-image: url("images/background-landing.png");
-  width: 100%;
+  width: 100%; 
   overflow: hidden;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 .landing-container {

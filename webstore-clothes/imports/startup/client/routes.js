@@ -9,7 +9,7 @@ import '../../ui/pages/shop-template.js';
 FlowRouter.route('/',{
   name: 'App.home',
   action() {
-   BlazeLayout.render('App_body', { main: 'landing-page' });
+   BlazeLayout.render('App_body', { main: 'landingPage' });
   },
 });
 
