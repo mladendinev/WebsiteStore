@@ -4,6 +4,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import '../../ui/layouts/app-body.js';
 import '../../ui/pages/landing-page.js';
 import '../../ui/pages/shop-template.js';
+import '../../ui/pages/contacts-template.js';
 
 
 FlowRouter.route('/',{
@@ -17,5 +18,12 @@ FlowRouter.route('/shop',{
   name: 'Shop',
   action() {
    BlazeLayout.render('App_body', { main: 'shop-template' });
+  },
+});
+
+FlowRouter.route('/contacts',{
+  name: 'Contacts',
+  action() {
+   BlazeLayout.render('App_body', { main: 'contactsTemplate' });
   },
 });

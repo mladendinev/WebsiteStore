@@ -53,6 +53,49 @@ a:hover {
   text-decoration: none;
 }
 
+.contacs-logo-header {
+ 
+  background-color: black;
+  width: 100%;
+  padding-left: 45%;
+  padding-top:1%;
+  padding-bottom: 1%;
+  font-size: 30pt;
+  color: white;
+
+}
+
+.contacts-image {
+   float: left;
+   padding-top: 1.5%;
+   padding-left: 2%;
+   padding-bottom: 2%;
+   overflow: hidden;
+   width: 60%;
+ 
+}
+
+.contacts-text {
+  float: left;
+  padding-top: 10%;
+  padding-left: 2.5%;
+  width: 40%;
+}
+
+.contacts-blue-text {
+  color: #56A4DE;
+}
+
+.contacts-info-p {
+  font-weight:bold;
+  line-height: 1.1;
+}
+
+.contacts-header {
+ font-size: 20pt;
+ font-weight: bold;
+}
+
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;
