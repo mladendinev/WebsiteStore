@@ -1,8 +1,12 @@
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+$.getScript("https://js.stripe.com/v2/", function(){
 
-<script type="text/javascript">
-  Stripe.setPublishableKey('pk_test_10mTaueKFQ7Vuu0qxUt6b4wA');
-</script>
+   console.log("Script loaded but not necessarily executed.");
+
+});
+
+
+Stripe.setPublishableKey('pk_test_10mTaueKFQ7Vuu0qxUt6b4wA');
+
 
 $(function() {
   var $form = $('#payment-form');
