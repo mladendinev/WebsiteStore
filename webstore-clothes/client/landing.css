@@ -1,0 +1,41 @@
+.landing-main {
+  background-image: url("images/background-landing.png");
+  width: 100%; 
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.landing-container {
+  
+ float: left;
+ width: 30%;
+ 
+}
+
+.logo {
+padding-top: 5%;
+padding-left: 27%;
+color: white;
+font-size: 60pt;
+}
+
+.landing-menu {
+padding-top: 110%;
+padding-left: 27%;
+padding-bottom: 2%;
+font-size: 15pt;
+color: white;
+}
+
+.landing-art-text {
+
+ float: left;
+ width: 70%; 
+ padding-top: 30%;
+ padding-left: 40%;
+ color: white;
+ font-family: "Helvetica"
+ 
+}
+

@@ -8,4 +8,5 @@ WebContent/bower_components/*
 /target/
 .idea/*
 WebsiteStore.iml
+/node_modules/*
 
