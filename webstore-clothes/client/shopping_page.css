@@ -80,19 +80,6 @@ body {
 }
 
 
-
-/* EXTRA */
-.clear-left {
-  clear: left;
-}
-.clear-right {
-  clear: right;
-}
-
-.clear-div {
-  clear: both;
-}
-
 .left-floating-div {
   float: left;
   height:800px;

@@ -1,5 +1,5 @@
 .body-main {
-   padding-top: 0px;
+  padding-top: 0px;
   padding-bottom: 30px;
   background-color: black; 
 }
@@ -30,4 +30,16 @@ a:hover {
   
   padding-left: 10%;
   
+}
+
+.clear-left {
+  clear: left;
+}
+
+.clear-right {
+  clear: right;
+}
+
+.clear-div {
+  clear: both;
 }
