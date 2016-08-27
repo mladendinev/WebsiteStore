@@ -6,6 +6,7 @@ import '../../ui/pages/landing-page.js';
 import '../../ui/pages/shop-template.js';
 import '../../ui/pages/contacts-template.js';
 import '../../ui/pages/shopping_page.js';
+import '../../ui/stripe/payment_page.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
@@ -32,5 +33,12 @@ FlowRouter.route('/shopping',{
   name: 'Shopping',
   action() {
    BlazeLayout.render('App_body', { main: 'shoppingTemplate' });
+  },
+});
+
+FlowRouter.route('/payment',{
+  name: 'Payment',
+  action() {
+   BlazeLayout.render('App_body', { main: 'payment-template' });
   },
 });
