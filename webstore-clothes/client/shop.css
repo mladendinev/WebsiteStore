@@ -4,6 +4,12 @@
   float: left;
  }
 
+.shop-container {
+ clear: both;
+ overflow: hidden;
+ width: 100%;
+}
+
 .shop-header-div-white {
   padding-left: 4%;
   background-color: white;
@@ -53,10 +59,14 @@
   padding-right: 6%;
   padding-top: 5%;
   padding-bottom: 8%;
+  height: auto;
 }
-
 
 .shop-div-margin-left {
  margin-left: 0.2%;
+}
+
+.shop-product-padding {
+ padding-left: 10%;
 }
 

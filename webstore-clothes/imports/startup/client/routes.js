@@ -18,7 +18,7 @@ FlowRouter.route('/',{
 FlowRouter.route('/shop',{
   name: 'Shop',
   action() {
-   BlazeLayout.render('App_body', { main: 'shop-template' });
+   BlazeLayout.render('App_body', { main: 'shopTemplate' });
   },
 });
 
