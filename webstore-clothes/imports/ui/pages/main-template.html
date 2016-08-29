@@ -1,50 +1,59 @@
 <template name='mainTemplate'>
 
-<div class="shop-header-div-white shop-width-div"> 
-<ul class="nav navbar-nav">
-<li> <a href="#"> WHO WE ARE </a> </li>
-<li> <p class="navbar-text">| </p> </li>
-<li> <a href="#"> MEASUREMENTS </a> </li>
+    <div class="shop-header-div-white shop-width-div">
+        <ul class="nav navbar-nav">
+            <li><a href="#"> WHO WE ARE </a></li>
+            <li><p class="navbar-text">| </p></li>
+            <li><a href="#"> MEASUREMENTS </a></li>
 
-</ul>
- </div>
-<div class="shop-header-div-black nav-padding shop-div-margin-left shop-width-div"> <ul class="nav navbar-nav"> <li> <p class="navbar-text"> <b>LOGO GOES HERE </b> </p> </li> </ul> </div>
+        </ul>
+    </div>
+    <div class="shop-header-div-black nav-padding shop-div-margin-left shop-width-div">
+        <ul class="nav navbar-nav">
+            <li><p class="navbar-text"><b>LOGO GOES HERE </b></p></li>
+        </ul>
+    </div>
 
-<div class="shop-header-div-white shop-div-margin-left shop-width-div"> 
-<ul class="nav navbar-nav">
-<li><a href="#"> COLLECTION </a></li>
-<li> <p class="navbar-text">| </p> </li>
-<li> <a href="#"> SHOP </a></li>
-<li> <p class="navbar-text">| </p></li>
-<li> <a href="#"> CONTACTS </a></li>
-</ul>
-</div>
-<div class="shop-container">
+    <div class="shop-header-div-white shop-div-margin-left shop-width-div">
+        <ul class="nav navbar-nav">
+            <li><a href="#"> COLLECTION </a></li>
+            <li><p class="navbar-text">| </p></li>
+            <li><a href="#"> SHOP </a></li>
+            <li><p class="navbar-text">| </p></li>
+            <li><a href="#"> CONTACTS </a></li>
+        </ul>
+    </div>
+    <div class="shop-container">
 
-<div class="shop-left-floating-div shop-width-div">
-<div class="shop-content-inner-div-white shop-inner-div-margin-top" >   </div>
-<div class="shop-content-inner-div-white shop-inner-div-margin-top"> <h4 align="center"> HOW DOES IT WORK WIBBLE </h4>  <h4 align="center"> ONLY TEXT  </h4> </div>
-<div class="shop-content-inner-div-white shop-inner-div-margin-top"> <h4 align="center"> HOW DOES IT WORK </h4>  <h4 align="center">  ONLY TEXT  </h4> </div>
+        <div class="shop-left-floating-div shop-width-div">
+            <div class="shop-content-inner-div-white shop-inner-div-margin-top"></div>
+            <div class="shop-content-inner-div-white shop-inner-div-margin-top"><h4 align="center"> HOW DOES IT WORK
+                WIBBLE </h4>  <h4 align="center"> ONLY TEXT </h4></div>
+            <div class="shop-content-inner-div-white shop-inner-div-margin-top"><h4 align="center"> HOW DOES IT
+                WORK </h4>  <h4 align="center"> ONLY TEXT </h4></div>
 
-</div>
+        </div>
 
-<div class="shop-content-div-white shop-width-div shop-div-margin-left shop-high-content-padding shop-left-floating-div" > <img class="img-responsive" src="images/model.jpg"/> </div>
+        <div class="shop-content-div-white shop-width-div shop-div-margin-left shop-high-content-padding shop-left-floating-div">
+            <img class="img-responsive" src="images/model.jpg"/></div>
 
-{{#each products}}
-{{>product}}
-{{/each}}
+        {{#each products}}
+        {{>product}}
+        {{/each}}
 
 
-</div>
- <script type="text/javascript">
+    </div>
+    <script type="text/javascript">
    document.title = 'Clothes Shop';
    $("body").addClass("body-main");
- </script>
+
+    </script>
 
 </template>
 
 <template name="product">
- 
- <div class="shop-content-div-white shop-width-div shop-div-margin-left shop-right-floating-div shop-product-padding"> <img class="img-responsibve" src="images/{{image}}"/></div>	
+
+    <div class="shop-content-div-white shop-width-div shop-div-margin-left shop-right-floating-div shop-product-padding">
+        <img class="img-responsive" src="images/{{image}}"/></div>
 
 </template>
