@@ -1,3 +1,3 @@
 import { Template } from 'meteor/templating'
-import "./landing-page.html"
+import "./landing-template.html"
 

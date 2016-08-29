@@ -2,11 +2,11 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 import '../../ui/layouts/app-body.js';
-import '../../ui/pages/landing-page.js';
-import '../../ui/pages/shop-template.js';
+import '../../ui/pages/landing-template.js';
+import '../../ui/pages/main-template.js';
 import '../../ui/pages/contacts-template.js';
-import '../../ui/pages/shopping_page.js';
-import '../../ui/stripe/payment_page.js';
+import '../../ui/pages/shopping-template.js';
+import '../../ui/stripe/payment-template.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
@@ -15,10 +15,10 @@ FlowRouter.route('/',{
   },
 });
 
-FlowRouter.route('/shop',{
-  name: 'Shop',
+FlowRouter.route('/main',{
+  name: 'Main',
   action() {
-   BlazeLayout.render('App_body', { main: 'shopTemplate' });
+   BlazeLayout.render('App_body', { main: 'mainTemplate' });
   },
 });
 
@@ -29,7 +29,7 @@ FlowRouter.route('/contacts',{
   },
 });
 
-FlowRouter.route('/shopping',{
+FlowRouter.route('/shopping-page',{
   name: 'Shopping',
   action() {
    BlazeLayout.render('App_body', { main: 'shoppingTemplate' });

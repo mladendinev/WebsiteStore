@@ -1,4 +1,4 @@
-import './payment_page.html'
+import './payment-template.html'
 //
 //Template.paymentTemplate.onRendered(function(){
 //  console.log("Script loaded but not necessarily executed.");
