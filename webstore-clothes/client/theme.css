@@ -1,0 +1,64 @@
+html, body {
+ height: 100%;
+}
+
+div#__blaze-root {
+ height: 100%;
+}
+.body-main {
+  padding-top: 0px;
+  padding-bottom: 30px;
+  background-color: black;
+}
+
+.white-a {
+ color: white;
+ }
+
+a:hover {
+  text-decoration: none;
+}
+
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}
+
+.nav-padding {
+  
+  padding-left: 10%;
+  
+}
+
+.background-black {
+ background-color:black;
+}
+
+.no-border {
+ border-style: none;
+}
+
+.clear-left {
+  clear: left;
+}
+
+.clear-right {
+  clear: right;
+}
+
+.clear-div {
+  clear: both;
+}
+
+.float-left {
+  float: left;
+}
