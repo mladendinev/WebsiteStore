@@ -39,6 +39,6 @@ FlowRouter.route('/shopping',{
 FlowRouter.route('/payment',{
   name: 'Payment',
   action() {
-   BlazeLayout.render('App_body', { main: 'payment-template' });
+   BlazeLayout.render('App_body', { main: 'paymentTemplate' });
   },
 });
