@@ -1,72 +1,52 @@
-.shop-header-div-black {
-  background-color: black;
-  color: white;
-  float: left;
- }
-
-.shop-container {
- clear: both;
- overflow: hidden;
- width: 100%;
+.shop-inner-background-white {
+ background-color: white;
+ margin-bottom: 0.7%;
 }
 
-.shop-header-div-white {
-  padding-left: 4%;
-  background-color: white;
-  color: black;
-  float: left;
+
+.shop-content-pane-height {
+ height: 95%;
 }
 
-.shop-margin-top-div {
-  margin-top: 0.2%;
+.shop-header-pane-height {
+ height: 5%;
 }
 
-.shop-content-inner-div-white {
-  padding-top: 15%;
-  padding-bottom: 14.1%;
-  background-color: white;
-}
-
-.shop-inner-div-margin-top {
-  margin-top: 0.7%;
-}
-
-.shop-content-div-white {
-  margin-top: 0.2%;
-  padding-top: 5.0%;
-  padding-bottom: 4.68%;
-  background-color: white;
-}
-
-.shop-left-floating-div {
-  float: left;
-}
-
-.shop-right-floating-div {
-
-  float: right;
-  
-}
-
-.shop-width-div {
+.shop-content-height {
+  height: 100%;
  
-  width:33.2%; 
-
-}
-
-.shop-high-content-padding {
-  padding-left: 6%;
-  padding-right: 6%;
-  padding-top: 5%;
-  padding-bottom: 8%;
-  height: auto;
-}
-
-.shop-div-margin-left {
- margin-left: 0.2%;
 }
 
 .shop-product-padding {
- padding-left: 10%;
+  padding-top: 10%;
+  padding-left: 30%;
+  padding-bottom: 10%;
+
 }
 
+.shop-padding {
+ padding-left: 0.15%;
+ padding-right: 0.15%;
+}
+
+.shop-white-background {
+ background-color: white;
+ }
+
+.shop-content-thirds-height {
+ height: 33%;
+ margin-bottom: 0.6%;
+}
+
+.navbar-shop-website a {
+
+  color: white; 
+  background-color: black;
+
+}
+
+.nav > li > a:hover {
+  text-decoration:none;
+  color: #15aeea;
+  background-color: transparent;	
+}

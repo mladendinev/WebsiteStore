@@ -1,6 +1,32 @@
 <template name='shopTemplate'>
 
-<div class="shop-header-div-white shop-width-div"> 
+<nav class="navbar">
+  <div class="container-fluid background-black navbar-shop-website">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+          <span class="navbar-toggle">Logo</span>
+     </div>
+    
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a class="navbara" href="#"> WHO WE ARE </a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!-- <div class="shop-header-div-white shop-width-div"> 
 <ul class="nav navbar-nav">
 <li> <a href="#"> WHO WE ARE </a> </li>
 <li> <p class="navbar-text">| </p> </li>
@@ -19,23 +45,26 @@
 <li> <a href="#"> CONTACTS </a></li>
 </ul>
 </div>
-<div class="shop-container">
-
-<div class="shop-left-floating-div shop-width-div">
-<div class="shop-content-inner-div-white shop-inner-div-margin-top" >   </div>
-<div class="shop-content-inner-div-white shop-inner-div-margin-top"> <h4 align="center"> HOW DOES IT WORK WIBBLE </h4>  <h4 align="center"> ONLY TEXT  </h4> </div>
-<div class="shop-content-inner-div-white shop-inner-div-margin-top"> <h4 align="center"> HOW DOES IT WORK </h4>  <h4 align="center">  ONLY TEXT  </h4> </div>
-
+-->
+<div class="container-fluid clear-div shop-content-pane-height">
+  <div class="row shop-content-height">
+   <div class="col-md-4 shop-padding shop-content-height">
+   <div class = "shop-white-background shop-content-thirds-height"> </div>
+   <div class = "shop-white-background shop-content-thirds-height"> </div>
+   <div class = "shop-white-background shop-content-thirds-height"> </div>
+  </div>
+   <div class="col-md-4 shop-padding shop-content-height">
+  <div class = "shop-white-background shop-content-height">
+  </div>
+  </div>
+   <div class="col-md-4 shop-padding shop-content-height">
+  {{#each products}}
+    {{>product}}
+  {{/each}}
+  </div>
+  </div>
 </div>
 
-<div class="shop-content-div-white shop-width-div shop-div-margin-left shop-high-content-padding shop-left-floating-div" > <img class="img-responsive" src="images/model.jpg"/> </div>
-
-{{#each products}}
-{{>product}}
-{{/each}}
-
-
-</div>
  <script type="text/javascript">
    document.title = 'Clothes Shop';
    $("body").addClass("body-main");
@@ -45,6 +74,6 @@
 
 <template name="product">
  
- <div class="shop-content-div-white shop-width-div shop-div-margin-left shop-right-floating-div shop-product-padding"> <img class="img-responsibve" src="images/{{image}}"/></div>	
+ <div class="shop-white-background shop-content-thirds-height shop-product-padding"> <img class="img-responsibve" src="images/{{image}}"/></div>	
 
 </template>
