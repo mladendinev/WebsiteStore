@@ -37,16 +37,19 @@
 
 <div class="container-fluid clear-div shop-content-pane-height">
   <div class="row shop-content-height">
-   <div class="col-md-4 shop-padding shop-content-height">
+   <div class="col-md-4 shop-padding shop-content-height shop-content-margin">
    <div class = "shop-white-background shop-content-thirds-height"> </div>
    <div class = "shop-white-background shop-content-thirds-height"> </div>
    <div class = "shop-white-background shop-content-thirds-height"> </div>
   </div>
-   <div class="col-md-4 shop-padding shop-content-height">
+   <div class="col-md-4 shop-padding shop-slider shop-content-height shop-content-margin">
   <div class = "shop-white-background shop-content-height">
   </div>
   </div>
-   <div class="col-md-4 shop-padding shop-content-height">
+   <div class="col-md-4 shop-padding shop-content-height shop-content-margin scrollbox">
+  {{#each products}}
+    {{>product}}
+  {{/each}}
   {{#each products}}
     {{>product}}
   {{/each}}
