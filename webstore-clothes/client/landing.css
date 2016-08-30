@@ -7,7 +7,6 @@
 }
 
 .landing-container {
-  
  float: left;
  width: 30%;
  
@@ -29,13 +28,12 @@ color: white;
 }
 
 .landing-art-text {
-
  float: left;
  width: 70%; 
  padding-top: 30%;
  padding-left: 40%;
  color: white;
  font-family: "Helvetica"
- 
 }
+
 
