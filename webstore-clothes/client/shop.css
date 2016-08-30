@@ -16,17 +16,17 @@
  
 }
 
-.scrollbox {
+.scroll-pane {
  overflow: auto;
 }
 
 
 @media (min-width: 992px) { 
 .shop-product-padding {
-  padding-top: 10%;
+  padding-top: 20px;
   padding-left: 30%;
   padding-bottom: 10%;
-  
+  min-height: 129px; 
 }
 }
 

@@ -125,9 +125,6 @@ body {
     border-left: 3px solid;
 }
 
-.row {
-  display: flex; /* equal height of the children */
-}
 
 .alignLeft {
 	float: left;
