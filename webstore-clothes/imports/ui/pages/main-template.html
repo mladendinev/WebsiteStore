@@ -1,63 +1,55 @@
 <template name='mainTemplate'>
 
 <nav class="navbar">
-  <div class="container-fluid background-black navbar-shop-website">
+  <div class="container-fluid background-white navbar-shop-website">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed hover-gray" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-          <span class="navbar-toggle">Logo</span>
+         <span class="background-black navbar-toggle" align ="center" id="logo-bar-toggle">  LOGO </span>
      </div>
     
 
     <!-- Collect the nav links, forms, and other content for toggling -->
+    <span class="background-black collapse navbar-collapse" align ="center" id="logo-bar">  LOGO </span>
+    <p class="navbar-text collapse navbar-collapse" id="first-bar">  | </p>
+    <p class="navbar-text collapse navbar-collapse" id="second-bar">  | </p>
+    <p class="navbar-text collapse navbar-collapse" id="third-bar">  | </p>
+        
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a class="navbara" href="#"> WHO WE ARE </a></li>
-        <li><a href="#">Link</a></li>
+       <ul class="nav navbar-nav">
+        <li><a href="#"> WHO WE ARE </a></li>
+        
+        <li><a href="#"> MEASUREMENTS </a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <li><a href="#">CONTACTS</a></li>
+        <li><a href="#">SHOP</a></li>
+        <li><a href="#">COLLECTION</a></li>  
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<!-- <div class="shop-header-div-white shop-width-div"> 
-<ul class="nav navbar-nav">
-<li> <a href="#"> WHO WE ARE </a> </li>
-<li> <p class="navbar-text">| </p> </li>
-<li> <a href="#"> MEASUREMENTS </a> </li>
 
-</ul>
- </div>
-<div class="shop-header-div-black nav-padding shop-div-margin-left shop-width-div"> <ul class="nav navbar-nav"> <li> <p class="navbar-text"> <b>LOGO GOES HERE </b> </p> </li> </ul> </div>
-
-<div class="shop-header-div-white shop-div-margin-left shop-width-div"> 
-<ul class="nav navbar-nav">
-<li><a href="#"> COLLECTION </a></li>
-<li> <p class="navbar-text">| </p> </li>
-<li> <a href="#"> SHOP </a></li>
-<li> <p class="navbar-text">| </p></li>
-<li> <a href="#"> CONTACTS </a></li>
-</ul>
-</div>
--->
 <div class="container-fluid clear-div shop-content-pane-height">
   <div class="row shop-content-height">
-   <div class="col-md-4 shop-padding shop-content-height">
+   <div class="col-md-4 shop-padding shop-content-height shop-content-margin">
    <div class = "shop-white-background shop-content-thirds-height"> </div>
    <div class = "shop-white-background shop-content-thirds-height"> </div>
    <div class = "shop-white-background shop-content-thirds-height"> </div>
   </div>
-   <div class="col-md-4 shop-padding shop-content-height">
+   <div class="col-md-4 shop-padding shop-slider shop-content-height shop-content-margin">
   <div class = "shop-white-background shop-content-height">
   </div>
   </div>
-   <div class="col-md-4 shop-padding shop-content-height">
+   <div class="col-md-4 shop-padding shop-content-height shop-content-margin scrollbox">
+  {{#each products}}
+    {{>product}}
+  {{/each}}
   {{#each products}}
     {{>product}}
   {{/each}}
@@ -74,6 +66,6 @@
 
 <template name="product">
  
- <div class="shop-white-background shop-content-thirds-height shop-product-padding"> <img class="img-responsibve" src="images/{{image}}"/></div>	
+ <div class="shop-white-background shop-content-thirds-height shop-product-padding"> <img class="img-responsive" src="images/{{image}}"/></div>	
 
 </template>

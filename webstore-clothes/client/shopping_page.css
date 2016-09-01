@@ -53,7 +53,7 @@ body {
 }
 
 .shopping-card-box-height{
-  height:20%;
+  height:100%;
 }
 
 
@@ -123,4 +123,19 @@ body {
 
 .border-style-left {
     border-left: 3px solid;
+}
+
+
+.alignLeft {
+	float: left;
+}
+.alignRight {
+	float: right;
+}
+
+.carousel img {
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
 }

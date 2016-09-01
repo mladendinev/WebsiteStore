@@ -1,8 +1,7 @@
-.shop-inner-background-white {
- background-color: white;
- margin-bottom: 0.7%;
+.shop-content-margin {
+ margin-bottom:0.6%;
+ overflow:hidden;
 }
-
 
 .shop-content-pane-height {
  height: 95%;
@@ -17,10 +16,30 @@
  
 }
 
+.scrollbox {
+ overflow: auto;
+}
+
+
+@media (min-width: 992px) { 
 .shop-product-padding {
-  padding-top: 10%;
+  padding-top: 20px;
   padding-left: 30%;
   padding-bottom: 10%;
+  min-height: 129px; 
+}
+}
+
+@media (max-width: 992px) { 
+.shop-product-padding {
+  padding-top: 0%;
+  padding-left: 40%;
+  min-height: 109px;
+}
+
+.shop-content-margin {
+ min-height: 340px;
+}
 
 }
 
@@ -34,14 +53,15 @@
  }
 
 .shop-content-thirds-height {
- height: 33%;
+ height: 33.1%;
  margin-bottom: 0.6%;
 }
 
+
 .navbar-shop-website a {
 
-  color: white; 
-  background-color: black;
+  color: black; 
+  position: relative;
 
 }
 
@@ -50,3 +70,72 @@
   color: #15aeea;
   background-color: transparent;	
 }
+
+.navbar-text {
+  
+  color: black;
+  z-index: 1;
+}
+
+.navbar {
+ margin-bottom: 3px;
+}
+
+#first-bar{
+ position: absolute;
+ left: 138px;
+ bottom: 1px;
+}
+
+#second-bar{
+ position: absolute;
+ right: 116px;
+ bottom: 1px;
+}
+
+#third-bar{
+ position: absolute;
+ right: 186px;
+ bottom: 1px;
+}
+
+#logo-bar{
+ font-size: 26.3pt;
+ width: 20%;
+ position: absolute;
+ right: 40%;
+ color: white;
+
+}
+
+#logo-bar-toggle {
+ font-size: 20.3pt;
+ width: 38%;
+ float:right;
+ right: 24%;
+ color: white;
+ margin-top: 0%;
+ margin-bottom: 0%;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #757373;
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+
+.navbar-toggle {
+ float:left;
+}
+
+.hover-gray:hover {
+  background-color: #e6e6e6;
+}
+
+.mainLink{
+padding-right:100px;
+}
+
+
