@@ -52,12 +52,12 @@
 }
 
 footer{
-	position: fixed;
+	position: relative;
 	bottom: 0;
 }
 
 @media (max-height:800px){
-	footer { position: static; }
+	footer { position: relative; bottom:0;}
 	header { padding-top:40px; }
 }
 
