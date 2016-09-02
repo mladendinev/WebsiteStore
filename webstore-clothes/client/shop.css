@@ -19,6 +19,7 @@
  width: 100%;
  display: inline-block;
  line-height: 1.4;
+ background-color: black;
 
 }
 
@@ -91,9 +92,18 @@
  margin-bottom: 0.6%;
 }
 
+.jumbotron-bg {
+  
+  position: fixed;
+  top: 20px;
+  z-index: -1;
+  height: 70%;
+  overflow: hidden;
+}
+
 .jumbotron {
-   background:url("images/fs_pic.jpg") no-repeat;
-   background-size: cover;
+   
+   background-color: transparent;
    width:100%;
    height:70%;
    position:relative;
