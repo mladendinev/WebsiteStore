@@ -1,65 +1,101 @@
 <template name='mainTemplate'>
 
-<nav class="navbar">
-  <div class="container-fluid background-white navbar-shop-website">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed hover-gray" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-         <span class="background-black navbar-toggle" align ="center" id="logo-bar-toggle">  LOGO </span>
-     </div>
-    
+    <nav class="navbar">
+        <div class="container-fluid background-black navbar-shop-website">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed hover-gray" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="background-black navbar-toggle" align="center" id="logo-bar-toggle">  LOGO </span>
+            </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <span class="background-black collapse navbar-collapse" align ="center" id="logo-bar">  LOGO </span>
-    <p class="navbar-text collapse navbar-collapse" id="first-bar">  | </p>
-    <p class="navbar-text collapse navbar-collapse" id="second-bar">  | </p>
-    <p class="navbar-text collapse navbar-collapse" id="third-bar">  | </p>
-        
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-       <ul class="nav navbar-nav">
-        <li><a href="#"> WHO WE ARE </a></li>
-        
-        <li><a href="#"> MEASUREMENTS </a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">CONTACTS</a></li>
-        <li><a href="#">SHOP</a></li>
-        <li><a href="#">COLLECTION</a></li>  
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#"> WHO WE ARE </a></li>
+
+                    <li><a href="#"> MEASUREMENTS </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">CONTACTS</a></li>
+                    <li><a href="#">SHOP</a></li>
+                    <li><a href="#">COLLECTION</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="jumbotron">
+    </div>
 
 
-<div class="container-fluid clear-div shop-content-pane-height">
-  <div class="row shop-content-height">
-   <div class="col-md-4 shop-padding shop-content-height shop-content-margin">
-   <div class = "shop-white-background shop-content-thirds-height"> </div>
-   <div class = "shop-white-background shop-content-thirds-height"> </div>
-   <div class = "shop-white-background shop-content-thirds-height"> </div>
-  </div>
-   <div class="col-md-4 shop-padding shop-slider shop-content-height shop-content-margin">
-  <div class = "shop-white-background shop-content-height">
-  </div>
-  </div>
-   <div class="col-md-4 shop-padding shop-content-height shop-content-margin" id="scrollable-prod-div"> 
-   <button class="z-index-2" onclick="scrollWin('#bottom-button', '#top-button' ,120)" id="bottom-button">Scroll down</button>
-   <button class="z-index-2" onclick="scrollWin('#bottom-button', '#top-button',-120)" id="top-button">Scroll up</button>
-    {{#each products}}
-    {{>product}}
-    {{/each}}
-    {{#each products}}
-    {{>product}}
-    {{/each}}
-  </div>
-  </div>
-</div>
- <script type="text/javascript">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <span class="collapse navbar-collapse" align="center" id="logo-bar">  LOGO </span>
+
+
+    <div class="container-fluid clear-div shop-content-pane-height">
+        <div class="row shop-content-height">
+            <div class="col-md-4 shop-padding shop-content-height shop-content-margin">
+                <div class="shop-white-background shop-content-thirds-height"></div>
+                <div class="shop-white-background shop-content-thirds-height"></div>
+                <div class="shop-white-background shop-content-thirds-height"></div>
+            </div>
+            <div class="col-md-4 shop-padding shop-content-height shop-content-margin">
+                <div class="shop-white-background shop-content-height">
+                </div>
+            </div>
+            <div class="col-md-4 shop-padding shop-content-height shop-content-margin ">
+             <button class="z-index-2" onclick="scrollWin('#bottom-button', '#top-button' ,120)" id="bottom-button">Scroll down</button>
+             <button class="z-index-2" onclick="scrollWin('#bottom-button', '#top-button',-120)" id="top-button">Scroll up</button>     
+                {{#each products}}
+                {{>product}}
+                {{/each}}
+                {{#each products}}
+                {{>product}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-distributed">
+
+        <div class="footer-right">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+
+        </div>
+
+        <div class="footer-left">
+            <p>Company Name &copy; 2016</p>
+        </div>
+    </footer>
+
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#"> WHO WE ARE </a></li>
+
+                    <li><a href="#"> MEASUREMENTS </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">CONTACTS</a></li>
+                    <li><a href="#">SHOP</a></li>
+                    <li><a href="#">COLLECTION</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="jumbotron">
+    </div>
+
    document.title = 'Clothes Shop';
    $("body").addClass("body-main");
   
@@ -77,7 +113,11 @@
 </template>
 
 <template name="product">
- 
- <div class="shop-white-background shop-content-thirds-height shop-product-padding"> <img class="img-responsive" src="images/{{image}}"/></div>	
+
+    <div class="shop-white-background shop-content-thirds-height shop-product-padding"><img class="img-responsive"
+                                                                                            src="images/{{image}}"/>
+    </div>
 
 </template>
+
+
