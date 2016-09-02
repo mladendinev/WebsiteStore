@@ -6,7 +6,8 @@
   },
   "dependencies": {
     "imports": "^1.0.0",
-    "meteor-node-stubs": "~0.2.0",
+    "jquery": "^2.2.4",
+    "meteor-node-stubs": "^0.2.3",
     "react": "^15.3.1",
     "react-addons-create-fragment": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.1",

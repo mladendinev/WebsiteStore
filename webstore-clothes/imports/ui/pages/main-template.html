@@ -35,6 +35,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+
 <div class="container-fluid clear-div shop-content-pane-height">
   <div class="row shop-content-height">
    <div class="col-md-4 shop-padding shop-content-height shop-content-margin">
@@ -46,21 +47,32 @@
   <div class = "shop-white-background shop-content-height">
   </div>
   </div>
-   <div class="col-md-4 shop-padding shop-content-height shop-content-margin scrollbox">
-  {{#each products}}
+   <div class="col-md-4 shop-padding shop-content-height shop-content-margin" id="scrollable-prod-div"> 
+   <button class="z-index-2" onclick="scrollWin('#bottom-button', '#top-button' ,120)" id="bottom-button">Scroll down</button>
+   <button class="z-index-2" onclick="scrollWin('#bottom-button', '#top-button',-120)" id="top-button">Scroll up</button>
+    {{#each products}}
     {{>product}}
-  {{/each}}
-  {{#each products}}
+    {{/each}}
+    {{#each products}}
     {{>product}}
-  {{/each}}
+    {{/each}}
   </div>
   </div>
 </div>
-
  <script type="text/javascript">
    document.title = 'Clothes Shop';
    $("body").addClass("body-main");
- </script>
+  
+   function scrollWin(idBottom,idTop,x) {
+    document.getElementById("scrollable-prod-div").scrollTop += x;
+    var newBottom = parseInt($(idBottom).css("bottom"))-parseInt(x);
+    var newTop = parseInt($(idTop).css("top"))+parseInt(x);
+    console.log(newTop);
+     console.log(newBottom);
+    $(idBottom).css("bottom", newBottom+"px");
+    $(idTop).css("top", newTop+"px"); 
+   }	
+</script>
 
 </template>
 

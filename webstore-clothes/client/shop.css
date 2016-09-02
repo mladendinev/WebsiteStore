@@ -16,10 +16,23 @@
  
 }
 
-.scrollbox {
- overflow: auto;
+#scrollable-prod-div {
+ position: relative;
 }
 
+.z-index-2 {
+  position: absolute;
+  left: 37%;
+  z-index: 2;
+}
+
+#top-button {
+ top: 0;
+}
+
+#bottom-button {
+ bottom: 20px;
+}
 
 @media (min-width: 992px) { 
 .shop-product-padding {
