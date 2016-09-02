@@ -1,3 +1,4 @@
+import './carousel-template.js'
 import './main-template.html'
 
 import {Products}  from '../../api/products.js';

@@ -15,6 +15,25 @@
   height: 100%;
  }
 
+#top-div-left {
+  
+  padding-left: 10%;
+  padding-right: 10%;
+  color: black;
+}
+
+#top-div-left p {
+ text-align: justify;
+}
+
+#top-div-left h1 {
+ margin-top: 0px;
+}
+
+#mid-div-left {
+ background-color: #231F20;
+}
+
 #main-content {
  width: 100%;
  display: inline-block;
