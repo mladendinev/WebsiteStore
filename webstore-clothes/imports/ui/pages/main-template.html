@@ -1,6 +1,6 @@
 <template name='mainTemplate'>
 
-    <nav class="navbar">
+    <nav class="navbar" id= 'nav-main'>
         <div class="container-fluid background-black navbar-shop-website">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -34,11 +34,10 @@
     </div>
 
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <span class="collapse navbar-collapse" align="center" id="logo-bar">  LOGO </span>
+          
 
 
-    <div class="container-fluid clear-div shop-content-pane-height">
+    <div class="container-fluid clear-div shop-content-pane-height" id="main-content">
         <div class="row shop-content-height">
             <div class="col-md-4 shop-padding shop-content-height shop-content-margin">
                 <div class="shop-white-background shop-content-thirds-height"></div>
@@ -49,7 +48,7 @@
                 <div class="shop-white-background shop-content-height">
                 </div>
             </div>
-            <div class="col-md-4 shop-padding shop-content-height shop-content-margin ">
+            <div class="col-md-4 shop-padding shop-content-height shop-content-margin" id="scrollable-prod-div">
              <button class="z-index-2" onclick="scrollWin('#bottom-button', '#top-button' ,120)" id="bottom-button">Scroll down</button>
              <button class="z-index-2" onclick="scrollWin('#bottom-button', '#top-button',-120)" id="top-button">Scroll up</button>     
                 {{#each products}}
@@ -60,42 +59,20 @@
                 {{/each}}
             </div>
         </div>
-    </div>
-
-    <footer class="footer-distributed">
-
-        <div class="footer-right">
-
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-
-        </div>
-
+      </div>
+       <footer class="footer-distributed clear-div" id='main-footer'>
+       <div class="footer-right">
+         <a href="#"><i class="fa fa-facebook"></i></a>
+         <a href="#"><i class="fa fa-twitter"></i></a>
+       </div>
         <div class="footer-left">
             <p>Company Name &copy; 2016</p>
         </div>
     </footer>
-
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="#"> WHO WE ARE </a></li>
-
-                    <li><a href="#"> MEASUREMENTS </a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">CONTACTS</a></li>
-                    <li><a href="#">SHOP</a></li>
-                    <li><a href="#">COLLECTION</a></li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-    <div class="jumbotron">
-    </div>
-
+   
+  
+   
+<script type="text/javascript">
    document.title = 'Clothes Shop';
    $("body").addClass("body-main");
   
@@ -113,11 +90,7 @@
 </template>
 
 <template name="product">
-
-    <div class="shop-white-background shop-content-thirds-height shop-product-padding"><img class="img-responsive"
-                                                                                            src="images/{{image}}"/>
-    </div>
-
+<div class="shop-white-background shop-content-thirds-height shop-product-padding"> <img class="img-responsive" src="images/{{image}}"/> </div>
 </template>
 
 

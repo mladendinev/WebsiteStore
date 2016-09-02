@@ -4,17 +4,18 @@ html, body {
 
 div#__blaze-root {
  height: 100%;
+ 
 }
 .body-main {
   padding-top: 0px;
   padding-bottom: 30px;
   background-color: black;
-  overflow:auto;
+  line-height: 0; 
 }
 
 .white-a {
  color: white;
- }
+ }  
 
 a:hover {
   text-decoration: none;
