@@ -42,7 +42,7 @@
 
 .z-index-2 {
   position: absolute;
-  left: 37%;
+  right: 3%;
   z-index: 2;
 }
 
@@ -51,7 +51,7 @@
 }
 
 #bottom-button {
- bottom: 20px;
+ bottom:0;
 }
 
 @media (min-width: 992px) { 

@@ -6,4 +6,7 @@ Template.mainTemplate.helpers({
  products(){
   return Products.find({});
  },
+ isScrollable(count){
+   return count>3;
+ }, 
 });
