@@ -1,7 +1,8 @@
-import './carousel-template.js'
-import './main-template.html'
-
+import './carousel-template.js';
+import './main-template.html';
+import {scrollWin} from '../../api/scroll-function.js';
 import {Products}  from '../../api/products.js';
+
 
 Template.mainTemplate.helpers({
  products(){
@@ -10,4 +11,20 @@ Template.mainTemplate.helpers({
  isScrollable(count){
    return count>3;
  }, 
+});
+
+Template.mainTemplate.events({
+
+ 'click #top-button' (event) {
+
+     scrollWin('#bottom-button', '#top-button' ,-120);
+     amplify.store('top_button_clicked', 'yess', {expires: 60000});
+     
+  },
+
+  'click #bottom-button' (event) {
+
+     scrollWin('#bottom-button', '#top-button' ,120)
+     console.log(amplify.store('top_button_clicked'));
+   },
 });

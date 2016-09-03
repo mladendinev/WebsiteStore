@@ -62,10 +62,10 @@
             </div>
             <div class="col-md-4 shop-padding shop-content-height shop-content-margin" id="scrollable-prod-div">
              {{#if isScrollable products.count}}
-             <button type="button" class="btn btn-default z-index-2" aria-label="Left Align" onclick="scrollWin('#bottom-button', '#top-button' ,-120)" id="top-button">
+             <button type="button" class="btn btn-default z-index-2" aria-label="Left Align" id="top-button">
                <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
              </button> 
-             <button type="button" class="btn btn-default z-index-2" aria-label="Left Align" onclick="scrollWin('#bottom-button', '#top-button' ,120)" id="bottom-button">
+             <button type="button" class="btn btn-default z-index-2" aria-label="Left Align" id="bottom-button">
                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
              </button>   
              {{/if}}
@@ -90,23 +90,6 @@
 <script type="text/javascript">
    document.title = 'Clothes Shop';
    $("body").addClass("body-main");
-  
-   function scrollWin(idBottom,idTop,x) {
-    document.getElementById("scrollable-prod-div").scrollTop += x;
-    var newBottom = parseInt($(idBottom).css("bottom"))-parseInt(x);
-    var newTop = parseInt($(idTop).css("top"))+parseInt(x);
-    var bottomLimit = parseInt($("#scrollable-prod-div").css("height")) - $("#scrollable-prod-div")[0].scrollHeight
-     if(newTop < 0) { 
-      $(idTop).css("top","0px");
-      $(idBottom).css("bottom","0px");  
-     } else if (newBottom < bottomLimit) {
-        $(idBottom).css("bottom",bottomLimit);  
-        $(idTop).css("top", -bottomLimit); 
-     } else {
-         $(idTop).css("top",newTop);
-         $(idBottom).css("bottom",newBottom);  
-       }
-   }	
 </script>
 
 </template>
