@@ -30,17 +30,17 @@
                 <ul class="nav navbar-nav nav-bar-">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Products <span class="caret"></span></a>
+                           aria-expanded="false">PRODUCTS <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Product 1</a></li>
-                            <li><a href="#">Product 2</a></li>
-                            <li><a href="#">Product 3</a></li>
+                             {{#each products}}
+                             {{>shoppingProduct}}
+                             {{/each}}
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="promoLink"><a href="#">PROMO</a></li>
-                    <li class="mainLink"><a href="#">MAIN</a></li>
+                    <li class="mainLink"><a href="/main">MAIN</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -154,4 +154,8 @@
         </div>
     </footer>
 
+</template>
+
+<template name="shoppingProduct">
+ <li><a href="/shopping-page?product={{productName}}">{{productName}}</a></li>
 </template>

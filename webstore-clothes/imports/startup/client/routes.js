@@ -5,7 +5,7 @@ import '../../ui/layouts/app-body.js';
 import '../../ui/pages/landing-template.js';
 import '../../ui/pages/main-template.js';
 import '../../ui/pages/contacts-template.js';
-import '../../ui/pages/shopping-template.js';
+import '../../ui/pages/shopping-template-show.js';
 import '../../ui/stripe/payment-template.js';
 
 FlowRouter.route('/',{
@@ -31,8 +31,8 @@ FlowRouter.route('/contacts',{
 
 FlowRouter.route('/shopping-page',{
   name: 'Shopping',
-  action() {
-   BlazeLayout.render('App_body', { main: 'shoppingTemplate' });
+  action(params, queryParams) {
+    BlazeLayout.render('App_body', { main:'shoppingTemplateShow'});
   },
 });
 

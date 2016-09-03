@@ -112,7 +112,11 @@
 </template>
 
 <template name="product">
-<div class="shop-white-background shop-content-thirds-height shop-product-padding"> <img class="img-responsive" src="images/{{image}}"/> </div>
+<div class="shop-white-background shop-content-thirds-height shop-product-padding"> 
+ <a href="/shopping-page?product={{productName}}">
+  <img class="img-responsive" src="images/{{image}}"/> 
+ </a>
+</div>
 </template>
 
 
