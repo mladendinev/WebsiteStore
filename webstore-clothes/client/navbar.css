@@ -10,6 +10,10 @@
   background-color: transparent;
 }
 
+.nav > li > a:focus {
+ background-color: transparent;
+}
+
 .navbar-text {
   color: white;
   z-index: 1;
