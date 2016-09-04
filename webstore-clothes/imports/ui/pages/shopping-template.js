@@ -2,12 +2,16 @@ import './carousel-template.js'
 import './shopping-template.html';
 
 
-import {Shopping}  from '../../api/products.js';
+import {Inventory}  from '../../api/products.js';
+
 
 
 Template.shoppingTemplate.helpers({
     shopping(){
-    return Shopping.find({});
+    return Inventory.find({});
   }
 });
 
+Template.shoppingTemplate.onRendered(function(){
+   Session.set("DocumentTitle","Shopping Page");
+});

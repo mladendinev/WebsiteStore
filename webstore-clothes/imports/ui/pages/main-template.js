@@ -11,3 +11,7 @@ Template.mainTemplate.helpers({
    return count>3;
  }, 
 });
+
+Template.mainTemplate.onRendered(function(){
+   Session.set("DocumentTitle","Shop Online");
+});
