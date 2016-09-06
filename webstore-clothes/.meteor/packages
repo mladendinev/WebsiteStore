@@ -29,3 +29,5 @@ react-meteor-data
 themeteorchef:jquery-validation
 fortawesome:fontawesome
 session
+kurounin:pagination
+kurounin:pagination-blaze

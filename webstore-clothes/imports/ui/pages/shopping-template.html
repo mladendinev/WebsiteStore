@@ -1,5 +1,5 @@
 <template name="shoppingTemplate">
-    {{localizedTitle}}
+
 
     <nav class="navbar">
         <div class="container-fluid background-black navbar-shop-website">
@@ -49,92 +49,47 @@
         <!-- /.container-fluid -->
     </nav>
 
+    <!--<div>-->
+        <!--<ul>-->
+            <!--{{#each documents}}-->
+            <!--<li>Document #{{type}}</li>-->
+            <!--{{/each}}-->
+        <!--</ul>-->
 
+    <!--</div>-->
 
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4">
                 <row>
-                   {{>carouselTemplate}}
+                    {{>carouselTemplate}}
                 </row>
                 <!-- END OF FIRST ROW -->
                 <!--<div class="white-box border-style-top shopping-card-box-height">-->
-                    <!--<a href=#>-->
-                        <!--<p style="text-align:center">SHOPPING CART</p></a>-->
+                <!--<a href=#>-->
+                <!--<p style="text-align:center">SHOPPING CART</p></a>-->
                 <!--</div>-->
 
 
             </div>
             <div class="col-xs-8">
-                <!--&lt;!&ndash; THREE &ndash;&gt;-->
-                {{#each shopping}}
+                {{#each documents}}
                 <div class="col-xs-6 col-md-4">
                     <a href="cinqueterre.jpg" class="thumbnail">
-                        <img class="img-responsive" src="images/{{file}}" alt="T-Shirt" style="width:100px;height:200px" >
+                        <img class="img-responsive" src="images/{{file}}" alt="T-Shirt">
 
                         <div class="caption">
-                           <p class="alignLeft">{{product}}</p>
-                           <p class="alignRight">${{price}}</p>
+                            <p class="alignLeft">{{product}}</p>
+
+                            <p class="alignRight">${{price}}</p>
                         </div>
                         <div style="clear: both;"></div>
                     </a>
                 </div>
                 {{/each}}
-
-                <!--<div class="col-xs-6 col-md-4">-->
-                <!--<a href="cinqueterre.jpg" class="thumbnail">-->
-                <!--<img src="" alt="T-Shirt" style="width:100px;height:250px">-->
-                <!--</a>-->
-                <!--</div>-->
-
-                <!--<div class="col-xs-6 col-md-4">-->
-                <!--<a href="cinqueterre.jpg" class="thumbnail">-->
-                <!--<img src="" alt="T-Shirt" style="width:100px;height:250px">-->
-                <!--</a>-->
-                <!--</div>-->
-
-                <!--&lt;!&ndash; THREE &ndash;&gt;-->
-                <!--<div class="col-xs-6 col-md-4">-->
-                <!--<a href="cinqueterre.jpg" class="thumbnail">-->
-                <!--<img src="" alt="T-Shirt" style="width:100px;height:250px">-->
-                <!--</a>-->
-                <!--</div>-->
-
-                <!--<div class="col-xs-6 col-md-4">-->
-                <!--<a href="cinqueterre.jpg" class="thumbnail">-->
-                <!--<img src="" alt="T-Shirt" style="width:100px;height:250px">-->
-                <!--</a>-->
-                <!--</div>-->
-
-                <!--<div class="col-xs-6 col-md-4">-->
-                <!--<a href="cinqueterre.jpg" class="thumbnail">-->
-                <!--<img src="" alt="T-Shirt" style="width:100px;height:250px">-->
-
-
-                <!--</a>-->
-                <!--</div>-->
-
-
-                <!--&lt;!&ndash; THREE &ndash;&gt;-->
-                <!--<div class="col-xs-6 col-md-4">-->
-                <!--<a href="cinqueterre.jpg" class="thumbnail">-->
-                <!--<img src="" alt="T-Shirt" style="width:100px;height:250px">-->
-                <!--</a>-->
-                <!--</div>-->
-
-                <!--<div class="col-xs-6 col-md-4">-->
-                <!--<a href="cinqueterre.jpg" class="thumbnail">-->
-                <!--<img src="" alt="T-Shirt" style="width:100px;height:250px">-->
-                <!--</a>-->
-                <!--</div>-->
-
-
-                <!--<div class="col-xs-6 col-md-4">-->
-                <!--<a href="cinqueterre.jpg" class="thumbnail">-->
-                <!--<img src="" alt="T-Shirt" style="width:100px;height:250px">-->
-                <!--</a>-->
-                <!--</div>-->
+                {{> defaultBootstrapPaginator pagination=templatePagination limit=5 containerClass="text-center"
+                onClick=clickEvent}}
             </div>
         </div>
     </div>
