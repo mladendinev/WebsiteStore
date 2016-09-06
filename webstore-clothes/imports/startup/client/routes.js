@@ -31,8 +31,8 @@ FlowRouter.route('/contacts',{
 
 FlowRouter.route('/shopping-page',{
   name: 'Shopping',
-  action() {
-   BlazeLayout.render('App_body', { main: 'shoppingTemplate' });
+  action(params, queryParams) {
+    BlazeLayout.render('App_body', { main:'shoppingTemplate'});
   },
 });
 
