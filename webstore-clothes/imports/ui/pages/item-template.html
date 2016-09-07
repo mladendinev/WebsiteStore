@@ -1,0 +1,117 @@
+<template name="itemTemplate">
+
+  <nav class="navbar">
+    <div class="container-fluid background-black navbar-shop-website">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+            <!--    <button type="button" class="navbar-toggle collapsed hover-gray" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button> -->
+                  <span class="navbar-toggle" align="center" id="logo-bar-toggle">  LOGO </span>
+                </div>
+
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+
+                <span class="collapse navbar-collapse" align="center" id="logo-bar">  LOGO </span>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
+                  <ul class="nav navbar-nav nav-bar-">
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                      aria-expanded="false">PRODUCTS <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                       {{#each products}}
+                       {{>shoppingProduct}}
+                       {{/each}}
+                     </ul>
+                   </li>
+                 </ul>
+                <!--<ul class="nav navbar-nav navbar-right">
+                    <li class="promoLink"><a href="#">PROMO</a></li>
+                    <li class="mainLink"><a href="/main">MAIN</a></li>
+                  </ul> -->
+                </div> 
+                <!-- /.navbar-collapse -->
+              </div>
+
+              <!-- /.container-fluid -->
+            </nav>
+
+            <div class="container-fluid">
+              <div class="row">
+               <div class='col-md-6'>
+                <div class = "item-small-images">
+                 <img class="img-responsive item-small-image" src="images/suit-pics/suit1.jpg"/>
+                 <img class="img-responsive item-small-image" src="images/suit-pics/suit2.jpg"/>
+                 <img class="img-responsive item-small-image" src="images/suit-pics/suit3.jpg"/>
+                 <img class="img-responsive item-small-image" src="images/suit-pics/suit4.jpg"/> 
+               </div>
+               <div class = "item-main-image">
+                 <img id="product-main-image" class="img-responsive" src="images/suit-pics/suit1.jpg"/>
+               </div>
+               <div class="clear-div" id="item-product-info">
+                 <h4> INFO PRODUCT </h4>
+                 <div class='item-product-info-text'>
+                   <b> Composition: </b> Lorem ipsum dolor sit amet <br/>
+                   <b> Details: </b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed augue a purus molestie ultrices. Etiam varius molestie libero id commodo...<br/>
+                   <b> Product code: </b> 129201903 <br/>
+                 </div>
+               </div> 
+             </div>
+             <div class="col-md-6 item-right-col">
+               <div>
+                <p align="center">
+                  VEST XXXXXXX <br/>
+                  Mod. <b> ABC </b> <br/>
+                  <b> EUR 3333 </b> <br/>
+                </p>   
+              </div>
+              <hr class="item-product-properties-separator"/>     
+              <div class="form-group" id="size-container">
+                <label for="sel1">Size</label>
+                <select class="form-control" id="sel-size">
+                  <option>38</option>
+                  <option>40</option>
+                  <option>42</option>
+                  <option>44</option>
+                </select>
+              </div>
+              <p align="center"> TABLE OF SIZES EU\US\UK </p>
+              <hr class="item-product-properties-separator"/>      
+              <div id="luxury-addons-container">
+               <h5 align="center"> <b> ADD A TOUCH OF LUXURY MOOD TO YOUR ITEM </b> </h5>
+               Lorem ipsum dolor sit amet: 200€ <br/>
+               <div id = "item-checkbox-container"> 
+               <div class="checkbox">
+                <label><input type="checkbox" value="">1 button first</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="">1 button inside</label>
+              </div>
+              </div>
+              <div id="item-checkbox-image-container">
+                <img class='img-resonsive' src='images/button.png'/>
+              </div>
+            </div>
+            <hr class="clear-div item-product-properties-separator"/>
+            <div>
+              <h5 align="center"> <b> THE INITIALS OF YOUR NAME FOR THE EMBRODIERY </b> </h5>
+              <div class="form-group" id="initials-form-div">
+                <label for="usr">Initials: <input type="text" class="form-control" id="initials">
+                </label>
+              </div>
+            </div>
+            <hr class="clear-div item-product-properties-separator"/>
+            <div id="button-div">
+             <button type="button" class="btn btn-default item-page-button">ADD TO YOUR SHOPPING CART</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </template>
