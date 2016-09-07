@@ -46,17 +46,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4">
-                <row>
-                    {{>carouselTemplate}}
-                </row>
-                <!-- END OF FIRST ROW -->
-                <!--<div class="white-box border-style-top shopping-card-box-height">-->
-                <!--<a href=#>-->
-                <!--<p style="text-align:center">SHOPPING CART</p></a>-->
-                <!--</div>-->
-
-
-            </div>
+               {{>carouselTemplate}}
+           </div>
             <div class="col-xs-8">
                 {{#each documents}}
                 <div class="col-xs-6 col-md-4">
@@ -78,8 +69,4 @@
         </div>
     </div>
 
-</template>
-
-<template name="shoppingProduct">
- <li><a href="/shopping-page?product={{productName}}">{{productName}}</a></li>
 </template>

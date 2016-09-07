@@ -1,4 +1,5 @@
 import './shopping-template.html';
+import '../components/shopping-product.html'
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import {Inventory}  from '../../api/products.js';
