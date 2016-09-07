@@ -46,13 +46,15 @@
               <div class="row">
                <div class='col-md-6'>
                 <div class = "item-small-images">
-                 <img class="img-responsive item-small-image" src="images/suit-pics/suit1.jpg"/>
-                 <img class="img-responsive item-small-image" src="images/suit-pics/suit2.jpg"/>
-                 <img class="img-responsive item-small-image" src="images/suit-pics/suit3.jpg"/>
-                 <img class="img-responsive item-small-image" src="images/suit-pics/suit4.jpg"/> 
+                  <img class="img-responsive item-small-image" src="images/{{item.file}}"/>
+                  {{#each img in item.additionalImages}}
+                   <img class="img-responsive item-small-image" src="images/{{img}}"/>
+                  {{/each}}
                </div>
                <div class = "item-main-image">
-                 <img id="product-main-image" class="img-responsive" src="images/suit-pics/suit1.jpg"/>
+                
+                 <img id="product-main-image" class="img-responsive" src="images/{{item.file}}"/>
+                
                </div>
                <div class="clear-div" id="item-product-info">
                  <h4> INFO PRODUCT </h4>
@@ -68,7 +70,7 @@
                 <p align="center">
                   VEST XXXXXXX <br/>
                   Mod. <b> ABC </b> <br/>
-                  <b> EUR 3333 </b> <br/>
+                  <b> {{item.price}}$</b> <br/>
                 </p>   
               </div>
               <hr class="item-product-properties-separator"/>     
