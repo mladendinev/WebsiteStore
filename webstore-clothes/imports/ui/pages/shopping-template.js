@@ -25,7 +25,7 @@ Template.shoppingTemplate.helpers({
   	// optional helper used to return a callback that should be executed before changing the page
     clickEvent() {
         return function(e, templateInstance, clickedPage) {
-            
+            e.preventDefault();
             console.log('Changing page from ', templateInstance.data.pagination.currentPage(), ' to ', clickedPage);
         };
     },
@@ -40,21 +40,11 @@ Template.shoppingTemplate.helpers({
               }   
 });
 
-// Template.shoppingTemplate.events({
-//  'click .product-a' (event) { 
-//     console.log("event executed");
-//       console.log(FlowRouter.getQueryParam('product'));
-//       this.pagination = new Meteor.Pagination(Inventory, {filters: {
-//                                                              "type" : FlowRouter.getQueryParam('product')
-//                                                             },
-//                                                             perPage:6});
-//   },
-// });
+
 
 
 Template.shoppingTemplate.onRendered(function(){
-   console.log("I am rendered again")
    Session.set("DocumentTitle","Shopping Page");
    $("body").removeClass(); 
    $("body").addClass("body-shopping");
-});
+  });
