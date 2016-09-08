@@ -16,7 +16,6 @@
  }
 
 #top-div-left {
-  
   padding-left: 10%;
   padding-right: 10%;
   color: black;
@@ -28,6 +27,7 @@
 
 #top-div-left h1 {
  margin-top: 0px;
+ margin-bottom: 0px;
 }
 
 #mid-div-left {

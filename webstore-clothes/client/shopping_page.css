@@ -98,3 +98,8 @@ body {
 .body-shopping{
   background-color:white;
 }
+
+#filterOpt {
+  padding-left:3%;
+  padding-bottom:2%;
+}
