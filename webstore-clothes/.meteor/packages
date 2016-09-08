@@ -32,3 +32,4 @@ amplify
 kurounin:pagination
 kurounin:pagination-blaze
 session
+reactive-dict

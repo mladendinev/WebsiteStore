@@ -1,0 +1,44 @@
+.img-basket {
+	float:left;
+	margin-right: 10px;
+
+}
+
+#basket-content {
+    width: 80%;
+   margin-left: 10%;
+}
+
+.table-div {
+  font-size: 20pt;	
+  float:left;
+  margin-top:2px;
+}
+
+
+.basket-th {
+	font-size: 20pt;
+}
+
+#total-div {
+	float:right;
+}
+
+.proceed-to-checkout-button {
+   
+   color: white;
+   background-color: black;
+   width: 100%;
+   border-radius: 0;
+   outline: none;
+   font-size: 13pt;
+
+}
+
+#basket-final-row-col1{
+ padding-top: 20px;
+}
+
+#basket-final-row-col2{
+  padding-top: 20px;	
+}

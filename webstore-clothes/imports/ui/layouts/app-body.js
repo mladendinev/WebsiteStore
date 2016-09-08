@@ -3,5 +3,10 @@ import { Template } from 'meteor/templating';
 import './app-body.html';
 
 Template.App_body.onCreated(function(){
-  Session.set('itemsInBasketTemplateLocal',amplify.store('itemsInBasket'));
+	var currentValue = amplify.store('itemsInBasket');
+  if ((typeof currentValue !== "undefined") && currentValue !== null) {
+  Session.set('numberOfItemsInBasketSession',currentValue.length);
+  } else {
+  	Session.set('numberOfItemsInBasketSession', null);
+  }
 });

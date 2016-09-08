@@ -1,0 +1,56 @@
+<template name='basketOverview'>
+<nav class="navbar">
+    <div class="container-fluid background-black navbar-shop-website">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+           
+                  <a class="navbar-toggle" id='basket-link-toggle' href="/basket"> {{>numberOfBasketItems}}<img class='img-responsive' src='images/basket/shopping-cart.png'/></a>
+                  <span class="navbar-toggle" align="center" id="logo-bar-toggle">  LOGO </span>
+                </div>
+
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+
+                <span class="collapse navbar-collapse" align="center" id="logo-bar">  LOGO </span>
+                <a class="collapse navbar-collapse" id='basket-link' href="/basket"> {{>numberOfBasketItems}} <img class='img-responsive' src='images/basket/shopping-cart.png'/></a>
+                
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
+                  <ul class="nav navbar-nav nav-bar-">
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                      aria-expanded="false">PRODUCTS <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                       {{>dropdownProducts}}
+                     </ul>
+                   </li>
+                 </ul>
+               </div> 
+                <!-- /.navbar-collapse -->
+              </div>
+
+              <!-- /.container-fluid -->
+            </nav>
+            <table class="table" id="basket-content">
+             <thead>
+             	<tr>
+             	 <th class="basket-th">Item </th>
+             	 <th class="basket-th"> Price</th>	
+             	</tr>
+             </thead>
+             <tbody>
+             {{#each item in itemsInBasket}}
+              {{#with getItem item}}
+              <tr> 
+
+               <td><img class="img-responsive img-circle img-basket" src="images/{{file}}" width="40px"/> <div class="table-div"> {{product}} </div> </td>
+               <td> <div class="table-div">{{price}} </div> </td>
+              </tr>
+             {{/with}}
+             {{/each}}
+             <tr>
+               <td id="basket-final-row-col1"> <div class="float-left"> <button type="button" class="btn btn-default proceed-to-checkout-button"> PROCEED TO CHECKOUT</button> </div><div class="table-div" id="total-div"> Total: </div></td>
+               <td id="basket-final-row-col2"> <div class="table-div">{{total}} </div> </td>
+           </tr>
+            </tbody>
+           </table>
+</template>

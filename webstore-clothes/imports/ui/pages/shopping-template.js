@@ -17,7 +17,6 @@ Template.shoppingTemplate.helpers({
     },
   	
     documents() {
-      console.log(FlowRouter.getQueryParam('product'));
       Template.instance().pagination.filters({"type" : FlowRouter.getQueryParam('product')});
       return Template.instance().pagination.getPage();
     },
@@ -27,7 +26,6 @@ Template.shoppingTemplate.helpers({
     clickEvent() {
         return function(e, templateInstance, clickedPage) {
             e.preventDefault();
-            console.log('Changing page from ', templateInstance.data.pagination.currentPage(), ' to ', clickedPage);
         };
     },
     extractObjectId(id) {
