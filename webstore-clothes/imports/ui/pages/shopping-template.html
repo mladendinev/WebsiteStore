@@ -11,13 +11,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <span class="navbar-toggle" align="center" id="logo-bar-toggle">  LOGO </span>
-            </div>
+               <a class="navbar-toggle" id='basket-link-toggle' href="#"> {{>numberOfBasketItems}}<img class='img-responsive' src='images/basket/shopping-cart.png'/></a>
+              <span class="navbar-toggle" id="logo-bar-toggle">  LOGO </span> 
+              </div>
 
 
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <span class="collapse navbar-collapse" align="center" id="logo-bar">  LOGO </span>
+            <a class="collapse navbar-collapse" id='basket-link' href="#">
+                 {{>numberOfBasketItems}} 
+                <img class='img-responsive' src='images/basket/shopping-cart.png'/></a>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav nav-bar-">
@@ -63,6 +67,7 @@
                     </a>
                 </div>
                 {{/each}}
+                <br class = "clear-div"/>
                 {{> defaultBootstrapPaginator pagination=templatePagination limit=5 containerClass="text-center"
                 onClick=clickEvent}}
             </div>

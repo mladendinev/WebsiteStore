@@ -55,9 +55,8 @@
 
 #logo-bar-toggle {
  font-size: 20.3pt;
- width: 38%;
  float:right;
- right: 24%;
+ right:30%;
  color: white;
  margin-top: 0%;
  margin-bottom: 0%;
@@ -79,6 +78,21 @@
   background-color: #e6e6e6;
 }
 
-.mainLink{
-padding-right:100px;
+.mainLink {
+
+  padding-right: 25px;
+
+}
+
+#basket-link{
+  float: right;
+  padding-top:5px;
+  color: white;
+}
+
+#basket-link-toggle {
+ float: right;
+ padding-top:5px;
+ margin-right:5px;
+ padding-left:0px;  
 }
