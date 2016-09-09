@@ -1,5 +1,5 @@
 import './payment-template.html'
-//
+
 Template.paymentTemplate.onRendered(function(){
   $('#payment-form').validate({
     rules: {
@@ -41,24 +41,51 @@ Template.paymentTemplate.onRendered(function(){
 
 
 Template.paymentTemplate.events({
-  'submit form': function(tmpl,e){
-    e.preventDefault();
-    console.log('validate');
+  'submit form': (event,template) => {
+    event.preventDefault();
+    var $form = $('#payment-form');
+    // loading state
+    template.loading.set(true);
+
+    //disable submit button
+    $form.find('.submit').prop('disabled', true);
+
+
+    Stripe.card.createToken($form, function(status, response) {
+
+      // Error in creating token
+      if(response.error){
+          template.loading.set(false);
+          $form.find('.payment-errors').text(response.error.message);
+          console.log(response.error.message);
+          $form.find('.submit').prop('disabled', false); // Re-enable submission
+          return;
+      }
+      else{
+          var token = response.id;
+          console.log(token);
+          $form.append($('<input type="hidden" name="stripeToken">').val(token));
+          $form.get(0).submit();
+      }
+    });
+
+    //prevent the form from being submitted to the server
+    return false;
   }
+});
+
+Template.paymentTemplate.created=function(){
+  // attach a reactive var to the template instance
+  // you need to meteor add reactive-var first !
+  this.loading=new ReactiveVar(false);
+};
 
 
+Template.paymentTemplate.helpers({
+  loading:function(){
+    // return the value of the reactive var attached to this template instance
+    return Template.instance().loading.get();
+  }
 });
 
 
-//Template.paymentTemplate.onRendered(function(){
-//  var $form = $('#payment-form');
-//  $form.submit(function(event) {
-//    // Disable the submit button to prevent repeated clicks:
-//    $form.find('.submit').prop('disabled', true);
-//    console.log('dasdad');
-//    // Request a token from Stripe:
-//    Stripe.card.createToken($form, stripeResponseHandler);
-//    // Prevent the form from being submitted:
-//    return false;
-//  });
-//});
