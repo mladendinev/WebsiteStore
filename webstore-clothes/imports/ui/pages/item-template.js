@@ -30,12 +30,23 @@ Template.itemTemplate.events({
  },
 
  'click #add-to-basket-button' (event) {
-   var currentValue = amplify.store('itemsInBasket')
+   var currentValue = amplify.store('itemsInBasket');
+     
      if (typeof currentValue !== "undefined" && currentValue !== null) {
-       currentValue.push(Template.instance().state.get("oid"));
+          currentValue.push({
+          "size": $("#sel-size").val(),  
+          "oid" : Template.instance().state.get("oid"),
+          "initials" : $("#initials").val(),
+          "qantity" : 1
+           });
        amplify.store('itemsInBasket',currentValue);
      } else {
-       amplify.store('itemsInBasket',[Template.instance().state.get("oid")]);
+       amplify.store('itemsInBasket',[{
+        "size": $("#sel-size").val(),  
+        "oid" : Template.instance().state.get("oid"),
+        "initials" : $("#initials").val(),
+        "quantity" : 1
+       }]);
      }
    Session.set('numberOfItemsInBasketSession',amplify.store('itemsInBasket').length);
    console.log(amplify.store('itemsInBasket'));

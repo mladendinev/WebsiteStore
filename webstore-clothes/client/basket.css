@@ -10,18 +10,13 @@
 }
 
 .table-div {
-  font-size: 20pt;	
-  float:left;
+  font-size: 15pt;	
   margin-top:2px;
 }
 
 
 .basket-th {
-	font-size: 20pt;
-}
-
-#total-div {
-	float:right;
+	font-size: 15pt;
 }
 
 .proceed-to-checkout-button {
