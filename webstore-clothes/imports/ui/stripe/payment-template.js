@@ -63,14 +63,21 @@ Template.paymentTemplate.events({
       }
       else{
           var token = response.id;
-          console.log(token);
+          console.log(response);
           $form.append($('<input type="hidden" name="stripeToken">').val(token));
-          $form.get(0).submit();
+//          $form.get(0).submit();
+          Meteor.call("chargeCard",token,function(error,response){
+             if(error){
+                $form.find('.payment-errors').text(error.message);
+             }
+             else{
+                alert("You have been charged");
+             }
+        });
       }
     });
 
     //prevent the form from being submitted to the server
-    return false;
   }
 });
 
