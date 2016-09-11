@@ -34,3 +34,5 @@ kurounin:pagination-blaze
 session
 reactive-dict
 mrt:paypal
+email
+meteorhacks:ssr
