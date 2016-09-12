@@ -66,7 +66,7 @@ Template.paymentTemplate.events({
           console.log(response);
           $form.append($('<input type="hidden" name="stripeToken">').val(token));
 //          $form.get(0).submit();
-          Meteor.call("chargeCard",token,function(error,response){
+          Meteor.apply("chargeCard",[token],{noRetry:true},function(error,response){
              if(error){
                 $form.find('.payment-errors').text(error.message);
              }
