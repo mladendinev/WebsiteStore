@@ -51,7 +51,6 @@ Template.basketOverview.helpers({
    },
 
     'click .proceed-to-checkout-button'(event){
-            FlowRouter.go('Payment');
+            FlowRouter.go('DeliveryDetails');
     }
-
  });

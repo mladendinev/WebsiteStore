@@ -40,14 +40,11 @@ Template.shoppingTemplate.helpers({
 });
 
 
-
-
 Template.shoppingTemplate.onRendered(function(){
    Session.set("DocumentTitle","Shopping Page");
    $("body").removeClass(); 
    $("body").addClass("body-shopping");
   });
-
 
 Template.shoppingTemplate.events({
   'click #sel1'(e,tmpl) {

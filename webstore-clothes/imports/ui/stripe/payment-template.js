@@ -1,4 +1,5 @@
 import './payment-template.html'
+import '../pages/progress-bar.js';
 import {calculatePriceCall} from '../../api/method-calls.js';
 
 Template.paymentTemplate.onRendered(function(){

@@ -9,7 +9,7 @@ import '../../ui/pages/shopping-template.js';
 import '../../ui/pages/item-template.js';
 import '../../ui/pages/basket-overview.js';
 import '../../ui/stripe/payment-template.js';
-
+import '../../ui/pages/delivery-template.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
@@ -57,5 +57,13 @@ FlowRouter.route('/basket',{
   name: 'Basket',
   action() {
    BlazeLayout.render('App_body', { main: 'basketOverview' });
+  },
+});
+
+
+FlowRouter.route('/delivery_details',{
+  name: 'DeliveryDetails',
+  action() {
+   BlazeLayout.render('App_body', { main: 'deliveryTemplate' });
   },
 });
