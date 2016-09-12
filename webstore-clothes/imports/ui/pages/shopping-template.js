@@ -55,15 +55,17 @@ Template.shoppingTemplate.events({
 
     var selectedOpt = $('#sel1 option:selected').val();
     var sortBy = ''
-    if (selectedOpt === "priceAsc") {sortBy = {'price':1};}
-    else if (selectedOpt === "priceDesc") {sortBy = {'price':-1};}
-    else if (selectedOpt === "productAsc") {sortBy = {'product':1};}
-    else if (selectedOpt === "productDesc") {sortBy = {'product':-1};}
-    else sortBy = 'unrecognised'
+    if (selectedOpt !== "Please Select"){
+        if (selectedOpt === "priceAsc") {sortBy = {'price':1};}
+        else if (selectedOpt === "priceDesc") {sortBy = {'price':-1};}
+        else if (selectedOpt === "productAsc") {sortBy = {'product':1};}
+        else if (selectedOpt === "productDesc") {sortBy = {'product':-1};}
+        else sortBy = 'unrecognised'
 
-    const currentFilters = tmpl.pagination.filters();
-    console.log(sortBy)
-    Template.instance().pagination.filters(currentFilters);
-    Template.instance().pagination.sort(sortBy);
+        const currentFilters = tmpl.pagination.filters();
+        console.log("selected option " + selectedOpt);
+        Template.instance().pagination.filters(currentFilters);
+        Template.instance().pagination.sort(sortBy);
+    }
   }
 });
