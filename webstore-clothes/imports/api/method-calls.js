@@ -6,5 +6,5 @@ export function calculatePriceCall(){
              else{
                 Session.set("totalPrice",response);
              }
-           });
-	};
+     });
+};

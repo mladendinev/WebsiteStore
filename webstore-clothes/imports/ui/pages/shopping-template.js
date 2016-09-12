@@ -58,7 +58,7 @@ Template.shoppingTemplate.events({
     if (selectedOpt === "priceAsc") {sortBy = {'price':1};}
     else if (selectedOpt === "priceDesc") {sortBy = {'price':-1};}
     else if (selectedOpt === "productAsc") {sortBy = {'product':1};}
-    else if (selectedOpt === "productDesc") {sortBy = {'productDesc':-1};}
+    else if (selectedOpt === "productDesc") {sortBy = {'product':-1};}
     else sortBy = 'unrecognised'
 
     const currentFilters = tmpl.pagination.filters();

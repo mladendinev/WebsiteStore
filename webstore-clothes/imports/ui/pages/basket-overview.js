@@ -9,7 +9,6 @@ import {Inventory}  from '../../api/products.js';
 Template.basketOverview.onCreated(function(){
  Session.set("itemsInBasketSession",amplify.store("itemsInBasket"));
  calculatePriceCall();
-
 });
 
 Template.basketOverview.onRendered(function(){
@@ -50,5 +49,9 @@ Template.basketOverview.helpers({
           Session.set("numberOfItemsInBasketSession",amplify.store("itemsInBasket").length);
 
    },
+
+    'click .proceed-to-checkout-button'(event){
+            FlowRouter.go('Payment');
+    }
 
  });

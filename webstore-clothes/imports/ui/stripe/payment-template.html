@@ -1,17 +1,23 @@
 <template name='paymentTemplate'>
 
     <div class="container">
+        <div class="summaryOrder">
+            <p>Total Amount: {{total}}</p>
+        </div>
+
+
         <form class="form-horizontal" role="form" method="POST" id="payment-form">
 
             <fieldset>
-                <span class="payment-errors"></span>
+                <!--<span class="payment-errors"></span>-->
                 <legend>Payment</legend>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" vafor="card_holder_name">Name on Card</label>
 
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" value="dasdasd" name="card_holder_name" placeholder="Card Holder's Name"
+                        <input type="text" class="form-control" value="dasdasd" data-minlength="10" id="card_holder_name" placeholder="Card Holder's Name"
                                 required>
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="form-group">
