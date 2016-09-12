@@ -2,6 +2,11 @@ import './number-of-basket-items.html';
 
 Template.numberOfBasketItems.helpers({
  numberOfItemsInBasket(){
-      return Session.get("numberOfItemsInBasketSession");
-    },
+	 	var numberOfItemsInBasket = Session.get("numberOfItemsInBasketSession");
+	 	  if(numberOfItemsInBasket > 0) {
+	      return Session.get("numberOfItemsInBasketSession");
+	      } else {
+	      	return null;
+	      }
+	    },
 });
