@@ -1,12 +1,15 @@
-import '../components/dropdown-products.js'
-import '../components/number-of-basket-items.js'
-import './basket-overview.html'
+import {calculatePriceCall} from '../../api/method-calls.js';
+import '../components/dropdown-products.js';
+import '../components/number-of-basket-items.js';
+import './basket-overview.html';
 
 import {Inventory}  from '../../api/products.js';
 
 
 Template.basketOverview.onCreated(function(){
  Session.set("itemsInBasketSession",amplify.store("itemsInBasket"));
+ calculatePriceCall();
+
 });
 
 Template.basketOverview.onRendered(function(){
@@ -30,14 +33,7 @@ Template.basketOverview.helpers({
  		      "quantity" : basketItem.quantity };
  },
  total(){
- 	//PROBLEM RACE CONDITION //TODO: read documentation to fix
- 	var total = 0;
- 	Session.get('itemsInBasketSession').forEach(function(basketItem,index){
-       var item = Inventory.findOne({"_id" : new Meteor.Collection.ObjectID(basketItem.oid)}); 
-       console.log(item);
-       total = total + parseInt(item.price);
- 	});
-   return total;
+ 	return Session.get("totalPrice");
  },
 });
 
@@ -50,7 +46,8 @@ Template.basketOverview.helpers({
           console.log(currentItemsArray);
           amplify.store("itemsInBasket",currentItemsArray);
           Session.set("itemsInBasketSession",amplify.store("itemsInBasket"));
-          Session.set("numberOfItemsInBasketSession",amplify.store("itemsInBasket").length)
+          calculatePriceCall();
+          Session.set("numberOfItemsInBasketSession",amplify.store("itemsInBasket").length);
 
    },
 
