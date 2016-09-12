@@ -1,16 +1,14 @@
 <template name='deliveryTemplate'>
 
     <div class="container">
-        <div class="summaryOrder">
-            <p>Total Amount: {{total}}</p>
+        <div class="progress-wrapper">
+            {{>progressBar first="progress-bar-success" second="progress-bar-success" third="progress-bar-danger" fourth="progress-bar-danger" }}
         </div>
+
         <!---->
         <!-- User info form-->
         <!---->
 
-        <div class="progress-wrapper">
-            {{>progressBar number=75 value="Payment"}}
-        </div>
 
         <form class="form-horizontal" role="form" method="POST" id="user-info">
 

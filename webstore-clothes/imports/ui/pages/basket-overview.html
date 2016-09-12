@@ -1,6 +1,8 @@
 <template name='basketOverview'>
     <nav class="navbar">
         <div class="container-fluid background-black navbar-shop-website">
+
+
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
 
@@ -30,70 +32,74 @@
             <!-- /.navbar-collapse -->
         </div>
 
+
         <!-- /.container-fluid -->
     </nav>
-    <table class="table" id="basket-content">
-        <thead>
-        <tr>
-            <th class="basket-th">Item</th>
-            <th class="basket-th"> Size</th>
-            <th class="basket-th"> Initials</th>
-            <th class="basket-th"> Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each basketItem in itemsInBasket}}
-        {{#with getItem basketItem}}
-        <tr>
+    <div id="basket-content">
+        {{>progressBar first="progress-bar-success" second="progress-bar-danger" third="progress-bar-danger"
+        fourth="progress-bar-danger" }}
 
-            <td><img class="img-responsive img-circle img-basket" src="images/{{item.file}}" width="40px"/>
+        <table class="table">
 
-                <div class="table-div float-left"> {{item.product}}</div>
-            </td>
-            {{#if size}}
-            <td>
-                <div class="table-div float-left">{{size}}</div>
-            </td>
-            {{else}}
-            <td>
-                <div class="table-div float-left">n/a</div>
-            </td>
-            {{/if}}
-            {{#if initials}}
-            <td>
-                <div class="table-div float-left">{{initials}}</div>
-            </td>
-            {{else}}
-            <td>
-                <div class="table-div float-left">n/a</div>
-            </td>
-            {{/if}}
-            <td>
-                <div class="table-div float-left">{{item.price}}</div>
-                <div class="table-div float-right"><span class="glyphicon glyphicon-remove remove-item"
-                                                         aria-hidden="true" id="{{@index}}"></span></div>
-            </td>
-        </tr>
-        {{/with}}
-        {{/each}}
-        <tr>
-            <td id="basket-final-row-col1" colspan="3">
-                <div class="float-left">
-                    <button type="button" class="btn btn-default proceed-to-checkout-button"> PROCEED TO CHECKOUT
-                    </button>
-                </div>
-                <div class="table-div float-right"> Total:</div>
-            </td>
-            <td id="basket-final-row-col2">
-                <div class="table-div float-left">{{total}}</div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            <thead>
+            <tr>
+                <th class="basket-th">Item</th>
+                <th class="basket-th"> Size</th>
+                <th class="basket-th"> Initials</th>
+                <th class="basket-th"> Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each basketItem in itemsInBasket}}
+            {{#with getItem basketItem}}
+            <tr>
 
-    <div class="progress-wrapper">
-        {{> prgBar number="25"}}
+                <td><img class="img-responsive img-circle img-basket" src="images/{{item.file}}" width="40px"/>
+
+                    <div class="table-div float-left"> {{item.product}}</div>
+                </td>
+                {{#if size}}
+                <td>
+                    <div class="table-div float-left">{{size}}</div>
+                </td>
+                {{else}}
+                <td>
+                    <div class="table-div float-left">n/a</div>
+                </td>
+                {{/if}}
+                {{#if initials}}
+                <td>
+                    <div class="table-div float-left">{{initials}}</div>
+                </td>
+                {{else}}
+                <td>
+                    <div class="table-div float-left">n/a</div>
+                </td>
+                {{/if}}
+                <td>
+                    <div class="table-div float-left">{{item.price}}</div>
+                    <div class="table-div float-right"><span class="glyphicon glyphicon-remove remove-item"
+                                                             aria-hidden="true" id="{{@index}}"></span></div>
+                </td>
+            </tr>
+            {{/with}}
+            {{/each}}
+            <tr>
+                <td id="basket-final-row-col1" colspan="3">
+                    <div class="float-left">
+                        <button type="button" class="btn btn-default proceed-to-checkout-button"> PROCEED TO CHECKOUT
+                        </button>
+                    </div>
+                    <div class="table-div float-right"> Total:</div>
+                </td>
+                <td id="basket-final-row-col2">
+                    <div class="table-div float-left">{{total}}</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
     <!--<table class="table" id="basket-content">
     <tbody>
       <tr>
