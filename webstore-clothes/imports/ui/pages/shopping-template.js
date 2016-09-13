@@ -6,8 +6,15 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import {Inventory}  from '../../api/products.js';
 import {Products}  from '../../api/products.js';
 
+Template.shoppingTemplate.onRendered(function(){
+   Session.set("DocumentTitle","Shopping Page");
+   $("body").removeClass();
+   $("body").addClass("body-shopping");
+  });
+
+
+
  Template.shoppingTemplate.created = function () {
- 
   this.pagination = new Meteor.Pagination(Inventory, {perPage:6});
  };
 
@@ -40,11 +47,7 @@ Template.shoppingTemplate.helpers({
 });
 
 
-Template.shoppingTemplate.onRendered(function(){
-   Session.set("DocumentTitle","Shopping Page");
-   $("body").removeClass(); 
-   $("body").addClass("body-shopping");
-  });
+
 
 Template.shoppingTemplate.events({
   'click #sel1'(e,tmpl) {

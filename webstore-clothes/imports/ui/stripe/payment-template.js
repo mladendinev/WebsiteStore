@@ -2,6 +2,15 @@ import './payment-template.html'
 import '../pages/progress-bar.js';
 import {calculatePriceCall} from '../../api/method-calls.js';
 
+
+Template.paymentTemplate.onRendered(function(){
+   Session.set("DocumentTitle","Payment");
+   $("body").removeClass();
+   $("body").addClass("body-shopping");
+  });
+
+
+
 Template.paymentTemplate.onRendered(function(){
   $('#payment-form').validate({
     rules: {
@@ -106,4 +115,6 @@ Template.paymentTemplate.onCreated(function(){
  Session.set("itemsInBasketSession",amplify.store("itemsInBasket"));
  calculatePriceCall();
 });
+
+
 
