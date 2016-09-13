@@ -6,8 +6,15 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import {Inventory}  from '../../api/products.js';
 import {Products}  from '../../api/products.js';
 
+Template.shoppingTemplate.onRendered(function(){
+   Session.set("DocumentTitle","Shopping Page");
+   $("body").removeClass();
+   $("body").addClass("body-shopping");
+  });
+
+
+
  Template.shoppingTemplate.created = function () {
- 
   this.pagination = new Meteor.Pagination(Inventory, {perPage:6});
  };
 
@@ -42,28 +49,23 @@ Template.shoppingTemplate.helpers({
 
 
 
-Template.shoppingTemplate.onRendered(function(){
-   Session.set("DocumentTitle","Shopping Page");
-   $("body").removeClass(); 
-   $("body").addClass("body-shopping");
-  });
-
-
 Template.shoppingTemplate.events({
   'click #sel1'(e,tmpl) {
     e.preventDefault();
 
     var selectedOpt = $('#sel1 option:selected').val();
     var sortBy = ''
-    if (selectedOpt === "priceAsc") {sortBy = {'price':1};}
-    else if (selectedOpt === "priceDesc") {sortBy = {'price':-1};}
-    else if (selectedOpt === "productAsc") {sortBy = {'product':1};}
-    else if (selectedOpt === "productDesc") {sortBy = {'productDesc':-1};}
-    else sortBy = 'unrecognised'
+    if (selectedOpt !== "Please Select"){
+        if (selectedOpt === "priceAsc") {sortBy = {'price':1};}
+        else if (selectedOpt === "priceDesc") {sortBy = {'price':-1};}
+        else if (selectedOpt === "productAsc") {sortBy = {'product':1};}
+        else if (selectedOpt === "productDesc") {sortBy = {'product':-1};}
+        else sortBy = 'unrecognised'
 
-    const currentFilters = tmpl.pagination.filters();
-    console.log(sortBy)
-    Template.instance().pagination.filters(currentFilters);
-    Template.instance().pagination.sort(sortBy);
+        const currentFilters = tmpl.pagination.filters();
+        console.log("selected option " + selectedOpt);
+        Template.instance().pagination.filters(currentFilters);
+        Template.instance().pagination.sort(sortBy);
+    }
   }
 });

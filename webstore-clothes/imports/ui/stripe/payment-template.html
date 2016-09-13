@@ -1,24 +1,42 @@
 <template name='paymentTemplate'>
 
     <div class="container">
+        <div class="progress-wrapper">
+            {{>progressBar first="progress-bar-success" second="progress-bar-success" third="progress-bar-success" fourth="progress-bar-danger" }}
+        </div>
+
+        <div class="summaryOrder">
+            <p>Total Amount: {{total}}</p>
+        </div>
+
+        <!---->
+        <!-- Payment form-->
+        <!---->
+
         <form class="form-horizontal" role="form" method="POST" id="payment-form">
 
             <fieldset>
-                <span class="payment-errors"></span>
+                <!--<span class="payment-errors"></span>-->
                 <legend>Payment</legend>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label" vafor="card_holder_name">Name on Card</label>
+                    <label class="col-sm-3 control-label" for="card_holder_name">Name on Card</label>
 
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" value="dasdasd" name="card_holder_name" placeholder="Card Holder's Name"
-                                required>
+                        <input type="text" class="form-control" value="dasdasd" data-minlength="10"
+                               id="card_holder_name"
+                               placeholder="Card Holder's Name"
+                               required>
+
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="card_number">Card Number</label>
 
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" value="4242424242424242" name="card_number" maxlength="26" size="26"
+                        <input type="text" class="form-control" value="4242424242424242" name="card_number"
+                               maxlength="26"
+                               size="26"
                                placeholder="Debit/Credit Card Number" required
                                data-stripe="number">
                     </div>
@@ -29,7 +47,7 @@
                     <div class="col-sm-9">
                         <div class="row">
                             <div class="col-xs-3">
-                                <select class="form-control col-sm-2" name ="expiry_month" data-stripe="exp_month"
+                                <select class="form-control col-sm-2" name="expiry_month" data-stripe="exp_month"
                                         required>
                                     <option value="" disabled selected hidden> Month</option>
                                     <option value="01">January</option>
@@ -68,28 +86,31 @@
                     <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
 
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" value="111" name="cvv" placeholder="Security Code" maxlength="4"
+                        <input type="text" class="form-control" value="111" name="cvv" placeholder="Security Code"
+                               maxlength="4"
                                size="4" data-stripe="cvc" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-9">
                         <button type="submit" disabled={{loading}} class="btn btn-success">
-                        {{#if loading}}
-                           Processing...
-                        {{else}}
-                           Pay Now
-                        {{/if}}
+                            {{#if loading}}
+                            Processing...
+                            {{else}}
+                            Pay Now
+                            {{/if}}
                         </button>
                     </div>
                 </div>
             </fieldset>
         </form>
+
     </div>
     <script type="text/javascript">
-   document.title = 'Payment';
-   $("body").addClass("payment-main");
+        $("body").addClass("payment-main");
     </script>
+
+
 </template>
 
 

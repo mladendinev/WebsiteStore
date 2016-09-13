@@ -1,5 +1,6 @@
 allow-deny@1.0.5
 amplify@1.0.0
+anback:bootstrap-validator@0.9.0
 arunoda:npm@0.2.6
 autopublish@1.0.7
 autoupdate@1.2.11
