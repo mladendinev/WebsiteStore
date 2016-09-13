@@ -1,0 +1,26 @@
+.progress-bar-success{
+  background-color: #ffd633;
+}
+
+.progress-bar-danger{
+  background-color: white;
+}
+
+.progress-bar {
+   color:black;
+}
+
+.progress-bar {
+    border-right: solid 1px;
+    border-right-color: black;
+}
+.progress-bar:last-child {
+    border: none;
+}
+
+.progress-wrapper {
+    border-right: solid 1px;
+    border-right-color: black;
+    border-left: solid 1px;
+    border-left-color: black;
+}
