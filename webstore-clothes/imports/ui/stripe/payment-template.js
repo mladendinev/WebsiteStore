@@ -43,7 +43,7 @@ Template.paymentTemplate.onRendered(function(){
 
 
 Template.paymentTemplate.events({
-  'submit form': (event,template) => {
+  'submit #payment-form': (event,template) => {
     event.preventDefault();
     var $form = $('#payment-form');
     // loading state
