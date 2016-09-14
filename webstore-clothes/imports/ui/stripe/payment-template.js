@@ -62,32 +62,51 @@ Template.paymentTemplate.events({
     //disable submit button
     $form.find('.submit').prop('disabled', true);
 
+    card_number = $("[data-stripe=number]").val();
+
+
+//   TODO: individual validity checking
+//    if(Stripe.card.validateCardNumber(card_number) === false){
+//
+//    }
+
+
 
     Stripe.card.createToken($form, function(status, response) {
 
       // Error in creating token
       if(response.error){
           template.loading.set(false);
+          console.log(response.error.param);
           var error_field = $("[data-stripe=" +response.error.param+"]");
           $("<label class=\"error\">" + response.error.message +"</label>").insertAfter(error_field);
           console.log(response.error.message);
-
-
           $form.find('.submit').prop('disabled', false); // Re-enable submission
           return;
       }
       else{
           var token = response.id;
-          console.log(response);
           $form.append($('<input type="hidden" name="stripeToken">').val(token));
+
+          let charge = {
+                         amount:10000,
+                         source: response.id,
+                         currency: 'eur',
+                         description: "test transaction"
+                        }
+
+
 //          $form.get(0).submit();
-          Meteor.apply("chargeCard",[token],{noRetry:true},function(error,response){
+          Meteor.call("chargeCardSynchronous",charge,function(error,result){
              if(error){
-                $form.find('.payment-errors').text(error.message);
+                console.log('error');
+                $form.find('.payment-errors').text("<label class=\"error\">" + error.message +"</label>");
              }
              else{
-                alert("You have been charged");
-             }
+                Session.set("orderInfo",result.amount);
+                FlowRouter.go('successfulTrans');
+                //Call the email service
+            }
         });
       }
     });

@@ -46,11 +46,5 @@ Template.deliveryTemplate.onRendered(function(){
     'submit form'(event){
         event.preventDefault();
         FlowRouter.go('Payment');
-//        var $form = $('##user-info');
-//
-//        $form.find('.submit').prop('disabled', true);
-//
-//
-//
     }
  });
