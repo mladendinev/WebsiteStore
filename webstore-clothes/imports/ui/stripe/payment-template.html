@@ -16,14 +16,14 @@
         <form class="form-horizontal" role="form" method="POST" id="payment-form">
 
             <fieldset>
-                <!--<span class="payment-errors"></span>-->
+                <span class="payment-errors"></span>
                 <legend>Payment</legend>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="card_holder_name">Name on Card</label>
 
                     <div class="col-sm-3">
                         <input type="text" class="form-control" value="dasdasd" data-minlength="10"
-                               id="card_holder_name"
+                               name="card_holder_name"
                                placeholder="Card Holder's Name"
                                required>
 
@@ -34,7 +34,7 @@
                     <label class="col-sm-3 control-label" for="card_number">Card Number</label>
 
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" value="4242424242424242" name="card_number"
+                        <input type="text" class="form-control" value="42424242424242421" name="card_number"
                                maxlength="26"
                                size="26"
                                placeholder="Debit/Credit Card Number" required

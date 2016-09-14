@@ -12,6 +12,7 @@ Template.paymentTemplate.onRendered(function(){
 
 
 Template.paymentTemplate.onRendered(function(){
+
   $('#payment-form').validate({
     rules: {
       card_holder_name: {
@@ -46,7 +47,7 @@ Template.paymentTemplate.onRendered(function(){
       cvv: {
          required: "Please enter a cvv number",
       },
-    }
+    },
   });
 });
 
@@ -67,8 +68,11 @@ Template.paymentTemplate.events({
       // Error in creating token
       if(response.error){
           template.loading.set(false);
-          $form.find('.payment-errors').text(response.error.message);
+          var error_field = $("[data-stripe=" +response.error.param+"]");
+          $("<label class=\"error\">" + response.error.message +"</label>").insertAfter(error_field);
           console.log(response.error.message);
+
+
           $form.find('.submit').prop('disabled', false); // Re-enable submission
           return;
       }

@@ -37,7 +37,7 @@ Template.deliveryTemplate.onRendered(function(){
       address_line_1: {
          required: "Please type your delivery address.",
       },
-    }
+    },
   });
 });
 
