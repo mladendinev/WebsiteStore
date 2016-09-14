@@ -1,6 +1,9 @@
 <template name='successPayment'>
     <div class="container">
+        {{>progressBar first="progress-bar-success" second="progress-bar-success" third="progress-bar-success"
+        fourth="progress-bar-success" }}
+
         <p>Your transaction was successful</p>
-        <p>Order id {{order}}</p>
+        <p>Paid amount {{order}}</p>
     </div>
 </template>
