@@ -1,6 +1,7 @@
 import './payment-template.html'
 import '../pages/progress-bar.js';
 import {calculatePriceCall} from '../../api/method-calls.js';
+import {Inventory} from '../../api/products.js';
 
 Template.paymentTemplate.onRendered(function(){
   $('#payment-form').validate({
@@ -80,7 +81,17 @@ Template.paymentTemplate.events({
     });
 
     //prevent the form from being submitted to the server
-  }
+  },
+   
+  "change input[name='payment-method']" (event) {
+   $("input[name='payment-method']").each(function(){
+      if(this.checked) {
+        $("#" + this.id +"-container").attr("style", "");  
+      } else {
+        $("#" + this.id +"-container").attr("style", "display:none");  
+      }
+   });
+  },
 });
 
 Template.paymentTemplate.created=function(){
@@ -99,11 +110,30 @@ Template.paymentTemplate.helpers({
    total(){
    	return Session.get("totalPrice");
    },
+   encryptButton(){
+    //console.log("THE response" + Session.get('payPalButtonValue'));
+     return Session.get('payPalButtonValue');
+   },
 });
 
 
 Template.paymentTemplate.onCreated(function(){
  Session.set("itemsInBasketSession",amplify.store("itemsInBasket"));
- calculatePriceCall();
-});
+const handle = Meteor.subscribe('inventory');
+  
+   this.autorun(() => {
+      Session.set("totalPrice",calculatePriceCall());
+      var resp =  Meteor.call('encryptPayPalButton',function(error,response){
+             if(error){
+                console.log("price could not be calculated, error occured");
+             }
+             else{
+                 // console.log("response in the callback" + response); 
+                console.log("response in the callback" + response);
+                Session.set('payPalButtonValue',response);
+             }
+    // console.log("RESP" + ));
 
+  });
+});
+});

@@ -35,3 +35,4 @@ session
 reactive-dict
 mrt:paypal
 anback:bootstrap-validator
+meteorhacks:picker

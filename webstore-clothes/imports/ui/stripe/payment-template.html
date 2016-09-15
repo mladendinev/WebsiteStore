@@ -12,12 +12,20 @@
         <!---->
         <!-- Payment form-->
         <!---->
-
+         <fieldset>
+            <legend>Choose Payment Method</legend>
+          <input type="radio" name="payment-method" value="card" id="card-payment"> Pay with debit/credit card <img src="/images/payment/visa.jpg">  
+          <img src="/images/payment/mastercard.jpg">  <br>
+          <input type="radio" name="payment-method" value="paypal" id="paypal-payment"> 
+          Pay with PayPal<img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" style="margin-left:7px;"> <br> 
+         </fieldset>
+        
+        <div id = "card-payment-container" style="display:none">
         <form class="form-horizontal" role="form" method="POST" id="payment-form">
 
             <fieldset>
                 <!--<span class="payment-errors"></span>-->
-                <legend>Payment</legend>
+                <legend>Enter your card details</legend>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="card_holder_name">Name on Card</label>
 
@@ -104,53 +112,40 @@
                 </div>
             </fieldset>
         </form>
-
     </div>
+    <div id="paypal-payment-container" style="display:none">
 
-<!--     <script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=mladen_dinev@abv.bg" 
-     data-button="buynow" 
-     data-name="basket" 
-     data-quantity="1" 
-     data-amount="100" 
-     data-currency="EUR" 
-     data-shipping="0" 
-     data-tax="0" 
-     data-callback="localhost:3000/confirm" 
-     data-env="sandbox"
- ></script> -->
-    <!-- {{>paypalCreditCardForm}} -->
-    <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr&#8221;" class="paypal-button" target="_top" style="opacity: 1;">
+         <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
 
-    <div class="hide" id="errorBox"></div>
+    <fieldset>
+            <legend> Checkout with PayPal </legend>
 
-    <input type="hidden" name="button" value="buynow">
+    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input
+type="image"
+src="https://www.sandbox.paypal.com/en_US/i/btn/x-click-but23.gif"
+border="0"
+name="submit"
+alt="Make payments with PayPal - it's fast, free and secure!">
+<input type="hidden" name="encrypted" value="{{encryptButton}}">
+</form>
 
-    <input type="hidden" name="business" value="YOUR EMAIL">
-
-    <input type="hidden" name="item_name" value="ITEM NAME">
-
-    <input type="hidden" name="quantity" value="THE QUANTITY">
-
-    <input type="hidden" name="amount" value="THE PRICE">
-
-    <input type="hidden" name="currency_code" value="THE CURRENCY (usually set to ‘USD’)">
-
-    <input type="hidden" name="shipping" value="THE SHIPPING COST">
-
-    <input type="hidden" name="tax" value="THE TAX AMOUNT">
-
-    <input type="hidden" name="notify_url" value="http://localhost:3000/paypalCallback">
-
-    <input type="hidden" name="env" value="www.sandbox">
-
-    <input type="hidden" name="cmd" value="_xclick">
-
-    <input type="hidden" name="bn" value="JavaScriptButton_buynow">
-
-    <button type="submit" class="paypal-button large">Checkout with paypal</button>
-
+    </fieldset>
    </form>
+    </div>
+</div>
 
+
+
+
+<!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="B96JUTTQ6R2A6">
+<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
 
     <script type="text/javascript">
         document.title = 'Payment';
