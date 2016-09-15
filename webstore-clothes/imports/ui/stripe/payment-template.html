@@ -24,14 +24,14 @@
         <form class="form-horizontal" role="form" method="POST" id="payment-form">
 
             <fieldset>
-                <!--<span class="payment-errors"></span>-->
-                <legend>Enter your card details</legend>
+                <span class="payment-errors"></span>
+               <legend>Enter your card details</legend>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="card_holder_name">Name on Card</label>
 
                     <div class="col-sm-3">
                         <input type="text" class="form-control" value="dasdasd" data-minlength="10"
-                               id="card_holder_name"
+                               name="card_holder_name"
                                placeholder="Card Holder's Name"
                                required>
 
@@ -69,13 +69,13 @@
                                     <option value="09">September</option>
                                     <option value="10">October</option>
                                     <option value="11">November</option>
-                                    <option value="12">December</option>
+                                    <option selected="selected"  value="12">December</option>
                                 </select>
                             </div>
                             <div class="col-xs-3">
                                 <select class="form-control" name="exp_year" data-stripe="exp_year" required>
                                     <option value="" disabled selected hidden> Year</option>
-                                    <option value="16">2016</option>
+                                    <option selected="selected"  value="16">2016</option>
                                     <option value="17">2017</option>
                                     <option value="18">2018</option>
                                     <option value="19">2019</option>
@@ -148,7 +148,6 @@ alt="Make payments with PayPal - it's fast, free and secure!">
 -->
 
     <script type="text/javascript">
-        document.title = 'Payment';
         $("body").addClass("payment-main");
     </script>
 

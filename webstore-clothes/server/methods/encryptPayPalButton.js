@@ -13,13 +13,13 @@ import {exec} from 'child_process';
     var future = new Future();
   
 	
-	var response = exec("printf 'cmd=_xclick\nbusiness=mladen_dinev-facilitator@abv.bg\nitem_name=Webstore Shoping Basket\namount=230\nshipping=2.00 \nno_note=1\ncurrency_code=USD\ncert_id=FKAY6K9XKA98J' | openssl smime -sign -signer " +  MY_CERT + ' -inkey '+ MY_KEY + ' -outform  der -nodetach -binary |' +
+	var response = exec("printf 'cmd=_xclick\nbusiness=mladen_dinev-facilitator@abv.bg\nitem_name=Webstore Shoping Basket\namount=230\nshipping=2.00 \nno_note=1\ncurrency_code=EUR\ncert_id=FKAY6K9XKA98J\nreturn=http://localhost:3000/confirmation\nnotify_url=http://localhost:3000/post' | openssl smime -sign -signer " +  MY_CERT + ' -inkey '+ MY_KEY + ' -outform  der -nodetach -binary |' +
 		 ' openssl smime -encrypt -des3 -binary -outform pem ' + PAYPAL_CERT, (error, stdout, stderr) => {
 	  if (error) {
 	    console.error(`exec error: ${error}`);
 	    future.return( error );
 	  }
-	  console.log(`stdout: ${stdout}`);
+	  //console.log(`stdout: ${stdout}`);
 	   future.return(stdout);
 	});
     

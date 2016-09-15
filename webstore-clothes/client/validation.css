@@ -1,0 +1,28 @@
+label.error{
+    color: red !important;
+}
+
+.btn-success {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success {
+    color: #fff;
+    background-color: #999999;
+    border-color: #999999; /*set the color you want here*/
+}
+
+.btn-success:active {
+   background-color: #999999;
+}
+
+.btn-success:active {
+  box-shadow: none;
+}
+
+.btn-success:active:focus {
+  color: #ffffff;
+  background-color: #161617;
+  border-color: #494F57;
+}

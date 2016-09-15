@@ -10,6 +10,7 @@ import '../../ui/pages/item-template.js';
 import '../../ui/pages/basket-overview.js';
 import '../../ui/stripe/payment-template.js';
 import '../../ui/pages/delivery-template.js';
+import '../../ui/pages/successful-transaction.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
@@ -65,5 +66,13 @@ FlowRouter.route('/delivery_details',{
   name: 'DeliveryDetails',
   action() {
    BlazeLayout.render('App_body', { main: 'deliveryTemplate' });
+  },
+});
+
+
+FlowRouter.route('/confirmation',{
+  name: 'successfulTrans',
+   action()  {
+   BlazeLayout.render('App_body', { main: 'successPayment' });
   },
 });

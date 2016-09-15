@@ -1,6 +1,6 @@
 <template name='deliveryTemplate'>
-
     <div class="container">
+
         <div class="progress-wrapper">
             {{>progressBar first="progress-bar-success" second="progress-bar-success" third="progress-bar-danger" fourth="progress-bar-danger" }}
         </div>
@@ -13,7 +13,7 @@
         <form class="form-horizontal" role="form" method="POST" id="user-info">
 
             <fieldset>
-                <span class="payment-errors"></span>
+                <span class="user-info-errors"></span>
                 <legend>Delivery Details</legend>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="first_name">First Name</label>
@@ -48,11 +48,11 @@
 
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label" for="phone_number">Phone Number</label>
+                    <label class="col-sm-3 control-label" for="phone_number">Phone Number <br /> with area code</label>
 
                     <div class="col-sm-3">
                         <input type="text" class="form-control" value="32131231" data-minlength="10" name="phone_number"
-                               placeholder="Phone Number"
+                               placeholder="Phone Number with area code"
                                required>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                     <div class="col-sm-3">
                         <input type="text" class="form-control" data-minlength="10" name="address_line_2"
                                placeholder="Address Line 2 (Optional)"
-                               required>
+                               >
                     </div>
                 </div>
 
