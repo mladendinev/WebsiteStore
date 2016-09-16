@@ -120,16 +120,7 @@
     <fieldset>
             <legend> Checkout with PayPal </legend>
 
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input
-type="image"
-src="https://www.sandbox.paypal.com/en_US/i/btn/x-click-but23.gif"
-border="0"
-name="submit"
-alt="Make payments with PayPal - it's fast, free and secure!">
-<input type="hidden" name="encrypted" value="{{encryptButton}}">
-</form>
+   {{{encryptButton}}}
 
     </fieldset>
    </form>

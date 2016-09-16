@@ -38,3 +38,4 @@ anback:bootstrap-validator
 check
 audit-argument-checks
 meteorhacks:picker
+http

@@ -4,26 +4,51 @@ import {exec} from 'child_process';
   if (Meteor.isServer){
 
    Meteor.methods({'encryptPayPalButton' : function() {
-	const CERT_HOME = Meteor.settings.private.keyfileLocations.certificateHome;
-	const MY_CERT = CERT_HOME + "pubcert.pem";
-	const MY_KEY = CERT_HOME + "prvkey.pem";
-	const PAYPAL_CERT = CERT_HOME + "paypal_cert_pem.txt";
-    //const SIGNABLE_CONTENT = 'cmd=_xclick\nbusiness=mladen_dinev-facilitator@abv.bg\nitem_name=Jesus Christ its Jason Bourne\namount=34.00\nshipping=2.00 \nno_note=1\ncurrency_code=USD\ncert_id=FKAY6K9XKA98J';    
-    var Future = Npm.require( 'fibers/future' ); 
-    var future = new Future();
-  
-	
-	var response = exec("printf 'cmd=_xclick\nbusiness=mladen_dinev-facilitator@abv.bg\nitem_name=Webstore Shoping Basket\namount=230\nshipping=2.00 \nno_note=1\ncurrency_code=EUR\ncert_id=FKAY6K9XKA98J\nreturn=http://localhost:3000/confirmation\nnotify_url=http://localhost:3000/post' | openssl smime -sign -signer " +  MY_CERT + ' -inkey '+ MY_KEY + ' -outform  der -nodetach -binary |' +
-		 ' openssl smime -encrypt -des3 -binary -outform pem ' + PAYPAL_CERT, (error, stdout, stderr) => {
-	  if (error) {
-	    console.error(`exec error: ${error}`);
-	    future.return( error );
-	  }
-	  //console.log(`stdout: ${stdout}`);
-	   future.return(stdout);
-	});
-    
-    return future.wait();
-   }
+     var Future = Npm.require( 'fibers/future' ); 
+     var future = new Future();
+
+     const PAYPAL_API_VERSION = Meteor.settings.private.paypal.apiVersion;
+     const PAYPAL_API_USER = Meteor.settings.private.paypal.apiUserName;
+     const PAYPAL_API_PASSWORD = Meteor.settings.private.paypal.apiPassword;
+     const PAYPAL_API_SIGNATURE = Meteor.settings.private.paypal.apiSignature;
+     const PAYPAL_BUSINESS_ID = Meteor.settings.private.paypal.paypalBusinessId;
+     const PAYPAL_API_RETURN_URL = Meteor.settings.private.paypal.paypalApiReturnURL;
+     const PAYPAL_API_NOTIFY_URL = Meteor.settings.private.paypal.papyalApiNotifyURL;
+     const PAYPAL_API_ADDRESS = Meteor.settings.private.paypal.paypalApiAddress;
+
+    const CONTENT  = "METHOD=BMCreateButton&" +
+                     "VERSION=" + PAYPAL_API_VERSION + "&" +
+                     "USER=" + PAYPAL_API_USER +"&" +
+                     "PWD=" + PAYPAL_API_PASSWORD +"&" +
+                     "SIGNATURE=" + PAYPAL_API_SIGNATURE +"&" +
+                     "BUTTONCODE=ENCRYPTED&" +
+                     "BUTTONTYPE=BUYNOW&" +
+                     "L_BUTTONVAR1=business=" + PAYPAL_BUSINESS_ID +"&" +
+                     "L_BUTTONVAR2=item_name=Webstore-Shoping-Basket&" +
+                     "L_BUTTONVAR3=amount=230&" +
+                     "L_BUTTONVAR4=shipping=2.00&" +
+                     "L_BUTTONVAR5=currency_code=EUR&" +
+                     "L_BUTTONVAR6=return=" + PAYPAL_API_RETURN_URL + "&" +
+                     "L_BUTTONVAR7=notify_url=" + PAYPAL_API_NOTIFY_URL
+ 
+	HTTP.call("POST", PAYPAL_API_ADDRESS,
+          {content: CONTENT},
+          function (error, result) {
+            if (!error) {
+              var re = /<form(.|[\r\n])*<\/form>/g;
+              var decodedResult = decodeURIComponent(result.content);
+              var extractedResult = decodedResult.match(re);
+              console.log("The results from paypal NVP API:" + decodedResult); 
+              console.log("The extracted result:" + extractedResult[0]);
+              future.return(extractedResult[0]);
+            } else {
+              console.log(decodeURIComponent(error));
+              future.return("");
+            }
+
+          });
+
+          return future.wait();
+     }
    });
   }
