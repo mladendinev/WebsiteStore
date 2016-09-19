@@ -1,10 +1,13 @@
+import {Inventory} from './products.js';
+
 export function calculatePriceCall(){
-	 Meteor.call("calculateTotalPrice",Session.get('itemsInBasketSession'),function(error,response){
-             if(error){
-                console.log("price could not be calculated, error occured");
-             }
-             else{
-                Session.set("totalPrice",response);
-             }
-     });
+		var total=0;
+		     Session.get('itemsInBasketSession').forEach(function(basketItem,index){
+		        var item = Inventory.findOne({"_id" : new Meteor.Collection.ObjectID(basketItem.oid)});
+			        if ((typeof item !== "undefined") && item !== null) {
+			        total = total + parseInt(item.price);
+			    }
+		 	  });
+		      return total;
+	 
 };

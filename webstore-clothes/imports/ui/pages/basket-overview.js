@@ -7,8 +7,10 @@ import {Inventory}  from '../../api/products.js';
 
 
 Template.basketOverview.onCreated(function(){
- Session.set("itemsInBasketSession",amplify.store("itemsInBasket"));
- calculatePriceCall();
+ Session.set('itemsInBasketSession',amplify.store("itemsInBasket"));
+ this.autorun(() => {
+      Session.set("totalPrice",calculatePriceCall());
+  });
 });
 
 Template.basketOverview.onRendered(function(){
@@ -45,7 +47,7 @@ Template.basketOverview.helpers({
           console.log(currentItemsArray);
           amplify.store("itemsInBasket",currentItemsArray);
           Session.set("itemsInBasketSession",amplify.store("itemsInBasket"));
-          calculatePriceCall();
+          Session.set("totalPrice",calculatePriceCall());
           Session.set("numberOfItemsInBasketSession",amplify.store("itemsInBasket").length);
 
    },
