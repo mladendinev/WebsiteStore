@@ -45,7 +45,6 @@
 }
 
 #logo-bar{
- font-size: 26.3pt;
  width: 20%;
  position: absolute;
  right: 40%;
@@ -54,7 +53,6 @@
 }
 
 #logo-bar-toggle {
- font-size: 20.3pt;
  float:right;
  right:30%;
  color: white;
@@ -96,3 +94,4 @@
  margin-right:5px;
  padding-left:0px;  
 }
+

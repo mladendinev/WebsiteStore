@@ -1,4 +1,5 @@
 import './shopping-template.html';
+import './navbar-shopping.js';
 import '../components/shopping-product.html'
 import '../components/number-of-basket-items.js'
 import { FlowRouter } from 'meteor/kadira:flow-router';
