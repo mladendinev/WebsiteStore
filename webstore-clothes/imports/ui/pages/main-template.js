@@ -1,5 +1,5 @@
 import './carousel-template.js';
-import './navbar-main.js';
+import '../components/navbar-main.js';
 
 import './main-template.html';
 import {scrollWin} from '../../api/scroll-function.js';

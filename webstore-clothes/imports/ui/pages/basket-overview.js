@@ -1,7 +1,9 @@
 import {calculatePriceCall} from '../../api/method-calls.js';
 import '../components/dropdown-products.js';
 import '../components/number-of-basket-items.js';
+import '../components/navbar-shopping.js';
 import './basket-overview.html';
+
 
 import {Inventory}  from '../../api/products.js';
 

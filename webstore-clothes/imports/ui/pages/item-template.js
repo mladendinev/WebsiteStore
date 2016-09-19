@@ -2,6 +2,7 @@ import './item-template.html';
 import '../components/shopping-product.html';
 import '../components/number-of-basket-items.js';
 import '../components/dropdown-products.js';
+import '../components/navbar-shopping.js';
 
 import { FlowRouter } from 'meteor/kadira:flow-router';
 

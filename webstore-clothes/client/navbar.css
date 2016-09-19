@@ -44,11 +44,16 @@
  bottom: 1px;
 }
 
+#logo-image{
+  min-height: 50px; 
+}
+
 #logo-bar{
  width: 20%;
  position: absolute;
  right: 40%;
  color: white;
+ padding-top: 10px;
 
 }
 
