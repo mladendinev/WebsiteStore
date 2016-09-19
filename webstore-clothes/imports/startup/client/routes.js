@@ -6,7 +6,11 @@ import '../../ui/pages/landing-template.js';
 import '../../ui/pages/main-template.js';
 import '../../ui/pages/contacts-template.js';
 import '../../ui/pages/shopping-template.js';
+import '../../ui/pages/item-template.js';
+import '../../ui/pages/basket-overview.js';
 import '../../ui/stripe/payment-template.js';
+import '../../ui/pages/delivery-template.js';
+import '../../ui/pages/successful-transaction.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
@@ -31,8 +35,8 @@ FlowRouter.route('/contacts',{
 
 FlowRouter.route('/shopping-page',{
   name: 'Shopping',
-  action() {
-   BlazeLayout.render('App_body', { main: 'shoppingTemplate' });
+  action(params, queryParams) {
+    BlazeLayout.render('App_body', { main:'shoppingTemplate'});
   },
 });
 
@@ -40,5 +44,35 @@ FlowRouter.route('/payment',{
   name: 'Payment',
   action() {
    BlazeLayout.render('App_body', { main: 'paymentTemplate' });
+  },
+});
+
+FlowRouter.route('/item',{
+  name: 'Item',
+  action() {
+   BlazeLayout.render('App_body', { main: 'itemTemplate' });
+  },
+});
+
+FlowRouter.route('/basket',{
+  name: 'Basket',
+  action() {
+   BlazeLayout.render('App_body', { main: 'basketOverview' });
+  },
+});
+
+
+FlowRouter.route('/delivery_details',{
+  name: 'DeliveryDetails',
+  action() {
+   BlazeLayout.render('App_body', { main: 'deliveryTemplate' });
+  },
+});
+
+
+FlowRouter.route('/confirmation',{
+  name: 'successfulTrans',
+   action()  {
+   BlazeLayout.render('App_body', { main: 'successPayment' });
   },
 });

@@ -1,0 +1,98 @@
+.navbar {
+ line-height:1.4;
+}
+.navbar-shop-website a {
+  color: white;
+  position: relative;
+
+}
+
+.nav > li > a:hover {
+  text-decoration:none;
+  color: #15aeea;
+  background-color: transparent;
+}
+
+.nav > li > a:focus {
+ background-color: transparent;
+}
+
+.navbar-text {
+  color: white;
+  z-index: 1;
+}
+
+.navbar {
+ margin-bottom: 3px;
+}
+
+#first-bar{
+ position: absolute;
+ left: 138px;
+ bottom: 1px;
+}
+
+#second-bar{
+ position: absolute;
+ right: 116px;
+ bottom: 1px;
+}
+
+#third-bar{
+ position: absolute;
+ right: 186px;
+ bottom: 1px;
+}
+
+#logo-bar{
+ font-size: 26.3pt;
+ width: 20%;
+ position: absolute;
+ right: 40%;
+ color: white;
+
+}
+
+#logo-bar-toggle {
+ font-size: 20.3pt;
+ float:right;
+ right:30%;
+ color: white;
+ margin-top: 0%;
+ margin-bottom: 0%;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #757373;
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+
+.navbar-toggle {
+ float:left;
+}
+
+.hover-gray:hover {
+  background-color: #e6e6e6;
+}
+
+.mainLink {
+
+  padding-right: 25px;
+
+}
+
+#basket-link{
+  float: right;
+  padding-top:5px;
+  color: white;
+}
+
+#basket-link-toggle {
+ float: right;
+ padding-top:5px;
+ margin-right:5px;
+ padding-left:0px;  
+}
