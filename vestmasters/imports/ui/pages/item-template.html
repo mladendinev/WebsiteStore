@@ -1,83 +1,94 @@
 <template name="itemTemplate">
-   <div class="header">
-      {{>navigationBarShop}}
+    <div class="header">
+        {{>navigationBarShop}}
     </div>
-            <div class="container-fluid">
-              <div class="row">
-               <div class='col-md-6'>
-                <div class = "item-small-images">
-                  <img class="img-responsive item-small-image" src="images/{{item.file}}"/>
-                  {{#each img in item.additionalImages}}
-                   <img class="img-responsive item-small-image" src="images/{{img}}"/>
-                  {{/each}}
-               </div>
-               <div class = "item-main-image">
-                
-                 <img id="product-main-image" class="img-responsive" src="images/{{item.file}}"/>
-                
-               </div>
-               <div class="clear-div" id="item-product-info">
-                 <h4> INFO PRODUCT </h4>
-                 <div class='item-product-info-text'>
-                   <b> Composition: </b> {{item.productInfo.composition}}<br/>
-                   <b> Details: </b> {{item.productInfo.details}}<br/>
-                   <b> Product code: </b> {{item.productInfo.productCode}}<br/>
-                 </div>
-               </div> 
-             </div>
-             <div class="col-md-6 item-right-col">
-               <div>
-                <p align="center">
-                  {{item.product}} <br/>
-                  Mod. <b> {{item.productInfo.model}} </b> <br/>
-                  <b> {{item.price}}$</b> <br/>
-                </p>   
-              </div>
-              <hr class="item-product-properties-separator"/>     
-              {{#if item.size}}
-              <div class="form-group" id="size-container">
-                <label for="sel1">Size</label>
-                <select class="form-control" id="sel-size">
-                  {{#each size in item.sizes}}
-                  <option>{{size}}</option>
-                  {{/each}}
-                </select>
-              </div>
-              <p align="center"> TABLE OF SIZES EU\US\UK </p>
-              <hr class="item-product-properties-separator"/>      
-              {{/if}}
-             <!--
-               ADDING A BUTTON TEMPORARILY REMOVED AS NO CLARITY ABOUT WHERE TO GO (maybe can be reused in capsule collection??) 
-               <div id="luxury-addons-container">
-               <h5 align="center"> <b> ADD A TOUCH OF LUXURY MOOD TO YOUR ITEM </b> </h5>
-               Lorem ipsum dolor sit amet: 200€ <br/>
-               <div id = "item-checkbox-container"> 
-               <div class="checkbox">
-                <label><input type="checkbox" value="">1 button first</label>
-              </div>
-              <div class="checkbox">
-                <label><input type="checkbox" value="">1 button inside</label>
-              </div>
-              </div>
-              <div id="item-checkbox-image-container">
-                <img class='img-resonsive' src='images/button.png'/>
-              </div>
-            </div>
-            <hr class="clear-div item-product-properties-separator"/>
-            -->
-            <div>
-              <h5 align="center"> <b> THE INITIALS OF YOUR NAME FOR THE EMBRODIERY </b> </h5>
-              <div class="form-group" id="initials-form-div">
-                <label for="usr">Initials: <input type="text" class="form-control" id="initials">
-                </label>
-              </div>
-            </div>
-            <hr class="clear-div item-product-properties-separator"/>
-            <div id="button-div">
-             <button type="button" class="btn btn-default item-page-button" id="add-to-basket-button">ADD TO YOUR SHOPPING CART</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class='col-md-6'>
+                <div class="item-small-images">
+                    <img class="img-responsive item-small-image" src="images/{{item.file}}"/>
+                    {{#each img in item.additionalImages}}
+                    <img class="img-responsive item-small-image" src="images/{{img}}"/>
+                    {{/each}}
+                </div>
+                <div class="item-main-image">
 
-    </template>
+                    <img id="product-main-image" class="img-responsive" src="images/{{item.file}}"/>
+
+                </div>
+                <div class="clear-div" id="item-product-info">
+                    <h4> INFO PRODUCT </h4>
+
+                    <div class='item-product-info-text'>
+                        <b> Composition: </b> {{item.productInfo.composition}}<br/>
+                        <b> Details: </b> {{item.productInfo.details}}<br/>
+                        <b> Product code: </b> {{item.productInfo.productCode}}<br/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 item-right-col">
+                <div>
+                    <p align="center">
+                        {{item.product}} <br/>
+                        Mod. <b> {{item.productInfo.model}} </b> <br/>
+                        <b> {{item.price}}$</b> <br/>
+                    </p>
+                </div>
+                <hr class="item-product-properties-separator"/>
+
+                {{#if item.size}}
+                <div class="form-group" id="size-container">
+                    <label for="sel1">Size</label>
+                    <select class="form-control" id="sel-size">
+                        {{#each size in item.sizes}}
+                        <option>{{size}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <hr class="item-product-properties-separator"/>
+                {{/if}}
+                <!--
+                  ADDING A BUTTON TEMPORARILY REMOVED AS NO CLARITY ABOUT WHERE TO GO (maybe can be reused in capsule collection??)
+                  <div id="luxury-addons-container">
+                  <h5 align="center"> <b> ADD A TOUCH OF LUXURY MOOD TO YOUR ITEM </b> </h5>
+                  Lorem ipsum dolor sit amet: 200€ <br/>
+                  <div id = "item-checkbox-container">
+                  <div class="checkbox">
+                   <label><input type="checkbox" value="">1 button first</label>
+                 </div>
+                 <div class="checkbox">
+                   <label><input type="checkbox" value="">1 button inside</label>
+                 </div>
+                 </div>
+                 <div id="item-checkbox-image-container">
+                   <img class='img-resonsive' src='images/button.png'/>
+                 </div>
+               </div>
+               <hr class="clear-div item-product-properties-separator"/>
+               -->
+                {{#if item.initials}}
+                <div>
+                    <h5 align="center"><b> THE INITIALS OF YOUR NAME FOR THE EMBRODIERY </b></h5>
+
+                    <div>
+                        <div class="form-group" id="initials-form-div">
+                            <label for="usr">Initials: <input type="text" class="form-control" id="initials">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr class="clear-div item-product-properties-separator"/>
+                {{/if}}
+
+
+                <div id="button-div">
+                    <button type="button" class="btn btn-default item-page-button" id="add-to-basket-button">ADD TO
+                        YOUR
+                        SHOPPING CART
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
