@@ -3,7 +3,6 @@ amplify@1.0.0
 anback:bootstrap-validator@0.9.0
 arunoda:npm@0.2.6
 audit-argument-checks@1.0.7
-autopublish@1.0.7
 autoupdate@1.2.11
 babel-compiler@6.9.1
 babel-runtime@0.1.11
@@ -55,11 +54,11 @@ modules@0.7.6
 modules-runtime@0.7.6
 mongo@1.1.12
 mongo-id@1.0.5
-mrgalaxy:stripe@2.2.2
 mrt:paypal@1.1.1
 npm-mongo@1.5.48
 observe-sequence@1.0.12
 ordered-dict@1.0.8
+patrickml:braintree@1.32.0
 promise@0.8.4
 random@1.0.10
 react@15.0.1
@@ -80,6 +79,7 @@ templating@1.1.14
 templating-tools@1.0.4
 themeteorchef:jquery-validation@1.14.0
 tmeasday:check-npm-versions@0.2.0
+tmeasday:html5-history-api@4.1.2
 tmeasday:publish-counts@0.7.3
 tracker@1.1.0
 twbs:bootstrap@3.3.6

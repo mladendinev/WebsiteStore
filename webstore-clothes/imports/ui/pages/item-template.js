@@ -3,7 +3,7 @@ import '../components/shopping-product.html';
 import '../components/number-of-basket-items.js';
 import '../components/dropdown-products.js';
 import '../components/navbar-shopping.js';
-
+import {ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION} from '../../api/session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import {Inventory}  from '../../api/products.js';
@@ -16,6 +16,10 @@ Template.itemTemplate.onRendered(function(){
 
 Template.itemTemplate.onCreated(function(){
  this.state = new ReactiveDict();
+
+ this.autorun(() => {
+   Meteor.subscribe('inventory');
+ });
 });
 
 Template.itemTemplate.helpers({
@@ -32,7 +36,7 @@ Template.itemTemplate.events({
  },
 
  'click #add-to-basket-button' (event) {
-   var currentValue = amplify.store('itemsInBasket');
+   var currentValue = amplify.store(ITEMS_IN_BASKET_STORE);
      
      if (typeof currentValue !== "undefined" && currentValue !== null) {
           currentValue.push({
@@ -41,16 +45,16 @@ Template.itemTemplate.events({
           "initials" : $("#initials").val(),
           "qantity" : 1
            });
-       amplify.store('itemsInBasket',currentValue);
+       amplify.store(ITEMS_IN_BASKET_STORE,currentValue);
      } else {
-       amplify.store('itemsInBasket',[{
+       amplify.store(ITEMS_IN_BASKET_STORE,[{
         "size": $("#sel-size").val(),  
         "oid" : Template.instance().state.get("oid"),
         "initials" : $("#initials").val(),
         "quantity" : 1
        }]);
      }
-   Session.set('numberOfItemsInBasketSession',amplify.store('itemsInBasket').length);
+   Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
    console.log(amplify.store('itemsInBasket'));
  }
 

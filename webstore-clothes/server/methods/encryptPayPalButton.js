@@ -38,11 +38,11 @@ import {exec} from 'child_process';
               var re = /<form(.|[\r\n])*<\/form>/g;
               var decodedResult = decodeURIComponent(result.content);
               var extractedResult = decodedResult.match(re);
-              console.log("The results from paypal NVP API:" + decodedResult); 
-              console.log("The extracted result:" + extractedResult[0]);
+              // console.log("The results from paypal NVP API:" + decodedResult); 
+              // console.log("The extracted result:" + extractedResult[0]);
               future.return(extractedResult[0]);
             } else {
-              console.log(decodeURIComponent(error));
+              //console.log(decodeURIComponent(error));
               future.return("");
             }
 

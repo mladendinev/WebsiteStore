@@ -1,4 +1,5 @@
-import {calculatePriceCall} from '../../api/method-calls.js';
+import {calculatePriceCall,obtainBraintreeId} from '../../api/method-calls.js';
+import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION} from '../../api/session-constants.js';
 import '../components/dropdown-products.js';
 import '../components/number-of-basket-items.js';
 import '../components/navbar-shopping.js';
@@ -9,9 +10,10 @@ import {Inventory}  from '../../api/products.js';
 
 
 Template.basketOverview.onCreated(function(){
- Session.set('itemsInBasketSession',amplify.store("itemsInBasket"));
+ Session.set(ITEMS_IN_BASKET_SESSION,amplify.store(ITEMS_IN_BASKET_STORE));
  this.autorun(() => {
-      Session.set("totalPrice",calculatePriceCall());
+      Meteor.subscribe('inventory');
+      Session.set(TOTAL_PRICE_SESSION,calculatePriceCall());
   });
 });
 
@@ -24,7 +26,7 @@ Template.basketOverview.onRendered(function(){
 Template.basketOverview.helpers({
 
  itemsInBasket(){
-    return Session.get("itemsInBasketSession");
+    return Session.get(ITEMS_IN_BASKET_SESSION);
  },
 
  getItem(basketItem){
@@ -36,25 +38,26 @@ Template.basketOverview.helpers({
  		      "quantity" : basketItem.quantity };
  },
  total(){
- 	return Session.get("totalPrice");
+ 	return Session.get(TOTAL_PRICE_SESSION);
  },
 });
 
  Template.basketOverview.events({
 
    'click .remove-item'(event){
-          var currentItemsArray = amplify.store("itemsInBasket");
+          var currentItemsArray = amplify.store(ITEMS_IN_BASKET_STORE);
           var index = $(event.currentTarget).attr("id");
           currentItemsArray.splice(index,1);
           console.log(currentItemsArray);
-          amplify.store("itemsInBasket",currentItemsArray);
-          Session.set("itemsInBasketSession",amplify.store("itemsInBasket"));
-          Session.set("totalPrice",calculatePriceCall());
-          Session.set("numberOfItemsInBasketSession",amplify.store("itemsInBasket").length);
+          amplify.store(ITEMS_IN_BASKET_STORE,currentItemsArray);
+          Session.set(ITEMS_IN_BASKET_SESSION,amplify.store(ITEMS_IN_BASKET_STORE));
+          Session.set(TOTAL_PRICE_SESSION,calculatePriceCall());
+          Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
 
    },
 
     'click .proceed-to-checkout-button'(event){
+            obtainBraintreeId();
             FlowRouter.go('DeliveryDetails');
     }
  });
