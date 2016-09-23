@@ -7,3 +7,5 @@ export const Carousel = new Mongo.Collection('carousel');
 export const Inventory = new Mongo.Collection('inventory');
 
 export const Orders = new Mongo.Collection('orders');
+
+export const Countries = new Mongo.Collection('countries');

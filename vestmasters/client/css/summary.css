@@ -1,0 +1,23 @@
+.summary-style{
+  background-color:#7C8080;
+  border-radius: 30px;
+  padding: 20px;
+  width:230px;
+ margin-left:50px;
+}
+
+.summary-style h {
+ font-size:15px;
+ display:block;
+ font-weight: 600;
+ color:#35373D;
+}
+
+
+.summary-style p {
+ display:block;
+ margin-top:3px;
+ margin-bottom:3px;
+
+}
+

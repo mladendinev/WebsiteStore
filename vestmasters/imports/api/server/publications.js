@@ -7,3 +7,8 @@ Meteor.publish('inventory', function() {
 Meteor.publish('products', function() {
   return Products.find();
 });
+
+Meteor.publish('countries', function() {
+  return Countries.find();
+});
+
