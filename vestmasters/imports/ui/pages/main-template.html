@@ -1,7 +1,7 @@
 <template name='mainTemplate'>
-     <div class="header">
-         {{>navigationBar}}
-     </div>
+    <div class="header">
+        {{>navigationBar}}
+    </div>
 
     <div class="jumbotron-bg">
         <img src="images/fs_pic.jpg" class="img-responsive"/>
@@ -47,20 +47,74 @@
             </div>
         </div>
     </div>
-    <footer class="footer-distributed clear-div" id='main-footer'>
-        <div class="footer-right">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-        </div>
-        <div class="footer-left">
-            <p>Company Name &copy; 2016</p>
+
+
+    <footer class="clear-div" id='main-footer'>
+        <!--<div class="footer-right">-->
+        <!--<a href="#"><i class="fa fa-facebook"></i></a>-->
+        <!--<a href="#"><i class="fa fa-twitter"></i></a>-->
+        <!--</div>-->
+        <!--<div class="footer-left">-->
+        <!--<h>WORK WITH US</h>-->
+
+        <!--<p> Business opportunity</p>-->
+
+        <!--<h>Company Name &copy; 2016</h>-->
+        <!--</div>-->
+
+        <div class="container footer-dimensions">
+            <div class="row">
+                <div class="col-xs-2 footer-content">
+                    <h>WORK WITH US</h>
+                    <a href="#"><p>Business Opportunity</p>
+                    </a>
+                </div>
+
+
+                <div class="col-xs-2  footer-content">
+                    <h>MAY WE HELP YOU</h>
+                    <a href="/contacts"><p>Contact us</p></a>
+                    <a href="/instructions"><p>How does it work</p></a>
+                </div>
+
+                <div class="col-xs-2  footer-content">
+                    <h>THE COMPANY</h>
+                    <a href="/whoweare"><p>About Vest Masters</p></a>
+                    <a href="/policy"><p>Terms and Conditions</p></a>
+                </div>
+
+                <div class="col-xs-2  footer-social">
+                    <h>FIND US ON</h>
+                    <a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+                    <a href="#"><i class="fa fa-instagram"></i> Instagram</a>
+                </div>
+
+                <div class="col-xs-4  footer-content">
+                    <h>SIGN UP FOR VEST MASTERS</h>
+                    <p>You can leave your email address below if you want to be the first who receives our latest
+                        collections and promotions</p>
+
+                    <div class="input-group custom-form">
+                        <input type="email" class="form-control" id="emailSubscribe" aria-describedby="emailHelp"
+                               placeholder="Your email address">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-custom butto-sm">
+                                    <span class="glyphicon glyphicon-chevron-right">
+                                    </span>
+                                </button>
+                            </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
 
     <script type="text/javascript">
+        $("body").addClass("body-main");
 
-   $("body").addClass("body-main");
+
+
 
     </script>
 
