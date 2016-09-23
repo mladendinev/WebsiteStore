@@ -29,7 +29,8 @@ Meteor.methods({
      var generateToken = Meteor.wrapAsync(gateway.clientToken.generate, gateway.clientToken);
      var response = generateToken({});
      return response.clientToken;
-   },
+   }
+   ,
    createTransaction: function(nonceFromTheClient,itemsInBasket) {
     check(nonceFromTheClient,String);
     check(itemsInBasket,[Match.Any]); //TODO Add proper check for the items, otherwise a security risk

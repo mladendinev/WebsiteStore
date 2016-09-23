@@ -11,7 +11,6 @@ Template.paymentTemplate.onCreated(function(){
  this.autorun(() => {
       Meteor.subscribe('inventory');
       Session.set(TOTAL_PRICE_SESSION,calculatePriceCall());
-      
    });
 });
 
@@ -22,19 +21,28 @@ Template.paymentTemplate.onRendered(function(){
   });
 
 Template.paymentTemplate.onRendered(function(){
-  
+
   this.autorun(() => {
       var templateClientToken = Template.instance().clientToken;
-      if((typeof templateClientToken !== "undefined") && templateClientToken !== null) {  
-      braintree.setup(templateClientToken, "dropin", {
-        container: "payment-form", 
-        onPaymentMethodReceived: function (response) {
-          var nonce = response.nonce;
-          createTransaction(nonce);
-        }
+      if((typeof templateClientToken !== "undefined") && templateClientToken !== null) {
+         braintree.setup(templateClientToken, "custom", {
+           id: "payment-form",
+           onPaymentMethodReceived: function (response) {
+             var nonce = response.nonce;
+             createTransaction(nonce);
+           }
+         });
+      }
+      braintree.setup(templateClientToken, "custom", {
+         paypal: {
+           container: "paypal-container",
+         },
+         onPaymentMethodReceived: function (response) {
+            console.log('okay')
+         }
       });
-    }
-   });
+
+  });
 });
 
 
@@ -46,4 +54,18 @@ Template.paymentTemplate.helpers({
    total(){
    	return Session.get(TOTAL_PRICE_SESSION);
    },
+});
+
+
+Template.paymentTemplate.events({
+  "change input[name='payment-method']" (event) {
+     $("input[name='payment-method']").each(function(){
+        if(this.checked) {
+          $("#" + this.id +"-container").attr("style", "");
+        }
+        else {
+          $("#" + this.id +"-container").attr("style", "display:none");
+        }
+     });
+  },
 });
