@@ -1,4 +1,6 @@
-import './successful-transaction.html'
+import './successful-transaction.html';
+import {ORDER_INFO} from '../../api/session-constants.js';
+import {getOrder} from '../../api/method-calls.js';
 
 Template.successPayment.onRendered(function(){
    Session.set("DocumentTitle","Order Completed");
@@ -8,15 +10,11 @@ Template.successPayment.onRendered(function(){
 
 
 Template.successPayment.onCreated(function(){
-	this.autorun(() => {
-		Meteor.subscribe('orders',FlowRouter.getQueryParam('order'));
-	});
+	getOrder();
 });
 
 Template.successPayment.helpers({
- order(){
-	 	var orderInfo = Session.get("orderInfo");
-	 	console.log(orderInfo);
-	 	return orderInfo;
-	    },
+   orderInfo(){
+     return Session.get(ORDER_INFO);
+   	},
 });

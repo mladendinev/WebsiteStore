@@ -1,9 +1,66 @@
 <template name='successPayment'>
-    <div class="container">
+   
+       <div class="header">
+      {{>navigationBarShop}}
+    </div>
+    <div id="basket-content">
         {{>progressBar first="progress-bar-success" second="progress-bar-success" third="progress-bar-success"
         fourth="progress-bar-success" }}
+        
+        <h3> Order reference: {{orderInfo.transactionId}} </h3>
+        
+        <table class="table">
 
-        <p>Your transaction was successful</p>
-        <p>Paid amount {{order}}</p>
+            <thead>
+            <tr>
+                <th class="basket-th">Item</th>
+                <th class="basket-th"> Size</th>
+                <th class="basket-th"> Initials</th>
+                <th class="basket-th"> Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each orderItem in orderInfo.items}}
+           
+            <tr>
+
+                <td><img class="img-responsive img-circle img-basket" src="images/{{orderItem.file}}" width="40px"/>
+
+                    <div class="table-div float-left"> {{orderItem.product}}</div>
+                </td>
+                {{#if orderItem.size}}
+                <td>
+                    <div class="table-div float-left">{{orderItem.size}}</div>
+                </td>
+                {{else}}
+                <td>
+                    <div class="table-div float-left">n/a</div>
+                </td>
+                {{/if}}
+                {{#if orderItem.initials}}
+                <td>
+                    <div class="table-div float-left">{{orderItem.initials}}</div>
+                </td>
+                {{else}}
+                <td>
+                    <div class="table-div float-left">n/a</div>
+                </td>
+                {{/if}}
+                <td>
+                    <div class="table-div float-left">{{orderItem.price}}</div>	
+                </td>
+            </tr>
+            {{/each}}
+           <tr>
+                <td id="basket-final-row-col1" colspan="3">
+                  <div class="table-div float-right"> Total:</div>
+                </td>
+                <td id="basket-final-row-col2">
+                    <div class="table-div float-left">{{orderInfo.amount}}</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
 </template>

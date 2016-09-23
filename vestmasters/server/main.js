@@ -42,8 +42,9 @@ Meteor.methods({
                                            submitForSettlement: true
                                          }
                                          }); 
-    var orderId = Orders.insert({"items" : itemsInBasket, "transaction-id" : result.transaction.id, "amount" : result.transaction.amount, "currency" : result.transaction.currencyIsoCode});
-    return orderId;
+    var orderId = Orders.insert({"items" : itemsInBasket, "transactionId" : result.transaction.id, "amount" : result.transaction.amount, "currency" : result.transaction.currencyIsoCode});
+    encrypted = CryptoJS.AES.encrypt(orderId, Meteor.settings.private.crypto.aesKey);
+    return encrypted.toString();
     } catch(error){
       console.log(error);
     };

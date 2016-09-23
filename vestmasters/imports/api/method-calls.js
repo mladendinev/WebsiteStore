@@ -1,5 +1,5 @@
 import {Inventory} from './products.js';
-import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION} from './session-constants.js';
+import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 
@@ -26,7 +26,8 @@ export function createTransaction(nonce){
                 if (error) {
                   throw new Meteor.Error('transaction-creation-failed');
                 } else {
-                  FlowRouter.go('/confirmation?order=' + success);
+                  amplify.store(ORDER_ID,success);
+                  FlowRouter.go('/confirmation');
                 }
            });
 };
@@ -57,5 +58,17 @@ export function getSingleItem(id){
    }
  
   });
+};
 
+export function getOrder(){
+  Meteor.call('gerOrder', amplify.store(ORDER_ID), function(error,order){
+     if(error){
+       console.log("Error in retrieving order")
+     }else{
+       amplify.store(BRAINTREE_CLIENT_TOKEN,null);
+       amplify.store(ITEMS_IN_BASKET_STORE,[]);
+       Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
+       Session.set(ORDER_INFO,order);
+     }
+    });
 };
