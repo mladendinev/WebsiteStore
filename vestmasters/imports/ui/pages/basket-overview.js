@@ -25,7 +25,8 @@ Template.basketOverview.onRendered(function(){
 
 Template.basketOverview.helpers({
 
- items(){
+ itemsInBasket(){
+    console.log(Session.get(ITEMS_IN_BASKET_SESSION));
     return Session.get(ITEMS_IN_BASKET_SESSION);
  },
 

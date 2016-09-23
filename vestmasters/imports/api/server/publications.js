@@ -1,4 +1,4 @@
-import {Inventory,Products,Orders} from '../products.js';
+import {Inventory,Products,Orders,Countries} from '../products.js';
 
 Meteor.publish('inventory', function() {
   return Inventory.find();
