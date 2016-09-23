@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
+import {calculatePriceCallServer} from './lib/common.js'
 import '../imports/api/products.js';
+import {Orders} from '../imports/api/products.js';
 import '../imports/api/server/publications.js'
 
 var gateway;
@@ -28,21 +30,22 @@ Meteor.methods({
      var response = generateToken({});
      return response.clientToken;
    },
-   createTransaction: function(nonceFromTheClient) {
+   createTransaction: function(nonceFromTheClient,itemsInBasket) {
     check(nonceFromTheClient,String);
-    gateway.transaction.sale({
-      amount: '10.00',
-      paymentMethodNonce: nonceFromTheClient,
-      options: {
-        submitForSettlement: true,
-      }
-    }, function (err, success) {
-      if (err) { 
-        console.log(err);
-      } else {
-         console.log(success);
-        
-      }
-    });
+    check(itemsInBasket,[Match.Any]); //TODO Add proper check for the items, otherwise a security risk
+    var totalAmountToPay = calculatePriceCallServer(itemsInBasket); //TODO Add the delivery calculation inside the method
+    var gatewayTransactionSync = Meteor.wrapAsync(gateway.transaction.sale,gateway.transaction); 
+    try {
+    var result = gatewayTransactionSync({amount: totalAmountToPay,
+                                         paymentMethodNonce: nonceFromTheClient,
+                                         options: {
+                                           submitForSettlement: true
+                                         }
+                                         }); 
+    var orderId = Orders.insert({"items" : itemsInBasket, "transaction-id" : result.transaction.id, "amount" : result.transaction.amount, "currency" : result.transaction.currencyIsoCode});
+    return orderId;
+    } catch(error){
+      console.log(error);
+    };
   }
 });

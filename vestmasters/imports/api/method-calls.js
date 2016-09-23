@@ -1,16 +1,14 @@
 import {Inventory} from './products.js';
-import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION} from './session-constants.js';
+import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION} from './session-constants.js';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 
 export function calculatePriceCall(){
-		var total=0;
-		     Session.get(ITEMS_IN_BASKET_SESSION).forEach(function(basketItem,index){
-		        var item = Inventory.findOne({"_id" : new Meteor.Collection.ObjectID(basketItem.oid)});
-			        if ((typeof item !== "undefined") && item !== null) {
-			        total = total + parseInt(item.price);
-			    }
-		 	  });
-		      return total;
-	 
+    var total=0;
+         Session.get(ITEMS_IN_BASKET_SESSION).forEach(function(basketItem,index){
+          total = total + parseInt(basketItem.price);
+           });
+         return total;
 };
 
 export function obtainBraintreeId(){
@@ -24,12 +22,40 @@ export function obtainBraintreeId(){
 };
 
 export function createTransaction(nonce){
-	Meteor.call('createTransaction', nonce, function(error, success) {
+	Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), function(error, success) {
                 if (error) {
                   throw new Meteor.Error('transaction-creation-failed');
                 } else {
-                  console.log('thank you for your payment!');
-                  alert('Thank you for your payment!');
+                  FlowRouter.go('/confirmation?order=' + success);
                 }
            });
+};
+
+export function getSingleItem(id){
+  Meteor.call('getSingleItem',id,function(error,item){
+   
+    if(error){
+      console.log("Error in retrieving item from mongo");
+    } else {
+      var currentValue = amplify.store(ITEMS_IN_BASKET_STORE);
+      var itemToAdd = {
+          "product" : item.product,
+          "file" : item.file,
+          "size": $("#sel-size").val(),  
+          "oid" : item._id.valueOf(),
+          "initials" : $("#initials").val(),
+          "price" : item.price, 
+          "qantity" : 1
+           };
+      if (typeof currentValue !== "undefined" && currentValue !== null) {
+          currentValue.push(itemToAdd);
+          amplify.store(ITEMS_IN_BASKET_STORE,currentValue);
+      } else {
+          amplify.store(ITEMS_IN_BASKET_STORE,[itemToAdd]);
+      }
+      Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
+   }
+ 
+  });
+
 };
