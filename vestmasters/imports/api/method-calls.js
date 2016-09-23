@@ -11,6 +11,15 @@ export function calculatePriceCall(){
          return total;
 };
 
+
+export function totalPlusDelivery(delivery_cost){
+    var total=0;
+         Session.get(ITEMS_IN_BASKET_SESSION).forEach(function(basketItem,index){
+          total = total + parseInt(basketItem.price);
+           });
+         return total + delivery_cost;
+};
+
 export function obtainBraintreeId(){
    Meteor.call('getClientToken', function(error, clientToken) {
     if (error) {
