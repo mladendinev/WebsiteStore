@@ -4,7 +4,7 @@ import {Countries}  from '../../api/products.js';
 import {Products}  from '../../api/products.js';
 import {Inventory}  from '../../api/products.js';
 import './summary-template.js';
-import {TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,} from '../../api/session-constants.js';
+import {TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,DELIVERY_COST} from '../../api/session-constants.js';
 
 
 Template.deliveryTemplate.onRendered(function(){
@@ -69,7 +69,7 @@ Template.deliveryTemplate.onCreated(function(){
              console.log(selectedOpt);
              delivery_price2= Countries.findOne({'country': selectedOpt});
              console.log(delivery_price2.price);
-             Session.set('DELIVERY_COST',delivery_price2.price);
+             Session.set(DELIVERY_COST,delivery_price2.price);
           }
     }
  });

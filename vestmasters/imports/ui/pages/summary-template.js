@@ -26,12 +26,12 @@ Template.summaryOrder.helpers({
  },
 
    deliveryOrder(){
-        Session.set(TOTAL_PRICE_SESSION,totalPlusDelivery(Session.get(TOTAL_PRICE_SESSION),Session.get(DELIVERY_COST)));
-   	    return Session.get(DELIVERY_COST);
+       return Session.get(DELIVERY_COST);
    },
 
    totalPriceOrder(){
-      return Session.get(TOTAL_PRICE_SESSION);
+      
+      return totalPlusDelivery(Session.get(TOTAL_PRICE_SESSION),Session.get(DELIVERY_COST));
    },
 
    items(){
