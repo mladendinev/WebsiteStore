@@ -15,9 +15,12 @@ export function calculatePriceCall(){
            } 
             queryArray.push({"_id": new Meteor.Collection.ObjectID(basketItem.oid)});
            });
-              Inventory.find({$or: queryArray}).forEach(function(mongoBasketItem,index){
-              total = total + parseInt(mongoBasketItem.price)*quantityDict[mongoBasketItem._id.valueOf()];
-           });
+              if(queryArray.length>0) {
+               Inventory.find({$or: queryArray}).forEach(function(mongoBasketItem,index){
+                total = total + parseInt(mongoBasketItem.price)*quantityDict[mongoBasketItem._id.valueOf()];
+              
+               });
+             }
         return total;
 };
 
