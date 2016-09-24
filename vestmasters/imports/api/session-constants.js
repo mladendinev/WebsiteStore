@@ -11,3 +11,5 @@ export const NUMBER_ITEMS_SESSION = "number-of-items-session";
 export const ORDER_ID = "order-id";
 
 export const ORDER_INFO = "order-info";
+
+export const DELIVERY_COST = "delivery-info";

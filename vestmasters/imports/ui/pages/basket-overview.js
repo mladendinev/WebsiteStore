@@ -26,8 +26,15 @@ Template.basketOverview.onRendered(function(){
 Template.basketOverview.helpers({
 
  itemsInBasket(){
-    console.log(Session.get(ITEMS_IN_BASKET_SESSION));
     return Session.get(ITEMS_IN_BASKET_SESSION);
+ },
+getItem(basketItem){
+  var item = Inventory.findOne({"_id" : new Meteor.Collection.ObjectID(basketItem.oid)}); 
+  return  { "oid" : basketItem.oid,
+          "size" : basketItem.size,
+          "item" : item,
+          "initials" : basketItem.initials,
+          "quantity" : basketItem.quantity };
  },
 
  total(){

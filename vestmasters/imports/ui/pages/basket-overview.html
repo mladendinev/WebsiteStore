@@ -18,37 +18,38 @@
             </thead>
             <tbody>
             {{#each basketItem in itemsInBasket}}
-           
+            {{#with getItem basketItem}}
             <tr>
 
-                <td><img class="img-responsive img-circle img-basket" src="images/{{basketItem.file}}" width="40px"/>
+                <td><img class="img-responsive img-circle img-basket" src="images/{{item.file}}" width="40px"/>
 
-                    <div class="table-div float-left"> {{basketItem.product}}</div>
+                    <div class="table-div float-left"> {{item.product}}</div>
                 </td>
-                {{#if basketItem.size}}
+                {{#if size}}
                 <td>
-                    <div class="table-div float-left">{{basketItem.size}}</div>
-                </td>
-                {{else}}
-                <td>
-                    <div class="table-div float-left">n/a</div>
-                </td>
-                {{/if}}
-                {{#if basketItem.initials}}
-                <td>
-                    <div class="table-div float-left">{{basketItem.initials}}</div>
+                    <div class="table-div float-left">{{size}}</div>
                 </td>
                 {{else}}
                 <td>
                     <div class="table-div float-left">n/a</div>
                 </td>
                 {{/if}}
+                {{#if initials}}
                 <td>
-                    <div class="table-div float-left">{{basketItem.price}}</div>
+                    <div class="table-div float-left">{{initials}}</div>
+                </td>
+                {{else}}
+                <td>
+                    <div class="table-div float-left">n/a</div>
+                </td>
+                {{/if}}
+                <td>
+                    <div class="table-div float-left">{{item.price}}</div>
                     <div class="table-div float-right"><span class="glyphicon glyphicon-remove remove-item"
                                                              aria-hidden="true" id="{{@index}}"></span></div>
                 </td>
             </tr>
+            {{/with}}
             {{/each}}
             <tr>
                 <td id="basket-final-row-col1" colspan="3">
@@ -65,5 +66,4 @@
             </tbody>
         </table>
     </div>
-
 </template>

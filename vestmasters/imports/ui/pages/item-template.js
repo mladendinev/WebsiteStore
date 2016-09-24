@@ -36,7 +36,25 @@ Template.itemTemplate.events({
  },
 
  'click #add-to-basket-button' (event) {
-   getSingleItem(Template.instance().itemId);   
+   var currentValue = amplify.store(ITEMS_IN_BASKET_STORE);
+     
+    if (typeof currentValue !== "undefined" && currentValue !== null) {
+          currentValue.push({
+          "size": $("#sel-size").val(),  
+          "oid" : Template.instance().itemId,
+          "initials" : $("#initials").val(),
+          "qantity" : 1
+           });
+       amplify.store(ITEMS_IN_BASKET_STORE,currentValue);
+     } else {
+       amplify.store(ITEMS_IN_BASKET_STORE,[{
+        "size": $("#sel-size").val(),  
+        "oid" : Template.instance().itemId,
+        "initials" : $("#initials").val(),
+        "quantity" : 1
+       }]);
+     }
+   Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
  }
 
 });

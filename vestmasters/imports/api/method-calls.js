@@ -5,19 +5,25 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 export function calculatePriceCall(){
     var total=0;
+    var queryArray = [];
+    var quantityDict = {};
          Session.get(ITEMS_IN_BASKET_SESSION).forEach(function(basketItem,index){
-          total = total + parseInt(basketItem.price);
+           if(typeof quantityDict[basketItem.oid] === "undefined") {
+            quantityDict[basketItem.oid] = 1;
+           } else {
+            quantityDict[basketItem.oid] = quantityDict[basketItem.oid] + 1;
+           } 
+            queryArray.push({"_id": new Meteor.Collection.ObjectID(basketItem.oid)});
            });
-         return total;
+              Inventory.find({$or: queryArray}).forEach(function(mongoBasketItem,index){
+              total = total + parseInt(mongoBasketItem.price)*quantityDict[mongoBasketItem._id.valueOf()];
+           });
+        return total;
 };
 
 
-export function totalPlusDelivery(delivery_cost){
-    var total=0;
-         Session.get(ITEMS_IN_BASKET_SESSION).forEach(function(basketItem,index){
-          total = total + parseInt(basketItem.price);
-           });
-         return total + delivery_cost;
+export function totalPlusDelivery(total_price, delivery_cost){
+        return total_price + delivery_cost;
 };
 
 export function obtainBraintreeId(){
