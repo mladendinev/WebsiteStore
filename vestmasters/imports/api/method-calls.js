@@ -66,5 +66,27 @@ export function getSingleItem(id){
    }
  
   });
+};
 
+
+export function configBrainTree(type) {
+      var config;
+      if (type === 'paypal') {
+         config = {
+            paypal: { container: 'paypal-container' },
+         };
+      }
+      else {
+         config = {
+           id: 'payment-form',
+           onPaymentMethodReceived: function (response) {
+                       if(response.type === 'CreditCard')
+                        var nonce = response.nonce;
+                        console.log(response.type);
+                        console.log('dasdasda');
+                        createTransaction(nonce);
+                      }
+         };
+      }
+     return config;
 };

@@ -29,23 +29,27 @@ Meteor.methods({
      var generateToken = Meteor.wrapAsync(gateway.clientToken.generate, gateway.clientToken);
      var response = generateToken({});
      return response.clientToken;
-   }
-   ,
+   },
+
+
    createTransaction: function(nonceFromTheClient,itemsInBasket) {
     check(nonceFromTheClient,String);
     check(itemsInBasket,[Match.Any]); //TODO Add proper check for the items, otherwise a security risk
     var totalAmountToPay = calculatePriceCallServer(itemsInBasket); //TODO Add the delivery calculation inside the method
     var gatewayTransactionSync = Meteor.wrapAsync(gateway.transaction.sale,gateway.transaction); 
     try {
-    var result = gatewayTransactionSync({amount: totalAmountToPay,
-                                         paymentMethodNonce: nonceFromTheClient,
-                                         options: {
-                                           submitForSettlement: true
-                                         }
-                                         }); 
-    var orderId = Orders.insert({"items" : itemsInBasket, "transaction-id" : result.transaction.id, "amount" : result.transaction.amount, "currency" : result.transaction.currencyIsoCode});
-    return orderId;
-    } catch(error){
+         var result = gatewayTransactionSync({amount: totalAmountToPay,
+                                              paymentMethodNonce: nonceFromTheClient,
+                                               options: {
+                                               submitForSettlement: true
+                                              }
+                                            });
+         var orderId = Orders.insert({"items" : itemsInBasket,
+                                "transaction-id" : result.transaction.id,
+                                "amount" : result.transaction.amount,
+                                "currency" : result.transaction.currencyIsoCode});
+         return orderId;
+    }catch(error){
       console.log(error);
     };
   }
