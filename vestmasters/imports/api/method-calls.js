@@ -129,3 +129,35 @@ export function getOrder(){
      }
     });
 };
+
+export function invalidMessageTrigger(array){
+   array.forEach(function(currentValue){
+      if (currentValue === 'number') {
+            $('#card-number').next('span').text('Invalid Card');
+      }
+
+      else if(currentValue === "expirationYear"){
+            $('#expiration-year').next('span').text('Invalid Year');
+      }
+      else if(currentValue === "expirationMonth"){
+            $('#expiration-month').next('span').text('Invalid Month');
+       }
+      else {
+            $('#cvv').next('span').text('Invalid security code');
+      }
+   })
+};
+
+
+export function emptyMessageTrigger(){
+
+            $('#card-number').next('span').text('This field is required');
+
+            $('#expiration-year').next('span').text('This field is required');
+
+            $('#expiration-month').next('span').text('This field is required');
+
+            $('#cvv').next('span').text('This field is required');
+
+};
+

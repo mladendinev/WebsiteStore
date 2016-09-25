@@ -83,3 +83,9 @@
  color: red !important;
  font-weight: bold;
 }
+
+#card-payment-container{
+  margin-top:4%;
+  position: relative;
+
+}

@@ -1,7 +1,7 @@
 import './payment-template.html';
 import '../components/progress-bar.js';
 import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE} from '../../api/session-constants.js';
-import {calculatePriceCall,createTransaction,cardPaymentCallBack} from '../../api/method-calls.js';
+import {calculatePriceCall,createTransaction,cardPaymentCallBack,invalidMessageTrigger,emptyMessageTrigger} from '../../api/method-calls.js';
 import {Inventory} from '../../api/products.js';
 import braintree from 'braintree-web'
 
@@ -21,11 +21,12 @@ Template.paymentTemplate.onRendered(function(){
    Session.set("DocumentTitle","Payment");
    $("body").removeClass();
    $("body").addClass("body-shopping");
-    
-    this.autorun(() => {
+   $("#credit-card-number").prop('required',true);
+   $("#payment-form" ).validate();
+
         if((typeof this.clientToken !== "undefined") && this.clientToken !== null) {
-   
-        var form = document.querySelector('#credit-card-payment-form');
+
+        var form = document.querySelector('#payment-form');
         var submit = document.querySelector('#credit-card-submit');
         var paypalButton = document.querySelector('.paypal-button');
         console.log(paypalButton);
@@ -67,17 +68,25 @@ Template.paymentTemplate.onRendered(function(){
             hostedFieldsInstance.on('validityChange', function (event) {
               var field = event.fields[event.emittedBy];
               console.log(event.emmitedBy);
+
+
+              // VALID FIELDS
               if (field.isValid) {
                 if (event.emittedBy === 'expirationMonth' || event.emittedBy === 'expirationYear') {
-                  if (!event.fields.expirationMonth.isValid || !event.fields.expirationYear.isValid) {
-                    return;
-                  }
+                    $('#expiration-year').next('span').text('');
+                    $('#expiration-month').next('span').text('');
                 } else if (event.emittedBy === 'number') {
                   $('#card-number').next('span').text('');
                 }
+                 else if (event.emittedBy === 'cvv') {
+                                  $('#cvv').next('span').text('');
+                 }
 
-                // Apply styling for a valid field
+
+
 //                $(field.container).parents('.form-group').addClass('has-success');
+
+              // Potentially Valid
               } else if (field.isPotentiallyValid) {
                 // Remove styling  from potentially valid fields
                 $(field.container).parents('.form-group').removeClass('has-warning');
@@ -85,10 +94,14 @@ Template.paymentTemplate.onRendered(function(){
                 if (event.emittedBy === 'number') {
                   $('#card-number').next('span').text('');
                 }
+              }
 
 
-              } else {
-                // Add styling to invalid fields
+
+              // Add styling to invalid fields
+
+              else {
+
                  console.log(field);
                 // Add helper text for an invalid card number
                 console.log(typeof event.emmitedBy);
@@ -96,23 +109,62 @@ Template.paymentTemplate.onRendered(function(){
                   console.log(event);
                   $('#card-number').next('span').text('Please provide valid card');
                 }
-
-                else if(event.emmitedBy === "expirationYear"){
-                  $('#card-number').next('span').text('asdasda');
-                }
-
-                else{
-                  console.log(event);
-                  $(field.container).next('span').text('Invalid');
-                }
               }
             });
-          }
+
+
+          hostedFieldsInstance.on('empty', function (event) {
+            var field = event.fields[event.emittedBy];
+
+            if (field.isEmpty) {
+               $(field.container).next('span').text('This field is required');
+            }
+          }),
+
+
+          submit.removeAttribute('disabled');
+
+          form.addEventListener('submit', function (event,template) {
+             event.preventDefault();
+             console.log(template)
+//             this.template.loading.set(true);
 
 
 
+            hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+               if (tokenizeErr) {
+//                  Template.instance().loading.set(false);
+                  // Handle error in Hosted Fields tokenization
+                  switch (tokenizeErr.code) {
+                        case 'HOSTED_FIELDS_FIELDS_EMPTY':
+                          console.error('All fields are empty! Please fill out the form.');
+                          emptyMessageTrigger();
+//                          invalidMessageTrigger()
+                          break;
+                        case 'HOSTED_FIELDS_FIELDS_INVALID':
+                          console.error('Some fields are invalid:', tokenizeErr.details.invalidFieldKeys);
+                          var array = tokenizeErr.details.invalidFieldKeys
+                          invalidMessageTrigger(array);
+                          break;
+                        case 'HOSTED_FIELDS_FAILED_TOKENIZATION':
+                          console.error('Tokenization failed server side. Is the card valid?');
+                          break;
+                        case 'HOSTED_FIELDS_TOKENIZATION_NETWORK_ERROR':
+                          console.error('Network error occurred when tokenizing.');
+                          break;
+                        default:
+                          console.error('Something bad happened!', tokenizeErr);
+                      }
+                 return;
+               }
 
-          );
+               // Successful form, generate nonce and redirect to confirmation
+               else{
+                 createTransaction(payload.nonce);
+               }
+            });
+          },false);
+        });
         
     braintree.paypal.create({
       client: clientInstance
@@ -159,7 +211,6 @@ Template.paymentTemplate.onRendered(function(){
         });
 
       }
-     });
   });
 
 
@@ -185,29 +236,29 @@ Template.paymentTemplate.events({
   },
 
 
-  "submit form"(event,template){
-     event.preventDefault();
-
-      template.loading.set(true);
-      var $form = $('#credit-card-payment-form');
-
-      $form.find('.submit').prop('disabled', true);
-
-
-
-      hostedFieldsInstance.tokenize(function(err, response){
-       if (err){
-         console.error(err);
-         template.loading.set(false);
-         $form.find('.submit').prop('disabled', false);
-          return;
-       }
-
-       else{
-
-       }
-
-    //create transaction
-   })
-  }
+//  "submit form"(event,template){
+//     event.preventDefault();
+//
+//      template.loading.set(true);
+//      var $form = $('#credit-card-payment-form');
+//
+//      $form.find('.submit').prop('disabled', true);
+//
+//
+//
+//      hostedFieldsInstance.tokenize(function(err, response){
+//       if (err){
+//         console.error(err);
+//         template.loading.set(false);
+//         $form.find('.submit').prop('disabled', false);
+//          return;
+//       }
+//
+//       else{
+//
+//       }
+//
+//    //create transaction
+//   })
+//  }
 })
