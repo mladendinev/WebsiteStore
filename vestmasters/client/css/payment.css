@@ -1,7 +1,7 @@
 .payment-main {
   background-color: white;
 }
-
+/*
  .hosted-field {
   height: 50px;
   box-sizing: border-box;
@@ -68,21 +68,22 @@
   color: white;
 }
 
-.braintree-hosted-fields-focused {
-  border: 1px solid #64d18a;
-  border-radius: 1px;
-  background-position: left bottom;
-}
+
 
 .braintree-hosted-fields-invalid {
   border: 1px solid #ed574a;
 }
 
 .braintree-hosted-fields-valid {
-}
+} 
 
 #cardForm {
   max-width: 50.75em;
   margin: 0 auto;
   padding: 1.875em;
-}
+} */
+
+.braintree-hosted-fields-focused {
+  border-color: #66afe9;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+ }
