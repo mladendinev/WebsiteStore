@@ -22,27 +22,68 @@
 
 
         <div id="card-payment-container" style="display:none">
-          <form action="/" method="post" id="credit-card-payment-form" >
-               <label class="hosted-fields--label" for="card-number">Card Number</label>
-               <div id="card-number" class="hosted-field"></div>
+            <form class="form-horizontal" role="form" method="POST" id="payment-form">
+                <fieldset>
 
-               <label class="hosted-fields--label" for="expiration-date">Expiration Date</label>
-               <div id="expiration-date" class="hosted-field"></div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="card_numb">Card Number</label>
+                        <!--  Hosted Fields div container -->
+                        <div class="col-sm-3">
 
-                <label class="hosted-fields--label" for="cvv">CVV</label>
-                <div id="cvv" class="hosted-field"></div>
+                            <div class="form-control" id="card-number" name="card_numb"  required></div>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
 
-                <div class="button-container">
-                <input type="submit" class="button button--small button--green" value="Purchase" id="credit-card-submit"/>
-            </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Expiration Date</label>
+
+                        <div class="col-sm-9">
+                            <div class="row">
+
+                                <div class="col-xs-3">
+                                    <!--  Hosted Fields div container -->
+                                    <div class="form-control" id="expiration-month" required></div>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                                <div class="col-xs-3">
+                                    <!--  Hosted Fields div container -->
+                                    <div class="form-control" id="expiration-year" required></div>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+
+                        <label class="control-label col-sm-3">Security Code</label>
+                        <!--  Hosted Fields div container -->
+                        <div class="col-sm-3">
+                            <div class="form-control" id="cvv" required></div>
+                        </div>
+
+                    </div>
+                    <div class="button-container">
+                        <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-success" value="Purchase"
+                                id="credit-card-submit" disabled="{{loading}}">
+                            {{#if loading}}
+                            Processing...
+                            {{else}}
+                            Pay Now
+                            {{/if}}
+                        </button>
+                        </div>
+                    </div>
+                </fieldset>
             </form>
-
-
         </div>
 
 
         <div id="paypal-payment-container" style="display:none">
-            <span class = "paypal-button">
+            <span class="paypal-button">
                  <img class="img-responsive" src="images/payment/paypal.png">
             </span>
         </div>
