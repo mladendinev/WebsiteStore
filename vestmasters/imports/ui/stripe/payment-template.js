@@ -97,7 +97,7 @@ Template.paymentTemplate.onRendered(function(){
                   $('#card-number').next('span').text('Please provide valid card');
                 }
 
-                else if(event.emmitedBy == "expirationYear"){
+                else if(event.emmitedBy === "expirationYear"){
                   $('#card-number').next('span').text('asdasda');
                 }
 
