@@ -22,18 +22,22 @@
 
 
         <div id="card-payment-container" style="display:none">
-            <form action="/" id="credit-card-payment-form" method="post">
-              <label for="card-number">Card Number</label>
-                <div id="card-number"></div>
+          <form action="/" method="post" id="credit-card-payment-form" >
+               <label class="hosted-fields--label" for="card-number">Card Number</label>
+               <div id="card-number" class="hosted-field"></div>
 
-              <label for="cvv">CVV</label>
-                 <div id="cvv"></div>
+               <label class="hosted-fields--label" for="expiration-date">Expiration Date</label>
+               <div id="expiration-date" class="hosted-field"></div>
 
-              <label for="expiration-date">Expiration Date</label>
-                <div id="expiration-date"></div>
+                <label class="hosted-fields--label" for="cvv">CVV</label>
+                <div id="cvv" class="hosted-field"></div>
 
-              <input id="credit-card-submit" type="submit" value="Pay" />
+                <div class="button-container">
+                <input type="submit" class="button button--small button--green" value="Purchase" id="credit-card-submit"/>
+            </div>
             </form>
+
+
         </div>
 
 

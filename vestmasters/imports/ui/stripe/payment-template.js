@@ -42,17 +42,6 @@ Template.paymentTemplate.onRendered(function(){
 
           braintree.hostedFields.create({
             client: clientInstance,
-            styles: {
-              'input': {
-                'font-size': '14px'
-              },
-              'input.invalid': {
-                'color': 'red'
-              },
-              'input.valid': {
-                'color': 'green'
-              }
-            },
             fields: {
               number: {
                 selector: '#card-number',
