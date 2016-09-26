@@ -34,10 +34,7 @@ kurounin:pagination-blaze
 session
 reactive-dict
 mrt:paypal
-anback:bootstrap-validator
-<<<<<<< HEAD
-meteorhacks:picker
-=======
-check
-audit-argument-checks
->>>>>>> mladen/validation
+email
+meteorhacks:ssr
+meteorhcheck
+audit-argument-checksacks:picker
