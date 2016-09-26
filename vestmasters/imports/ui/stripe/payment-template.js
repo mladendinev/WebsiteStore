@@ -91,9 +91,8 @@ Template.paymentTemplate.onRendered(function(){
                 // Remove styling  from potentially valid fields
                 $(field.container).parents('.form-group').removeClass('has-warning');
                 $(field.container).parents('.form-group').removeClass('has-success');
-                console.log("potentially valid");
-                if (event.emittedBy === 'number') {
-                  $('#card-number').next('span').text('');
+                if (event.emittedBy === 'number' && event.fields.number.isEmpty ) {
+                  $('#card-number').next('span').text('This field is required');
                 }
               }
 
