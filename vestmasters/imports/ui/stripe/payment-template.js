@@ -67,7 +67,7 @@ Template.paymentTemplate.onRendered(function(){
 
             hostedFieldsInstance.on('validityChange', function (event) {
               var field = event.fields[event.emittedBy];
-              console.log(event.emmitedBy);
+              //console.log(event.fields[event.emittedBy]);
 
 
               // VALID FIELDS
@@ -115,7 +115,7 @@ Template.paymentTemplate.onRendered(function(){
 
           hostedFieldsInstance.on('empty', function (event) {
             var field = event.fields[event.emittedBy];
-
+            console.log("is empty")
             if (field.isEmpty) {
                $(field.container).next('span').text('This field is required');
             }
