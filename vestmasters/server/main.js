@@ -6,7 +6,10 @@ import '../imports/api/server/publications.js'
 
 var gateway;
 
+
+
 Meteor.startup(() => {
+
   var env;
   // Pick Braintree environment based on environment defined in Meteor settings.
   if (Meteor.settings.public.env === 'Production') {
@@ -25,28 +28,63 @@ Meteor.startup(() => {
 
 
 Meteor.methods({
+
+  sendConfirmationEmail: function(clientEmail,subjectEmail, emailData){
+    check(clientEmail,String);
+    check(subjectEmail,String);
+    check(emailData,Object);
+    SSR.compileTemplate('htmlEmail',Assets.getText('emailToClient.html'));
+
+    Email.send({
+      to: clientEmail,
+      from: "clients@example.com",
+      subject: subjectEmail,
+      html: SSR.render('htmlEmail', emailData),
+    });
+  },
+
    getClientToken: function () {
      var generateToken = Meteor.wrapAsync(gateway.clientToken.generate, gateway.clientToken);
      var response = generateToken({});
      return response.clientToken;
    },
-   createTransaction: function(nonceFromTheClient,itemsInBasket) {
-    check(nonceFromTheClient,String);
-    check(itemsInBasket,[Match.Any]); //TODO Add proper check for the items, otherwise a security risk
-    var totalAmountToPay = calculatePriceCallServer(itemsInBasket); //TODO Add the delivery calculation inside the method
+
+   createTransaction: function(nonceFromTheClient,itemsInBasket,deliveryDetails) {
     var gatewayTransactionSync = Meteor.wrapAsync(gateway.transaction.sale,gateway.transaction); 
     try {
-    var result = gatewayTransactionSync({amount: totalAmountToPay,
+
+
+       check(nonceFromTheClient,String);
+       check(itemsInBasket,[Match.Any]); //TODO Add proper check for the items, otherwise a security risk
+       check(deliveryDetails,Object); //TODO Add proper check for the delivery, otherwise a security risk
+       var totalAmountToPay = calculatePriceCallServer(itemsInBasket); //TODO Add the delivery calculation inside the method
+
+       var result = gatewayTransactionSync({amount: totalAmountToPay,
                                          paymentMethodNonce: nonceFromTheClient,
                                          options: {
-                                           submitForSettlement: true
+                                         submitForSettlement: true
                                          }
-                                         }); 
-    var orderId = Orders.insert({"items" : itemsInBasket, "transactionId" : result.transaction.id, "amount" : result.transaction.amount, "currency" : result.transaction.currencyIsoCode});
-    encrypted = CryptoJS.AES.encrypt(orderId, Meteor.settings.private.crypto.aesKey);
-    return encrypted.toString();
+                                         });
+       var orderId = Orders.insert({"items" : itemsInBasket,
+                                    "transactionId" : result.transaction.id,
+                                    "amount" : result.transaction.amount,
+                                    "currency" : result.transaction.currencyIsoCode,
+                                    "deliveryInfo":deliveryDetails});
+
+
+       encrypted = CryptoJS.AES.encrypt(orderId, Meteor.settings.private.crypto.aesKey);
+       return encrypted.toString();
     } catch(error){
       console.log(error);
     };
-  }
-});
+  },
+ });
+
+
+
+
+//  var emailData= {
+//    order_id: "-",
+//    products: "-",
+//  };
+

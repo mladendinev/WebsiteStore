@@ -59,6 +59,11 @@ Template.deliveryTemplate.onCreated(function(){
  Template.deliveryTemplate.events({
     'submit form'(event){
         event.preventDefault();
+        var map= {};
+        $("#user-info :input").each(function(){
+           map[$(this).attr("name")] = $(this).val();
+        });
+        amplify.store("DELIVERY_INFO",map);
         FlowRouter.go('Payment');
     },
 
@@ -66,10 +71,8 @@ Template.deliveryTemplate.onCreated(function(){
           e.preventDefault();
           var selectedOpt = $('#countryDelivery option:selected').val();
           if (selectedOpt !== "Country"){
-             console.log(selectedOpt);
-             delivery_price2= Countries.findOne({'country': selectedOpt});
-             console.log(delivery_price2.price);
-             Session.set(DELIVERY_COST,delivery_price2.price);
+             delivery_price= Countries.findOne({'country': selectedOpt});
+             Session.set(DELIVERY_COST,delivery_price.price);
           }
     }
  });
@@ -77,7 +80,6 @@ Template.deliveryTemplate.onCreated(function(){
  Template.deliveryTemplate.helpers({
     countries: function(){
          countries = Countries.find({},{sort:{'country': 1}});
-         console.log(countries);
          return countries;
   },
 });

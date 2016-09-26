@@ -19,6 +19,8 @@ Template.paymentTemplate.onCreated(function(){
 
 Template.paymentTemplate.onRendered(function(){
    Session.set("DocumentTitle","Payment");
+   var deliveryDetails = amplify.store('DELIVERY_INFO');
+   console.log(deliveryDetails);
    $("body").removeClass();
    $("body").addClass("body-shopping");
    $("#credit-card-number").prop('required',true);
@@ -235,30 +237,4 @@ Template.paymentTemplate.events({
    });
   },
 
-
-//  "submit form"(event,template){
-//     event.preventDefault();
-//
-//      template.loading.set(true);
-//      var $form = $('#credit-card-payment-form');
-//
-//      $form.find('.submit').prop('disabled', true);
-//
-//
-//
-//      hostedFieldsInstance.tokenize(function(err, response){
-//       if (err){
-//         console.error(err);
-//         template.loading.set(false);
-//         $form.find('.submit').prop('disabled', false);
-//          return;
-//       }
-//
-//       else{
-//
-//       }
-//
-//    //create transaction
-//   })
-//  }
 })

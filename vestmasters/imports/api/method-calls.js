@@ -2,45 +2,6 @@ import {Inventory} from './products.js';
 import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-export function cardPaymentCallBack(hostedFieldsErr, hostedFieldsInstance) {
-   if (hostedFieldsErr) {
-          console.error(hostedFieldsErr);
-          return;
-       }
-
-  hostedFieldsInstance.on('validityChange', function (event) {
-    var field = event.fields[event.emittedBy];
-
-    if (field.isValid) {
-      if (event.emittedBy === 'expirationMonth' || event.emittedBy === 'expirationYear') {
-        if (!event.fields.expirationMonth.isValid || !event.fields.expirationYear.isValid) {
-          return;
-        }
-      } else if (event.emittedBy === 'number') {
-        $('#card-number').next('span').text('');
-      }
-
-      // Apply styling for a valid field
-      $(field.container).parents('.form-group').addClass('has-success');
-    } else if (field.isPotentiallyValid) {
-      // Remove styling  from potentially valid fields
-      $(field.container).parents('.form-group').removeClass('has-warning');
-      $(field.container).parents('.form-group').removeClass('has-success');
-      if (event.emittedBy === 'number') {
-        $('#card-number').next('span').text('');
-      }
-    } else {
-      // Add styling to invalid fields
-      $(field.container).parents('.form-group').addClass('has-warning');
-      // Add helper text for an invalid card number
-      if (event.emittedBy === 'number') {
-        $('#card-number').next('span').text('Invalid Card');
-      }
-    }
-  });
-}
-
-
 
 export function calculatePriceCall(){
     var total=0;
@@ -79,11 +40,17 @@ export function obtainBraintreeId(){
 };
 
 export function createTransaction(nonce){
-	Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), function(error, success) {
+
+	Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), amplify.store("DELIVERY_INFO"), function(error, success) {
                 if (error) {
                   throw new Meteor.Error('transaction-creation-failed');
                 } else {
+                  var delivery_info = amplify.store("DELIVERY_INFO");
+                  emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
                   amplify.store(ORDER_ID,success);
+//                  Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
+
+                 //TODO replace the email with a real one
                   FlowRouter.go('/confirmation');
                 }
            });
