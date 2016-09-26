@@ -94,9 +94,6 @@ Template.paymentTemplate.onRendered(function(){
                 if (event.emittedBy === 'number' && event.fields.number.isEmpty ) {
                   $('#card-number').next('span').text('This field is required');
                 }
-                else if (event.emittedBy === 'number' && !event.fields.number.isEmpty ) {
-                  $('#card-number').next('span').text('Please provide valid card');
-                }
               }
 
 
