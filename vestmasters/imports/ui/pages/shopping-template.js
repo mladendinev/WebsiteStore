@@ -44,7 +44,18 @@ Template.shoppingTemplate.helpers({
                },
     products(){
                return Products.find({});
-              }   
+              },
+    soldOut(hasSize,quantity,sizes,quantitySize){   
+          if(hasSize === false) {
+            return quantity <=0;
+          } else {
+            var result = true;
+            sizes.forEach(function(size,index){
+                result = result && ((typeof quantitySize[size] === "undefined") || quantitySize[size] <=0);
+            });
+            return result;
+          }
+     },
 });
 
 

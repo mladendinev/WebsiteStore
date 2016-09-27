@@ -40,49 +40,25 @@ export function obtainBraintreeId(){
 };
 
 export function createTransaction(nonce){
-
+  Session.set("time", new Date().getTime());
 	Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), amplify.store("DELIVERY_INFO"), function(error, success) {
                 if (error) {
-                  throw new Meteor.Error('transaction-creation-failed');
+                  console.log(new Date().getTime() - Session.get("time"));
+                  console.log(error);
+                  // throw new Meteor.Error('transaction-creation-failed');
                 } else {
                   var delivery_info = amplify.store("DELIVERY_INFO");
                   emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
                   amplify.store(ORDER_ID,success);
+
 //                  Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
 
                  //TODO replace the email with a real one
-                  FlowRouter.go('/confirmation');
+                 // FlowRouter.go('/confirmation');
                 }
            });
 };
 
-export function getSingleItem(id){
-  Meteor.call('getSingleItem',id,function(error,item){
-   
-    if(error){
-      console.log("Error in retrieving item from mongo");
-    } else {
-      var currentValue = amplify.store(ITEMS_IN_BASKET_STORE);
-      var itemToAdd = {
-          "product" : item.product,
-          "file" : item.file,
-          "size": $("#sel-size").val(),  
-          "oid" : item._id.valueOf(),
-          "initials" : $("#initials").val(),
-          "price" : item.price, 
-          "qantity" : 1
-           };
-      if (typeof currentValue !== "undefined" && currentValue !== null) {
-          currentValue.push(itemToAdd);
-          amplify.store(ITEMS_IN_BASKET_STORE,currentValue);
-      } else {
-          amplify.store(ITEMS_IN_BASKET_STORE,[itemToAdd]);
-      }
-      Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
-   }
- 
-  });
-};
 
 export function getOrder(){
   Meteor.call('gerOrder', amplify.store(ORDER_ID), function(error,order){
@@ -127,4 +103,3 @@ export function emptyMessageTrigger(){
             $('#cvv').next('span').text('This field is required');
 
 };
-

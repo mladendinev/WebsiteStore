@@ -5,6 +5,7 @@
     "start": "meteor --settings settings.json"
   },
   "dependencies": {
+    "sleep" : "4.0.0",
     "braintree-web": "3.3.0",
     "imports": "^1.0.0",
     "jquery": "^2.2.4",

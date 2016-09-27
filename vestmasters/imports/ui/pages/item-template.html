@@ -41,31 +41,17 @@
                     <label for="sel1">Size</label>
                     <select class="form-control" id="sel-size">
                         {{#each size in item.sizes}}
+                         {{#if outOfStock item.quantitySize size}}  
+                        <option disabled>{{size}}</option>
+                        {{else}}
                         <option>{{size}}</option>
+                        {{/if}}
                         {{/each}}
                     </select>
                 </div>
                 <hr class="item-product-properties-separator"/>
                 {{/if}}
-                <!--
-                  ADDING A BUTTON TEMPORARILY REMOVED AS NO CLARITY ABOUT WHERE TO GO (maybe can be reused in capsule collection??)
-                  <div id="luxury-addons-container">
-                  <h5 align="center"> <b> ADD A TOUCH OF LUXURY MOOD TO YOUR ITEM </b> </h5>
-                  Lorem ipsum dolor sit amet: 200€ <br/>
-                  <div id = "item-checkbox-container">
-                  <div class="checkbox">
-                   <label><input type="checkbox" value="">1 button first</label>
-                 </div>
-                 <div class="checkbox">
-                   <label><input type="checkbox" value="">1 button inside</label>
-                 </div>
-                 </div>
-                 <div id="item-checkbox-image-container">
-                   <img class='img-resonsive' src='images/button.png'/>
-                 </div>
-               </div>
-               <hr class="clear-div item-product-properties-separator"/>
-               -->
+              
                 {{#if item.initials}}
                 <div>
                     <h5 align="center"><b> THE INITIALS OF YOUR NAME FOR THE EMBRODIERY </b></h5>

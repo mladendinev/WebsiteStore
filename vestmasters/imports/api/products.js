@@ -9,3 +9,5 @@ export const Inventory = new Mongo.Collection('inventory');
 export const Orders = new Mongo.Collection('orders');
 
 export const Countries = new Mongo.Collection('countries');
+
+export const InventoryLock = new Mongo.Collection('inventoryLock');

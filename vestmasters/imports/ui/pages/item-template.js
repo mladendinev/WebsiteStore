@@ -27,6 +27,10 @@ Template.itemTemplate.helpers({
     item() {
       return Inventory.findOne({"_id" : new Meteor.Collection.ObjectID(Template.instance().itemId)});
     },
+
+    outOfStock(sizeDict,size){
+       return (typeof sizeDict[size] === "undefined" || sizeDict[size] <= 0)
+    }
 });
 
 Template.itemTemplate.events({

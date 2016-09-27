@@ -11,16 +11,31 @@
 
                 {{#each documents}}
                 <div class="col-xs-6 col-md-4">
-                    <a href="/item?id={{extractObjectId _id}}" class="thumbnail">
-                        <img class="img-responsive" src="images/{{file}}" alt="T-Shirt">
-
+                    {{#if soldOut size quantity sizes quantitySize}}
+                    <div class="thumbnail">
+                    <div class="sold-out-div">
+                        <h2 class = "sold-out-text"> <b> SOLD OUT </b> </h2>
+                        <img class="sold-out-image img-responsive" src="images/{{file}}" alt="T-Shirt">
+                    </div>
                         <div class="caption">
                             <p class="alignLeft">{{product}}</p>
 
                             <p class="alignRight">${{price}}</p>
                         </div>
                         <div style="clear: both;"></div>
-                    </a>
+                    </div>
+                    {{else}}
+                        <a href="/item?id={{extractObjectId _id}}" class="thumbnail">
+                         <img class="img-responsive" src="images/{{file}}" alt="T-Shirt">
+                         <div class="caption">
+                            <p class="alignLeft">{{product}}</p>
+
+                            <p class="alignRight">${{price}}</p>
+                         </div>
+                         <div style="clear: both;"></div>
+                        </a>
+                     {{/if}}
+                        
                 </div>
                 {{/each}}
                 <br class="clear-div"/>

@@ -128,7 +128,6 @@ Template.paymentTemplate.onRendered(function(){
 
           form.addEventListener('submit', function (event,template) {
              event.preventDefault();
-             console.log(template)
 //             this.template.loading.set(true);
 
 
@@ -162,6 +161,7 @@ Template.paymentTemplate.onRendered(function(){
 
                // Successful form, generate nonce and redirect to confirmation
                else{
+                Session.set("time", new Date().getTime);
                  createTransaction(payload.nonce);
                }
             });
