@@ -42,12 +42,15 @@ getItem(basketItem){
  },
 
  basketErrorPresent(){
-  return typeof Session.get(BASKET_ERROR) !== "undefined";
+  return Session.get(BASKET_ERROR) !== null && (typeof Session.get(BASKET_ERROR) !== "undefined");
  },
 
- errorMessage(){
+ errorMessages(){
    return Session.get(BASKET_ERROR);
  },
+ linebreak(){
+  return "</br>"
+ }
 });
 
  Template.basketOverview.events({

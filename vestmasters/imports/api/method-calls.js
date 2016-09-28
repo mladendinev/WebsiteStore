@@ -43,17 +43,26 @@ export function createTransaction(nonce){
   Session.set("time", new Date().getTime());
 	Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), amplify.store("DELIVERY_INFO"), function(error, success) {
                if(error){
+                var messages = [];
                switch(error.error) {
                  case "INVENTORY_NOT_SUFFICIENT": 
-                  var message = "You have requested:" + error.details.requestedNumber + " items of:" + error.details.product + " but we " +
-                  "only have:" +  error.details.availableNumber; 
-                  Session.set(BASKET_ERROR,message)
+                 error.details.forEach(function(detail){
+                  var sizeMessage =""
+                  if(typeof detail.requestedSize !== "undefined"){
+                    sizeMessage = " of size:" + detail.requestedSize + " ";
+                  }
+                  messages.push("You have requested:" + detail.requestedNumber + " items of:" + detail.product + sizeMessage + " but we " +
+                  "only have:" +  detail.availableNumber);
+                  }); 
+                  Session.set(BASKET_ERROR,messages)
                   FlowRouter.go('/basket')
                   break;
                  case "INVALID_SIZE_SELECTED_BY_USER":
-                  var message = "You have requested a size:"  + error.details.requestedSize + " for product " + error.details.product + " but we" +
-                  " do not have such size in stock";
-                  Session.set(BASKET_ERROR,message);
+                 error.details.forEach(function(detail){
+                  messages.push("You have requested a size:"  + detail.requestedSize + " for product " + detail.product + " but we" +
+                  " do not have such size in stock");
+                 });
+                  Session.set(BASKET_ERROR,messages);
                   FlowRouter.go('/basket')
                   break;
                  case "BASKET_NOT_VALID":
@@ -72,8 +81,13 @@ export function createTransaction(nonce){
                   amplify.store(ORDER_ID,success);
 
 //                  Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
-
+                 console.log("Errorless Transaction");
                  //TODO replace the email with a real one
+                 amplify.store(BRAINTREE_CLIENT_TOKEN,null);
+                 amplify.store(ITEMS_IN_BASKET_STORE,[]);
+                 Session.set(PAYMENT_ERROR,null);
+                 Session.set(BASKET_ERROR,null);
+                 Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
                  FlowRouter.go('/confirmation');
                 }
            });
@@ -85,9 +99,6 @@ export function getOrder(){
      if(error){
        console.log("Error in retrieving order")
      }else{
-       amplify.store(BRAINTREE_CLIENT_TOKEN,null);
-       amplify.store(ITEMS_IN_BASKET_STORE,[]);
-       Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
        Session.set(ORDER_INFO,order);
      }
     });

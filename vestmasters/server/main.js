@@ -58,14 +58,17 @@ Meteor.methods({
        check(deliveryDetails,Object); //TODO Add proper check for the delivery, otherwise a security risk
      
        var itemsDict={};
-       var totalAmountToPay = calculatePriceCallServer(itemsInBasket); //TODO Add the delivery calculation inside the method
+      
        try {
        removeFromInventory(itemsInBasket,itemsDict);
        } catch(inventoryVaidationError){
         InventoryLock.update({"status" : "busy"},{$set :{"status":"available"}});
         throw inventoryVaidationError;
        }
-   try {
+     
+       //TODO Add the delivery calculation inside the method
+     try {
+     var totalAmountToPay = calculatePriceCallServer(itemsInBasket,itemsDict);
      var result = gatewayTransactionSync({amount: totalAmountToPay,
                                          paymentMethodNonce: nonceFromTheClient,
                                          options: {

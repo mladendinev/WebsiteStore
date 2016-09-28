@@ -225,7 +225,7 @@ Template.paymentTemplate.helpers({
    },
 
    paymentErrorPresent(){
-  return typeof Session.get(PAYMENT_ERROR) !== "undefined";
+  return Session.get(PAYMENT_ERROR) !== null && (typeof Session.get(PAYMENT_ERROR) !== "undefined");
  },
 
  errorMessage(){

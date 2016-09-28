@@ -1,70 +1,50 @@
 import {Inventory, InventoryLock} from '../../imports/api/products.js';
 import sleep from 'sleep'
 
-export function calculatePriceCallServer(itemsArray){
+export function calculatePriceCallServer(itemsArray,itemsDict){
 		var total=0;
-		var queryArray = [];
-		var itemsDict = {};
-             itemsArray.forEach(function(basketItem,index){
-		       if(typeof itemsDict[basketItem.oid+ ".quantity"] === "undefined") {
-		       	itemsDict[basketItem.oid+ ".quantity"] = 1;
-		       } else {
-		       	itemsDict[basketItem.oid +".quantity"] = itemsDict[basketItem.oid + ".quantity"] + 1;
-		       } 
-               queryArray.push({"_id": new Meteor.Collection.ObjectID(basketItem.oid)});
-             });
-              
-              Inventory.find({$or: queryArray}).forEach(function(mongoBasketItem,index){
-			  total = total + parseInt(mongoBasketItem.price)*itemsDict[mongoBasketItem._id.valueOf()+ ".quantity"];
-              itemsDict[mongoBasketItem._id.valueOf() +".price"]=mongoBasketItem.price;
-              itemsDict[mongoBasketItem._id.valueOf()+ ".product"]=mongoBasketItem.product;
-              itemsDict[mongoBasketItem._id.valueOf()+ ".file"] = mongoBasketItem.file;
-	         });
+        itemsDict.mongoArray.forEach(function(mongoBasketItem,index){
+    	  total = total + parseInt(mongoBasketItem.price)*itemsDict[mongoBasketItem._id.valueOf()+ ".quantityPerId"];
+           });
 
-             itemsArray.forEach(function(basketItem,index){
-                basketItem.price = itemsDict[basketItem.oid + ".price"];
-                basketItem.product = itemsDict[basketItem.oid +  ".product"];
-                basketItem.file = itemsDict[basketItem.oid+ ".file"];
-             });
-		return total;
+  		return total;
 };
+
+
 
 export function removeFromInventory(itemsArray,itemsDict){
   var queryArray = [];
+  setUpData(itemsDict,itemsArray,queryArray)
+  
 
+ while(InventoryLock.update({"status" : "available"},{$set :{"status":"busy"}}) === 0){}; 
+   itemsDict.mongoArray = Inventory.find({$or: queryArray}).fetch();
+   var errorDetails = [];
 
-  itemsArray.forEach(function(basketItem,index){
-    var mongoItem = Inventory.findOne({"_id" : new Meteor.Collection.ObjectID(basketItem.oid)}) 
-    if(typeof mongoItem === "undefined"){
-      generateIdError(basketItem.oid);
-    } else {
-      if (mongoItem.size) {
-           addQuantitySize(itemsDict,basketItem,mongoItem);
-           addSizeToSizesArray(itemsDict,basketItem,mongoItem);
-         }
-        else {
-           addQuantityNoSize(itemsDict,mongoItem);
-         }
-      queryArray.push({"_id": new Meteor.Collection.ObjectID(basketItem.oid)});
-
-    }});
-
- while(InventoryLock.update({"status" : "available"},{$set :{"status":"busy"}}) === 0){
-
- }; 
-      Inventory.find({$or: queryArray}).forEach(function(mongoItem,index){
+   itemsDict.mongoArray.forEach(function(mongoItem,index){
         if(mongoItem.size){
            itemsDict[mongoItem._id + ".size"] = true;
-           checkSizesProvided(itemsDict,mongoItem);
-           checkInventoryCapacity(itemsDict,mongoItem);  
+           checkInventoryCapacity(itemsDict,mongoItem,errorDetails);  
         } else {
            itemsDict[mongoItem._id + ".size"] = false;
-           checkInventoryCapacityNoSize(itemsDict,mongoItem);
-        }  
- });
+           checkInventoryCapacityNoSize(itemsDict,mongoItem,errorDetails);
+        }
+   });
+   if(errorDetails.length>0){
+     throwInventoryError(errorDetails);
+   }
+
+   itemsDict.mongoArray.forEach(function(mongoItem,index){    
+    if(mongoItem.size){ 
+     checkSizesProvided(itemsDict,mongoItem,errorDetails);
+    }
+   });
+   
+   if(errorDetails.length>0){
+     throwSizeError(errorDetails);
+   }   
 
 updateInventory(itemsDict,itemsArray,-1);    
-console.log("got the lock");
 InventoryLock.update({"status" : "busy"},{$set :{"status":"available"}})
 };
 
@@ -80,6 +60,41 @@ export function updateInventory(itemsDict,itemsArray,value){
             Inventory.update({"_id" : new Meteor.Collection.ObjectID(basketItem.oid)}, {$inc: {"quantity" : value}});
           }
          })
+}
+
+function setUpData(itemsDict,itemsArray,queryArray){
+   itemsArray.forEach(function(basketItem,index){
+    var mongoItem = Inventory.findOne({"_id" : new Meteor.Collection.ObjectID(basketItem.oid)}) 
+    if(typeof mongoItem === "undefined"){
+      generateIdError(basketItem.oid);
+    } else {
+      addQuantityPerId(itemsDict,basketItem);
+      updatebasketItem(basketItem,mongoItem);
+      if (mongoItem.size) {
+           addQuantitySize(itemsDict,basketItem,mongoItem);
+           addSizeToSizesArray(itemsDict,basketItem,mongoItem);
+         }
+        else {
+          addQuantityNoSize(itemsDict,mongoItem);
+         }
+        queryArray.push({"_id": new Meteor.Collection.ObjectID(basketItem.oid)});
+      
+
+    }});
+}
+
+function updatebasketItem(basketItem,mongoItem){
+ basketItem.price = mongoItem.price;
+ basketItem.product = mongoItem.product;
+ basketItem.file =mongoItem.file;
+}
+
+function addQuantityPerId(itemsDict,basketItem){
+         if(typeof itemsDict[basketItem.oid+ ".quantityPerId"] === "undefined") {
+            itemsDict[basketItem.oid+ ".quantityPerId"] = 1;
+           } else {
+            itemsDict[basketItem.oid +".quantityPerId"] = itemsDict[basketItem.oid + ".quantityPerId"] + 1;
+           } 
 }
 
 function addQuantitySize(itemsDict,basketItem,mongoItem){
@@ -107,41 +122,47 @@ function addSizeToSizesArray(itemsDict,basketItem,mongoItem){
 
 };
 
-function checkSizesProvided(itemsDict,mongoItem){
+function checkSizesProvided(itemsDict,mongoItem,details){
   itemsDict[mongoItem._id + ".sizes"].forEach(function(size){
       if((typeof (mongoItem["quantitySize"])[size.toString()]) === "undefined") {
-      generateSizeError(mongoItem,size);
+      generateSizeError(mongoItem,size,details);
       }
 }); 
 };
 
-function checkInventoryCapacity(itemsDict,mongoItem){
+function checkInventoryCapacity(itemsDict,mongoItem,details){
     mongoItem.sizes.forEach(function(mongoItemSize){
          if(itemsDict[mongoItem._id + "." + mongoItemSize] > (mongoItem["quantitySize"])[mongoItemSize.toString()]){
-         generateErrorInventory(itemsDict,mongoItem,true,mongoItemSize);
+         generateErrorInventory(itemsDict,mongoItem,true,details,mongoItemSize);
          }
       });
   };
 
-function checkInventoryCapacityNoSize(itemsDict,mongoItem){
+function checkInventoryCapacityNoSize(itemsDict,mongoItem,details){
  if(itemsDict[mongoItem._id + ".quantity"] > mongoItem.quantity) {
-   generateErrorInventory(itemsDict,mongoItem,false)
+   generateErrorInventory(itemsDict,mongoItem,false,details);
  }
 }
 
-function generateErrorInventory(itemsDict,mongoItem,size,mongoItemSize){
-  var details;
+function generateErrorInventory(itemsDict,mongoItem,size,details,mongoItemSize){
   if(size){
-  details = {"product": mongoItem.product, "requestedNumber" : itemsDict[mongoItem._id + "." + mongoItemSize], "availableNumber": (mongoItem["quantitySize"])[mongoItemSize.toString()]} 
+  details.push({"product": mongoItem.product, "requestedNumber" : itemsDict[mongoItem._id + "." + mongoItemSize], "availableNumber": (mongoItem["quantitySize"])[mongoItemSize.toString()], "requestedSize":mongoItemSize.toString() })
   }  else {
-  details = {"product": mongoItem.product, "requestedNumber" : itemsDict[mongoItem._id + ".quantity"], "availableNumber": mongoItem["quantity"]}   
+  details.push({"product": mongoItem.product, "requestedNumber" : itemsDict[mongoItem._id + ".quantity"], "availableNumber": mongoItem["quantity"]})   
   }
-  throw new Meteor.Error("INVENTORY_NOT_SUFFICIENT", "The inventory lack the capacity to process the order", details); 
+  
 }
 
-function generateSizeError(mongoItem,size){
-  var details ={"product": mongoItem.product , "requestedSize" : size};
-  throw new Meteor.Error("INVALID_SIZE_SELECTED_BY_USER", "The user passed invalid size to the server", details);
+function generateSizeError(mongoItem,size,details){
+  details.push({"product": mongoItem.product , "requestedSize" : size});
+}
+
+function throwInventoryError(details){
+ throw new Meteor.Error("INVENTORY_NOT_SUFFICIENT", "The inventory lack the capacity to process the order", details); 
+}
+
+function throwSizeError(details){
+ throw new Meteor.Error("INVALID_SIZE_SELECTED_BY_USER", "The user passed invalid size to the server", details);
 }
 
 function generateIdError(id){
