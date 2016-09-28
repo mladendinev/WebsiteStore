@@ -1,5 +1,5 @@
 import {Inventory} from './products.js';
-import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO} from './session-constants.js';
+import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 
@@ -42,10 +42,30 @@ export function obtainBraintreeId(){
 export function createTransaction(nonce){
   Session.set("time", new Date().getTime());
 	Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), amplify.store("DELIVERY_INFO"), function(error, success) {
-                if (error) {
-                  console.log(new Date().getTime() - Session.get("time"));
-                  console.log(error);
-                  // throw new Meteor.Error('transaction-creation-failed');
+               if(error){
+               switch(error.error) {
+                 case "INVENTORY_NOT_SUFFICIENT": 
+                  var message = "You have requested:" + error.details.requestedNumber + " items of:" + error.details.product + " but we " +
+                  "only have:" +  error.details.availableNumber; 
+                  Session.set(BASKET_ERROR,message)
+                  FlowRouter.go('/basket')
+                  break;
+                 case "INVALID_SIZE_SELECTED_BY_USER":
+                  var message = "You have requested a size:"  + error.details.requestedSize + " for product " + error.details.product + " but we" +
+                  " do not have such size in stock";
+                  Session.set(BASKET_ERROR,message);
+                  FlowRouter.go('/basket')
+                  break;
+                 case "BASKET_NOT_VALID":
+                  console.log(error.error);
+                  var message = "You have requested an item which is not currently supplied.";
+                  Session.set(BASKET_ERROR,message);
+                  FlowRouter.go('/basket');
+                  break;
+                 default:
+                  Session.set(PAYMENT_ERROR, "There was a problem with your transaction. Please try again.")
+                  console.log(error.error);
+                  }
                 } else {
                   var delivery_info = amplify.store("DELIVERY_INFO");
                   emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
@@ -54,7 +74,7 @@ export function createTransaction(nonce){
 //                  Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
 
                  //TODO replace the email with a real one
-                 // FlowRouter.go('/confirmation');
+                 FlowRouter.go('/confirmation');
                 }
            });
 };

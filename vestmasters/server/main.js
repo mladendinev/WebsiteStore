@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import {calculatePriceCallServer,removeFromInventory} from './lib/common.js'
+import {calculatePriceCallServer,removeFromInventory,updateInventory} from './lib/common.js'
 import '../imports/api/products.js';
 import {InventoryLock} from '../imports/api/products.js';
 import {Orders} from '../imports/api/products.js';
@@ -57,36 +57,36 @@ Meteor.methods({
        check(itemsInBasket,[Match.Any]); //TODO Add proper check for the items, otherwise a security risk
        check(deliveryDetails,Object); //TODO Add proper check for the delivery, otherwise a security risk
      
-
+       var itemsDict={};
        var totalAmountToPay = calculatePriceCallServer(itemsInBasket); //TODO Add the delivery calculation inside the method
        try {
-       removeFromInventory(itemsInBasket);
+       removeFromInventory(itemsInBasket,itemsDict);
        } catch(inventoryVaidationError){
         InventoryLock.update({"status" : "busy"},{$set :{"status":"available"}});
         throw inventoryVaidationError;
        }
-   // try {      
-   //     var result = gatewayTransactionSync({amount: totalAmountToPay,
-   //                                       paymentMethodNonce: nonceFromTheClient,
-   //                                       options: {
-   //                                       submitForSettlement: true
-   //                                       }
-   //                                       });
-     // } catch(transactionError){
-         // console.log("Transaction Error");
-        //reinstate inventory;
-     // }
+   try {
+     var result = gatewayTransactionSync({amount: totalAmountToPay,
+                                         paymentMethodNonce: nonceFromTheClient,
+                                         options: {
+                                         submitForSettlement: true
+                                         }
+                                         });
+     } catch(transactionError){
+       updateInventory(itemsDict,itemsInBasket,1);
+       throw new Meteor.Error("TRANSACTION_FAULURE","Problem with transaction");
+     }
      
 
-   //     var orderId = Orders.insert({"items" : itemsInBasket,
-   //                                  "transactionId" : result.transaction.id,
-   //                                  "amount" : result.transaction.amount,
-   //                                  "currency" : result.transaction.currencyIsoCode,
-   //                                  "deliveryInfo":deliveryDetails});
+       var orderId = Orders.insert({"items" : itemsInBasket,
+                                    "transactionId" : result.transaction.id,
+                                    "amount" : result.transaction.amount,
+                                    "currency" : result.transaction.currencyIsoCode,
+                                    "deliveryInfo":deliveryDetails});
 
 
-   //     encrypted = CryptoJS.AES.encrypt(orderId, Meteor.settings.private.crypto.aesKey);
-   //     return encrypted.toString();
+       encrypted = CryptoJS.AES.encrypt(orderId, Meteor.settings.private.crypto.aesKey);
+       return encrypted.toString();
     
   },
  });

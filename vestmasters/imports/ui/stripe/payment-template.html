@@ -5,6 +5,13 @@
             {{>progressBar first="progress-bar-success" second="progress-bar-success" third="progress-bar-success"
             fourth="progress-bar-danger" }}
         </div>
+    
+        {{#if paymentErrorPresent}}
+         
+         <div class="div-error">
+            {{errorMessage}}
+         </div>
+        {{/if}}
 
         <!--<div class="summaryOrder">-->
         <!--<p>Total Amount: {{total}}</p>-->

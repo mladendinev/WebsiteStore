@@ -1,6 +1,6 @@
 import './payment-template.html';
 import '../components/progress-bar.js';
-import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE} from '../../api/session-constants.js';
+import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,PAYMENT_ERROR} from '../../api/session-constants.js';
 import {calculatePriceCall,createTransaction,cardPaymentCallBack,invalidMessageTrigger,emptyMessageTrigger} from '../../api/method-calls.js';
 import {Inventory} from '../../api/products.js';
 import braintree from 'braintree-web'
@@ -161,8 +161,7 @@ Template.paymentTemplate.onRendered(function(){
 
                // Successful form, generate nonce and redirect to confirmation
                else{
-                Session.set("time", new Date().getTime);
-                 createTransaction(payload.nonce);
+                createTransaction(payload.nonce);
                }
             });
           },false);
@@ -224,6 +223,14 @@ Template.paymentTemplate.helpers({
    total(){
    	return Session.get(TOTAL_PRICE_SESSION);
    },
+
+   paymentErrorPresent(){
+  return typeof Session.get(PAYMENT_ERROR) !== "undefined";
+ },
+
+ errorMessage(){
+   return Session.get(PAYMENT_ERROR);
+ },
 });
 
 Template.paymentTemplate.events({

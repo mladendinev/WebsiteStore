@@ -1,0 +1,11 @@
+.div-error{
+  padding: 2%;
+  color: #f44336;
+  font-size: 15pt;
+  border: 1px solid #f44336;
+}
+
+.div-error-messages {
+  padding-top: 1%;
+  padding-bottom: 1%;
+}

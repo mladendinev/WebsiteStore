@@ -1,5 +1,5 @@
 import {calculatePriceCall,obtainBraintreeId} from '../../api/method-calls.js';
-import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION} from '../../api/session-constants.js';
+import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,BASKET_ERROR} from '../../api/session-constants.js';
 import '../components/dropdown-products.js';
 import '../components/number-of-basket-items.js';
 import '../components/navbar-shopping.js';
@@ -39,6 +39,14 @@ getItem(basketItem){
 
  total(){
  	return Session.get(TOTAL_PRICE_SESSION);
+ },
+
+ basketErrorPresent(){
+  return typeof Session.get(BASKET_ERROR) !== "undefined";
+ },
+
+ errorMessage(){
+   return Session.get(BASKET_ERROR);
  },
 });
 

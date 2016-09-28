@@ -13,3 +13,7 @@ export const ORDER_ID = "order-id";
 export const ORDER_INFO = "order-info";
 
 export const DELIVERY_COST = "delivery-info";
+
+export const SESSION_SET = "session-error";
+
+export const PAYMENT_ERROR = "payment-error";
