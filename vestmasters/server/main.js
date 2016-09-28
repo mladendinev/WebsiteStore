@@ -57,6 +57,10 @@ Meteor.methods({
        check(itemsInBasket,[Match.Any]); //TODO Add proper check for the items, otherwise a security risk
        check(deliveryDetails,Object); //TODO Add proper check for the delivery, otherwise a security risk
      
+      if(itemsInBasket.length === 0){
+         throw new Meteor.Error("BASKET_EMPTY", "Problem with transaction");
+      }
+       
        var itemsDict={};
       
        try {

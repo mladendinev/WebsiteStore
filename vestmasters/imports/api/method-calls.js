@@ -41,7 +41,7 @@ export function obtainBraintreeId(){
 
 export function createTransaction(nonce){
   Session.set("time", new Date().getTime());
-	Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), amplify.store("DELIVERY_INFO"), function(error, success) {
+  Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), amplify.store("DELIVERY_INFO"), function(error, success) {
                if(error){
                 var messages = [];
                switch(error.error) {
@@ -66,10 +66,11 @@ export function createTransaction(nonce){
                   FlowRouter.go('/basket')
                   break;
                  case "BASKET_NOT_VALID":
-                  console.log(error.error);
-                  var message = "You have requested an item which is not currently supplied.";
-                  Session.set(BASKET_ERROR,message);
+                  Session.set(BASKET_ERROR,["You have requested an item which is not currently supplied."]);
                   FlowRouter.go('/basket');
+                  break;
+                 case "BASKET_EMPTY":
+                  Session.set(PAYMENT_ERROR,"You can't checkout with an empty basket. Please add items before attempting a payment");
                   break;
                  default:
                   Session.set(PAYMENT_ERROR, "There was a problem with your transaction. Please try again.")

@@ -48,8 +48,13 @@ getItem(basketItem){
  errorMessages(){
    return Session.get(BASKET_ERROR);
  },
- linebreak(){
-  return "</br>"
+isDefined(item){
+  console.log(item)
+  if (Session.get(BASKET_ERROR) === null || (typeof Session.get(BASKET_ERROR) === "undefined")){
+    return true;
+  } else {
+  return (typeof item !== "undefined") && item !== null;
+  }
  }
 });
 
