@@ -1,4 +1,4 @@
-import {Inventory, InventoryLock} from '../../imports/api/products.js';
+import {Inventory, InventoryLock, LockQueue} from '../../imports/api/products.js';
 import sleep from 'sleep'
 
 export function calculatePriceCallServer(itemsArray,itemsDict){
@@ -16,8 +16,12 @@ export function removeFromInventory(itemsArray,itemsDict){
   var queryArray = [];
   setUpData(itemsDict,itemsArray,queryArray)
   
-
- while(InventoryLock.update({"status" : "available"},{$set :{"status":"busy"}}) === 0){}; 
+ var nextId = LockQueue.insert({});
+ InventoryLock.update({"name" : "lock"}, {$push : {"next": nextId},$set: {"nextAdded" : new Date()}});
+ console.log("Executing");
+ while(InventoryLock.update({"status" : "available", "next.0" : nextId},{$set :{"status":"busy","lastUpdated" : new Date()}}) === 0){
+  console.log("in the loop:  " + nextId);
+ }; 
    itemsDict.mongoArray = Inventory.find({$or: queryArray}).fetch();
    var errorDetails = [];
 
@@ -43,9 +47,10 @@ export function removeFromInventory(itemsArray,itemsDict){
    if(errorDetails.length>0){
      throwSizeError(errorDetails);
    }   
-
-updateInventory(itemsDict,itemsArray,-1);    
-InventoryLock.update({"status" : "busy"},{$set :{"status":"available"}})
+ console.log("Executing");
+ updateInventory(itemsDict,itemsArray,-1);   
+ LockQueue.remove({"_id": nextId}); 
+ InventoryLock.update({"status" : "busy"},{$set :{"status":"available","lastUpdated" : new Date()}, $pop : {"next" : -1}});
 };
 
 export function updateInventory(itemsDict,itemsArray,value){

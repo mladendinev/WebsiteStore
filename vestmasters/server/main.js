@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import {calculatePriceCallServer,removeFromInventory,updateInventory} from './lib/common.js'
 import '../imports/api/products.js';
-import {InventoryLock} from '../imports/api/products.js';
+import {InventoryLock,LockQueue} from '../imports/api/products.js';
 import {Orders} from '../imports/api/products.js';
 import '../imports/api/server/publications.js'
 
@@ -66,7 +66,8 @@ Meteor.methods({
        try {
        removeFromInventory(itemsInBasket,itemsDict);
        } catch(inventoryVaidationError){
-        InventoryLock.update({"status" : "busy"},{$set :{"status":"available"}});
+        LockQueue.remove({"_id": nextId}); 
+        InventoryLock.update({"status" : "busy"},{$set :{"status":"available", "lastUpdated" : new Date()},$pop : {"next" : -1}});
         throw inventoryVaidationError;
        }
      
@@ -97,12 +98,3 @@ Meteor.methods({
     
   },
  });
-
-
-
-
-//  var emailData= {
-//    order_id: "-",
-//    products: "-",
-//  };
-
