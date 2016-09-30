@@ -62,12 +62,12 @@ Meteor.methods({
       }
        
        var itemsDict={};
-      
+       
        try {
        removeFromInventory(itemsInBasket,itemsDict);
        } catch(inventoryVaidationError){
-        LockQueue.remove({"_id": nextId}); 
-        InventoryLock.update({"status" : "busy"},{$set :{"status":"available", "lastUpdated" : new Date()},$pop : {"next" : -1}});
+        LockQueue.remove({"_id": itemsDict.nextId}); 
+        InventoryLock.update({"status" : "busy"},{$set :{"status":"available", "lastUpdated" : new Date(),"lastPopped" : new Date()},$pop : {"next" : -1}});
         throw inventoryVaidationError;
        }
      

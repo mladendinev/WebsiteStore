@@ -16,11 +16,16 @@ export function removeFromInventory(itemsArray,itemsDict){
   var queryArray = [];
   setUpData(itemsDict,itemsArray,queryArray)
   
- var nextId = LockQueue.insert({});
- InventoryLock.update({"name" : "lock"}, {$push : {"next": nextId},$set: {"nextAdded" : new Date()}});
+ itemsDict.nextId = LockQueue.insert({});
+ InventoryLock.update({"next" : []},{$set: {"lastPopped" : new Date()}});
+ InventoryLock.update({"name" : "lock"}, {$push : {"next": itemsDict.nextId}});
  console.log("Executing");
- while(InventoryLock.update({"status" : "available", "next.0" : nextId},{$set :{"status":"busy","lastUpdated" : new Date()}}) === 0){
-  console.log("in the loop:  " + nextId);
+ var timeout = new Date();
+ while(InventoryLock.update({"status" : "available", "next.0" : itemsDict.nextId},{$set :{"status":"busy","lastUpdated" : new Date()}}) === 0){
+  if((new Date() - timeout)/1000 > 20) {
+    throw new Meteor.Error("Timed out");
+  }
+  console.log("in the loop:  " + itemsDict.nextId);
  }; 
    itemsDict.mongoArray = Inventory.find({$or: queryArray}).fetch();
    var errorDetails = [];
@@ -49,8 +54,8 @@ export function removeFromInventory(itemsArray,itemsDict){
    }   
  console.log("Executing");
  updateInventory(itemsDict,itemsArray,-1);   
- LockQueue.remove({"_id": nextId}); 
- InventoryLock.update({"status" : "busy"},{$set :{"status":"available","lastUpdated" : new Date()}, $pop : {"next" : -1}});
+ LockQueue.remove({"_id": itemsDict.nextId}); 
+ InventoryLock.update({"status" : "busy"},{$set :{"status":"available","lastUpdated" : new Date(), "lastPopped" : new Date()}, $pop : {"next" : -1}});
 };
 
 export function updateInventory(itemsDict,itemsArray,value){

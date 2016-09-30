@@ -12,7 +12,7 @@ var everyMinute = new Cron(function() {
    }
    // console.log(lock.next[0]);
    if (lock.next.length >0) {
-   var difference = (new Date() - lock.nextAdded)/1000;
+   var difference = (new Date() - lock.lastPopped)/1000;
    // console.log("next difference" +  difference);
    if(difference>THRESHOLD_NEXT) {
     InventoryLock.update({"name" : "lock"}, {$pop : {"next" : -1}});
