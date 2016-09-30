@@ -1,0 +1,14 @@
+<template name="summaryOrder">
+    <div class="summary-style">
+            <h align="left"> Products in Basket</h>
+                {{#each basket_item in items}}
+                {{#with getItem basket_item}}
+                   <p>{{item.product}}</p>
+                {{/with}} 
+                {{/each}}
+
+            <p align="center"> ------------------</p>
+            <h align="left"> Delivery: {{deliveryOrder}} </h>
+            <h align="left"> Total Price:{{totalPriceOrder}} </h>
+        </div>
+</template>

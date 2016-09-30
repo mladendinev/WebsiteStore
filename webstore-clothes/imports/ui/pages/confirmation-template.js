@@ -1,1 +1,0 @@
-import './confirmation-template.html'

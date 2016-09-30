@@ -1,0 +1,49 @@
+<template name="shoppingTemplate">
+    <div class="header">
+        {{>navigationBarShop}}
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" col-xs-4">
+                {{>carouselTemplate}}
+            </div>
+            <div class=" col-xs-8">
+
+                {{#each documents}}
+                <div class="col-xs-6 col-md-4">
+                    {{#if soldOut size quantity sizes quantitySize}}
+                    <div class="thumbnail">
+                    <div class="sold-out-div">
+                        <h2 class = "sold-out-text"> <b> SOLD OUT </b> </h2>
+                        <img class="sold-out-image img-responsive" src="images/{{file}}" alt="T-Shirt">
+                    </div>
+                        <div class="caption">
+                            <p class="alignLeft">{{product}}</p>
+
+                            <p class="alignRight">${{price}}</p>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                    {{else}}
+                        <a href="/item?id={{extractObjectId _id}}" class="thumbnail">
+                         <img class="img-responsive" src="images/{{file}}" alt="T-Shirt">
+                         <div class="caption">
+                            <p class="alignLeft">{{product}}</p>
+
+                            <p class="alignRight">${{price}}</p>
+                         </div>
+                         <div style="clear: both;"></div>
+                        </a>
+                     {{/if}}
+                        
+                </div>
+                {{/each}}
+                <br class="clear-div"/>
+                {{> defaultBootstrapPaginator pagination=templatePagination limit=5 containerClass="text-center"
+                onClick=clickEvent}}
+            </div>
+        </div>
+    </div>
+
+
+</template>

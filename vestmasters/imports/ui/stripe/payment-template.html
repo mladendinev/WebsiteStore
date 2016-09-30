@@ -1,0 +1,114 @@
+<template name='paymentTemplate'>
+
+    <div class="container">
+        <div class="progress-wrapper">
+            {{>progressBar first="progress-bar-success" second="progress-bar-success" third="progress-bar-success"
+            fourth="progress-bar-danger" }}
+        </div>
+    
+        {{#if paymentErrorPresent}}
+         
+         <div class="div-error">
+            {{errorMessage}}
+         </div>
+        {{/if}}
+
+        <!--<div class="summaryOrder">-->
+        <!--<p>Total Amount: {{total}}</p>-->
+        <!--</div>-->
+
+
+        <fieldset>
+            <legend>Choose Payment Method</legend>
+            <input type="radio" name="payment-method" value="card" id="card-payment"> Pay with debit/credit card
+            <img src="/images/payment/visa.jpg">
+            <img src="/images/payment/mastercard.jpg"> <br>
+            <input type="radio" name="payment-method" value="paypal" id="paypal-payment">
+            Pay with PayPal<br>
+        </fieldset>
+
+
+        <div id="card-payment-container" style="display:none">
+            <form class="form-horizontal" role="form" method="POST" id="payment-form">
+                <fieldset>
+                    <legend>Enter your card details</legend>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="card_numb">Card Number</label>
+                        <!--  Hosted Fields div container -->
+                        <div class="col-sm-3">
+
+                            <div class="form-control" id="card-number" name="card_numb" required></div>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Expiration Date</label>
+
+                        <div class="col-sm-3">
+                            <div class="row">
+
+                                <div class="col-xs-6">
+                                    <!--  Hosted Fields div container -->
+                                    <div class="form-control" id="expiration-month" required></div>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--  Hosted Fields div container -->
+                                    <div class="form-control" id="expiration-year" required></div>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+
+                        <label class="control-label col-sm-3">Security Code</label>
+                        <!--  Hosted Fields div container -->
+                        <div class="col-sm-3">
+                            <div class="row">
+
+                                <div class="col-xs-6">
+                                    <div class="form-control" id="cvv" required></div>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <div class="col-sm-9">
+                            <button type="submit" class="btn btn-success" value="Purchase"
+                                    id="credit-card-submit" disabled="{{loading}}">
+                                {{#if loading}}
+                                Processing...
+                                {{else}}
+                                Pay Now
+                                {{/if}}
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+
+        <div id="paypal-payment-container" style="display:none">
+            <span class="paypal-button">
+                 <img class="img-responsive" src="images/payment/paypal.png">
+            </span>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $("body").addClass("payment-main");
+
+
+    </script>
+
+
+</template>
+
