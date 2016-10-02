@@ -30,53 +30,7 @@
             </tr>
             </thead>
             <tbody>
-            {{#each basketItem in itemsInBasket}}
-            {{#with getItem basketItem}}
-            
-             
-            <tr>
-            {{#if isDefined item}}
-              <td><img class="img-responsive img-circle img-basket" src="images/{{item.file}}" width="40px"/>
-
-                    <div class="table-div float-left"> {{item.product}}</div>
-                </td>
-                {{#if size}}
-                <td>
-                    <div class="table-div float-left">{{size}}</div>
-                </td>
-                {{else}}
-                <td>
-                    <div class="table-div float-left">n/a</div>
-                </td>
-                {{/if}}
-                {{#if initials}}
-                <td>
-                    <div class="table-div float-left">{{initials}}</div>
-                </td>
-                {{else}}
-                <td>
-                    <div class="table-div float-left">n/a</div>
-                </td>
-                {{/if}}
-                <td>
-                    <div class="table-div float-left">{{item.price}}</div>
-                    <div class="table-div float-right"><span class="glyphicon glyphicon-remove remove-item"
-                                                             aria-hidden="true" id="{{@index}}"></span></div>
-                </td>
-
-            {{else}}
-              <td colspan="4">
-              <div class="float-left error-item-missing">
-               We are unable to locate this record in our system. Please remove the item from your basket.
-              </div>  
-              <div class="table-div float-right"><span class="glyphicon glyphicon-remove remove-item"
-                                                             aria-hidden="true" id="{{@index}}"></span></div>
-              </td>
-            
-            {{/if}}
-            </tr>
-            {{/with}}
-            {{/each}}
+            {{{displayBasket}}}
             <tr>
                 <td id="basket-final-row-col1" colspan="3">
                     <div class="float-left">

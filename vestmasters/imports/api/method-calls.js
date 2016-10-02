@@ -1,27 +1,43 @@
 import {Inventory} from './products.js';
-import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR} from './session-constants.js';
+import {BASKET_ID,BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 
-export function calculatePriceCall(){
+export function updateBasket(item) {
+  if ((typeof amplify.store(BASKET_ID) === "undefined") || amplify.store(BASKET_ID) === null) {
+     amplify.store(BASKET_ID,"");
+  }
+ 
+  Meteor.call('updateBasket', item, amplify.store(BASKET_ID), function(error,response){
+    if(error) {
+      switch(error.error) {
+        case "UNEXISTING_BASKET" : 
+          amplify.store(BASKET_ID,error.details.newId);
+          console.log(amplify.store(BASKET_ID,error.details.newId));
+          console.log(error);
+          break;
+        case "INADEQUATE_INVENTORY" :
+        console.log(error);
+         //TODO handle error  
+         break;
+        case "INACTIVE CART" :
+        console.log(error); 
+        //TODO handle error
+        break;
+        default:
+          console.log(error);
+          break;
+      }
+     };
+ });
+
+}
+
+export function calculatePriceCall(basket){
     var total=0;
-    var queryArray = [];
-    var quantityDict = {};
-         Session.get(ITEMS_IN_BASKET_SESSION).forEach(function(basketItem,index){
-           if(typeof quantityDict[basketItem.oid] === "undefined") {
-            quantityDict[basketItem.oid] = 1;
-           } else {
-            quantityDict[basketItem.oid] = quantityDict[basketItem.oid] + 1;
-           } 
-            queryArray.push({"_id": new Meteor.Collection.ObjectID(basketItem.oid)});
-           });
-              if(queryArray.length>0) {
-               Inventory.find({$or: queryArray}).forEach(function(mongoBasketItem,index){
-                total = total + parseInt(mongoBasketItem.price)*quantityDict[mongoBasketItem._id.valueOf()];
-              
-               });
-             }
-        return total;
+     basket.itemsDetails.forEach(function(item){
+     });
+    return total;
 };
 
 
