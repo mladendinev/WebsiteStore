@@ -108,7 +108,6 @@ isDefined(item){
           var eventSourceSize = $(event.currentTarget).next().attr("id");
           var eventSourceInitials = $(event.currentTarget).next().next().attr("id");
           removeItem(amplify.store(BASKET_ID),eventSourceId,eventSourceSize,eventSourceInitials);
-          sanitizeBasket(amplify.store(BASKET_ID),eventSourceId,eventSourceSize,eventSourceInitials);
     },
 
     'click .proceed-to-checkout-button'(event){

@@ -38,13 +38,13 @@ export function removeItem(basketId,itemId,size,initials){
      if(error){
       console.log(error);
      }else {
-      return response;
+      sanitizeBasket(basketId,itemId,size,initials);
      }
 
   })
 }
 
-export function sanitizeBasket(basketId,itemId,size,initials){
+function sanitizeBasket(basketId,itemId,size,initials){
   Meteor.call("sanitizeBasket",basketId,itemId,size,initials,function(error,response){
       if(error){
       console.log(error);

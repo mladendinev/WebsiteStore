@@ -72,12 +72,17 @@ function removeSizeWhenZero(basketId,itemId,size,initials){
 function removeUpdateQuantity(basketId,itemId,size,initials){
  
  var now = new Date();
-  
   itemToRemove = {};
   itemToRemove["itemsDetails.$.quantity" + initials] = -1;
+  updateQueryObject ={}
+  updateQueryObject['_id']=basketId;
+  updateQueryObject['status']='active'; 
+  updateQueryObject['itemsDetails.oid'] = itemId; 
+  updateQueryObject['itemsDetails.size'] = size;
+  updateQueryObject['itemsDetails.quantity' + initials] = {$gte : 1};
+  console.log(updateQueryObject);
    //Make sure the cart is still active and add the line item
-    result = Baskets.update(
-        {'_id': basketId, 'status': 'active', 'itemsDetails.oid': itemId, "itemsDetails.size" : size},
+    result = Baskets.update(updateQueryObject,
         { $set: {'last_modified': now},
           $inc : itemToRemove
         },
