@@ -54,6 +54,7 @@ Template.itemTemplate.events({
     }
 
     var item = {
+          "product" : Template.instance().item.get().product,
           "file" : Template.instance().item.get().file,
           "price" : Template.instance().item.get().price,
           "size": size,  

@@ -7,7 +7,7 @@ export function updateBasket(item) {
   if ((typeof amplify.store(BASKET_ID) === "undefined") || amplify.store(BASKET_ID) === null) {
      amplify.store(BASKET_ID,"");
   }
- 
+
   Meteor.call('updateBasket', item, amplify.store(BASKET_ID), function(error,response){
     if(error) {
       switch(error.error) {
@@ -33,9 +33,37 @@ export function updateBasket(item) {
 
 }
 
+export function removeItem(basketId,itemId,size,initials){
+  Meteor.call("removeItem",basketId,itemId,size,initials,function(error,response){
+     if(error){
+      console.log(error);
+     }else {
+      return response;
+     }
+
+  })
+}
+
+export function sanitizeBasket(basketId,itemId,size,initials){
+  Meteor.call("sanitizeBasket",basketId,itemId,size,initials,function(error,response){
+      if(error){
+      console.log(error);
+     }else {
+      return response;
+     }    
+  });
+}
+
 export function calculatePriceCall(basket){
     var total=0;
      basket.itemsDetails.forEach(function(item){
+      item.initials.forEach(function(initial){
+         var quantityCounter = item["quantity" + initial];
+        while(quantityCounter>0){
+              total = total+ parseInt(item.price);
+              quantityCounter = quantityCounter-1;
+              }
+         });  
      });
     return total;
 };
