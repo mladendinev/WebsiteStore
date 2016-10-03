@@ -18,8 +18,10 @@ Meteor.methods({
      check(size,String);
      check(initials,String);
      
-     removeSizeWhenZero(basketId,itemId,size,initials);
-     removeItemWhenInitialsEmpty(basketId,itemId,size,initials); 
+     // removeSizeWhenZero(basketId,itemId,size,initials);
+     // console.log("REMOVED ITEM WITH SIZE ZERO");
+     // removeItemWhenInitialsEmpty(basketId,itemId,size,initials); 
+     // console.log("REMOVE ITEM INITIALS");
   } 
 
 });
@@ -28,8 +30,8 @@ function removeItemWhenInitialsEmpty(basketId,itemId,size,initials){
     var now = new Date();
 
     result = Baskets.update(
-        {'_id': basketId, 'status': 'active', 'itemsDetails.oid': itemId, "itemsDetails.size" : size, 
-         "itemsDetails.initials" : {$exists: true}, "itemsDetails.initials" : {$size:0}},
+        {'_id': basketId, 'status': 'active', 'itemsDetails': {$elemMatch: {'oid': itemId, "size" : size, 
+         'initials' : {$exists: true}, 'initials' : {$size:0}}}},
         { $pull : {"itemsDetails" : {"oid" : itemId, "size" : size}}
         },
         {w:1});
@@ -37,7 +39,7 @@ function removeItemWhenInitialsEmpty(basketId,itemId,size,initials){
     if (result === 0) {
       throw new Meteor.Error("INITIALS_NOT_EMPTY", "The initials are not empty");
     }
- //Update the inventory
+    //Update the inventory
     result = Inventory.update(
         {"_id" : new Meteor.Collection.ObjectID(itemId)},
         {$pull: {"carted" : {"cartId" : basketId, "size": size}},
@@ -48,16 +50,14 @@ function removeItemWhenInitialsEmpty(basketId,itemId,size,initials){
 
 function removeSizeWhenZero(basketId,itemId,size,initials){
      itemToRemove={};
-     itemToRemove["itemsDetails.quantity" + initials] = {$lte : 0};
-     itemToRemove["_id"] = basketId;
-     itemToRemove["status"] = "active";
-     itemToRemove["itemsDetails.oid"] = itemId;
-     itemToRemove["itemsDetails.size"]= size;
+     itemToRemove["quantity" + initials] = {$lte : 0};
+     itemToRemove["oid"] = itemId;
+     itemToRemove["size"]= size;
      removeSize =  {}
      removeSize["itemsDetails.$.quantity" + initials] = ""
    //Make sure the cart is still active and add the line item
     result = Baskets.update(
-        itemToRemove,
+        {"_id" : basketId, "status" : "active", "itemsDetails": {$elemMatch: itemToRemove}},
         { $unset : removeSize,
           $pull: {"itemsDetails.$.initials" : initials}
         },
@@ -74,15 +74,12 @@ function removeUpdateQuantity(basketId,itemId,size,initials){
  var now = new Date();
   itemToRemove = {};
   itemToRemove["itemsDetails.$.quantity" + initials] = -1;
-  updateQueryObject ={}
-  updateQueryObject['_id']=basketId;
-  updateQueryObject['status']='active'; 
-  updateQueryObject['itemsDetails.oid'] = itemId; 
-  updateQueryObject['itemsDetails.size'] = size;
-  updateQueryObject['itemsDetails.quantity' + initials] = {$gte : 1};
-  console.log(updateQueryObject);
+  updateRemoveObject ={}
+  updateRemoveObject['oid'] = itemId; 
+  updateRemoveObject['size'] = size;
+  updateRemoveObject['quantity' + initials] = {$gte : 1};
    //Make sure the cart is still active and add the line item
-    result = Baskets.update(updateQueryObject,
+    result = Baskets.update({"_id" : basketId, 'status':'active' ,'itemsDetails' : {$elemMatch: updateRemoveObject}},
         { $set: {'last_modified': now},
           $inc : itemToRemove
         },
@@ -97,7 +94,7 @@ function removeUpdateQuantity(basketId,itemId,size,initials){
    generateQuantityQueryObjectRemove(basketId,updateQueryObject,decUpdateOperation,size,itemId,-1); 
     //Update the inventory
     result = Inventory.update(
-        updateQueryObject,
+        {"_id":new Meteor.Collection.ObjectID(itemId), "carted" : {$elemMatch: updateQueryObject}},
         {$inc: decUpdateOperation,
          $set: {'timestamp': now } },
         {w:1})
@@ -105,9 +102,8 @@ function removeUpdateQuantity(basketId,itemId,size,initials){
 }
 
 function generateQuantityQueryObjectRemove(basketId,updateQueryObject,decUpdateOperation,size,itemId,value){
-	updateQueryObject['_id'] = new Meteor.Collection.ObjectID(itemId);
-	updateQueryObject['carted.cartId'] = basketId;
-	updateQueryObject['carted.size'] = size;
+	updateQueryObject['cartId'] = basketId;
+	updateQueryObject['size'] = size;
 	decUpdateOperation['carted.$.quantity'] = value;
 	if(size === "noSize") {
    	 decUpdateOperation['quantity'] = -value;

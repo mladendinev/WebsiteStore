@@ -118,11 +118,10 @@ function updateQuantity(item,basketId,delta){
    var now = new Date();
    var itemToInsert = {};
    itemToInsert["itemsDetails.$.quantity" + item.initials] = 1;
-   console.log("EXECUTED");
    
    //Make sure the cart is still active and add the line item
     result = Baskets.update(
-        {'_id': basketId, 'status': 'active', 'itemsDetails.oid': item.oid, "itemsDetails.size" : item.size},
+        {'_id': basketId, 'status': 'active', 'itemsDetails': {$elemMatch: {'oid': item.oid, 'size' : item.size}}},
         { $set: {'last_modified': now},
           $inc : itemToInsert,
           $push :{"itemsDetails.$.initials" : item.initials}
@@ -146,7 +145,7 @@ function updateQuantity(item,basketId,delta){
     // Roll back our cart update
     if (result === 0) {
       Baskets.update(
-            {'_id': basketId, 'itemsDetails.oid': item.oid, 'itemsDetails.size': item.size },
+            {'_id': basketId, 'itemsDetails': {$elemMatch: {'oid': item.oid, 'size' : item.size}}},
             {$unset: itemToInsert,
              $pull:  {"initials" : item.initials}});
      throw new Meteor.Error("INADEQUATE_INVENTORY", "You did not have sufficient items in your inventory");
@@ -161,7 +160,7 @@ function updateQuantityInitials(item,initials,basketId,value){
   itemToRemove["itemsDetails.$.quantity" + item.initials] = -1;
    //Make sure the cart is still active and add the line item
     result = Baskets.update(
-        {'_id': basketId, 'status': 'active', 'itemsDetails.oid': item.oid, "itemsDetails.size" : item.size},
+        {'_id': basketId, 'status': 'active', 'itemsDetails': {$elemMatch: {'oid': item.oid, 'size' : item.size}}},
         { $set: {'last_modified': now},
           $inc : itemToInsert
         },
@@ -184,7 +183,7 @@ function updateQuantityInitials(item,initials,basketId,value){
     // Roll back our cart update
     if (result === 0) {
       Baskets.update(
-            {'_id': basketId, 'itemsDetails.oid': item.oid, 'itemsDetails.size': item.size},
+            {'_id': basketId, 'itemsDetails': {$elemMatch: {'oid': item.oid, 'size' : item.size}}},
             {$inc : itemToRemove})
      throw new Meteor.Error("INADEQUATE_INVENTORY", "You did not have sufficient items in your inventory");
     } 
@@ -204,8 +203,7 @@ function generateNewitemQueryObject(updateQueryObject,decUpdateOperation,item,va
 
 function generateQuantityQueryObject(basketId,updateQueryObject,decUpdateOperation,item,value){
 	updateQueryObject['_id'] = new Meteor.Collection.ObjectID(item.oid);
-	updateQueryObject['carted.cartId'] = basketId;
-	updateQueryObject['carted.size'] = item.size;
+	updateQueryObject['carted'] = {$elemMatch: {'cartId' : basketId,'size': item.size}};
 	decUpdateOperation['carted.$.quantity'] = value;
 	if(item.size === "noSize") {
    	 updateQueryObject['quantity'] = {$gte: value} ;
