@@ -1,5 +1,5 @@
 import {Inventory} from './products.js';
-import {BASKET_ID,BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR} from './session-constants.js';
+import {BASKET_ID,BRAINTREE_CLIENT_TOKEN,DELIVERY_COST,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR,BASKET_ID_SESSION} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 
@@ -13,6 +13,7 @@ export function updateBasket(item) {
       switch(error.error) {
         case "UNEXISTING_BASKET" : 
           amplify.store(BASKET_ID,error.details.newId);
+          Session.set(BASKET_ID_SESSION,amplify.store(BASKET_ID));
           console.log(amplify.store(BASKET_ID,error.details.newId));
           console.log(error);
           break;
@@ -69,8 +70,9 @@ export function calculatePriceCall(basket){
 };
 
 
-export function totalPlusDelivery(total_price, delivery_cost){
-        return total_price + delivery_cost;
+export function totalPlusDelivery(basket,deliveryCost){
+         var totalPrice = calculatePriceCall(basket);
+         return totalPrice + deliveryCost;
 };
 
 export function obtainBraintreeId(){

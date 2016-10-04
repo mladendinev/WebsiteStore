@@ -19,3 +19,5 @@ export const SESSION_SET = "session-error";
 export const PAYMENT_ERROR = "payment-error";
 
 export const BASKET_ID = "basket-id";
+
+export const BASKET_ID_SESSION = "basket-id-session";

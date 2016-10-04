@@ -18,10 +18,8 @@ Meteor.methods({
      check(size,String);
      check(initials,String);
      
-     // removeSizeWhenZero(basketId,itemId,size,initials);
-     // console.log("REMOVED ITEM WITH SIZE ZERO");
-     // removeItemWhenInitialsEmpty(basketId,itemId,size,initials); 
-     // console.log("REMOVE ITEM INITIALS");
+     removeSizeWhenZero(basketId,itemId,size,initials);
+     removeItemWhenInitialsEmpty(basketId,itemId,size,initials); 
   } 
 
 });

@@ -1,41 +1,48 @@
 import './summary-template.html';
-import {Inventory}  from '../../api/products.js';
-import {TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,DELIVERY_COST} from '../../api/session-constants.js';
+import {Inventory,Baskets}  from '../../api/products.js';
+import {TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,DELIVERY_COST,BASKET_ID} from '../../api/session-constants.js';
 import {calculatePriceCall,totalPlusDelivery} from '../../api/method-calls.js';
 
 Template.summaryOrder.onCreated(function(){
 Session.set(ITEMS_IN_BASKET_SESSION,amplify.store(ITEMS_IN_BASKET_STORE));
+  this.basket = new ReactiveVar();
   this.autorun(() => {
-    Meteor.subscribe("countries");
-    Meteor.subscribe("products");
-    Meteor.subscribe("inventory");
-    Session.set(TOTAL_PRICE_SESSION,calculatePriceCall());
+    if((typeof amplify.store(BASKET_ID) !== "undefined") && amplify.store(BASKET_ID) !== null){
+       Meteor.subscribe('baskets',amplify.store(BASKET_ID));
+      }
+    this.basket.set(Baskets.findOne(amplify.store(BASKET_ID)))
     Session.set(DELIVERY_COST,'');
   });
 });
 
 
 Template.summaryOrder.helpers({
-  getItem(basketItem){
-  var item = Inventory.findOne({"_id" : new Meteor.Collection.ObjectID(basketItem.oid)}); 
-  return  {"oid" : basketItem.oid,
-          "size" : basketItem.size,
-          "item" : item,
-          "initials" : basketItem.initials,
-          "quantity" : basketItem.quantity };
- },
-
    deliveryOrder(){
        return Session.get(DELIVERY_COST);
    },
 
    totalPriceOrder(){
-      
-      return totalPlusDelivery(Session.get(TOTAL_PRICE_SESSION),Session.get(DELIVERY_COST));
+    var basket = Template.instance().basket.get();
+    if((typeof basket !== "undefined") && basket !== null) {
+      return totalPlusDelivery(basket,Session.get(DELIVERY_COST));
+    }
    },
 
    items(){
-      return Session.get(ITEMS_IN_BASKET_SESSION);
-   },
+    var result =""
+    var basket = Template.instance().basket.get();
+  if((typeof basket !== "undefined") && basket !== null) {
+  basket.itemsDetails.forEach(function(item){
+    item.initials.forEach(function(initial){
+      var quantityCounter = item["quantity" + initial];
+      while(quantityCounter>0){
+      result = result + "<p>" + item.product + "</p>\n" 
+      quantityCounter = quantityCounter-1;
+      }
+    });
+  });
+ }
+  return result;
+  },
 
 });
