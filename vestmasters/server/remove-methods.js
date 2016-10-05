@@ -9,19 +9,17 @@ Meteor.methods({
    
    removeUpdateQuantity(basketId,itemId,size,initials);
 
+   Meteor.defer(function(){
+    
+    removeSizeWhenZero(basketId,itemId,size,initials);
+    console.log("when zero executed");
+    removeItemWhenInitialsEmpty(basketId,itemId,size,initials);
+    console.log("initals empty executed");
+    
+   })
    
   },
    
-  sanitizeBasket: function(basketId,itemId,size,initials) {
-     check(basketId,String)
-     check(itemId,String);
-     check(size,String);
-     check(initials,String);
-     
-     removeSizeWhenZero(basketId,itemId,size,initials);
-     removeItemWhenInitialsEmpty(basketId,itemId,size,initials); 
-  } 
-
 });
 
 function removeItemWhenInitialsEmpty(basketId,itemId,size,initials){
@@ -35,7 +33,7 @@ function removeItemWhenInitialsEmpty(basketId,itemId,size,initials){
         {w:1});
 
     if (result === 0) {
-      throw new Meteor.Error("INITIALS_NOT_EMPTY", "The initials are not empty");
+      return;
     }
     //Update the inventory
     result = Inventory.update(
@@ -61,9 +59,6 @@ function removeSizeWhenZero(basketId,itemId,size,initials){
         },
         {w:1});
 
-    if (result === 0) {
-      throw new Meteor.Error("SIZE_NOT_ZERO", "The size has not reached zero");
-    }
 }
 
 
