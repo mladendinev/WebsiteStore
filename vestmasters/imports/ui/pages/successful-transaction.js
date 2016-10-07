@@ -22,8 +22,8 @@ Template.successPayment.helpers({
     
     displayBasket(){
     var result = "";
-    var basket = Session.get(ORDER_INFO).items;
     if((typeof Session.get(ORDER_INFO) !== "undefined") && Session.get(ORDER_INFO) !== null) { 
+    var basket = Session.get(ORDER_INFO).items;
     basket.itemsDetails.forEach(function(item){
     item.initials.forEach(function(initial){
       var quantityCounter = item["quantity" + initial];
