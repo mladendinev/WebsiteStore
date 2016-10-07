@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import {calculatePriceCallServer,removeFromInventory,updateInventory} from './lib/common.js'
 import '../imports/api/products.js';
-import {InventoryLock,LockQueue} from '../imports/api/products.js';
 import {Orders} from '../imports/api/products.js';
+import {Baskets} from '../imports/api/products.js';
+import {Inventory} from '../imports/api/products.js';
 import '../imports/api/server/publications.js'
 
 var gateway;
@@ -50,30 +51,45 @@ Meteor.methods({
      return response.clientToken;
    },
 
-   createTransaction: function(nonceFromTheClient,itemsInBasket,deliveryDetails) {
+   createTransaction: function(nonceFromTheClient,basketId,deliveryDetails) {
     var gatewayTransactionSync = Meteor.wrapAsync(gateway.transaction.sale,gateway.transaction); 
-    
        check(nonceFromTheClient,String);
-       check(itemsInBasket,[Match.Any]); //TODO Add proper check for the items, otherwise a security risk
+       check(basketId,String); //TODO Add proper check for the items, otherwise a security risk
        check(deliveryDetails,Object); //TODO Add proper check for the delivery, otherwise a security risk
      
-      if(itemsInBasket.length === 0){
+      now = new Date();
+      //Make sure the cart is still active and set to 'pending'. Also
+      // fetch the cart details so we can calculate the checkout price
+      var result = Baskets.update(
+        {'_id': basketId, 'status': 'active' },
+        update={$set: { 'status': 'pending','lastModified': now } } )
+       if (result ===0) {
+        throw new Meteor.Error("INACTIVE CART", "Your cart has expired");
+       }
+
+      var basket = Baskets.findOne({"_id" : basketId});
+
+      if(basket.length === 0){
          throw new Meteor.Error("BASKET_EMPTY", "Problem with transaction");
       }
        
-       var itemsDict={};
+      var itemsDict={};
+      var queryArray = [];
+      basket.itemsDetails.forEach(function(item){
        
-       try {
-       removeFromInventory(itemsInBasket,itemsDict);
-       } catch(inventoryVaidationError){
-        LockQueue.remove({"_id": itemsDict.nextId}); 
-        InventoryLock.update({"status" : "busy"},{$set :{"status":"available", "lastUpdated" : new Date(),"lastPopped" : new Date()},$pop : {"next" : -1}});
-        throw inventoryVaidationError;
+       if((typeof itemsDict[item.oid+"quantity"] === "undefined") || itemsDict[item.oid+"quantity"] === null){
+        itemsDict[item.oid+"quantity"] = 0;
        }
-     
-       //TODO Add the delivery calculation inside the method
+       queryArray.push({"_id": new Meteor.Collection.ObjectID(item.oid)}); 
+       item.initials.forEach(function(initial){
+        var quantityCounter = item["quantity" + initial];
+          itemsDict[item.oid+"quantity"] =itemsDict[item.oid+"quantity"] + quantityCounter
+        })
+     })
+     items = Inventory.find({$or: queryArray}).fetch();
+     var totalAmountToPay = calculatePriceCallServer(items,itemsDict);
+
      try {
-     var totalAmountToPay = calculatePriceCallServer(itemsInBasket,itemsDict);
      var result = gatewayTransactionSync({amount: totalAmountToPay,
                                          paymentMethodNonce: nonceFromTheClient,
                                          options: {
@@ -81,12 +97,20 @@ Meteor.methods({
                                          }
                                          });
      } catch(transactionError){
-       updateInventory(itemsDict,itemsInBasket,1);
+         Baskets.update(
+        {'_id': basketId},
+        update={$set: { 'status': 'active'}});
        throw new Meteor.Error("TRANSACTION_FAULURE","Problem with transaction");
      }
      
+     Meteor.defer(function(){
+      Baskets.remove({'_id': basketId });
+      Inventory.update({'carted.cartId': basketId},
+            {$pull: {'carted' :{'cartId': basketId}}},
+            {multi: true})
+     })
 
-       var orderId = Orders.insert({"items" : itemsInBasket,
+     var orderId = Orders.insert({"items" : basket,
                                     "transactionId" : result.transaction.id,
                                     "amount" : result.transaction.amount,
                                     "currency" : result.transaction.currencyIsoCode,

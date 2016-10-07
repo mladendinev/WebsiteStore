@@ -1,5 +1,5 @@
 import {Inventory} from './products.js';
-import {BASKET_ID,BRAINTREE_CLIENT_TOKEN,DELIVERY_COST,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR,BASKET_ID_SESSION} from './session-constants.js';
+import {BASKET_ID,BRAINTREE_CLIENT_TOKEN,DELIVERY_COST,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR,BASKET_ID_SESSION} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 
@@ -76,36 +76,15 @@ export function obtainBraintreeId(){
 };
 
 export function createTransaction(nonce){
-  Session.set("time", new Date().getTime());
-  Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), amplify.store("DELIVERY_INFO"), function(error, success) {
+  // Session.set("time", new Date().getTime());
+  Meteor.call('createTransaction',nonce,amplify.store(BASKET_ID), amplify.store("DELIVERY_INFO"), function(error, success) {
                if(error){
                 var messages = [];
                switch(error.error) {
-                 case "INVENTORY_NOT_SUFFICIENT": 
-                 error.details.forEach(function(detail){
-                  var sizeMessage =""
-                  if(typeof detail.requestedSize !== "undefined"){
-                    sizeMessage = " of size:" + detail.requestedSize + " ";
-                  }
-                  messages.push("You have requested:" + detail.requestedNumber + " items of:" + detail.product + sizeMessage + " but we " +
-                  "only have:" +  detail.availableNumber);
-                  }); 
-                  Session.set(BASKET_ERROR,messages)
-                  FlowRouter.go('/basket')
+                  case "INACTIVE CART":
+                  Session.set(PAYMENT_ERROR,"Your basket is inactive. This can happen if you have been inactive for long time.");
                   break;
-                 case "INVALID_SIZE_SELECTED_BY_USER":
-                 error.details.forEach(function(detail){
-                  messages.push("You have requested a size:"  + detail.requestedSize + " for product " + detail.product + " but we" +
-                  " do not have such size in stock");
-                 });
-                  Session.set(BASKET_ERROR,messages);
-                  FlowRouter.go('/basket')
-                  break;
-                 case "BASKET_NOT_VALID":
-                  Session.set(BASKET_ERROR,["You have requested an item which is not currently supplied."]);
-                  FlowRouter.go('/basket');
-                  break;
-                 case "BASKET_EMPTY":
+                  case "BASKET_EMPTY":
                   Session.set(PAYMENT_ERROR,"You can't checkout with an empty basket. Please add items before attempting a payment");
                   break;
                  default:
@@ -114,18 +93,14 @@ export function createTransaction(nonce){
                   }
                 } else {
                   var delivery_info = amplify.store("DELIVERY_INFO");
-                  emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
+                  //emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
                   amplify.store(ORDER_ID,success);
-
-//                  Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
-                 console.log("Errorless Transaction");
-                 //TODO replace the email with a real one
-                 amplify.store(BRAINTREE_CLIENT_TOKEN,null);
-                 amplify.store(ITEMS_IN_BASKET_STORE,[]);
-                 Session.set(PAYMENT_ERROR,null);
-                 Session.set(BASKET_ERROR,null);
-                 Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
-                 FlowRouter.go('/confirmation');
+//                Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
+                  console.log("Errorless Transaction");
+                  //TODO replace the email with a real one
+                  amplify.store(BRAINTREE_CLIENT_TOKEN,null);
+                  Session.set(PAYMENT_ERROR,null);
+                  FlowRouter.go('/confirmation');
                 }
            });
 };

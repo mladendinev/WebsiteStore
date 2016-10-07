@@ -7,7 +7,7 @@
         {{>progressBar first="progress-bar-success" second="progress-bar-success" third="progress-bar-success"
         fourth="progress-bar-success" }}
         
-        <h3> Order reference: {{orderInfo.transactionId}} </h3>
+        <h3> Order reference: {{orderInfo}} </h3>
         
         <table class="table">
 
@@ -20,37 +20,7 @@
             </tr>
             </thead>
             <tbody>
-            {{#each orderItem in orderInfo.items}}
-           
-            <tr>
-
-                <td><img class="img-responsive img-circle img-basket" src="images/{{orderItem.file}}" width="40px"/>
-
-                    <div class="table-div float-left"> {{orderItem.product}}</div>
-                </td>
-                {{#if orderItem.size}}
-                <td>
-                    <div class="table-div float-left">{{orderItem.size}}</div>
-                </td>
-                {{else}}
-                <td>
-                    <div class="table-div float-left">n/a</div>
-                </td>
-                {{/if}}
-                {{#if orderItem.initials}}
-                <td>
-                    <div class="table-div float-left">{{orderItem.initials}}</div>
-                </td>
-                {{else}}
-                <td>
-                    <div class="table-div float-left">n/a</div>
-                </td>
-                {{/if}}
-                <td>
-                    <div class="table-div float-left">{{orderItem.price}}</div>	
-                </td>
-            </tr>
-            {{/each}}
+           {{{displayBasket}}}
            <tr>
                 <td id="basket-final-row-col1" colspan="3">
                   <div class="table-div float-right"> Total:</div>
