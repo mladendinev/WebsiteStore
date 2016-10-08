@@ -38,7 +38,6 @@ var everyMinute = new Cron(function() {
         })
 
         Baskets.remove({'_id': basket._id});
-        Meteor.users.remove({'_id' : basket.user});
       })
 }, {});
 

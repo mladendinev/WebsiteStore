@@ -71,7 +71,7 @@ function removeUpdateQuantity(basketId,itemId,size,initials){
   updateRemoveObject['size'] = size;
   updateRemoveObject['quantity' + initials] = {$gte : 1};
    //Make sure the cart is still active and add the line item
-    result = Baskets.update({"_id" : basketId, 'status':'active', "user" : Meteor.userId() ,'itemsDetails' : {$elemMatch: updateRemoveObject}},
+    result = Baskets.update({"_id" : basketId, 'status':'active' ,'itemsDetails' : {$elemMatch: updateRemoveObject}},
         { $set: {'last_modified': now},
           $inc : itemToRemove
         },

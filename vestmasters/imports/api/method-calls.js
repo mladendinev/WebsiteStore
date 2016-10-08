@@ -13,10 +13,8 @@ export function updateBasket(item) {
     if(error) {
       switch(error.error) {
         case "UNEXISTING_BASKET" : 
-          amplify.store(BASKET_ID,error.details.userInfo.id);
+          amplify.store(BASKET_ID,error.details.id);
           Session.set(BASKET_ID_SESSION,amplify.store(BASKET_ID));
-          Meteor.loginWithPassword(error.details.userInfo.id, error.details.userInfo.password);
-          console.log(Meteor.userId());
           break;
         case "INADEQUATE_INVENTORY" :
         console.log(error);
@@ -96,8 +94,7 @@ export function createTransaction(nonce){
                   var delivery_info = amplify.store("DELIVERY_INFO");
                   //emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
                   amplify.store(ORDER_ID,success);
-                  Meteor.logout();
-//                Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
+//                 Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
                   console.log("Errorless Transaction");
                   //TODO replace the email with a real one
                   amplify.store(BRAINTREE_CLIENT_TOKEN,null);

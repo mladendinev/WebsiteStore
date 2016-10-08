@@ -61,7 +61,7 @@ Meteor.methods({
       //Make sure the cart is still active and set to 'pending'. Also
       // fetch the cart details so we can calculate the checkout price
       var result = Baskets.update(
-        {'_id': basketId, 'status': 'active', 'user' : Meteor.userId() },
+        {'_id': basketId, 'status': 'active',},
         update={$set: { 'status': 'pending','lastModified': now } } )
        if (result ===0) {
         throw new Meteor.Error("INACTIVE CART", "Your cart has expired");
@@ -109,7 +109,6 @@ Meteor.methods({
               {$pull: {'carted' :{'cartId': basketId}}},
               {multi: true})
      })
-     Meteor.users.remove({'_id': Meteor.userId()});
      var orderId = Orders.insert({"items" : basket,
                                     "transactionId" : result.transaction.id,
                                     "amount" : result.transaction.amount,

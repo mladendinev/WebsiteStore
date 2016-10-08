@@ -9,11 +9,13 @@ checkForExpirationClient: function(basketId){
    var timeout = 900000;
    threshold = new Date(now - timeout);
     //Lock and find all the expiring carts
+    var basket = Baskets.findOne({'_id': basketId});
+    if( (typeof basket !== "undefined") && basket !== null) {
+
     var  result = Baskets.update(
                  {'_id': basketId, 'status': 'active', 'lastModified': { $lt: threshold } },
                  {$set: { 'status': 'expiring'} });
 
-    var basket = Baskets.findOne({'_id': basketId});
 
     if(result === 0) {
          Baskets.update(
@@ -46,11 +48,12 @@ checkForExpirationClient: function(basketId){
         })
          //Actually expire each cart
         Baskets.remove({'_id': basket._id});
-        Meteor.users.remove({'_id' : basket.user});
         return {"expired" : true};
-    
+    }
    
 
+	} else {
+		return {"expired" : false}
 	}
   }
 });

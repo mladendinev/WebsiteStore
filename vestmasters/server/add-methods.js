@@ -6,13 +6,13 @@ Meteor.methods({
     check(item, Object); //TODO check for security reasons
     check(basketId,String); //TODO check for security reasons
 
-    var basket = Baskets.findOne({"_id" : basketId, "user" : Meteor.userId()});
+    var basket = Baskets.findOne({"_id" : basketId});
     
     if((typeof basket === "undefined") || basket === null){
-    	var userInfo = insertBasket(item,basketId);
+    	var insertedId = insertBasket(item,basketId);
     	throw new Meteor.Error("UNEXISTING_BASKET", 
     		"You have specified an unexisting basket, new basket was created with the initial item inserted"
-    		, {"userInfo": userInfo});
+    		, {"id": insertedId});
     }
 
     for(i=0; i<basket.itemsDetails.length; i++) {
@@ -45,9 +45,6 @@ function insertBasket(item,basketId){
    }
    itemToInsert["quantity" + item.initials] = 1;
    var insertedId = Baskets.insert({"itemsDetails" : [itemToInsert], "lastModified" : now,'lastCheckedByClient' : now, "status" : "active"});
-   var password = Random.secret();
-   var userId = Accounts.createUser({"username" : insertedId, "password" : password});
-   Baskets.update({"_id" : insertedId}, {$set: {"user" : userId}});
    var updateQueryObject = {};
    var decUpdateOperation = {};
    generateNewitemQueryObject(updateQueryObject,decUpdateOperation,item,1); 
@@ -69,7 +66,7 @@ function insertBasket(item,basketId){
     throw new Meteor.Error("INADEQUATE_INVENTORY", "You did not have sufficient items in your inventory");
    }
     
-   return {"id" : insertedId, "password" : password};
+   return insertedId
 };
 
 function updateWithNewItem(item,basketId){
