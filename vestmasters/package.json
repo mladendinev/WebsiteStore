@@ -5,7 +5,7 @@
     "start": "meteor --settings settings.json"
   },
   "dependencies": {
-    "sleep" : "4.0.0",
+    "bcrypt": "^0.8.7",
     "braintree-web": "3.3.0",
     "imports": "^1.0.0",
     "jquery": "^2.2.4",
@@ -20,6 +20,7 @@
     "react-addons-transition-group": "^15.3.1",
     "react-addons-update": "^15.3.1",
     "react-dom": "^15.3.1",
+    "sleep": "4.0.0",
     "smime": "^2.0.1",
     "stripe": "^4.10.0"
   }

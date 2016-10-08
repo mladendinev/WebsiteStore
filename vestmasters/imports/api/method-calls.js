@@ -4,6 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 
 export function updateBasket(item) {
+  Session.set("time", new Date().getTime());
   if ((typeof amplify.store(BASKET_ID) === "undefined") || amplify.store(BASKET_ID) === null) {
      amplify.store(BASKET_ID,"");
   }
@@ -12,10 +13,10 @@ export function updateBasket(item) {
     if(error) {
       switch(error.error) {
         case "UNEXISTING_BASKET" : 
-          amplify.store(BASKET_ID,error.details.newId);
+          amplify.store(BASKET_ID,error.details.userInfo.id);
           Session.set(BASKET_ID_SESSION,amplify.store(BASKET_ID));
-          console.log(amplify.store(BASKET_ID,error.details.newId));
-          console.log(error);
+          Meteor.loginWithPassword(error.details.userInfo.id, error.details.userInfo.password);
+          console.log(Meteor.userId());
           break;
         case "INADEQUATE_INVENTORY" :
         console.log(error);
@@ -30,6 +31,7 @@ export function updateBasket(item) {
           break;
       }
      };
+    console.log((new Date() - Session.get("time"))/1000)
  });
 
 }
@@ -76,7 +78,6 @@ export function obtainBraintreeId(){
 };
 
 export function createTransaction(nonce){
-  // Session.set("time", new Date().getTime());
   Meteor.call('createTransaction',nonce,amplify.store(BASKET_ID), amplify.store("DELIVERY_INFO"), function(error, success) {
                if(error){
                 var messages = [];
@@ -95,6 +96,7 @@ export function createTransaction(nonce){
                   var delivery_info = amplify.store("DELIVERY_INFO");
                   //emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
                   amplify.store(ORDER_ID,success);
+                  Meteor.logout();
 //                Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
                   console.log("Errorless Transaction");
                   //TODO replace the email with a real one
