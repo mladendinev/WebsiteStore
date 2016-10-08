@@ -1,19 +1,28 @@
 import {Baskets,Inventory} from '../imports/api/products.js';
 
-var everyMinute = new Cron(function() {
-	 now = new Date()
-   var timeout = 1800000;
-    threshold = new Date(now - timeout);
+Meteor.methods({
+	
+checkForExpirationClient: function(basketId){
+   check(basketId,String);
+
+   now = new Date()
+   var timeout = 900000;
+   threshold = new Date(now - timeout);
 
     //Lock and find all the expiring carts
-    Baskets.update(
-        {'status': 'active', 'lastCheckedByClient': { '$lt': threshold } },
-        {$set: { 'status': 'expiring'} },
-        {multi : true} )
+    var  result = Baskets.update(
+                 {'_id': basketId, 'status': 'active', 'lastModified': { '$lt': threshold } },
+                 {$set: { 'status': 'expiring'} });
 
-    //Actually expire each cart
-    Baskets.find({'status': 'expiring'}).forEach(function(basket){
+    var basket = Baskets.findOne({'id_': basketId});
 
+    if(result ===0) {
+         Baskets.update(
+                 {'_id': basketId},
+                 {$set: { 'lastCheckedByClient': now} });
+        var warning = now - basket.lastModified > 60000;
+        return {"expired" : false,"warning" : warning};
+    } else {
         //Return all line items to inventory
         basket.itemsDetails.forEach(function(item){
           var incObject = {};
@@ -36,9 +45,13 @@ var everyMinute = new Cron(function() {
                 $pull: { 'carted': { 'cartId': basket._id }}});
           }
         })
-
+         //Actually expire each cart
         Baskets.remove({'_id': cart['id']});
         Meteor.users.remove({'_id' : basket.user});
-      })
-}, {});
+        return {"expired" : true};
+    
+   
 
+	}
+  }
+});

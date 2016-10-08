@@ -46,7 +46,6 @@ function insertBasket(item,basketId){
    itemToInsert["quantity" + item.initials] = 1;
    var insertedId = Baskets.insert({"itemsDetails" : [itemToInsert], "lastModified" : now,'lastCheckedByClient' : now, "status" : "active"});
    var password = Random.secret();
-   console.log(password);
    var userId = Accounts.createUser({"username" : insertedId, "password" : password});
    Baskets.update({"_id" : insertedId}, {$set: {"user" : userId}});
    var updateQueryObject = {};

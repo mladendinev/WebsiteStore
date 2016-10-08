@@ -5,7 +5,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 export function updateBasket(item) {
   Session.set("time", new Date().getTime());
-  if ((typeof amplify.store(BASKET_ID) === "undefined") || amplify.store(BASKET_ID) === null) {
+  if ((typeof amplify.store(BASKET_ID) !== "string") || amplify.store(BASKET_ID) === null) {
      amplify.store(BASKET_ID,"");
   }
 
