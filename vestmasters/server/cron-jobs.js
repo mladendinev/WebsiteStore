@@ -17,7 +17,7 @@ var everyMinute = new Cron(function() {
         //Return all line items to inventory
         basket.itemsDetails.forEach(function(item){
           var incObject = {};
-          var invItem = Inventory.findOne({'_id' : item.oid});
+          var invItem = Inventory.findOne({'_id' : new Meteor.Collection.ObjectID(item.oid)});
           var totalQuantity = 0;
           item.initials.forEach(function(initial){
              totalQuantity = totalQuantity + item["quantity" + initial];
@@ -25,19 +25,19 @@ var everyMinute = new Cron(function() {
           if (invItem.size){
           incObject["quantitySize."+item.size] = totalQuantity;
             Inventory.update(
-                { '_id': item.oid},
+                { '_id': new Meteor.Collection.ObjectID(item.oid)},
                 {$inc: incObject,
                 $pull: { 'carted': { 'cartId': basket._id }}});
           } else {
              incObject["quantity"] = totalQuantity;
              Inventory.update(
-                { '_id': item.oid},
+                { '_id': new Meteor.Collection.ObjectID(item.oid)},
                 {$inc: incObject,
                 $pull: { 'carted': { 'cartId': basket._id }}});
           }
         })
 
-        Baskets.remove({'_id': cart['id']});
+        Baskets.remove({'_id': basket._id});
         Meteor.users.remove({'_id' : basket.user});
       })
 }, {});

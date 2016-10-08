@@ -126,7 +126,7 @@ function updateQuantity(item,basketId,delta){
    //Make sure the cart is still active and add the line item
     result = Baskets.update(
         {'_id': basketId, 'status': 'active', 'itemsDetails': {$elemMatch: {'oid': item.oid, 'size' : item.size}}},
-        { $set: {'last_modified': now},
+        { $set: {'lastModified': now},
           $inc : itemToInsert,
           $push :{"itemsDetails.$.initials" : item.initials}
         },
@@ -165,7 +165,7 @@ function updateQuantityInitials(item,initials,basketId,value){
    //Make sure the cart is still active and add the line item
     result = Baskets.update(
         {'_id': basketId, 'status': 'active', 'itemsDetails': {$elemMatch: {'oid': item.oid, 'size' : item.size}}},
-        { $set: {'last_modified': now},
+        { $set: {'lastModified': now},
           $inc : itemToInsert
         },
         {w:1});

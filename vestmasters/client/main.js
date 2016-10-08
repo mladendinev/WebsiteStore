@@ -5,16 +5,15 @@ import {BASKET_ID} from '../imports/api/session-constants.js';
 import '../imports/startup/client/client.js';
 
 Meteor.startup(function(){
- 
-if (Meteor.isClient && ((typeof amplify.store(BASKET_ID) !== "string") || amplify.store(BASKET_ID) === null)){
-  checkForExpirationClient()  
- }
-});
+  if (Meteor.isClient && (typeof amplify.store(BASKET_ID) === "string") && amplify.store(BASKET_ID) !== null){
+  checkForExpirationClient();
+  }
+   setInterval(function(){
+    checkForExpirationClient();
+   },300000);
+ });
 
 
-setInterval(function(){
- checkForExpirationClient();
-},900000);
 
 function checkForExpirationClient(){
 	Meteor.call("checkForExpirationClient", amplify.store(BASKET_ID), function(error,response){
