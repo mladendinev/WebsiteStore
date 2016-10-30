@@ -12,8 +12,6 @@ Template.paymentTemplate.onCreated(function(){
  Session.set(ITEMS_IN_BASKET_SESSION,amplify.store(ITEMS_IN_BASKET_STORE));
  this.autorun(() => {
       Meteor.subscribe('inventory');
-      Session.set(TOTAL_PRICE_SESSION,calculatePriceCall());
-      
    });
 });
 
@@ -31,7 +29,7 @@ Template.paymentTemplate.onRendered(function(){
         var form = document.querySelector('#payment-form');
         var submit = document.querySelector('#credit-card-submit');
         var paypalButton = document.querySelector('.paypal-button');
-        console.log(paypalButton);
+       
 
         braintree.client.create({
           authorization: this.clientToken

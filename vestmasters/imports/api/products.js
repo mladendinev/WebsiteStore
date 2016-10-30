@@ -10,6 +10,4 @@ export const Orders = new Mongo.Collection('orders');
 
 export const Countries = new Mongo.Collection('countries');
 
-export const InventoryLock = new Mongo.Collection('inventoryLock');
-
-export const LockQueue = new Mongo.Collection('lockQueue');
+export const Baskets = new Mongo.Collection('baskets');

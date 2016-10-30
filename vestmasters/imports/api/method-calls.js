@@ -1,32 +1,68 @@
 import {Inventory} from './products.js';
-import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR} from './session-constants.js';
+import {BASKET_ID,BRAINTREE_CLIENT_TOKEN,DELIVERY_COST,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR,BASKET_ID_SESSION} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 
-export function calculatePriceCall(){
+export function updateBasket(item) {
+  Session.set("time", new Date().getTime());
+  if ((typeof amplify.store(BASKET_ID) !== "string") || amplify.store(BASKET_ID) === null) {
+     amplify.store(BASKET_ID,"");
+  }
+
+  Meteor.call('updateBasket', item, amplify.store(BASKET_ID), function(error,response){
+    if(error) {
+      switch(error.error) {
+        case "UNEXISTING_BASKET" : 
+          amplify.store(BASKET_ID,error.details.id);
+          Session.set(BASKET_ID_SESSION,amplify.store(BASKET_ID));
+          break;
+        case "INADEQUATE_INVENTORY" :
+        console.log(error);
+         //TODO handle error  
+         break;
+        case "INACTIVE CART" :
+        console.log(error); 
+        //TODO handle error
+        break;
+        default:
+          console.log(error);
+          break;
+      }
+     };
+    console.log((new Date() - Session.get("time"))/1000)
+ });
+
+}
+
+export function removeItem(basketId,itemId,size,initials){
+  Meteor.call("removeItem",basketId,itemId,size,initials,function(error,response){
+     if(error){
+      console.log(error);
+     }else {
+      return response;
+     }
+
+  })
+}
+
+export function calculatePriceCall(basket){
     var total=0;
-    var queryArray = [];
-    var quantityDict = {};
-         Session.get(ITEMS_IN_BASKET_SESSION).forEach(function(basketItem,index){
-           if(typeof quantityDict[basketItem.oid] === "undefined") {
-            quantityDict[basketItem.oid] = 1;
-           } else {
-            quantityDict[basketItem.oid] = quantityDict[basketItem.oid] + 1;
-           } 
-            queryArray.push({"_id": new Meteor.Collection.ObjectID(basketItem.oid)});
-           });
-              if(queryArray.length>0) {
-               Inventory.find({$or: queryArray}).forEach(function(mongoBasketItem,index){
-                total = total + parseInt(mongoBasketItem.price)*quantityDict[mongoBasketItem._id.valueOf()];
-              
-               });
-             }
-        return total;
+     basket.itemsDetails.forEach(function(item){
+      item.initials.forEach(function(initial){
+         var quantityCounter = item["quantity" + initial];
+        while(quantityCounter>0){
+              total = total+ parseInt(item.price);
+              quantityCounter = quantityCounter-1;
+              }
+         });  
+     });
+    return total;
 };
 
 
-export function totalPlusDelivery(total_price, delivery_cost){
-        return total_price + delivery_cost;
+export function totalPlusDelivery(basket,deliveryCost){
+         var totalPrice = calculatePriceCall(basket);
+         return totalPrice + deliveryCost;
 };
 
 export function obtainBraintreeId(){
@@ -40,36 +76,14 @@ export function obtainBraintreeId(){
 };
 
 export function createTransaction(nonce){
-  Session.set("time", new Date().getTime());
-  Meteor.call('createTransaction',nonce,amplify.store(ITEMS_IN_BASKET_STORE), amplify.store("DELIVERY_INFO"), function(error, success) {
+  Meteor.call('createTransaction',nonce,amplify.store(BASKET_ID), amplify.store("DELIVERY_INFO"), function(error, success) {
                if(error){
                 var messages = [];
                switch(error.error) {
-                 case "INVENTORY_NOT_SUFFICIENT": 
-                 error.details.forEach(function(detail){
-                  var sizeMessage =""
-                  if(typeof detail.requestedSize !== "undefined"){
-                    sizeMessage = " of size:" + detail.requestedSize + " ";
-                  }
-                  messages.push("You have requested:" + detail.requestedNumber + " items of:" + detail.product + sizeMessage + " but we " +
-                  "only have:" +  detail.availableNumber);
-                  }); 
-                  Session.set(BASKET_ERROR,messages)
-                  FlowRouter.go('/basket')
+                  case "INACTIVE CART":
+                  Session.set(PAYMENT_ERROR,"Your basket is inactive. This can happen if you have been inactive for long time.");
                   break;
-                 case "INVALID_SIZE_SELECTED_BY_USER":
-                 error.details.forEach(function(detail){
-                  messages.push("You have requested a size:"  + detail.requestedSize + " for product " + detail.product + " but we" +
-                  " do not have such size in stock");
-                 });
-                  Session.set(BASKET_ERROR,messages);
-                  FlowRouter.go('/basket')
-                  break;
-                 case "BASKET_NOT_VALID":
-                  Session.set(BASKET_ERROR,["You have requested an item which is not currently supplied."]);
-                  FlowRouter.go('/basket');
-                  break;
-                 case "BASKET_EMPTY":
+                  case "BASKET_EMPTY":
                   Session.set(PAYMENT_ERROR,"You can't checkout with an empty basket. Please add items before attempting a payment");
                   break;
                  default:
@@ -78,18 +92,14 @@ export function createTransaction(nonce){
                   }
                 } else {
                   var delivery_info = amplify.store("DELIVERY_INFO");
-                  emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
+                  //emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
                   amplify.store(ORDER_ID,success);
-
-//                  Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
-                 console.log("Errorless Transaction");
-                 //TODO replace the email with a real one
-                 amplify.store(BRAINTREE_CLIENT_TOKEN,null);
-                 amplify.store(ITEMS_IN_BASKET_STORE,[]);
-                 Session.set(PAYMENT_ERROR,null);
-                 Session.set(BASKET_ERROR,null);
-                 Session.set(NUMBER_ITEMS_SESSION,amplify.store(ITEMS_IN_BASKET_STORE).length);
-                 FlowRouter.go('/confirmation');
+//                 Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
+                  console.log("Errorless Transaction");
+                  //TODO replace the email with a real one
+                  amplify.store(BRAINTREE_CLIENT_TOKEN,null);
+                  Session.set(PAYMENT_ERROR,null);
+                  FlowRouter.go('/confirmation');
                 }
            });
 };

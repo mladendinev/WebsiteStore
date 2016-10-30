@@ -1,0 +1,12 @@
+The reason to have a recurring job both on the client and the server:
+
+If a user has the browser open we would like to control the expiration process. When the basket expires we would like to have control of the user journey. If the expiration is server only this is impossible as we can't feedback to the specific user session that the basket has expired.
+
+However, if we only have client recurring job we will not be able to destroy the basket if the client shuts the browser down. Therefore we need a job on the server as well.
+
+
+The combination of two requires two different expiration states for basked. A defect was detected on 30/10/2016 fixed by separating the expiring state into serverExpiring and clientExpiring.
+The defect cause was that both the client and the server tried to remove a basket at the same time. The client went through with it by setting the basket state to expiring. The server could
+not set the basket state to expiring. But then detected that there was an expiring basked and attempted to delete it. This caused inconsistency in the inventory by increasing the actual
+quantity two times whereas we only want it once either by the client or server, not both. This defect could be avoided. If the client initiates the deletion the state will be clientExpiring
+and the basket will not be picked up by the server. Similarly the server will set it to serverExpiring and the client will not be able to pick the basket up for deletion.
