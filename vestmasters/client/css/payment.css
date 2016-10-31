@@ -67,8 +67,6 @@
 .braintree-hosted-fields-valid {
 }
 
-
-
 .helper-text {
   color: red !important;
   font-size: 13px;
@@ -85,7 +83,22 @@
 }
 
 #card-payment-container{
-  margin-top:4%;
+  margin-top:6%;
   position: relative;
-
 }
+
+.center-content{
+  padding-left:7%;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.payment-details{
+  padding-left:29%;
+}
+
+.form-horizontal .payment-details .control-label{
+  /* text-align:right; */
+  text-align:left;
+}
+
