@@ -11,6 +11,8 @@ import '../../ui/pages/basket-overview.js';
 import '../../ui/stripe/payment-template.js';
 import '../../ui/pages/delivery-template.js';
 import '../../ui/pages/successful-transaction.js';
+import '../../ui/pages/how-does-it-work.js';
+import '../../ui/pages/who-we-are.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
@@ -74,5 +76,19 @@ FlowRouter.route('/confirmation',{
   name: 'successfulTrans',
    action()  {
    BlazeLayout.render('App_body', { main: 'successPayment' });
+  },
+});
+
+FlowRouter.route('/how-does-it-work',{
+  name: 'howDoesItworkInfo',
+   action()  {
+   BlazeLayout.render('App_body', { main: 'howDoesItwork' });
+  },
+});
+
+FlowRouter.route('/who-we-are',{
+  name: 'whoWeAre',
+   action()  {
+   BlazeLayout.render('App_body', { main: 'whoWeAre' });
   },
 });

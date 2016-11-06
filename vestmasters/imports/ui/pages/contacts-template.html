@@ -1,32 +1,42 @@
 <template name="contactsTemplate">
+    <div class="header">
+        {{>navigationBar}}
+    </div>
+    <div class="container">
+        <div class="background-desc row">
+            <div class="contact-desc">
 
-<div class="contacs-logo-header"> LOGO </div>
-<div class="contacts-image"> <img class="img-responsive" src="images/contacts-image.png"/>  </div>
-<div class="contacts-text"> <h1 align="center" class="contacts-header contacts-blue-text"> WHO WE ARE  </h1> <br/>
-<p class="contacts-blue-text contacts-info-p" align="center">lorem ipsum lorem ipsum lorem <br/>
-ipsum lorem ipsumlorem ipsum <br/>
-lorem ips <br/>
-lorem ipsum lorem ipsumlorem <br/>
-ipsum lorem ipsumlorem ipsum <br/>
-lorem ipsumlorem ipsum lorem ip- <br/>
-sumlorem ipsum lorem ipsumlo- <br/>
-rem ipsum lorem ipsumlorem <br/>
-ipsum lorem ipsumlorem ipsum <br/>
-lorem ipsumlorem ipsum lorem ip- <br/>
-sumlorem ipsum lorem ipsumlo- <br/>
-rem ipsum lorem ipsumlorem <br/>
-ipsum lorem ipsumlorem ipsum <br/>
-lorem ipsumlorem ipsum lorem ip- <br/>
-sumlorem ipsum lorem ipsumlo- <br/>
-rem ipsum lorem ipsumlorem <br/>
-ipsum lorem ipsumlorem ipsum <br/>
-lorem ipsumlorem ipsum lorem ip- <br/>
-sumlorem ipsum lorem <br/>
-</p>
- </div>
+                <div class="map-container">
+                    {{> googleMap name="exampleMap" options=exampleMapOptions}}
+                </div>
 
- <script type="text/javascript">
-   $("body").addClass("contacts-body");
- </script>
+                <div class="col-md-4">
+                    <div class="contacts-text"><h1 align="center" class="contacts-header contacts-blue-text"> Call us
+                        on</h1> <br/>
+
+                        <p class="contacts-blue-text contacts-info-p" align="center"> 000000 0000 000 </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contacts-text"><p align="center" class="contacts-header contacts-blue-text"> Come find us at</p> <br/>
+
+                        <p class="contacts-blue-text contacts-info-p" align="center"> Varna Bulgaria 312 petko voivoda </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contacts-text"><h1 align="center" class="contacts-header contacts-blue-text"> Emails us at</h1> <br/>
+
+                        <p class="contacts-blue-text contacts-info-p" align="center"> example@test.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $("body").addClass("info-body");
+
+    </script>
 
 </template>
