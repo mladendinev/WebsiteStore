@@ -6,36 +6,62 @@
         <div class="background-desc row">
             <div class="contact-desc">
 
-                <div class="map-container">
-                    {{> googleMap name="exampleMap" options=exampleMapOptions}}
-                </div>
+                <div class="col-sm-12">
 
-                <div class="col-md-4">
-                    <div class="contacts-text"><h1 align="center" class="contacts-header contacts-blue-text"> Call us
-                        on</h1> <br/>
+                    <div class="row">
 
-                        <p class="contacts-blue-text contacts-info-p" align="center"> 000000 0000 000 </p>
+                        <div class="col-sm-4">
+                            <div class="contacts-text">
+                                <h1 class="contacts-header contacts-blue-text" align="center"> Call us on</h1>
+                                <br/>
+
+                                <p class="contacts-blue-text contacts-info-p" align="center"> 000000 0000 000 </p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="contacts-text">
+                                <h1 class="contacts-header contacts-blue-text" align="center"> Come find us at</h1>
+                                <br/>
+
+                                <p class="contacts-blue-text contacts-info-p" align="center"> Varna Bulgaria 312 petko
+                                    voivoda </p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="contacts-text">
+                                <h1 class="contacts-header contacts-blue-text" align="center"> Emails us at</h1>
+                                <br/>
+
+                                <p class="contacts-blue-text contacts-info-p" align="center"> example@test.com</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="contacts-text"><p align="center" class="contacts-header contacts-blue-text"> Come find us at</p> <br/>
-
-                        <p class="contacts-blue-text contacts-info-p" align="center"> Varna Bulgaria 312 petko voivoda </p>
+                <div class = "col-sm-12">
+                    <div class = "row">
+                        <div class="map-container">
+                            {{> googleMap name="exampleMap" options=exampleMapOptions}}
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="contacts-text"><h1 align="center" class="contacts-header contacts-blue-text"> Emails us at</h1> <br/>
 
-                        <p class="contacts-blue-text contacts-info-p" align="center"> example@test.com</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <script type="text/javascript">
         $("body").addClass("info-body");
+
+
+
+
+
+
+
+
 
     </script>
 

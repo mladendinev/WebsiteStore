@@ -82,7 +82,7 @@ FlowRouter.route('/confirmation',{
 FlowRouter.route('/how-does-it-work',{
   name: 'howDoesItworkInfo',
    action()  {
-   BlazeLayout.render('App_body', { main: 'howDoesItwork' });
+   BlazeLayout.render('App_body', { main: 'howDoesItWork' });
   },
 });
 

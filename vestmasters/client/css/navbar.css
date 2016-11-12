@@ -114,4 +114,9 @@ a {
     #logo-bar-toggle{
       position:absolute;
     }
+
+    .hover-gray:hover {
+        background-color: transparent;
+    }
 }
+

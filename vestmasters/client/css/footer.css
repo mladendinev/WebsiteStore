@@ -74,14 +74,6 @@
   font-size:9.9px;
 }
 
-
-
-
-
-
-
-
-
 @media (max-width :768px){
 	footer { position: relative; bottom:0;}
 	.footer-content { padding-top:30px; }
