@@ -15,8 +15,8 @@ Template.shoppingTemplate.onRendered(function(){
 
 
 
- Template.shoppingTemplate.created = function () {
-  this.pagination = new Meteor.Pagination(Inventory, {perPage:6});
+Template.shoppingTemplate.created = function () {
+  this.pagination = new Meteor.Pagination(Inventory, {perPage:6, sort:{index:1}});
  };
 
 Template.shoppingTemplate.helpers({
