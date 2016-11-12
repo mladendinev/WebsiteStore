@@ -1,0 +1,55 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Files affecting the basked:
+
+server/add-method.js
+
+server/remove-method.js
+
+File making all the method calls:
+
+imports/api/method-calls.js
+
+Files controlling the basket deletion:
+
+server/cron-jobs.js - checks on the server when was the last time that the client check for basket expiration. If larger than a certain threshold deletes the basked. NOTE this method checks
+the mongo field lastCheckedByClient.
+
+server/expiration-check-method.js -  checks from the client on a fixed interval whether the basket has expired. Uses the lastModified mongo field of the basket as a point of reference. If
+larger than certain threshold deletes the basket.
+
+Files executing the transaction:
+
+server/main.js : -> the function createTransaction <-
+
+Important is that all the method calls and some non-method calls but common functions for the client are in the file:
+
+api/method-calls.js
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Mongo structure:
+
+A basket representation of item with no initials with quantity 1, an item of two sizes with 4 different initials is presented in the image representative-example-basket.	
+
+Note that in mongo the basket is represented as follows:
+
+There is one an entry for a pair (item-id,size). This means that if there is a single Vest item, but selected for purchase in size 48 and 49 , there will be two basket entries.
+
+In every basket entry the quantity is measured per initials. i.e. if there is a Vest item in size 49 with initials VAS selected twice and initials MD selected once. There will be one entry
+in the basket, but the quantity will be stored against each initial.
+
+Examples can be found in images mongochef-structure1 and mongochef-structure2. Those images are representation of the representative-basket-example.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Inventory structure:
+
+For each item in the inventory, when there is an item in the basket the quantity is reduced but the amount currently carted is stored in case the user cancels the transaction. Then the
+amount is returned to the inventory. Images for the inventory in the case of the representative basket example can be found in inventory-hat.png and inventory-vest-carted.png and inventory-
+vest-no-carted.png.
+
+We can see that a total of 3 items size 48 and 3 items size 49 are carted for A Vest leaving us with 8 items present for size 48 and 3 items present for size 49. When deleted the items
+quantity will restore to 11 and 9 respectively for sizes 48 and 49. This can happen either when a customer removes the items from the basker proactively. Or simply when the basket expires.
+
+A similar logic can be observed for the Hat item

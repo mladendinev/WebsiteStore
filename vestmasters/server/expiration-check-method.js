@@ -14,7 +14,7 @@ checkForExpirationClient: function(basketId){
 
     var  result = Baskets.update(
                  {'_id': basketId, 'status': 'active', 'lastModified': { $lt: threshold } },
-                 {$set: { 'status': 'expiring'} });
+                 {$set: { 'status': 'clientExpiring'} });
 
 
     if(result === 0) {
