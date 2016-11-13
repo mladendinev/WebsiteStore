@@ -10,4 +10,4 @@ WebContent/bower_components/*
 WebsiteStore.iml
 /node_modules/*
 /vestmasters/settings.json
-
+/vestmasters/public/*
