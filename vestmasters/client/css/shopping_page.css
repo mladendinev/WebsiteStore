@@ -106,6 +106,10 @@ body {
   background-color:white;
 }
 
+.caption-div{
+  font-size: 9pt;
+}
+
 .sold-out-image {
   opacity: 0.2;
 }

@@ -8,11 +8,11 @@ var everyMinute = new Cron(function() {
     //Lock and find all the expiring carts
     Baskets.update(
         {'status': 'active', 'lastCheckedByClient': { '$lt': threshold } },
-        {$set: { 'status': 'expiring'} },
+        {$set: { 'status': 'serverExpiring'} },
         {multi : true} )
 
     //Actually expire each cart
-    Baskets.find({'status': 'expiring'}).forEach(function(basket){
+    Baskets.find({'status': 'serverExpiring'}).forEach(function(basket){
 
         //Return all line items to inventory
         basket.itemsDetails.forEach(function(item){
