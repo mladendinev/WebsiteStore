@@ -79,5 +79,8 @@ Template.shoppingTemplate.events({
         Template.instance().pagination.filters(currentFilters);
         Template.instance().pagination.sort(sortBy);
     }
+  },
+  'click .sold-out-container' (e,tmpl){
+    e.preventDefault();
   }
 });
