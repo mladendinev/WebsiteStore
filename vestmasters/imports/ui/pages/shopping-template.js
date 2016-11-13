@@ -16,6 +16,9 @@ Template.shoppingTemplate.onRendered(function(){
 
 
 Template.shoppingTemplate.created = function () {
+   this.autorun(() => {
+    Meteor.subscribe("carousel");
+  });
   this.pagination = new Meteor.Pagination(Inventory, {perPage:6, sort:{index:1}});
  };
 
