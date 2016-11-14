@@ -1,6 +1,4 @@
-.contacts-body {
- background-color: white;
-}
+
 .contacs-logo-header {
  
   background-color: black;
@@ -8,9 +6,8 @@
   padding-left: 45%;
   padding-top:1%;
   padding-bottom: 1%;
-  font-size: 30pt;
+  font-size: 10px;
   color: white;
-
 }
 
 .contacts-image {
@@ -23,15 +20,9 @@
  
 }
 
-.contacts-text {
-  float: left;
-  padding-top: 10%;
-  padding-left: 2.5%;
-  width: 40%;
-}
-
 .contacts-blue-text {
   color: #56A4DE;
+
 }
 
 .contacts-info-p {
@@ -40,7 +31,29 @@
 }
 
 .contacts-header {
- font-size: 20pt;
+  font-size:18px;
  font-weight: bold;
 }
 
+
+.map-container {
+  width: 800px;
+  max-width: 100%;
+  height: 500px;
+  padding-bottom:4%;
+  padding-left:20%;
+  padding-top:6%;
+}
+
+.contact-desc{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:13px;
+    color:black;
+    font-weight:bold;
+    padding-top:10%;
+}
+
+.contacts-text p{
+
+ font-size:12px;
+}

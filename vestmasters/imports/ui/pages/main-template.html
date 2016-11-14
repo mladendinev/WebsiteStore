@@ -11,28 +11,29 @@
 
     <div class="container-fluid clear-div shop-content-pane-height" id="main-content">
         <div class="row shop-content-height">
-            <div class="col-md-4 shop-padding shop-content-height shop-content-margin">
-                <div class="shop-white-background shop-content-thirds-height" id="top-div-left">
-                    <h1> How does it work? </h1>
+            <div class="col-md-4 shop-padding shop-content-height shop-content-margin shop-black-background">
+                <div class="shop-white-background shop-content-help-text-height shop-content-margin" id="top-div-left">
+                    <h1 align="center"> How does it work? </h1>
 
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed augue a purus molestie
-                        ultrices. Etiam varius molestie libero id commodo. Mauris suscipit et
-                        tortor tincidunt accumsan. Fusce in arcu nec est semper tempus quis vel arcu. Praesent suscipit
-                        iaculis leo </p>
+                    <p> We create fashion since 20 years, and today we produce vest for pleasure. Our men's vests are
+
+                        designed for business and for leisure.Colors, shapes and
+
+                        details are our must. ... <a href="/how-does-it-work"> see more</a> </p>
                 </div>
-                <div class="shop-content-thirds-height shop-product-padding" id="mid-div-left">
-                    <img class="img-responsive" src="images/shoes.jpg"/>
+                <div class="shop-content-big-image-height shop-product-padding shop-content-margin" id="mid-div-left">
+                    <img class="img-responsive" src="images/main/coming-soon.png"/>
                 </div>
-                <div class="shop-white-background shop-content-thirds-height shop-product-padding">
-                    <img class="img-responsive" src="images/watch.jpg"/>
+                <div class="shop-white-background shop-content-big-image-height shop-product-padding shop-content-margin">
+                    <img class="img-responsive" src="images/main/promo.png"/>
                 </div>
             </div>
-            <div class="col-md-4 shop-padding shop-content-height shop-content-margin">
+            <div class="col-md-4 shop-padding shop-content-height shop-content-margin shop-black-background">
                 <div class="shop-white-background shop-content-height">
-                    {{>carouselTemplate}}
+                    {{>carouselTemplate carouselStyle="height:100%"}}
                 </div>
             </div>
-            <div class="col-md-4 shop-padding shop-content-height shop-content-margin" id="scrollable-prod-div">
+            <div class="col-md-4 shop-padding shop-content-height shop-content-margin shop-black-background products-container" id="scrollable-prod-div">
                 {{#if isScrollable products.count}}
                 <button type="button" class="btn btn-default z-index-2" aria-label="Left Align" id="top-button">
                     <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
@@ -117,9 +118,9 @@
 </template>
 
 <template name="product">
-    <div class="shop-white-background shop-content-thirds-height shop-product-padding">
+    <div class="shop-white-background shop-content-thirds-height shop-product-padding shop-content-margin">
         <a href="/shopping-page?product={{productName}}">
-            <img class="img-responsive" src="images/{{image}}"/>
+            <img class="img-responsive" src="images/productmain/{{image}}"/>
         </a>
     </div>
 </template>

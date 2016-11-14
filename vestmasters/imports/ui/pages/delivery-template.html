@@ -1,5 +1,5 @@
 <template name='deliveryTemplate'>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
 
             <div class="progress-wrapper">
@@ -10,7 +10,7 @@
             <!---->
             <!-- User info form-->
             <!---->
-            <legend>Delivery Details</legend>
+            <legend align="center">Delivery Details</legend>
             <div class="col-md-8">
                 <div class="row">
                     <form class="form-horizontal" role="form" method="POST" id="user-info">
@@ -44,7 +44,8 @@
                                 <label class="col-sm-6 control-label" for="email_addr">Email Address</label>
 
                                 <div class="col-sm-6">
-                                    <input type="email" class="form-control" data-minlength="10" value="f0rch0s3@gmail.com" name="email_addr"
+                                    <input type="email" class="form-control" data-minlength="10"
+                                           value="f0rch0s3@gmail.com" name="email_addr"
                                            placeholder="Email Address"
                                            required>
                                 </div>
@@ -82,7 +83,8 @@
                                 <label class="col-sm-6 control-label" for="city">City</label>
 
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" value="Sofia" data-minlength="10" name="city"
+                                    <input type="text" class="form-control" value="Sofia" data-minlength="10"
+                                           name="city"
                                            placeholder="City"
                                            required>
                                 </div>
@@ -122,10 +124,8 @@
 
 
             <div class="col-md-4 summary-width">
-                <div class="container">
-                    <div class="row">
-                        {{>summaryOrder}}
-                    </div>
+                <div class="row">
+                    {{>summaryOrder}}
                 </div>
             </div>
 
@@ -135,6 +135,7 @@
 
     <script type="text/javascript">
         $("body").addClass("payment-main");
+
     </script>
 
 </template>

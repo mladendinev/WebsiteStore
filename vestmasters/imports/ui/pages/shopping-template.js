@@ -15,8 +15,11 @@ Template.shoppingTemplate.onRendered(function(){
 
 
 
- Template.shoppingTemplate.created = function () {
-  this.pagination = new Meteor.Pagination(Inventory, {perPage:6});
+Template.shoppingTemplate.created = function () {
+   this.autorun(() => {
+    Meteor.subscribe("carousel");
+  });
+  this.pagination = new Meteor.Pagination(Inventory, {perPage:6, sort:{index:1}});
  };
 
 Template.shoppingTemplate.helpers({
@@ -79,5 +82,8 @@ Template.shoppingTemplate.events({
         Template.instance().pagination.filters(currentFilters);
         Template.instance().pagination.sort(sortBy);
     }
+  },
+  'click .sold-out-container' (e,tmpl){
+    e.preventDefault();
   }
 });

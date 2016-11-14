@@ -17,13 +17,13 @@ export function updateBasket(item) {
           Session.set(BASKET_ID_SESSION,amplify.store(BASKET_ID));
           break;
         case "INADEQUATE_INVENTORY" :
-        console.log(error);
-         //TODO handle error  
-         break;
+          console.log(error);
+          //TODO handle error
+          break;
         case "INACTIVE CART" :
-        console.log(error); 
-        //TODO handle error
-        break;
+          console.log(error);
+          //TODO handle error
+          break;
         default:
           console.log(error);
           break;

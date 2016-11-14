@@ -1,0 +1,17 @@
+.text-desc{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:13px;
+    color:black;
+    font-weight:bold;
+    padding-top:30%;
+}
+
+.background-desc{
+  background-color:white;
+  padding-left:5%;
+  padding-right:5%;
+}
+
+.info-body {
+ background-color: #f5f5ef;
+}
