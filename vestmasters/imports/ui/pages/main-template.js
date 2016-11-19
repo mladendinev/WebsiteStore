@@ -19,7 +19,19 @@ Template.mainTemplate.helpers({
  },
  isScrollable(count){
    return count>3;
- }, 
+ },
+
+ getClass(index,length){
+  console.log(length)
+  var baseClass ="col-md-12 col-sm-4 shop-black-background"
+  if(index === 0){
+    return baseClass + " shop-content-thirds-height-margin shop-content-padding-right-top"
+  } else if(index === length-1) {
+    return baseClass + " shop-content-thirds-height shop-content-padding-right-bot"
+  } else {
+    return baseClass + " shop-content-thirds-height-margin shop-content-padding-right-mid"
+  }
+ }
 });
 
 Template.mainTemplate.onRendered(function(){
