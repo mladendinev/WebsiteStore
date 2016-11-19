@@ -93,6 +93,7 @@
   float: right;
   padding-top:5px;
   color: white;
+  display:inline-block;
 }
 
 #basket-link-toggle {
@@ -118,5 +119,14 @@ a {
     .hover-gray:hover {
         background-color: transparent;
     }
+}
+
+.item_count{
+  clear:both;
+  float:right;
+}
+
+#basket-link p{
+  padding-right:3px;
 }
 
