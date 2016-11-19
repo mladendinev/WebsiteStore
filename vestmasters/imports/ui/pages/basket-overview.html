@@ -6,19 +6,6 @@
         {{>progressBar first="progress-bar-success" second="progress-bar-danger" third="progress-bar-danger"
         fourth="progress-bar-danger" }}
          
-         {{#if basketErrorPresent}}
-         
-         <div class="div-error">
-            You have the following errors: 
-            <div class="div-error-messages">
-              {{#each errorMessage in errorMessages}}  
-            <img class= "img-responsieve img-circle" src="images/error-image.png" />  {{errorMessage}} <br>
-            {{/each}}
-            </div>   
-            Please ammend your basket accordingly!
-         </div>
-
-        {{/if}}
         <table class="table">
 
             <thead>

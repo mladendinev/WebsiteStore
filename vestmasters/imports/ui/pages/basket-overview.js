@@ -37,7 +37,7 @@ displayBasket(){
       var quantityCounter = item["quantity" + initial];
       while(quantityCounter>0){
     result = result + "<tr>\n" +
-                    "<td><img class='img-responsive img-circle img-basket' src='images/" + item.file +"' width='40px'/>\n" +
+                    "<td><img class='img-responsive img-circle img-basket' src='images/products/common/" + item.file +"' width='40px'/>\n" +
                     "<div class='table-div float-left'>" + item.product + "</div>\n" +
                     "</td>"
     if(item.size !== "noSize") {

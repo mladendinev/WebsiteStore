@@ -10,31 +10,36 @@
             <div class="col-xs-8 expand-div" >
 
                 {{#each documents}}
-                <div class="col-xs-6 col-md-4 hover-div-parent">
+                <div class="col-xs-6 col-md-4">
                     {{#if soldOut size quantity sizes quantitySize}}
                     <a href="#" class="sold-out-container thumbnail">
                     
                         <h2 class = "sold-out-text"> <b> SOLD OUT </b> </h2>
                         <img class="sold-out-image img-responsive" src="images/{{file}}" alt="T-Shirt" style="min-height: 193px; max-height:193px">
-                         <div class="caption caption-div">
+                    
+                        <div class="caption">
                             <p class="alignLeft">{{product}}</p>
 
-                            <p class="alignRight">€{{price}}</p>
-                         </div>
-                         <div style="clear: both;"></div>
+                            <p class="alignRight">${{price}}</p>
+                        </div>
+                        <div style="clear: both;"></div>
                     </a>
                     {{else}}
                         <a href="/item?id={{extractObjectId _id}}" class="thumbnail">
-                         <img class="img-responsive" src="images/products/common/{{file}}" alt="{{product}}" style="min-height:193px; max-height:193px">
-                         
-                          <div class="caption caption-div">
+<<<<<<< HEAD
+                         <img class="img-responsive" src="images/{{file}}" alt="T-Shirt" style="min-height:193px; max-height:193px">
+=======
+                         <img class="img-responsive" src="images/products/common/{{file}}" alt="{{product}}">
+>>>>>>> layout_fixing
+                         <div class="caption">
                             <p class="alignLeft">{{product}}</p>
 
-                            <p class="alignRight">€{{price}}</p>
+                            <p class="alignRight">€ {{price}}</p>
                          </div>
                          <div style="clear: both;"></div>
-                     </a>
+                        </a>
                      {{/if}}
+                        
                 </div>
                 {{/each}}
             </div>
@@ -44,9 +49,10 @@
                 <br class="clear-div"/>
                 {{> defaultBootstrapPaginator pagination=templatePagination limit=5 containerClass="text-center"
                 onClick=clickEvent}}
-            </div>
+              </div>
         </div>
     </div>
+
 
 
 </template>

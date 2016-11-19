@@ -19,6 +19,12 @@ Template.successPayment.helpers({
      return Session.get(ORDER_INFO).transactionId;
      }
    	},
+
+    amount(){
+     if((typeof Session.get(ORDER_INFO) !== "undefined") && Session.get(ORDER_INFO) !== null) { 
+     return parseInt(Session.get(ORDER_INFO).amount);
+     }
+    },
     
     displayBasket(){
     var result = "";
@@ -29,7 +35,7 @@ Template.successPayment.helpers({
       var quantityCounter = item["quantity" + initial];
       while(quantityCounter>0){
        result = result + "<tr>\n" +
-                    "<td><img class='img-responsive img-circle img-basket' src='images/" + item.file +"' width='40px'/>\n" +
+                    "<td><img class='img-responsive img-circle img-basket' src='images/products/common/" + item.file +"' width='40px'/>\n" +
                     "<div class='table-div float-left'>" + item.product + "</div>\n" +
                     "</td>"
       if(item.size !== "noSize") {

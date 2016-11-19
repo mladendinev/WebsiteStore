@@ -112,10 +112,22 @@
   background-color: black;
 }
 
+.shop-content-margin{
+ margin-bottom: 0.6%;
+ min-height: 181px; 
+}
 .shop-content-thirds-height {
  height: 33.1%;
- margin-bottom: 0.6%;
- min-height: 181px;
+ 
+}
+
+.shop-content-help-text-height{
+  height: 20%;
+ 
+}
+
+.shop-content-big-image-height{
+  height: 40%;
 }
 
 .jumbotron-bg {
