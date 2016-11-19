@@ -54,12 +54,19 @@ body {
   padding-left:11%;
 }
 
-html {
+
+.expand-div {
   height: 100%;
 }
-body {
-  min-height: 100%;
+
+.set-carousel-height {
+  height: 532px;
 }
+
+.set-image-height {
+  min-height: 193px;
+  max-height: 193px;
+ }
 
 /* Shopping Page */
 
@@ -99,6 +106,10 @@ body {
   background-color:white;
 }
 
+.caption-div{
+  font-size: 9pt;
+}
+
 .sold-out-image {
   opacity: 0.2;
 }
@@ -108,8 +119,21 @@ body {
   position: absolute;
   padding-top:40%;
   padding-left:21%;
+  color: #333;
 }
 
-.sold-out-div{
+.sold-out-container{
    position: relative;
+}
+
+a.sold-out-container:hover{
+  border-color:#ddd;
+}
+ 
+ a.sold-out-container:focus {
+   border-color:#ddd;
+ }
+
+a.sold-out-container.active {
+  border-color:#ddd; 
 }
