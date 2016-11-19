@@ -4,7 +4,6 @@ Meteor.methods({
 	
 checkForExpirationClient: function(basketId){
    check(basketId,String);
-
    now = new Date()
    var timeout = 900000;
    threshold = new Date(now - timeout);
