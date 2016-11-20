@@ -1,4 +1,4 @@
-@media (min-width: 320px) and (max-width: 768px){
+@media (min-width: 320px) and (max-width: 629px){
   .shop-content-height-right {
   height: 547.97px;
  }
@@ -22,22 +22,35 @@
  height: 183.49px;
  
 }
+ .shop-carousel-height-margin{
+   height: 547.97px;
+ }
+ 
+ .shop-carousel-height {
+   height: 542.97px;
+ }
+
+.shop-carousel-padding {
+  padding: 2.5px 0px 2.5px 0px;
+}
 }
 
-@media (min-width: 768px) and (max-width: 992px){
-  
+
+@media (min-width: 630px) and (max-width: 991px){
+ 
+ 
  .shop-content-height-right {
   max-height: 180.99px;
  }
  
   .shop-content-padding-right-top {
-   padding: 0px 1.25px 0px 0px;
+   padding: 2.5px 1.25px 0px 0px;
  }
  .shop-content-padding-right-mid {
-   padding: 0px 1.25px 0px 1.25px;
+   padding: 2.5px 1.25px 0px 1.25px;
  }
- .shop-content-padding-right-bot {
-   padding: 0px 0px 0px 1.25px;
+ .shop-content-padding-right-bot {  
+   padding: 2.5px 0px 0px 1.25px;
  }
 
  .shop-content-thirds-height {
@@ -47,8 +60,15 @@
 
 .shop-content-thirds-height-margin {
  height: 183.49px;
+ }
+
+ .shop-carousel-height-margin{
+   height: 547.97px;
+ }
  
-}
+ .shop-carousel-height {
+   height: 547.97px;
+ }
 
 }
 
@@ -73,11 +93,17 @@
  height: 180.99px;
  
 }
-
 .shop-content-thirds-height-margin {
  height: 183.49px;
- 
 }
+
+.shop-carousel-height-margin{
+   height: 547.97px;
+ }
+ 
+ .shop-carousel-height {
+   height: 547.97px;
+ }
 
 }
 
@@ -136,10 +162,6 @@
   height: 219.69px;
 }
 
-.shop-carousel-height{
-   height: 547.97px;
- }
-
 .content-image {
   min-height: 100%;
   max-height: 100%;
@@ -171,6 +193,8 @@
    font-weight:bold;
    padding-bottom:3%;
    padding-top:3%;
+   margin-top: 0px;
+   margin-bottom: 0px;
 }
 
 
@@ -185,10 +209,7 @@
  text-align: justify;
 }
 
-#top-div-left h1 {
- margin-top: 0px;
- margin-bottom: 0px;
-}
+
 
 #main-content {
  width: 100%;
