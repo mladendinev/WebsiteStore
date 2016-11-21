@@ -130,3 +130,14 @@ a {
   padding-right:3px;
 }
 
+
+@media (max-width: 767px){
+.navbar-nav .open .dropdown-menu > li > a {
+    color: white;
+    }
+
+    .navbar-nav .open .dropdown-menu > li > a:hover{
+      background-color: transparent;
+    }
+}
+

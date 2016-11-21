@@ -1,1 +1,2 @@
 import './shopping-product.html';
+

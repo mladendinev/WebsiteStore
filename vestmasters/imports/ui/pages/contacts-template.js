@@ -1,8 +1,8 @@
 import "./contacts-template.html"
 
-Template.contactsTemplate.onRendered(function(){
+Template.contactsTemplate.onCreated(function(){
    Session.set("DocumentTitle","Contacts");
-   GoogleMaps.load();
+   GoogleMaps.load({key:'AIzaSyDSI0LKtxtDGL0pEvjgfCwyxELC9cA-_f4'});
 });
 
 
