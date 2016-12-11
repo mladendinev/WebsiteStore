@@ -1,4 +1,4 @@
-import {Baskets,Inventory,Products,Orders,Countries,Carousel} from '../products.js';
+import {Baskets,Inventory,Products,Orders,Countries,Carousel} from '../imports/api/products.js';
 
 Meteor.publish('inventory', function() {
   return Inventory.find();
