@@ -1,3 +1,12 @@
 <template name="shoppingProduct">
- <li><a href="/shopping-page?product={{productName}}">{{productName}}</a></li>
+ {{#if equals productName 'dandy'}}
+    <li><a href="/shopping-page?product={{productName}}"><b>{{productName}} </b> vest</a></li>
+
+{{else}}
+    {{#if equals productName 'daily'}}
+      <li><a href="/shopping-page?product={{productName}}"><b>{{productName}} </b> vest</a></li>
+    {{else}}
+      <li><a href="/shopping-page?product={{productName}}">{{productName}}</a></li>
+    {{/if}}
+ {{/if}}
 </template>

@@ -1,0 +1,2 @@
+import './shopping-product.html';
+

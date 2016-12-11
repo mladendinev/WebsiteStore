@@ -93,6 +93,7 @@
   float: right;
   padding-top:5px;
   color: white;
+  display:inline-block;
 }
 
 #basket-link-toggle {
@@ -117,6 +118,26 @@ a {
 
     .hover-gray:hover {
         background-color: transparent;
+    }
+}
+
+.item_count{
+  clear:both;
+  float:right;
+}
+
+#basket-link p{
+  padding-right:3px;
+}
+
+
+@media (max-width: 767px){
+.navbar-nav .open .dropdown-menu > li > a {
+    color: white;
+    }
+
+    .navbar-nav .open .dropdown-menu > li > a:hover{
+      background-color: transparent;
     }
 }
 

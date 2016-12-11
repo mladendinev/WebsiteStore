@@ -1,3 +1,7 @@
 <template name="numberOfBasketItems">
-{{numberOfItemsInBasket}}
+    {{#if equals numberOfItemsInBasket null}}
+       {{numberOfItemsInBasket}}
+    {{else}}
+      ({{numberOfItemsInBasket}})
+    {{/if}}
 </template>

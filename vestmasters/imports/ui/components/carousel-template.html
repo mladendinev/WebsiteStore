@@ -1,6 +1,6 @@
 <template name="carouselTemplate">
 
- <div id="myCarousel" class="carousel slide" data-ride="carousel" style ={{carouselStyle}}>
+ <div id="myCarousel" class="carousel slide" data-ride="carousel" style =   {{carouselStyle}}>
                         <!-- Indicators -->
 
                         <ol id='indicator' class="carousel-indicators">
@@ -37,5 +37,13 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
+
+    <script type="text/javascript">
+  $(document).ready(function() {
+    $('.carousel').carousel({
+      interval: 2000
+    })
+  });
+</script>
 
 </template>
