@@ -21,3 +21,7 @@ export const PAYMENT_ERROR = "payment-error";
 export const BASKET_ID = "basket-id";
 
 export const BASKET_ID_SESSION = "basket-id-session";
+
+export const LOADING_ADD_ITEM = "loading-add-item";
+
+export const PROCESSING_PAYMENT = "processing-payment"

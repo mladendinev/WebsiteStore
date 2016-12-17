@@ -140,7 +140,7 @@ function updateQuantity(item,basketId,delta){
     result = Inventory.update(
         updateQueryObject,
         {$inc: decUpdateOperation,
-         $set: {'timestamp': now } },
+         $set: {'carted.$.timestamp': now } },
         {w:1})
         
     // Roll back our cart update
@@ -178,7 +178,7 @@ function updateQuantityInitials(item,initials,basketId,value){
     result = Inventory.update(
         updateQueryObject,
         {$inc: decUpdateOperation,
-         $set: {'timestamp': now } },
+         $set: {'carted.$.timestamp': now } },
         {w:1})
         
     // Roll back our cart update

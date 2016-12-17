@@ -87,6 +87,10 @@
   position: relative;
 }
 
+#paypal-payment-container{
+  padding-left: 29%;
+}
+
 .center-content{
   padding-left:7%;
   width: 50%;
