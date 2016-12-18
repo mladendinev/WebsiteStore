@@ -1,5 +1,5 @@
 import {calculatePriceCall,obtainBraintreeId,removeItem,sanitizeBasket} from '../../api/method-calls.js';
-import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION,BASKET_ERROR,BASKET_ID} from '../../api/session-constants.js';
+import {BRAINTREE_CLIENT_TOKEN,BASKET_ID,BASKET_SECRET} from '../../api/session-constants.js';
 import '../components/dropdown-products.js';
 import '../components/number-of-basket-items.js';
 import '../components/navbar-shopping.js';
@@ -13,10 +13,11 @@ Template.basketOverview.onCreated(function(){
  this.basket = new ReactiveVar();
  this.autorun(() => {
       Meteor.subscribe('inventory');
-      if((typeof amplify.store(BASKET_ID) !== "undefined") && amplify.store(BASKET_ID) !== null){
-       Meteor.subscribe('baskets',amplify.store(BASKET_ID));
-      }
-      this.basket.set(Baskets.findOne(amplify.store(BASKET_ID)));
+      if((typeof amplify.store(BASKET_ID) !== "undefined") && amplify.store(BASKET_ID) !== null
+         && (typeof amplify.store(BASKET_SECRET) !== "undefined") && amplify.store(BASKET_SECRET) !== null){
+       Meteor.subscribe('baskets',amplify.store(BASKET_ID),amplify.store(BASKET_SECRET));
+       }
+      this.basket.set(Baskets.findOne({'_id' : amplify.store(BASKET_ID), 'secret' : amplify.store(BASKET_SECRET)}));
   });
 });
 
@@ -63,22 +64,6 @@ Template.basketOverview.helpers({
   var basket = Template.instance().basket.get();
   if((typeof basket !== "undefined") && basket !== null) {
  	 return calculatePriceCall(basket);
-  }
- },
-
- basketErrorPresent(){
-  return Session.get(BASKET_ERROR) !== null && (typeof Session.get(BASKET_ERROR) !== "undefined");
- },
-
- errorMessages(){
-   return Session.get(BASKET_ERROR);
- },
-isDefined(item){
-  console.log(item)
-  if (Session.get(BASKET_ERROR) === null || (typeof Session.get(BASKET_ERROR) === "undefined")){
-    return true;
-  } else {
-  return (typeof item !== "undefined") && item !== null;
   }
  }
 });

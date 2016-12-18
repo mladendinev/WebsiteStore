@@ -1,5 +1,5 @@
 import {Inventory} from './products.js';
-import {LOADING_ADD_ITEM,BASKET_ID,BRAINTREE_CLIENT_TOKEN,DELIVERY_COST,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR,BASKET_ID_SESSION} from './session-constants.js';
+import {BASKET_SECRET,BASKET_SECRET_SESSION,LOADING_ADD_ITEM,BASKET_ID,BRAINTREE_CLIENT_TOKEN,DELIVERY_COST,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR,BASKET_ID_SESSION} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 
@@ -10,12 +10,18 @@ export function updateBasket(item) {
      amplify.store(BASKET_ID,"");
   }
 
-  Meteor.call('updateBasket', item, amplify.store(BASKET_ID), function(error,response){
+  if ((typeof amplify.store(BASKET_SECRET) !== "string") || amplify.store(BASKET_SECRET) === null) {
+     amplify.store(BASKET_SECRET,"");
+  }
+  
+  Meteor.call('updateBasket', item, amplify.store(BASKET_ID),amplify.store(BASKET_SECRET), function(error,response){
     if(error) {
       switch(error.error) {
         case "UNEXISTING_BASKET" : 
           amplify.store(BASKET_ID,error.details.id);
+          amplify.store(BASKET_SECRET,error.details.secret)
           Session.set(BASKET_ID_SESSION,amplify.store(BASKET_ID));
+          Session.set(BASKET_SECRET_SESSION,amplify.store(BASKET_SECRET));
           break;
         case "INADEQUATE_INVENTORY" :
           console.log(error);
@@ -37,7 +43,7 @@ export function updateBasket(item) {
 }
 
 export function removeItem(basketId,itemId,size,initials){
-  Meteor.call("removeItem",basketId,itemId,size,initials,function(error,response){
+  Meteor.call("removeItem",basketId,itemId,size,initials,amplify.store(BASKET_SECRET),function(error,response){
      if(error){
       console.log(error);
      }else {
@@ -78,7 +84,7 @@ export function obtainBraintreeId(){
 };
 
 export function createTransaction(nonce){
-  Meteor.call('createTransaction',nonce,amplify.store(BASKET_ID), amplify.store("DELIVERY_INFO"), function(error, success) {
+  Meteor.call('createTransaction',nonce,amplify.store(BASKET_ID), amplify.store("DELIVERY_INFO"), amplify.store(BASKET_SECRET), function(error, success) {
                if(error){
                 var messages = [];
                switch(error.error) {
@@ -94,6 +100,7 @@ export function createTransaction(nonce){
                   }
                 } else {
                   var delivery_info = amplify.store("DELIVERY_INFO");
+                  console.log(success);
                   //emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
                   amplify.store(ORDER_ID,success);
 //                 Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)

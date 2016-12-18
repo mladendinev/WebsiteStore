@@ -12,9 +12,10 @@ Meteor.publish('countries', function() {
   return Countries.find();
 });
 
-Meteor.publish('baskets', function(basketId) {
+Meteor.publish('baskets', function(basketId,secret) {
   check(basketId,String);
-  return Baskets.find({"_id" : basketId});
+  check(secret,String);
+  return Baskets.find({"_id" : basketId, 'secret': secret});
 });
 
 Meteor.publish('carousel', function() {
