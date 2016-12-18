@@ -50,7 +50,7 @@ jparker:crypto-padding@0.1.0
 jquery@1.11.9
 kadira:blaze-layout@2.3.0
 kadira:flow-router@2.12.1
-kurounin:pagination@1.0.11
+kurounin:pagination@1.0.17
 kurounin:pagination-blaze@1.0.2
 launch-screen@1.0.12
 less@2.5.7
@@ -96,7 +96,7 @@ templating-tools@1.0.4
 themeteorchef:jquery-validation@1.14.0
 tmeasday:check-npm-versions@0.2.0
 tmeasday:html5-history-api@4.1.2
-tmeasday:publish-counts@0.7.3
+tmeasday:publish-counts@0.8.0
 tracker@1.1.0
 ui@1.0.11
 underscore@1.0.9
