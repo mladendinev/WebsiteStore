@@ -29,6 +29,7 @@ Template.shoppingTemplate.helpers({
   	
     documents() {
       Template.instance().pagination.filters({"type" : FlowRouter.getQueryParam('product')});
+      // console.log(Template.instance().pagination.getPage());
       return Template.instance().pagination.getPage();
     },
 
