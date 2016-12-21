@@ -28,54 +28,36 @@ Template.basketOverview.onRendered(function(){
 
 Template.basketOverview.helpers({
 
-displayBasket(){
-  var result = "";
-  var basket = Template.instance().basket.get();
-  if((typeof basket !== "undefined") && basket !== null) {
-  basket.itemsDetails.forEach(function(item){
-    item.initials.forEach(function(initial){
-      var quantityCounter = item["quantity" + initial];
-      while(quantityCounter>0){
-    result = result + "<tr>\n" +
-                    "<td><img class='img-responsive img-circle img-basket' src='images/products/common/" + item.file +"' width='40px'/>\n" +
-                    "<div class='table-div float-left'>" + item.product + "</div>\n" +
-                    "</td>"
-    if(item.size !== "noSize") {
-      result = result +  "<td>\n" +
-                     "<div class='table-div float-left'>" + item.size + "</div>\n" +
-                     "</td>\n"
-    } else {
-       console.log(item.size !== "noSize");       
-       result = result + "<td>\n" +
-                 "<div class='table-div float-left'> n/a </div>\n" +
-                 "</td>\n"
+  getItemDetails(){
+    var basket = Template.instance().basket.get();
+    if((typeof basket !== "undefined") && basket !== null) {
+    return basket.itemsDetails;
+  } else {
+    return [];
+  } 
+  }, 
+
+  getInitial(item){
+    return item.initials;
+  },
+
+  repeatedInitial(item, initial){
+    var quantityCounter = item["quantity" + initial];
+    var result = new Array(quantityCounter);
+    for (var i =0; i<result.length; i++){
+      result[i]=i;
     }
-    
-    if (initial !== "noInitials") {
-        result = result + "<td>\n" +
-                 "<div class='table-div float-left'>" + initial + "</div>\n" +
-                "</td>\n"
-    } else {
-        result = result + "<td>\n" +
-                          "<div class='table-div float-left'> n/a </div>" +
-                          "</td>\n"
-    }
-        result = result + "<td>\n" +
-                    "<div class='table-div float-left'>" + item.price + "</div>\n" +
-                    "<div class='table-div float-right'><span class='glyphicon glyphicon-remove remove-item' aria-hidden='true' id=" +
-                    item.oid + "></span>\n"+
-                    "<span  id='"+ item.size+"'> </span>\n" + 
-                    "<span  id='"+ initial+"'> </span>\n" + 
-                    "</div>\n" +
-                "</td>\n" +
-                "</tr>\n"
-      quantityCounter = quantityCounter-1;
-      }
-     });
-    });
-  };
-     return result;
-},
+    console.log(result);
+    return result;
+  },
+
+  hasInitial(initial){
+    return initial !== "noInitials";
+  },
+
+  hasSize(size){
+     return size !== "noSize";
+  },
 
  total(){
   var basket = Template.instance().basket.get();

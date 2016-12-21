@@ -12,6 +12,7 @@ this.autorun(() => {
 
 });
 Template.numberOfBasketItems.helpers({
+
  numberOfItemsInBasket(){
 	 	var number = 0;
 	 	var basket = Baskets.findOne(Session.get(BASKET_ID_SESSION));
@@ -23,7 +24,7 @@ Template.numberOfBasketItems.helpers({
                 number = number + 1;
                 quantityCounter = quantityCounter-1;
               }
-             }); 
+             });
             });
            }
         if(number === 0){

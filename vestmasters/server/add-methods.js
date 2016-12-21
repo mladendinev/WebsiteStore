@@ -3,9 +3,9 @@ import {Baskets,Inventory} from '../imports/api/products.js';
 Meteor.methods({
 
  updateBasket: function(item, basketId){
-    check(item, Object); //TODO check for security reasons
-    check(basketId,String); //TODO check for security reasons
-
+    check(item, {product: String, file: String, price: Number, size: String, oid: String, initials: String,quantity: Number});
+    check(basketId,String);
+    
     var basket = Baskets.findOne({"_id" : basketId});
     
     if((typeof basket === "undefined") || basket === null){
@@ -140,7 +140,7 @@ function updateQuantity(item,basketId,delta){
     result = Inventory.update(
         updateQueryObject,
         {$inc: decUpdateOperation,
-         $set: {'timestamp': now } },
+         $set: {'carted.$.timestamp': now } },
         {w:1})
         
     // Roll back our cart update
@@ -178,7 +178,7 @@ function updateQuantityInitials(item,initials,basketId,value){
     result = Inventory.update(
         updateQueryObject,
         {$inc: decUpdateOperation,
-         $set: {'timestamp': now } },
+         $set: {'carted.$.timestamp': now } },
         {w:1})
         
     // Roll back our cart update

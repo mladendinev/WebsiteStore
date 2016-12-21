@@ -1,10 +1,11 @@
 import {Inventory} from './products.js';
-import {BASKET_ID,BRAINTREE_CLIENT_TOKEN,DELIVERY_COST,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR,BASKET_ID_SESSION} from './session-constants.js';
+import {LOADING_ADD_ITEM,BASKET_ID,BRAINTREE_CLIENT_TOKEN,DELIVERY_COST,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR,BASKET_ID_SESSION} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 
 export function updateBasket(item) {
   Session.set("time", new Date().getTime());
+  Session.set(LOADING_ADD_ITEM,true);
   if ((typeof amplify.store(BASKET_ID) !== "string") || amplify.store(BASKET_ID) === null) {
      amplify.store(BASKET_ID,"");
   }
@@ -30,6 +31,7 @@ export function updateBasket(item) {
       }
      };
     console.log((new Date() - Session.get("time"))/1000)
+    Session.set(LOADING_ADD_ITEM,false);
  });
 
 }

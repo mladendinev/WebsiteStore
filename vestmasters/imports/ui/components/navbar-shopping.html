@@ -17,21 +17,16 @@
                             class='img-responsive' src='images/basket/shopping-cart.png'/></a>
 
                 <a class="navbar-toggle" id="logo-bar-toggle">
-                    <img class='img-responsive'  src='images/white-logo-try.png'/>
+                    <img class='img-responsive' src='images/white-logo-try.png'/>
                 </a>
             </div>
 
 
             <!-- Collect the nav links, forms, and other content for toggling -->
 
-            <div class="collapse navbar-collapse" align="center" id="logo-bar">
-            <img class="img-responsive navbar-collapse" id="logo-image" src="images/white-logo-try.png">  
-            </div>
-            <a class="collapse navbar-collapse" id='basket-link' href="/basket">
-                {{>numberOfBasketItems}}
-                <img class='img-responsive' src='images/basket/shopping-cart.png'/></a>
+            <div class="collapse navbar-collapse">
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
                 <ul class="nav navbar-nav nav-bar-">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -41,14 +36,24 @@
                         </ul>
                     </li>
                 </ul>
+
+                <div align="center" id="logo-bar">
+                    <img class="img-responsive navbar-collapse" id="logo-image" src="images/white-logo-try.png">
+                </div>
+
                 <ul class="nav navbar-nav navbar-right">
                     <li class="promoLink"><a href="/main">MAIN</a></li>
                     <li class="mainLink"><a href="/contacts">CONTACTS</a></li>
                 </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
 
+
+                <a id='basket-link' href="/basket">
+                    <img  src='images/basket/shopping-cart.png'/>
+                     {{>numberOfBasketItems}}
+                </a>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
         <!-- /.container-fluid -->
     </nav>
 

@@ -37,8 +37,7 @@ function removeItemWhenInitialsEmpty(basketId,itemId,size,initials){
     //Update the inventory
     result = Inventory.update(
         {"_id" : new Meteor.Collection.ObjectID(itemId)},
-        {$pull: {"carted" : {"cartId" : basketId, "size": size}},
-         $set: {'timestamp': now }},
+        {$pull: {"carted" : {"cartId" : basketId, "size": size}}},
         {w:1})
 
 }
@@ -87,8 +86,7 @@ function removeUpdateQuantity(basketId,itemId,size,initials){
     //Update the inventory
     result = Inventory.update(
         {"_id":new Meteor.Collection.ObjectID(itemId), "carted" : {$elemMatch: updateQueryObject}},
-        {$inc: decUpdateOperation,
-         $set: {'timestamp': now } },
+        {$inc: decUpdateOperation},
         {w:1})
         
 }

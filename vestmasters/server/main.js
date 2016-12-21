@@ -4,7 +4,7 @@ import '../imports/api/products.js';
 import {Orders} from '../imports/api/products.js';
 import {Baskets} from '../imports/api/products.js';
 import {Inventory} from '../imports/api/products.js';
-import '../imports/api/server/publications.js'
+import './publications.js'
 
 var gateway;
 
@@ -34,7 +34,7 @@ Meteor.methods({
   sendConfirmationEmail: function(clientEmail,subjectEmail, emailData){
     check(clientEmail,String);
     check(subjectEmail,String);
-    check(emailData,Object);
+    check(emailData,Object); //TODO IMPORTANT check argument for security reasons
     SSR.compileTemplate('htmlEmail',Assets.getText('emailToClient.html'));
 
     Email.send({
