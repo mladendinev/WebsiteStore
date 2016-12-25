@@ -19,7 +19,7 @@ Template.shoppingTemplate.created = function () {
    this.autorun(() => {
     Meteor.subscribe("carousel");
   });
-  this.pagination = new Meteor.Pagination(Inventory, {perPage:6, sort:{index:1}});
+  this.pagination = new Meteor.Pagination(Inventory, {fields : {carted : 0},perPage:6, sort:{index:1}});
  };
 
 Template.shoppingTemplate.helpers({
@@ -29,7 +29,7 @@ Template.shoppingTemplate.helpers({
   	
     documents() {
       Template.instance().pagination.filters({"type" : FlowRouter.getQueryParam('product')});
-      // console.log(Template.instance().pagination.getPage());
+      console.log(Template.instance().pagination.getPage());
       return Template.instance().pagination.getPage();
     },
 
