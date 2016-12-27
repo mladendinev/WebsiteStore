@@ -11,6 +11,11 @@
   height: 500px;
 }
 
+.carousel-image{
+	max-height: 100%;
+	max-width: 100%;
+}
+
 @media (max-width: 480px){
 
 }

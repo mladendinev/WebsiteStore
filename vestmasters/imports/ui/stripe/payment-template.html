@@ -17,24 +17,28 @@
         <!--<p>Total Amount: {{total}}</p>-->
         <!--</div>-->
 
-
+         
         <fieldset>
             <legend align="center">Choose Payment Method</legend>
-                <div class="payment-details col-sm-8">
+               <div class="payment-container"> 
+                <span>
                     <input type="radio" name="payment-method" value="card" id="card-payment"> Pay with debit/credit card
                     <img src="/images/payment/visa.jpg">
                     <img src="/images/payment/mastercard.jpg"> <br>
                     <input type="radio" name="payment-method" value="paypal" id="paypal-payment">
                     Pay with PayPal<br>
+                </span>
                 </div>
         </fieldset>
 
 
-        <div id="card-payment-container" style="display:none">
+        <div id="card-payment-container" class="payment-container" style="display:none">
             <form class="form-horizontal" role="form" method="POST" id="payment-form">
                 <fieldset>
                     <legend align="center">Enter your card details</legend>
                     <div class="payment-details">
+
+                          
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="card_numb">Card Number</label>
                             <!--  Hosted Fields div container -->
@@ -66,7 +70,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group ">
+                        <div class="form-group">
 
                             <label class="control-label col-sm-3">Security Code</label>
                             <!--  Hosted Fields div container -->
@@ -98,7 +102,7 @@
         </div>
 
 
-        <div class="col-sm-8" id="paypal-payment-container" style="display:none">
+        <div id="paypal-payment-container" class="payment-container" style="display:none">
             <span class="paypal-button">
                  <img class="img-responsive" src="images/payment/paypal.png">
             </span>

@@ -1,9 +1,109 @@
+@media (min-width: 320px) and (max-width: 629px){
+     .shopping-page-item-div{
+       height:180px;
+      }
+
+      .item-link{
+        height:150px;
+      }  
+
+       .caption-div{
+        height:40px;
+        font-size: 8pt;
+       }
+       .thumbnail > img{
+         height:50%;
+       }
+
+       .sold-out-text {
+          font-size:12pt;
+       }
+}
+
+
+@media (min-width: 630px) and (max-width: 991px){
+ 
+   .shopping-page-item-div{
+     height:200px;
+    }
+
+      .item-link{
+        height:180px;
+      }  
+
+       .caption-div{
+        height:40px;
+        font-size: 9pt;
+       }
+
+        .thumbnail > img{
+          height:60%;
+       }
+       .sold-out-text {
+          font-size:12pt;
+       }
+
+
+}
+
+@media (min-width: 992px) and (max-width: 1200px){
+        .shopping-page-item-div{
+        height:300px;
+      }
+
+      .item-link{
+        height:280px;
+      }  
+
+       .caption-div{
+        height:50px;
+        font-size: 9pt;
+       }
+
+        .thumbnail > img{
+        height:70%;
+       }
+       .sold-out-text {
+          font-size:15pt;
+       }
+
+}
+
+@media (min-width: 1201px){
+      .shopping-page-item-div{
+        height:300px;
+      }
+
+      .item-link{
+        height:280px;
+      }  
+
+       .caption-div{
+        height:50px;
+        font-size: 9pt;
+       }
+
+        .thumbnail > img{
+        height:80%;
+       }
+       .sold-out-text {
+          font-size:20pt;
+       }
+
+}
+ 
+.caption-div {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
 
 body {
   padding-top: 0px;
   padding-bottom: 30px;
   background-color: black;
 }
+
 
 
 .theme-showcase .navbar .container {
@@ -106,9 +206,9 @@ body {
   background-color:white;
 }
 
-.caption-div{
-  font-size: 9pt;
-}
+.shopping-carousel-padding{
+  padding-bottom:20px;
+ }
 
 .sold-out-image {
   opacity: 0.2;
@@ -117,8 +217,12 @@ body {
 .sold-out-text {
   z-index: 2;
   position: absolute;
-  padding-top:40%;
-  padding-left:21%;
+  width: 100%;
+  height:100%;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   color: #333;
 }
 
