@@ -4,33 +4,33 @@
     </div>
     <div class="container-fluid">
         <div class="row carousel-height">
-            <div class=" col-xs-4 expand-div" >
-                {{>carouselTemplate carouselStyle="min-height:507px;max-height:507px"}}
+            <div class="col-md-offset-0 col-md-4 col-sm-offset-2 col-sm-8 col-xs-12 col-xs-offset-0 expand-div shopping-carousel-padding" >
+                {{>carouselTemplate carouselStyle="height:580px"}}
             </div>
-            <div class="col-xs-8 expand-div" >
+            <div class="col-md-8 col-md-offset-0 col-sm-offset-2 col-sm-8 col-xs-offset-0 col-xs-12 expand-div" >
 
                 {{#each documents}}
-                <div class="col-xs-6 col-md-4 hover-div-parent">
+                <div class="col-md-4 col-sm-6 col-xs-6 hover-div-parent shopping-page-item-div">
                     {{#if soldOut size quantity sizes quantitySize}}
-                    <a href="#" class="sold-out-container thumbnail">
+                    <a href="#" class="sold-out-container thumbnail item-link">
                     
-                        <h2 class = "sold-out-text"> <b> SOLD OUT </b> </h2>
-                        <img class="sold-out-image img-responsive" src="images/{{file}}" alt="T-Shirt" style="min-height: 193px; max-height:193px">
+                        <div class = "sold-out-text"> <span><b> SOLD OUT </b> </span> </div>
+                        <img class="sold-out-image shopping-item-image img-responsive" src="images/products/common/{{file}}" alt="T-Shirt" >
                          <div class="caption caption-div">
-                            <p class="alignLeft">{{product}}</p>
-
-                            <p class="alignRight">€{{price}}</p>
+                            <p style="color:#E0E0E0">{{product}}</p>
+                            <span style="flex-grow: 1"></span>
+                            <p  style="color:#E0E0E0">€{{price}}</p>
                          </div>
                          <div style="clear: both;"></div>
                     </a>
                     {{else}}
-                        <a href="/item?id={{extractObjectId _id}}" class="thumbnail">
-                         <img class="img-responsive" src="images/products/common/{{file}}" alt="{{product}}" style="min-height:193px; max-height:193px">
+                        <a href="/item?id={{extractObjectId _id}}" class="thumbnail item-link">
+                         <img class="img-responsive shopping-item-image" src="images/products/common/{{file}}" alt="{{product}}" >
                          
                           <div class="caption caption-div">
-                            <p class="alignLeft">{{product}}</p>
-
-                            <p class="alignRight">€{{price}}</p>
+                            <p>{{product}}</p>
+                            <span style="flex-grow: 1"></span>
+                            <p>€{{price}}</p>
                          </div>
                          <div style="clear: both;"></div>
                      </a>

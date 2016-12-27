@@ -1,6 +1,6 @@
 <template name="carouselTemplate">
 
- <div id="myCarousel" class="carousel slide" data-ride="carousel" style =   {{carouselStyle}}>
+ <div id="myCarousel" class="carousel slide" data-ride="carousel" style ={{carouselStyle}}>
                         <!-- Indicators -->
 
                         <ol id='indicator' class="carousel-indicators">
@@ -12,17 +12,18 @@
 
                         <div class="carousel-inner" role="listbox" style ={{carouselStyle}}>
                             <div class="item active" style ={{carouselStyle}}>
-                                <img class="img-responsive" src="images/carousel/dandy.png" alt="Model" style="max-width: 100%;max-height: 100%;">
+                                  <img class="img-responsive carousel-image" src="images/carousel/dandy.png" alt="Model">
                             </div>
-
+                            
+                            {{carouselSetStyle carouselStyle}}
                             {{#each carousel}}
-                            <div class="item" style ={{carouselStyle}}>
+                            <div class="item" style={{carouselStyleHelper carouselStyle}}>
                                 <a href={{link}}>
                                     <div class="carousel-caption">
                                         <h1>{{title}}</h1>
                                         <p>{{desc}}</p>
                                     </div>
-                                    <img class='img-responsive' src="images/products/common/{{image}}" style="max-width: 100%;max-height: 100%;" alt="Model">
+                                    <img class="img-responsive carousel-image" src="images/products/common/{{image}}"  alt="Model">
                                 </a>
                             </div>
                             {{/each}}
