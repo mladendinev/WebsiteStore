@@ -1,7 +1,31 @@
-@media (min-width: 990px) and (max-width: 1100px){
+@media (min-width: 1101px) {
   
   #logo-image{
-    max-width: 220px;
+    width: 350px;
+    max-height: 100%;
+  }
+
+  #logo-bar-toggle {
+    display:none;
+  }
+
+  #bs-example-navbar-collapse-1{
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1100px){
+  
+  #logo-image{
+    max-width: 270px;
+  }
+
+  #logo-bar-toggle {
+    display:none;
+  }
+
+   #bs-example-navbar-collapse-1{
+    display: none !important;
   }
 
 }
@@ -26,16 +50,30 @@
 
 }
 
-@media (min-width: 992px){
+@media (max-width: 991px) and (min-width: 769px){
 
-  #bs-example-navbar-collapse-1{
-    display: none !important;
-  }
+ 
+
+  #logo-bar-toggle {
+  max-height: 100%;
+  width: 350px;
+}
 
 }
+
+@media (max-width: 768px){
+
+  #logo-bar-toggle {
+  max-height: 100%;
+  width: 200px;
+  }
+}
+
 .navbar {
  line-height:1.4;
 }
+
+
 
 #navbar-container{
   width:100%;
