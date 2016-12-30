@@ -4,7 +4,7 @@ import '../imports/api/products.js';
 import {Orders} from '../imports/api/products.js';
 import {Baskets} from '../imports/api/products.js';
 import {Inventory} from '../imports/api/products.js';
-import '../imports/api/server/publications.js'
+import './publications.js'
 
 var gateway;
 
@@ -34,7 +34,7 @@ Meteor.methods({
   sendConfirmationEmail: function(clientEmail,subjectEmail, emailData){
     check(clientEmail,String);
     check(subjectEmail,String);
-    check(emailData,Object);
+    check(emailData,Object); //TODO IMPORTANT check argument for security reasons
     SSR.compileTemplate('htmlEmail',Assets.getText('emailToClient.html'));
 
     Email.send({
@@ -51,23 +51,24 @@ Meteor.methods({
      return response.clientToken;
    },
 
-   createTransaction: function(nonceFromTheClient,basketId,deliveryDetails) {
+   createTransaction: function(nonceFromTheClient,basketId,deliveryDetails,secret) {
     var gatewayTransactionSync = Meteor.wrapAsync(gateway.transaction.sale,gateway.transaction); 
        check(nonceFromTheClient,String);
        check(basketId,String); //TODO Add proper check for the items, otherwise a security risk
+       check(secret,String);
        check(deliveryDetails,Object); //TODO Add proper check for the delivery, otherwise a security risk
-     
+       
       now = new Date();
       //Make sure the cart is still active and set to 'pending'. Also
       // fetch the cart details so we can calculate the checkout price
       var result = Baskets.update(
-        {'_id': basketId, 'status': 'active',},
+        {'_id': basketId, 'secret' : secret,'status': 'active',},
         update={$set: { 'status': 'pending','lastModified': now } } )
        if (result ===0) {
         throw new Meteor.Error("INACTIVE CART", "Your cart has expired");
        }
 
-      var basket = Baskets.findOne({"_id" : basketId});
+      var basket = Baskets.findOne({"_id" : basketId,'secret' : secret});
 
       if(basket.length === 0){
          throw new Meteor.Error("BASKET_EMPTY", "Problem with transaction");

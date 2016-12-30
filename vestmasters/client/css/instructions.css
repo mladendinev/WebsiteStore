@@ -3,7 +3,7 @@
     font-size:13px;
     color:black;
     font-weight:bold;
-    padding-top:30%;
+    padding-top:5%;
 }
 
 .background-desc{
@@ -14,4 +14,8 @@
 
 .info-body {
  background-color: #f5f5ef;
+}
+
+.who-we-are-photo img{
+
 }

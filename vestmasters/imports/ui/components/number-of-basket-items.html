@@ -1,5 +1,5 @@
 <template name="numberOfBasketItems">
-    {{#if equals numberOfItemsInBasket null}}
+    {{#if checkBasket numberOfItemsInBasket null}}
        {{numberOfItemsInBasket}}
     {{else}}
       ({{numberOfItemsInBasket}})

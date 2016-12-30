@@ -3,7 +3,7 @@ import '../components/shopping-product.html';
 import '../components/number-of-basket-items.js';
 import '../components/dropdown-products.js';
 import '../components/navbar-shopping.js';
-import {ITEMS_IN_BASKET_STORE,NUMBER_ITEMS_SESSION, BASKET_ID} from '../../api/session-constants.js';
+import {LOADING_ADD_ITEM,NUMBER_ITEMS_SESSION, BASKET_ID} from '../../api/session-constants.js';
 import {createNewBasketAndUpdate,updateBasket} from '../../api/method-calls.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
@@ -31,17 +31,27 @@ Template.itemTemplate.helpers({
 
     outOfStock(sizeDict,size){
        return (typeof sizeDict[size] === "undefined" || sizeDict[size] <= 0)
+    },
+
+    buttonText(){
+      if(Session.get(LOADING_ADD_ITEM)){
+        return "ADDING YOUR ITEM...";
+      } else {
+        return "ADD TO YOUR SHOPPING CART";
+      }
     }
 });
 
 Template.itemTemplate.events({
-
+ 
  'click .item-small-image' (event) {
  	$("#product-main-image").attr("src",$(event.currentTarget).attr("src"));
  },
 
  'click #add-to-basket-button' (event) {
-   // var currentValue = amplify.store(ITEMS_IN_BASKET_STORE);
+    if(Session.get(LOADING_ADD_ITEM)){
+      return;
+    } 
     
     var size = $("#sel-size").val();
     if((typeof size === "undefined") || size === null) {
@@ -62,7 +72,7 @@ Template.itemTemplate.events({
           "initials" : initials,
           "quantity" : 1
            };
-
+    
     updateBasket(item);
 }
 

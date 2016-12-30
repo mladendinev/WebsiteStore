@@ -1,3 +1,39 @@
+@media (max-width:400px) {
+
+  .proceed-to-checkout-button {
+   font-size: 7pt;
+   }
+  .table-div {
+  font-size: 9pt;
+ }  
+
+}
+
+
+@media (min-width:401px) and (max-width: 500px) {
+  
+.proceed-to-checkout-button {
+   font-size: 8pt;
+   }
+  .table-div {
+  font-size: 9pt;
+ }  
+
+}
+
+@media (min-width: 501px) {
+  
+.proceed-to-checkout-button {
+   font-size: 13pt;
+   }
+
+ .table-div {
+  font-size: 15pt;
+ }
+
+}
+
+
 .img-basket {
 	float:left;
 	margin-right: 10px;

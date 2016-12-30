@@ -1,39 +1,59 @@
-.landing-main {
-  background-image: url("images/background-landing.png"); 
-  width: 100%; 
-  overflow: hidden;
-  background-repeat: no-repeat;
-  background-size: cover;
+.sampleClass {
+	  background-image: url("images/landingPage/VEST_MASTERS_HOMEPAGE.jpg");
+       background-repeat:no-repeat;
+       background-size:cover;
+        background-position: top center;
+         width: 100%;
+      /*
+      width: 100%;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-size: cover;
+      */
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
 }
 
-.landing-container {
- float: left;
- width: 30%;
- 
-}
 
-.logo {
-padding-top: 5%;
-padding-left: 27%;
-color: white;
-font-size: 60pt;
+
+
+
+.logo-text-landing {
+  padding-top: 5%;
+  padding-left: 12%;
+  color: white;
+  font-size: 70px;
+  font-weight:bold;
 }
 
 .landing-menu {
-padding-top: 110%;
-padding-left: 27%;
-padding-bottom: 2%;
-font-size: 15pt;
-color: white;
+  padding-top: 10%;
+  padding-left: 27%;
+  padding-bottom: 2%;
+  font-size: 20px;
+  color: white;
 }
 
 .landing-art-text {
- float: left;
- width: 70%; 
- padding-top: 30%;
- padding-left: 40%;
- color: white;
- font-family: "Helvetica"
+   float: left;
+   width: 70%;
+   padding-top: 30%;
+   padding-left: 40%;
+   color: white;
+   font-family: "Helvetica"
+}
+
+@media (max-width :768px){
+   .logo-text-landing{
+     font-size: 20px;
+   }
+}
+
+@media (max-width :930px){
+   .logo-text-landing{
+     font-size: 30px;
+   }
 }
 
 

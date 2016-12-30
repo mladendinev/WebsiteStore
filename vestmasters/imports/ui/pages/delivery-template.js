@@ -50,7 +50,7 @@ Template.deliveryTemplate.onRendered(function(){
 Template.deliveryTemplate.onCreated(function(){
 
   this.autorun(() => {
-    Meteor.subscribe("countries");
+    Meteor.subscribe("deliveryPrices");
     Meteor.subscribe("products");
   });
 });
@@ -79,7 +79,7 @@ Template.deliveryTemplate.onCreated(function(){
 
  Template.deliveryTemplate.helpers({
     countries: function(){
-         countries = Countries.find({},{sort:{'country': 1}});
+         countries = Countries.find({},{sort:{'Country': 1}});
          return countries;
   },
 });

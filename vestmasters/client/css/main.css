@@ -173,7 +173,7 @@
   position: fixed;
   top: 20px;
   z-index: -1;
-  height: 70%;
+  height: 80%;
   overflow: hidden;
 }
 
@@ -189,8 +189,8 @@
 
 #top-div-left h1{
    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   font-size:28px;
-   font-weight:bold;
+   font-size:18px;
+   font-weight:500;
    padding-bottom:3%;
    padding-top:3%;
    margin-top: 0px;

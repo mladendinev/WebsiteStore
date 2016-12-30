@@ -16,9 +16,16 @@ import '../../ui/pages/who-we-are.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
+    triggersEnter:[function(){
+        console.log("pendel");
+        $('body').addClass('sampleClass');
+    }],
   action() {
    BlazeLayout.render('App_body', { main: 'landingTemplate' });
   },
+    triggersExit:[function(){
+                      $('body').removeClass('sampleClass');
+                  }],
 });
 
 FlowRouter.route('/main',{

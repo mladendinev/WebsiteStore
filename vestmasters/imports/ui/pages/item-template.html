@@ -8,7 +8,9 @@
                 <div class="item-small-images">
                     <img class="img-responsive item-small-image" src="images/products/common/{{item.file}}"/>
                     {{#each img in item.additionalImages}}
-                    <img class="img-responsive item-small-image" src="images/products/additional/{{img}}"/>
+                    <div class="item-image-container">
+                        <img class="img-responsive item-small-image" src="images/products/additional/{{img}}"/>
+                    </div>
                     {{/each}}
                 </div>
                 <div class="item-main-image">
@@ -31,7 +33,7 @@
                     <p align="center">
                         {{item.product}} <br/>
                         Mod. <b> {{item.productInfo.model}} </b> <br/>
-                        <b> {{item.price}}$</b> <br/>
+                        <b> € {{item.price}}</b> <br/>
                     </p>
                 </div>
                 <hr class="item-product-properties-separator"/>
@@ -68,9 +70,7 @@
 
 
                 <div id="button-div">
-                    <button type="button" class="btn btn-default item-page-button" id="add-to-basket-button">ADD TO
-                        YOUR
-                        SHOPPING CART
+                    <button type="button" class="btn btn-default item-page-button" id="add-to-basket-button"> {{buttonText}}
                     </button>
                 </div>
             </div>

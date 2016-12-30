@@ -13,6 +13,6 @@ Template.dropdownProducts.onCreated(function(){
 
 Template.dropdownProducts.helpers({
  products() {
-        return Products.find({},{sort:{'productName': -1}});
+        return Products.find({},{sort:{'productName': 1}});
     },
 });

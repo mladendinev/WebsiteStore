@@ -25,50 +25,36 @@ Template.successPayment.helpers({
      return parseInt(Session.get(ORDER_INFO).amount);
      }
     },
-    
-    displayBasket(){
-    var result = "";
-    if((typeof Session.get(ORDER_INFO) !== "undefined") && Session.get(ORDER_INFO) !== null) { 
-    var basket = Session.get(ORDER_INFO).items;
-    basket.itemsDetails.forEach(function(item){
-    item.initials.forEach(function(initial){
-      var quantityCounter = item["quantity" + initial];
-      while(quantityCounter>0){
-       result = result + "<tr>\n" +
-                    "<td><img class='img-responsive img-circle img-basket' src='images/products/common/" + item.file +"' width='40px'/>\n" +
-                    "<div class='table-div float-left'>" + item.product + "</div>\n" +
-                    "</td>"
-      if(item.size !== "noSize") {
-      result = result +  "<td>\n" +
-                     "<div class='table-div float-left'>" + item.size + "</div>\n" +
-                     "</td>\n"
-      } else {
-       console.log(item.size !== "noSize");       
-       result = result + "<td>\n" +
-                 "<div class='table-div float-left'> n/a </div>\n" +
-                 "</td>\n"
-     }
-    
-     if (initial !== "noInitials") {
-        result = result + "<td>\n" +
-                 "<div class='table-div float-left'>" + initial + "</div>\n" +
-                "</td>\n"
-     } else {
-        result = result + "<td>\n" +
-                          "<div class='table-div float-left'> n/a </div>" +
-                          "</td>\n"
-     }
-        result = result + "<td>\n" +
-                    "<div class='table-div float-left'>" + item.price + "</div>\n" +
-                    "</div>\n" +
-                "</td>\n" +
-                "</tr>\n"
-      quantityCounter = quantityCounter-1;
-      }
-     });
-    });
-   }
-  return result;
-  }
 
+  getItemDetails(){
+   if((typeof Session.get(ORDER_INFO) !== "undefined") && Session.get(ORDER_INFO) !== null) { 
+     var basket = Session.get(ORDER_INFO).items;
+    return basket.itemsDetails;
+  } else {
+    return [];
+  } 
+  }, 
+
+  getInitial(item){
+    return item.initials;
+  },
+
+  repeatedInitial(item, initial){
+    var quantityCounter = item["quantity" + initial];
+    var result = new Array(quantityCounter);
+    for (var i =0; i<result.length; i++){
+      result[i]=i;
+    }
+    console.log(result);
+    return result;
+  },
+
+  hasInitial(initial){
+    return initial !== "noInitials";
+  },
+
+  hasSize(size){
+     return size !== "noSize";
+  },
+    
 });

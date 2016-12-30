@@ -9,6 +9,15 @@ if (Meteor.isClient){
   });
 }
 
-Template.registerHelper( 'equals', ( a1, a2 ) => {
-  return a1 === a2;
+Template.registerHelper( 'equals', ( a1) => {
+  var vest = "vests"
+  return a1.indexOf(vest) !== -1;
+});
+
+Template.registerHelper( 'checkBasket', ( a1,a2) => {
+   return a1 === a2;
+});
+
+Template.registerHelper('checkVal',(a1) =>{
+      return a1.split(' ')[0]
 });

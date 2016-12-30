@@ -2,23 +2,24 @@ import {Baskets,Inventory} from '../imports/api/products.js';
 
 Meteor.methods({
 	
-checkForExpirationClient: function(basketId){
+checkForExpirationClient: function(basketId,secret){
    check(basketId,String);
+   check(secret,String);
    now = new Date()
    var timeout = 900000;
    threshold = new Date(now - timeout);
     //Lock and find all the expiring carts
-    var basket = Baskets.findOne({'_id': basketId});
+    var basket = Baskets.findOne({'_id': basketId, 'secret' : secret});
     if( (typeof basket !== "undefined") && basket !== null) {
 
     var  result = Baskets.update(
-                 {'_id': basketId, 'status': 'active', 'lastModified': { $lt: threshold } },
+                 {'_id': basketId,'secret' : secret, 'status': 'active', 'lastModified': { $lt: threshold } },
                  {$set: { 'status': 'clientExpiring'} });
 
 
     if(result === 0) {
          Baskets.update(
-                 {'_id': basketId},
+                 {'_id': basketId,'secret' : secret},
                  {$set: { 'lastCheckedByClient': now} });
         var warning = now - basket.lastModified > 600000;
         return {"expired" : false,"warning" : warning};
@@ -46,7 +47,7 @@ checkForExpirationClient: function(basketId){
           }
         })
          //Actually expire each cart
-        Baskets.remove({'_id': basket._id});
+        Baskets.remove({'_id': basket._id,'secret' : secret});
         return {"expired" : true};
     }
    

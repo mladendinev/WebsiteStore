@@ -23,4 +23,11 @@ Template.carouselTemplate.helpers({
    sizeList(){
      return Carousel.find({}).count();
    },
+   carouselStyleHelper(carouselStyle){
+    console.log("The style" + Template.instance().style);
+    return Template.instance().style;
+   },
+   carouselSetStyle(carouselStyle){
+     Template.instance().style = carouselStyle;
+   }
 });
