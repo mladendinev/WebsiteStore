@@ -30,9 +30,7 @@ Template.shoppingTemplate.helpers({
   	
     documents() {
       Template.instance().pagination.filters({"type" : FlowRouter.getQueryParam('product')});
-      var pageNumb = Number(FlowRouter.getQueryParam('page'));
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + pageNumb);
-      console.log("Geiche" + Template.instance().pagination.currentPage(parseInt(pageNumb)));
+      console.log(Template.instance().pagination.currentPage(1))
       return Template.instance().pagination.getPage();
     },
 

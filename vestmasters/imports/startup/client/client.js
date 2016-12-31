@@ -19,19 +19,6 @@ Template.registerHelper( 'checkBasket', ( a1,a2) => {
 });
 
 Template.registerHelper('checkVal',(a1) =>{
-      console.log('f!#@#@!#!');
       return a1.split(' ')[0]
 });
 
-//Template.registerHelper('pathForPost',() =>{
-//    var product = this;
-//    var params = {
-//        product: product.productName,
-//        pageId: pageId
-//    };
-//    var queryParams = {comments: "yes"};
-//    var routeName = "blogPost";
-//    var path = FlowRouter.path(routeName, params, queryParams);
-//
-//    return path;
-//});
