@@ -45,7 +45,6 @@ Template.successPayment.helpers({
     for (var i =0; i<result.length; i++){
       result[i]=i;
     }
-    console.log(result);
     return result;
   },
 

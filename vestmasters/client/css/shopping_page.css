@@ -8,8 +8,9 @@
       }  
 
        .caption-div{
-        height:40px;
-        font-size: 8pt;
+          height:40px;
+          font-size: 8pt;
+          bottom:0
        }
        .thumbnail > img{
          height:50%;
@@ -20,6 +21,9 @@
        }
 }
 
+.caption-div p{
+  font-weight:bold;
+}
 
 @media (min-width: 630px) and (max-width: 991px){
  

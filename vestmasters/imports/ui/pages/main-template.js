@@ -22,7 +22,6 @@ Template.mainTemplate.helpers({
  },
 
  getClass(index,length){
-  console.log(length)
   var baseClass ="col-md-12 col-sm-4 shop-black-background"
   if(index === 0){
     return baseClass + " shop-content-thirds-height-margin shop-content-padding-right-top"
@@ -46,6 +45,5 @@ Template.mainTemplate.events({
 
   'click #bottom-button' (event) {
      scrollWin('#bottom-button', '#top-button' ,120)
-     console.log(amplify.store('top_button_clicked'));
    },
 });

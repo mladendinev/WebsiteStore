@@ -19,17 +19,20 @@ Template.shoppingTemplate.created = function () {
    this.autorun(() => {
     Meteor.subscribe("carousel");
   });
-  this.pagination = new Meteor.Pagination(Inventory, {fields : {carted : 0},perPage:6, sort:{index:1}});
+  var pageNumb = Number(FlowRouter.getQueryParam('page'))
+  this.pagination = new Meteor.Pagination(Inventory, {fields : {carted : 0},perPage:6, sort:{index:1}, page:pageNumb});
  };
 
 Template.shoppingTemplate.helpers({
     templatePagination() {
-          return Template.instance().pagination;
+       return Template.instance().pagination;
     },
   	
     documents() {
       Template.instance().pagination.filters({"type" : FlowRouter.getQueryParam('product')});
-      console.log(Template.instance().pagination.getPage());
+      var pageNumb = Number(FlowRouter.getQueryParam('page'));
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + pageNumb);
+      console.log("Geiche" + Template.instance().pagination.currentPage(parseInt(pageNumb)));
       return Template.instance().pagination.getPage();
     },
 
@@ -38,6 +41,7 @@ Template.shoppingTemplate.helpers({
     clickEvent() {
         return function(e, templateInstance, clickedPage) {
             e.preventDefault();
+            FlowRouter.setQueryParams({"page":clickedPage})
         };
     },
     extractObjectId(id) {

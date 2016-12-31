@@ -24,7 +24,6 @@ Template.carouselTemplate.helpers({
      return Carousel.find({}).count();
    },
    carouselStyleHelper(carouselStyle){
-    console.log("The style" + Template.instance().style);
     return Template.instance().style;
    },
    carouselSetStyle(carouselStyle){

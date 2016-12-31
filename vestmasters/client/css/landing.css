@@ -28,20 +28,27 @@
 }
 
 .landing-menu {
-  padding-top: 10%;
-  padding-left: 27%;
+  padding-top: 30%;
+  padding-left: 12%;
   padding-bottom: 2%;
   font-size: 20px;
   color: white;
+  position:fixed;
+  bottom:0;
 }
 
-.landing-art-text {
-   float: left;
+.landing-menu a{
+   color:white;
+}
+
+
+.landing-intro p {
    width: 70%;
-   padding-top: 30%;
    padding-left: 40%;
+   float: right;
    color: white;
-   font-family: "Helvetica"
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size:15px;
 }
 
 @media (max-width :768px){

@@ -23,8 +23,9 @@
 }
 
 .footer-content a  {
+   font-size: 15px;
    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   font-size:15px;
+   font-weight: bold;
    color:#B39F88;
    display:block;
    padding-left:none;
@@ -32,6 +33,7 @@
 
 .footer-social a{
    display:block;
+   font-weight: bold;
    padding-top:5px;
    padding-bottom:10px;
    color:white;

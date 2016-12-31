@@ -1,4 +1,4 @@
-import './description-template.html';
+import './how-does-it-work-template.html';
 import '../components/navbar-main.js';
 
 Template.howDoesItWork.onRendered(function(){

@@ -18,13 +18,12 @@ Template.paymentTemplate.onCreated(function(){
 Template.paymentTemplate.onRendered(function(){
    Session.set("DocumentTitle","Payment");
    var deliveryDetails = amplify.store('DELIVERY_INFO');
-   console.log(deliveryDetails);
    $("body").removeClass();
    $("body").addClass("body-shopping");
    $("#credit-card-number").prop('required',true);
    $("#payment-form" ).validate();
 
-        if((typeof this.clientToken !== "undefined") && this.clientToken !== null) {
+   if((typeof this.clientToken !== "undefined") && this.clientToken !== null) {
 
         var form = document.querySelector('#payment-form');
         var submit = document.querySelector('#credit-card-submit');
@@ -102,11 +101,8 @@ Template.paymentTemplate.onRendered(function(){
 
               else {
 
-                 console.log(field);
                 // Add helper text for an invalid card number
-                console.log(typeof event.emmitedBy);
                 if (event.emittedBy === 'number') {
-                  console.log(event);
                   $('#card-number').next('span').text('Please provide valid card');
                 }
               }
@@ -115,7 +111,6 @@ Template.paymentTemplate.onRendered(function(){
 
           hostedFieldsInstance.on('empty', function (event) {
             var field = event.fields[event.emittedBy];
-            console.log("is empty")
             if (field.isEmpty) {
                $(field.container).next('span').text('This field is required');
             }
@@ -136,12 +131,10 @@ Template.paymentTemplate.onRendered(function(){
                   // Handle error in Hosted Fields tokenization
                   switch (tokenizeErr.code) {
                         case 'HOSTED_FIELDS_FIELDS_EMPTY':
-                          console.error('All fields are empty! Please fill out the form.');
                           emptyMessageTrigger();
 //                          invalidMessageTrigger()
                           break;
                         case 'HOSTED_FIELDS_FIELDS_INVALID':
-                          console.error('Some fields are invalid:', tokenizeErr.details.invalidFieldKeys);
                           var array = tokenizeErr.details.invalidFieldKeys
                           invalidMessageTrigger(array);
                           break;
@@ -149,7 +142,6 @@ Template.paymentTemplate.onRendered(function(){
                           console.error('Tokenization failed server side. Is the card valid?');
                           break;
                         case 'HOSTED_FIELDS_TOKENIZATION_NETWORK_ERROR':
-                          console.error('Network error occurred when tokenizing.');
                           break;
                         default:
                           console.error('Something bad happened!', tokenizeErr);

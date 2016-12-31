@@ -11,13 +11,12 @@ import '../../ui/pages/basket-overview.js';
 import '../../ui/stripe/payment-template.js';
 import '../../ui/pages/delivery-template.js';
 import '../../ui/pages/successful-transaction.js';
-import '../../ui/pages/how-does-it-work.js';
+import '../../ui/pages/how-does-it-work-template.js';
 import '../../ui/pages/who-we-are.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
     triggersEnter:[function(){
-        console.log("pendel");
         $('body').addClass('sampleClass');
     }],
   action() {
