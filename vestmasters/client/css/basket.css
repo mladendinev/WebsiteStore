@@ -37,6 +37,7 @@
 .img-basket {
 	float:left;
 	margin-right: 10px;
+  max-height:40px;
 
 }
 
