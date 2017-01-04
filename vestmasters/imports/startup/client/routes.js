@@ -13,6 +13,8 @@ import '../../ui/pages/delivery-template.js';
 import '../../ui/pages/successful-transaction.js';
 import '../../ui/pages/how-does-it-work-template.js';
 import '../../ui/pages/who-we-are.js';
+import '../../ui/pages/terms-cond-template.js';
+import '../../ui/pages/privacy-template.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
@@ -96,5 +98,19 @@ FlowRouter.route('/who-we-are',{
   name: 'whoWeAre',
    action()  {
    BlazeLayout.render('App_body', { main: 'whoWeAre' });
+  },
+});
+
+FlowRouter.route('/termsandconditions',{
+  name: 'termsAndCond',
+   action()  {
+   BlazeLayout.render('App_body', { main: 'termsTemplate' });
+  },
+});
+
+FlowRouter.route('/privacypolicy',{
+  name: 'policy',
+   action()  {
+   BlazeLayout.render('App_body', { main: 'privacyTemplate' });
   },
 });

@@ -65,8 +65,6 @@ Template.shoppingTemplate.helpers({
 });
 
 
-
-
 Template.shoppingTemplate.events({
   'click #sel1'(e,tmpl) {
     e.preventDefault();
