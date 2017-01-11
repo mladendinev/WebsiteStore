@@ -19,8 +19,7 @@ Template.shoppingTemplate.created = function () {
    this.autorun(() => {
     Meteor.subscribe("carousel");
   });
-  var pageNumb = Number(FlowRouter.getQueryParam('page'))
-  this.pagination = new Meteor.Pagination(Inventory, {fields : {carted : 0},perPage:6, sort:{index:1}, page:pageNumb});
+  this.pagination = new Meteor.Pagination(Inventory, {fields : {carted : 0},perPage:6, sort:{index:1}, page: Number(FlowRouter.getQueryParam('page'))});
  };
 
 Template.shoppingTemplate.helpers({
@@ -29,8 +28,9 @@ Template.shoppingTemplate.helpers({
     },
   	
     documents() {
+      var templateInstance = this;
       Template.instance().pagination.filters({"type" : FlowRouter.getQueryParam('product')});
-      console.log(Template.instance().pagination.currentPage(1))
+
       return Template.instance().pagination.getPage();
     },
 

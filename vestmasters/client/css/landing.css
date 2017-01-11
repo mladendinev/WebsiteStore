@@ -25,6 +25,7 @@
   color: white;
   font-size: 70px;
   font-weight:bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .landing-menu {
@@ -43,12 +44,13 @@
 
 
 .landing-intro p {
-   width: 70%;
-   padding-left: 40%;
-   float: right;
+   width: 38%;
+   padding-left: 12%;
+   margin-right:7%;
+   padding-top:5%;
    color: white;
    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   font-size:15px;
+   font-size:16px;
 }
 
 @media (max-width :768px){
