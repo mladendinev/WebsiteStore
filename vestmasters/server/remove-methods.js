@@ -13,11 +13,19 @@ Meteor.methods({
    Meteor.defer(function(){
     removeSizeWhenZero(basketId,itemId,size,initials,secret);
     removeItemWhenInitialsEmpty(basketId,itemId,size,initials,secret);
+    removeBasketWhenEmpty(basketId);
    })
    
   },
    
 });
+
+function removeBasketWhenEmpty(basketId){
+  Baskets.remove(
+  {'_id': basketId,
+    'itemsDetails' : {$size : 0}
+    });
+}
 
 function removeItemWhenInitialsEmpty(basketId,itemId,size,initials,secret){
     var now = new Date();
