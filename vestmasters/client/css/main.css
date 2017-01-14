@@ -3,7 +3,7 @@
   height: 547.97px;
  }
 
-.shop-content-padding-right-top {
+ .shop-content-padding-right-top {
    padding: 0px 0px 2.5px 0px;
  }
  .shop-content-padding-right-mid {
@@ -247,4 +247,8 @@
 
 #bottom-button {
  bottom:0;
+}
+
+.central-image {
+  width: 100%;
 }
