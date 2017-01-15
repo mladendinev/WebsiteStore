@@ -1,41 +1,71 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta name="viewport" content="width=device-width"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>HTML email test</title>
-    <link href="styles.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="styles.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 
 <body itemscope itemtype="http://schema.org/EmailMessage">
 
-<div id="confirmatonMessage">
-    <h>Thank you for your purchase</h>
+<div class="container">
+    <div id="confirmatonMessage">
+        <h align="center"><b>Thank you for your purchase</b></h>
+        <p>
+            Dear Friend,
+            here is your order.
+
+
+            Thank you for choosing our line of products designed for men like you.
+
+            Your Vest Masters clothes will be made with extreme care and under our supervision. Every detail is
+            important
+            and every stitch is followed with passion.
+
+            We will achieve them with care as quickly as possible ... but what is beautiful needs its time to be born.
+
+            Come back soon and find out all the new creations designed by Vest Masters.
+
+            All the best
+
+            Federico and Fabio
+        </p>
+
+    </div>
+
+    <div class="order-details">
+        <table>
+            <tr>
+                <td></td>
+                <td width="600">
+                    <table width="100%" style="border: 1px solid #eee;">
+
+                        <tr>
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
+                                Order id:
+                            </th>
+                            <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">{{order_id}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
+                                Products
+                            </th>
+                            <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">{{products}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </div>
 
 </div>
-<table>
-    <tr>
-        <td></td>
-        <td width="600">
-            <table width="100%" style="border: 1px solid #eee;">
-
-                <tr>
-                    <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
-                        Order id:
-                    </th>
-                    <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">{{order_id}}</td>
-                </tr>
 
 
-                <tr>
-                    <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
-                        Products
-                    </th>
-                    <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">{{products}}</td>
-                </tr>
-
-            </table>
-        </td>
-    </tr>
-</table>
 </body>
 </html>
+

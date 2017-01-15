@@ -99,12 +99,9 @@ export function createTransaction(nonce){
                   console.log(error.error);
                   }
                 } else {
-                  var delivery_info = amplify.store("DELIVERY_INFO");
-                  console.log(success);
-                  //emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
+
                   amplify.store(ORDER_ID,success);
-//                 Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "confirmationEmail",emailData)
-                  console.log("Errorless Transaction");
+
                   //TODO replace the email with a real one
                   amplify.store(BRAINTREE_CLIENT_TOKEN,null);
                   Session.set(PAYMENT_ERROR,null);

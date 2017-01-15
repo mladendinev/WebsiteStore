@@ -64,6 +64,10 @@ Template.deliveryTemplate.onCreated(function(){
            map[$(this).attr("name")] = $(this).val();
         });
         amplify.store("DELIVERY_INFO",map);
+        var delivery_info = amplify.store("DELIVERY_INFO");
+        emailData = {'order_id': 13231231, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
+        console.log(emailData);
+        Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "Confirmation Email (Vest Masters)",emailData)
         FlowRouter.go('Payment');
     },
 

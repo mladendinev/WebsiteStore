@@ -15,6 +15,7 @@ import '../../ui/pages/how-does-it-work-template.js';
 import '../../ui/pages/who-we-are.js';
 import '../../ui/pages/terms-cond-template.js';
 import '../../ui/pages/privacy-template.js';
+import '../../ui/pages/business-opportunity.js';
 
 FlowRouter.route('/',{
   name: 'App.home',
@@ -112,5 +113,12 @@ FlowRouter.route('/privacypolicy',{
   name: 'policy',
    action()  {
    BlazeLayout.render('App_body', { main: 'privacyTemplate' });
+  },
+});
+
+FlowRouter.route('/businessOpportunity',{
+  name: 'businessOpportunity',
+   action()  {
+   BlazeLayout.render('App_body', { main: 'businessOpp' });
   },
 });

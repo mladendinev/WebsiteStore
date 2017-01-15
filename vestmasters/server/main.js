@@ -39,7 +39,7 @@ Meteor.methods({
 
     Email.send({
       to: clientEmail,
-      from: "clients@example.com",
+      from: "clients@vestmasters.com",
       subject: subjectEmail,
       html: SSR.render('htmlEmail', emailData),
     });
