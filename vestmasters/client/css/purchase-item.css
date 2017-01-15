@@ -99,6 +99,12 @@
  text-align: center;
  }
 
+
+ .modal-body p {
+   display: table-cell;
+   word-wrap: break-word;
+ }
+
  .padding-item-container{
  padding-bottom:3%;
  }
