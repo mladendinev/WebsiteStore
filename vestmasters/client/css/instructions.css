@@ -7,10 +7,12 @@
 
 .text-desc{
     padding-top:5%;
+    padding-bottom:3%;
 }
 
 .instr-text{
     padding-top:10%;
+    padding-bottom:3%;
 }
 
 .instr-text a, .text-desc a{

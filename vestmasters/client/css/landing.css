@@ -17,15 +17,22 @@
 
 
 
+@font-face {
+    font-family: "PortagoITC TT";
+    src: url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.eot");
+    src: url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.svg#PortagoITC TT") format("svg");
+}
 
-
-.logo-text-landing {
+.logo-text-landing p {
   padding-top: 5%;
   padding-left: 12%;
   color: white;
-  font-size: 70px;
-  font-weight:bold;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 90px;
+  font-family: "PortagoITC TT";
 }
 
 .landing-menu {
@@ -42,7 +49,6 @@
    color:white;
 }
 
-
 .landing-intro p {
    width: 38%;
    padding-left: 12%;
@@ -53,16 +59,41 @@
    font-size:16px;
 }
 
-@media (max-width :768px){
-   .logo-text-landing{
-     font-size: 20px;
-   }
+
+/* Portrait and Landscape */
+@media screen
+  and (device-width: 360px)
+  and (device-height: 640px)
+  and (-webkit-device-pixel-ratio: 3) {
+        .logo-text-landing p{
+             font-size: 25px;
+        }
+
+       .landing-intro
+        {
+           display: none;
+        }
+
+
 }
 
-@media (max-width :930px){
-   .logo-text-landing{
-     font-size: 30px;
-   }
+
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+          .logo-text-landing p{
+               font-size: 25px;
+          }
+
+         .landing-intro
+          {
+             display: none;
+          }
+
+
+
+
 }
 
 

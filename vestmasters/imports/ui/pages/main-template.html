@@ -14,30 +14,35 @@
             <div class="col-md-4 col-sm-6 shop-padding shop-content-height shop-black-background">
                 <div class="shop-black-background shop-content-help-text-height-margin shop-content-padding">
                     <div id="top-div-left" class="shop-white-background shop-content-help-text-height">
-                    <h1 align="left"> HOW DOES IT WORK? </h1>
+                        <h1 align="left"> HOW DOES IT WORK? </h1>
 
-                    <p> We create fashion since 20 years, and today we produce vest for pleasure. Our men's vests are
+                        <p> We create fashion since 20 years, and today we produce vest for pleasure. Our men's vests
+                            are
 
-                        designed for business and for leisure.Colors, shapes and
+                            designed for business and for leisure.Colors, shapes and
 
-                        details are our must. ... <a class='shop-content-help-text-height-a' href="/how-does-it-work"> see more</a> </p>
+                            details are our must. ... <a class='shop-content-help-text-height-a'
+                                                         href="/how-does-it-work"> see more</a></p>
                     </div>
                 </div>
                 <div class="shop-content-big-image-height-margin shop-content-padding">
                     <div class="shop-content-big-image-height">
-                    <img class="img-responsive content-image" src="images/main/coming-soon.jpg"/>
-                  </div>
+                        <img class="img-responsive content-image" src="images/main/coming-soon.jpg"/>
+                    </div>
                 </div>
                 <div class="shop-content-big-image-height-margin shop-content-padding-bottom">
                     <div class="shop-content-big-image-height">
-                    <img class="img-responsive content-image" src="images/main/promo.png"/>
+                        <img class="img-responsive content-image" src="images/main/pisa-collection.jpg"/>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 shop-padding shop-carousel-height-margin shop-carousel-padding shop-black-background">
-                <a href="/shopping-page?product=dandy%20vests"><img class="shop-white-background shop-carousel-height central-image" src="images/carousel/dandy.png"/> </a>
+                <a href="/shopping-page?product=dandy%20vests"><img
+                        class="shop-white-background shop-carousel-height central-image"
+                        src="images/carousel/dandy.png"/> </a>
             </div>
-            <div class="col-md-4 shop-padding shop-content-height-right  shop-black-background products-container" id="scrollable-prod-div">
+            <div class="col-md-4 shop-padding shop-content-height-right  shop-black-background products-container"
+                 id="scrollable-prod-div">
                 {{#if isScrollable products.count}}
                 <button type="button" class="btn btn-default z-index-2" aria-label="Left Align" id="top-button">
                     <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
@@ -46,11 +51,11 @@
                     <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                 </button>
                 {{/if}}
-                
+
                 {{#each products}}
                 {{>product productClass=(getClass @index products.count) productName=productName image=image}}
                 {{/each}}
-                
+
             </div>
         </div>
     </div>
@@ -81,7 +86,7 @@
                 <div class="col-sm-2  footer-content">
                     <h>MAY WE HELP YOU</h>
                     <a href="/how-does-it-work"><p>How does it work</p></a>
-                    <a href="/contacts"><p  >Contact us</p></a>
+                    <a href="/contacts"><p>Contact us</p></a>
                 </div>
 
                 <div class="col-sm-2  footer-content">
@@ -111,6 +116,9 @@
                                 </button>
                             </span>
                     </div>
+                    <div class="copyright-text">
+                        <p>Copyright 2017 - Vest Masters - 2F Fashion Group Ltd</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,18 +127,19 @@
 
     <script type="text/javascript">
         $("body").addClass("body-main");
+
     </script>
 
 </template>
 
 <template name="product">
-     
+
     <div class="{{productClass}}">
-       <div class="shop-white-background shop-content-thirds-height">    
-        <a href="/shopping-page?product={{productName}}">
-            <img class="img-responsive content-image" src="images/productmain/{{image}}"/>
-        </a>
-      </div>
+        <div class="shop-white-background shop-content-thirds-height">
+            <a href="/shopping-page?product={{productName}}">
+                <img class="img-responsive content-image" src="images/productmain/{{image}}"/>
+            </a>
+        </div>
     </div>
 </template>
 

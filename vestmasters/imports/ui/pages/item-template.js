@@ -48,6 +48,14 @@ Template.itemTemplate.events({
  	$("#product-main-image").attr("src",$(event.currentTarget).attr("src"));
  },
 
+  'click .measurements a' (event) {
+         console.log(event.currentTarget);
+         data = {linkImage:"images/products/measurement/" + $(event.currentTarget).attr("name")};
+         Modal.show('measurementModal',data ,{backdrop: 'static',keyboard: false});
+  },
+
+
+
  'click #add-to-basket-button' (event) {
     if(Session.get(LOADING_ADD_ITEM)){
       return;
