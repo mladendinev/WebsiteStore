@@ -35,6 +35,7 @@ Meteor.methods({
     check(clientEmail,String);
     check(subjectEmail,String);
     check(emailData,Object); //TODO IMPORTANT check argument for security reasons
+
     SSR.compileTemplate('htmlEmail',Assets.getText('emailToClient.html'));
 
     Email.send({

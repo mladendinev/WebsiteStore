@@ -1,7 +1,7 @@
 import {Inventory} from './products.js';
 import {BASKET_SECRET,BASKET_SECRET_SESSION,LOADING_ADD_ITEM,BASKET_ID,BRAINTREE_CLIENT_TOKEN,DELIVERY_COST,ORDER_ID,ORDER_INFO,BASKET_ERROR,PAYMENT_ERROR,BASKET_ID_SESSION} from './session-constants.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-
+import {Baskets} from './products.js';
 
 export function updateBasket(item) {
   Session.set("time", new Date().getTime());
@@ -101,10 +101,6 @@ export function createTransaction(nonce){
                 } else {
 
                   amplify.store(ORDER_ID,success);
-                  var delivery_info = amplify.store("DELIVERY_INFO");
-                  emailData = {'order_id': success, 'products': amplify.store(ITEMS_IN_BASKET_STORE)};
-                  console.log(emailData);
-                  Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "Confirmation Email (Vest Masters)",emailData)
                   //TODO replace the email with a real one
                   amplify.store(BRAINTREE_CLIENT_TOKEN,null);
                   Session.set(PAYMENT_ERROR,null);
@@ -115,7 +111,7 @@ export function createTransaction(nonce){
 
 
 export function getOrder(){
-  Meteor.call('gerOrder', amplify.store(ORDER_ID), function(error,order){
+  Meteor.call('getOrder', amplify.store(ORDER_ID), function(error,order){
      if(error){
        console.log("Error in retrieving order")
      }else{

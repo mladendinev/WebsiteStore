@@ -1,6 +1,6 @@
 import './successful-transaction.html';
 import {ORDER_INFO} from '../../api/session-constants.js';
-import {getOrder} from '../../api/method-calls.js';
+import {getOrder,} from '../../api/method-calls.js';
 
 Template.successPayment.onRendered(function(){
    Session.set("DocumentTitle","Order Completed");
@@ -11,6 +11,13 @@ Template.successPayment.onRendered(function(){
 
 Template.successPayment.onCreated(function(){
 	getOrder();
+	if((typeof Session.get(ORDER_INFO) !== "undefined") && Session.get(ORDER_INFO) !== null) {
+    	var delivery_info = amplify.store("DELIVERY_INFO");
+
+        emailData = {'order_id': Session.get(ORDER_INFO).transactionId, 'products': Session.get(ORDER_INFO)};
+                          console.log(emailData);
+                          Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "Confirmation Email (Vest Masters)",emailData)
+    }
 });
 
 Template.successPayment.helpers({

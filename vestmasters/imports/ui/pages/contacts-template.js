@@ -1,12 +1,8 @@
 import "./contacts-template.html"
 
-Template.contactsTemplate.onCreated(function(){
+Template.contactsTemplate.onCreated(function() {
    Session.set("DocumentTitle","Contacts");
    GoogleMaps.load({key:'AIzaSyDSI0LKtxtDGL0pEvjgfCwyxELC9cA-_f4'});
-});
-
-
-Template.contactsTemplate.onCreated(function() {
   // We can use the `ready` callback to interact with the map API once the map is ready.
   GoogleMaps.ready('contactsMap', function(map) {
     // Add a marker to the map once it's ready

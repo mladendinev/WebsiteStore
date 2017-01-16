@@ -37,12 +37,10 @@
                 <fieldset>
                     <legend align="center">Enter your card details</legend>
                     <div class="payment-details">
-
-                          
                         <div class="form-group">
-                            <label class="control-label col-sm-3" for="card_numb">Card Number</label>
+                            <label class="control-label col-sm-4 col-md-2 col-lg-2" for="card_numb">Card Number</label>
                             <!--  Hosted Fields div container -->
-                            <div class="col-sm-4">
+                            <div class="col-sm-6 col-md-4 col-lg-4">
 
                                 <div class="form-control" id="card-number" name="card_numb" required></div>
                                 <span class="help-block with-errors"></span>
@@ -51,17 +49,17 @@
 
 
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Expiration Date</label>
+                            <label class="control-label col-sm-4 col-md-2">Expiration Date</label>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-6 col-md-4 col-lg-4">
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-sm-5">
                                         <!--  Hosted Fields div container -->
                                         <div class="form-control" id="expiration-month" required></div>
                                         <span class="help-block with-errors"></span>
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="col-sm-5">
                                         <!--  Hosted Fields div container -->
                                         <div class="form-control" id="expiration-year" required></div>
                                         <span class="help-block with-errors"></span>
@@ -72,29 +70,27 @@
 
                         <div class="form-group">
 
-                            <label class="control-label col-sm-3">Security Code</label>
+                            <label class="control-label col-sm-4 col-md-2 col-lg-2">Security Code</label>
                             <!--  Hosted Fields div container -->
-                            <div class="col-sm-3">
-                                <div class="row">
-
-                                    <div class="col-xs-6">
+                            <div class="col-sm-3 col-md-2 col-lg-2">
                                         <div class="form-control" id="cvv" required></div>
                                         <span class="help-block with-errors"></span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="button-container">
-                            <div class="col-sm-9">
-                                <button type="submit" class="btn btn-success" value="Purchase"
-                                        id="credit-card-submit" disabled="{{loading}}">
-                                    {{#if loading}}
-                                    Processing...
-                                    {{else}}
-                                    Pay Now
-                                    {{/if}}
-                                </button>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <button type="submit" class="btn btn-success" value="Purchase"
+                                            id="credit-card-submit" disabled="{{loading}}">
+                                        {{#if loading}}
+                                        Processing...
+                                        {{else}}
+                                        Pay Now
+                                        {{/if}}
+                                    </button>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </fieldset>
@@ -110,13 +106,6 @@
     </div>
 
 
-    <script type="text/javascript">
-        $("body").addClass("payment-main");
-
-
-
-
-    </script>
 
 
 </template>

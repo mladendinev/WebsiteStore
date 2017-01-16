@@ -10,8 +10,16 @@
             <!---->
             <!-- User info form-->
             <!---->
+
+
             <legend align="center">Delivery Details</legend>
-            <div class="col-md-8">
+            <div class="col-md-4 summary-width col-md-push-8">
+                <div class="row">
+                    {{>summaryOrder}}
+                </div>
+            </div>
+
+            <div class="col-md-8 col-md-pull-4">
                 <div class="row">
                     <form class="form-horizontal" role="form" method="POST" id="user-info">
 
@@ -70,9 +78,8 @@
                                 <label class="col-sm-6 control-label" for="countryDelivery">Country</label>
 
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="countryDelivery" name="country_delivery">
+                                    <select class="form-control" id="countryDelivery" name="country_delivery" required>
                                         {{#each countries}}
-                                        <option disabled selected hidden> Country</option>
                                         <option>{{country}} </option>
                                         {{/each}}
                                     </select>
@@ -139,19 +146,12 @@
             </div>
 
 
-            <div class="col-md-4 summary-width">
-                <div class="row">
-                    {{>summaryOrder}}
-                </div>
-            </div>
-
 
         </div>
     </div>
 
     <script type="text/javascript">
         $("body").addClass("payment-main");
-
     </script>
 
 </template>
