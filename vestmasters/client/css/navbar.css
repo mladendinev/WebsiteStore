@@ -3,7 +3,6 @@
   
   #logo-image{
     width: 350px;
-    max-height: 100%;
   }
 
   #logo-bar-toggle {
@@ -80,15 +79,11 @@
     padding-top:10px; 
   }
 
-  #logo-bar-toggle {
-  height: 40px;
-  max-height:100%;
-  width: 200px;
-  }
-
-  #logo-image-container{
-    
-  }
+    #logo-bar-toggle {
+     height: 40px;
+     max-height:100%;
+     width: 200px;
+    }
 }
 
 
@@ -169,6 +164,7 @@
 }
 
 #logo-image{
+  max-height: 100%;
   min-height: 69px;
   display:inline;
 }
