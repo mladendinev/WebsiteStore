@@ -1,10 +1,13 @@
 @media (min-width: 320px) and (max-width: 629.99px){
   .shop-content-height-right {
   height: 547.97px;
- }
+  }
+
+  .jumbotron {
+    height:220px;
+  }
 
   #main-content {
-    display: inline-block;
     height: 1642.94px;
   }
 
@@ -43,8 +46,10 @@
 
 @media (min-width: 630px) and (max-width: 991.99px){
  
+ .jumbotron {
+    height: 380px;
+ }
  #main-content {
-    display: inline-block;
     height:731.46px;
   }
  
@@ -82,8 +87,8 @@
 
 @media (min-width: 992px) and (max-width: 1300.99px){
 
- #main-content {
-    display: inline-block;
+  .jumbotron {
+    height:550px;
   }
 
 .shop-content-height-right {
@@ -119,6 +124,9 @@
 }
 
 @media (min-width: 1301px) {
+  .jumbotron{
+    height:700px;
+  }
   #main-content {
     display: flex;
     justify-content: flex-center;
@@ -229,13 +237,22 @@
   max-height: 70vh;
   margin-top: 70px;
   z-index: -1;
+  position:fixed;
+  width:100%;
 }
 
 #jumbo-image{
-  max-width: 1300px;
   margin: 0 auto;
   width: 100%;
 }
+
+.jumbotron {
+   background-color: transparent;
+   width:100%;
+   max-height: 70vh;
+   position:relative;
+   z-index:-1;
+ }
 
 #top-div-left h1{
    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
