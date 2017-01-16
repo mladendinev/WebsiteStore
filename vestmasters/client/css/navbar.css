@@ -1,4 +1,5 @@
 @media (min-width: 1101px) {
+
   
   #logo-image{
     width: 350px;
@@ -15,7 +16,7 @@
 }
 
 @media (min-width: 992px) and (max-width: 1100.99px){
-  
+   
   #logo-image{
     max-width: 270px;
   }
@@ -32,6 +33,7 @@
 
 @media (max-width: 991.99px){
   
+
   #navbar-container{
     display:none !important;
   }
@@ -50,23 +52,53 @@
 
 }
 
-@media (max-width: 991px) and (min-width: 769px){
-
+@media (max-width: 991.99px) and (min-width: 769px){
  
-
   #logo-bar-toggle {
   max-height: 100%;
+  height:40px;
   width: 350px;
 }
 
 }
 
-@media (max-width: 768px){
+@media (min-width: 769px) {
+  
+.logo-image-container{
+  margin-left:40%;
+  width:20%;
+}
+
+}
+
+@media (max-width: 768.99px){
+
+  .logo-image-container{
+    margin-left: 30%;
+    width:40%;
+    max-height:100%; 
+    padding-top:10px; 
+  }
 
   #logo-bar-toggle {
-  max-height: 100%;
+  height: 40px;
+  max-height:100%;
   width: 200px;
   }
+
+  #logo-image-container{
+    
+  }
+}
+
+
+.logo-image-container {
+  position:absolute;
+  left:0;
+  display:flex;
+  justify-content: center;
+  flex-direction: row;
+  padding-bottom:10px;
 }
 
 .navbar {
@@ -136,13 +168,6 @@
  bottom: 1px;
 }
 
-.logo-image-container{
-  flex-grow: 1;
-  flex-shrink: 1;
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
-}
 #logo-image{
   min-height: 69px;
   display:inline;
@@ -183,7 +208,7 @@
 }
 
 .navbar-nav {
- padding-top:2%;
+ padding-top:23px;
 }
 
 
@@ -195,12 +220,8 @@
 
 
 @media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    #logo-bar-toggle{
-      position:absolute;
-    }
-
-    .hover-gray:hover {
+    
+.hover-gray:hover {
         background-color: transparent;
     }
 }
