@@ -3,15 +3,18 @@
         {{>navigationBar}}
     </div>
 
+    
     <div class="jumbotron-bg">
-        <img src="images/main/VEST_MASTERS_MAIN.jpg" class="img-responsive"/>
+        <div style="margin: 0 auto; width:100%; max-width: 1300px">
+        <img id="jumbo-image" src="images/main/VEST_MASTERS_MAIN.jpg" class="img-responsive"/>
+        </div>
     </div>
     <div class="jumbotron">
-    </div>
-
-    <div class="container-fluid clear-div shop-content-pane-height" id="main-content">
+ -  </div>
+  
+  <div class="container-fluid clear-div shop-content-pane-height" id="main-content">
         <div class="row shop-content-height">
-            <div class="col-md-4 col-sm-6 shop-padding shop-content-height shop-black-background">
+            <div id="left-products-container" class="col-md-4 col-sm-6 shop-padding shop-content-height shop-black-background">
                 <div class="shop-black-background shop-content-help-text-height-margin shop-content-padding">
                     <div id="top-div-left" class="shop-white-background shop-content-help-text-height">
                         <h1 align="left"> HOW DOES IT WORK? </h1>
@@ -41,8 +44,7 @@
                         class="shop-white-background shop-carousel-height central-image"
                         src="images/carousel/dandy.png"/> </a>
             </div>
-            <div class="col-md-4 shop-padding shop-content-height-right  shop-black-background products-container"
-                 id="scrollable-prod-div">
+            <div id="right-products-container" class="col-md-4 shop-padding shop-content-height-right  shop-black-background products-container">
                 {{#if isScrollable products.count}}
                 <button type="button" class="btn btn-default z-index-2" aria-label="Left Align" id="top-button">
                     <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>

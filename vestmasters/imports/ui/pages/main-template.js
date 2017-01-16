@@ -35,6 +35,8 @@ Template.mainTemplate.helpers({
 
 Template.mainTemplate.onRendered(function(){
    Session.set("DocumentTitle","Shop Online");
+   $("body").removeClass();
+
 });
 
 Template.mainTemplate.events({
