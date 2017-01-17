@@ -14,7 +14,7 @@ Meteor.startup(() => {
 
   var env;
   // Pick Braintree environment based on environment defined in Meteor settings.
-  if (Meteor.settings.public.env === 'Production') {
+  if (Meteor.settings.public.braintree.env === 'Production') {
     env = Braintree.Environment.Production;
   } else {
     env = Braintree.Environment.Sandbox;
