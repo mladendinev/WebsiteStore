@@ -19,7 +19,7 @@
 
 
         <fieldset>
-            <legend align="center">Choose Payment Method</legend>
+            <legend class="legend-align">Choose Payment Method</legend>
                <div class="payment-container">
                 <span>
                     <input type="radio" name="payment-method" value="card" id="card-payment"> Pay with debit/credit card
@@ -35,7 +35,7 @@
         <div id="card-payment-container" class="payment-container" style="display:none">
             <form class="form-horizontal" role="form" method="POST" id="payment-form">
                 <fieldset>
-                    <legend align="center">Enter your card details</legend>
+                    <legend class="legend-align">Enter your card details</legend>
                     <div class="payment-details">
                         <div class="form-group">
                             <label class="control-label col-sm-4 col-md-2 col-lg-2" for="card_numb">Card Number</label>
@@ -99,7 +99,7 @@
 
 
         <div id="paypal-payment-container" class="payment-container" style="display:none">
-            <span class="paypal-button">
+            <span style="cursor:pointer; margin-top:20px" class="paypal-button">
                  <img class="img-responsive" src="images/payment/paypal.png">
             </span>
         </div>

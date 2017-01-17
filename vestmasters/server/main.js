@@ -98,6 +98,12 @@ Meteor.methods({
                                          submitForSettlement: true
                                          }
                                          });
+      if(!result.success){
+         Baskets.update(
+        {'_id': basketId},
+        update={$set: { 'status': 'active'}});
+       throw new Meteor.Error("TRANSACTION_FAULURE","Problem with transaction");
+      }
      } catch(transactionError){
          Baskets.update(
         {'_id': basketId},
