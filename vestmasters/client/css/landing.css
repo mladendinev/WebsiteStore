@@ -66,7 +66,7 @@
   and (device-height: 640px)
   and (-webkit-device-pixel-ratio: 3) {
         .logo-text-landing p{
-             font-size: 25px;
+             font-size: 40px;
         }
 
        .landing-intro
@@ -83,17 +83,40 @@
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
           .logo-text-landing p{
-               font-size: 25px;
+               font-size: 40px;
           }
 
          .landing-intro
           {
              display: none;
           }
+}
 
+@media only screen and (max-device-width: 480px) {
+          .logo-text-landing p{
+               font-size: 40px;
+          }
 
+                   .landing-intro
+                    {
+                       display: none;
+                    }
 
 
 }
+
+@media only screen and (min-width:321px) and (max-width:768px){
+
+          .logo-text-landing p{
+               font-size: 40px;
+          }
+
+                   .landing-intro
+                    {
+                       display: none;
+                    }
+
+}
+
 
 
