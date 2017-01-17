@@ -321,3 +321,9 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 margin-top:8%;
 color:white;
 }
+
+ .modal-body-subs p {
+   word-wrap: break-word;
+   text-align:center;
+   display:inherit;
+ }

@@ -36,15 +36,34 @@ Meteor.methods({
     check(subjectEmail,String);
     check(emailData,Object); //TODO IMPORTANT check argument for security reasons
 
-    SSR.compileTemplate('htmlEmail',Assets.getText('emailToClient.html'));
+
+//    var html=Blaze.toHTMLWithData(Template.shareEmailContent,emailData);
+    SSR.compileTemplate('htmlEmail',Assets.getText('emailTemplate.html'));
+console.log('dasda1');
 
     Email.send({
       to: clientEmail,
       from: "clients@vestmasters.com",
       subject: subjectEmail,
       html: SSR.render('htmlEmail', emailData),
+//      html: html,
     });
+
+    console.log('dasda');
   },
+
+    subscribeEmail: function(subscriber,subjectEmail){
+      check(subscriber,String);
+      check(subjectEmail,String);
+
+      Email.send({
+        to:"clients@2ffashiongroup.com",
+        from: subscriber,
+        subject: subjectEmail,
+        text: "User has subscribed"
+      });
+    },
+
 
    getClientToken: function () {
      var generateToken = Meteor.wrapAsync(gateway.clientToken.generate, gateway.clientToken);

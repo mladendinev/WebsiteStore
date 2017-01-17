@@ -11,14 +11,17 @@ Template.successPayment.onRendered(function(){
 
 Template.successPayment.onCreated(function(){
 	getOrder();
-	if((typeof Session.get(ORDER_INFO) !== "undefined") && Session.get(ORDER_INFO) !== null) {
-    	var delivery_info = amplify.store("DELIVERY_INFO");
+});
 
-        emailData = {'order_id': Session.get(ORDER_INFO).transactionId, 'products': Session.get(ORDER_INFO)};
+Template.successPayment.onRendered(function(){
+	 var delivery_info = amplify.store("DELIVERY_INFO");
+	 console.log("ex1");
+     emailData = {'order_id': Session.get(ORDER_INFO).transactionId, 'products': Session.get(ORDER_INFO)};
                           console.log(emailData);
                           Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "Confirmation Email (Vest Masters)",emailData)
-    }
+	 console.log("ex1");
 });
+
 
 Template.successPayment.helpers({
    orderInfo(){
