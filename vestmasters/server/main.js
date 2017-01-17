@@ -4,6 +4,7 @@ import '../imports/api/products.js';
 import {Orders} from '../imports/api/products.js';
 import {Baskets} from '../imports/api/products.js';
 import {Inventory} from '../imports/api/products.js';
+import {Countries} from '../imports/api/products.js';
 import './publications.js'
 
 var gateway;
@@ -89,8 +90,9 @@ Meteor.methods({
         })
      })
      items = Inventory.find({$or: queryArray}).fetch();
-     var totalAmountToPay = calculatePriceCallServer(items,itemsDict);
-
+     var deliveryPrice = (Countries.findOne({'country': deliveryDetails.country_delivery})).price;
+     console.log(deliveryPrice);
+     var totalAmountToPay = calculatePriceCallServer(items,itemsDict) + deliveryPrice;
      try {
      var result = gatewayTransactionSync({amount: totalAmountToPay,
                                          paymentMethodNonce: nonceFromTheClient,
