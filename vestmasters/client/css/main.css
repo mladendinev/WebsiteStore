@@ -180,6 +180,10 @@
   height:547px;
  }
 
+.expand-to-fit{
+  flex-grow:1;
+ }
+
 .shop-content-height {
   height:547px;
  }

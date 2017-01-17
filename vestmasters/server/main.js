@@ -4,6 +4,7 @@ import '../imports/api/products.js';
 import {Orders} from '../imports/api/products.js';
 import {Baskets} from '../imports/api/products.js';
 import {Inventory} from '../imports/api/products.js';
+import {Countries} from '../imports/api/products.js';
 import './publications.js'
 
 var gateway;
@@ -14,7 +15,7 @@ Meteor.startup(() => {
 
   var env;
   // Pick Braintree environment based on environment defined in Meteor settings.
-  if (Meteor.settings.public.env === 'Production') {
+  if (Meteor.settings.public.braintree.env === 'Production') {
     env = Braintree.Environment.Production;
   } else {
     env = Braintree.Environment.Sandbox;
@@ -89,8 +90,9 @@ Meteor.methods({
         })
      })
      items = Inventory.find({$or: queryArray}).fetch();
-     var totalAmountToPay = calculatePriceCallServer(items,itemsDict);
-
+     var deliveryPrice = (Countries.findOne({'country': deliveryDetails.country_delivery})).price;
+     console.log(deliveryPrice);
+     var totalAmountToPay = calculatePriceCallServer(items,itemsDict) + deliveryPrice;
      try {
      var result = gatewayTransactionSync({amount: totalAmountToPay,
                                          paymentMethodNonce: nonceFromTheClient,
@@ -98,6 +100,12 @@ Meteor.methods({
                                          submitForSettlement: true
                                          }
                                          });
+      if(!result.success){
+         Baskets.update(
+        {'_id': basketId},
+        update={$set: { 'status': 'active'}});
+       throw new Meteor.Error("TRANSACTION_FAULURE","Problem with transaction");
+      }
      } catch(transactionError){
          Baskets.update(
         {'_id': basketId},

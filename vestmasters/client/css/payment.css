@@ -81,6 +81,14 @@
  font-weight: bold;
 }
 
+.payment-container{
+   width:100%;
+   display:flex;
+   flex-direction: column;
+   align-items: center;
+  justify-content: flex-start;
+ }
+
 #card-payment-container{
   margin-top:6%;
   position: relative;
@@ -98,8 +106,13 @@
   padding-left:29%;
 }
 
+#payment-form {
+  width:100%;
+}
 
-
+.legend-align {
+  text-align: center;
+}
 .form-horizontal .payment-details .control-label{
   /* text-align:right; */
   text-align:left;
