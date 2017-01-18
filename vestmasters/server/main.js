@@ -109,7 +109,6 @@ Meteor.methods({
      })
      items = Inventory.find({$or: queryArray}).fetch();
      var deliveryPrice = (Countries.findOne({'country': deliveryDetails.country_delivery})).price;
-     console.log(deliveryPrice);
      var totalAmountToPay = calculatePriceCallServer(items,itemsDict) + deliveryPrice;
      try {
      var result = gatewayTransactionSync({amount: totalAmountToPay,
