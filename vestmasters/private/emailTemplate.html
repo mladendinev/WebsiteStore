@@ -1,9 +1,9 @@
-    <template name="shareEmailContent">
+<template name="shareEmailContent">
     <div class="container">
         <div id="confirmatonMessage">
             <h align="center"><b>Thank you for your purchase</b></h>
             <p>
-                Dear Friend, <br>
+                Dear {{products.deliveryInfo.firstName}}, <br>
 
                 Here is your order. <br>
 
@@ -26,28 +26,30 @@
                                 </td>
                             </tr>
 
+                            {{#each item in products.items.itemsDetails}}
                             <tr>
-                                {{#each item in products.itemsDetails}}
+
                                 <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
-                                    Product Info
+                                     {{item.product}}
                                 </th>
                                 <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">
-                                    Product: {{item.product}}
+                                    <pre>
                                     Size: {{item.size}}
                                     Price: {{item.price}}
+                                    </pre>
                                 </td>
-                                {{/each}}
                             </tr>
-
+                            {{/each}}
                             <tr>
                                 <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
                                     Delivery Info
                                 </th>
                                 <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">
                                 <pre>
-                                 First Name: {{products.deliveryInfo.first_name}}
-                                 Second Name: {{products.deliveryInfo.second_name}}
-                                 Email Address: {{products.deliveryInfo.email_addr}}
+                                 Address Line: {{products.deliveryInfo.address_line_1}}
+                                 City: {{products.deliveryInfo.city}}
+                                 Post code: {{products.deliveryInfo.zip}}
+                                 Country:{{products.deliveryInfo.country_delivery}}
                                 </pre>
 
                                 </td>
@@ -62,6 +64,18 @@
                                     {{products.amount }} {{products.currency}}
                                 </td>
                             </tr>
+
+                            <tr>
+                                <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
+                                    Contact Details
+                                </th>
+
+                                <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">
+                                    Email Address: {{products.deliveryInfo.email_addr}}
+                                    Email Address: {{products.deliveryInfo.phone_number}}
+                                </td>
+                            </tr>
+
 
                         </table>
                     </td>
@@ -100,11 +114,4 @@
         </div>
     </div>
 
-        <script type="text/javascript">
-         for(count = 0; count < ; count++){
-               document.write("Current Count : " + count );
-               document.write("<br />");
-            }
-
-    </script>
 </template>
