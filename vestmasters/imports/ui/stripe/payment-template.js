@@ -1,30 +1,36 @@
 import './payment-template.html';
 import '../components/progress-bar.js';
-import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,PAYMENT_ERROR} from '../../api/session-constants.js';
+import {BRAINTREE_CLIENT_TOKEN,TOTAL_PRICE_SESSION,ITEMS_IN_BASKET_SESSION,ITEMS_IN_BASKET_STORE,PAYMENT_ERROR,BASKET_ID,BASKET_SECRET} from '../../api/session-constants.js';
 import {calculatePriceCall,createTransaction,cardPaymentCallBack,invalidMessageTrigger,emptyMessageTrigger} from '../../api/method-calls.js';
 import {Inventory} from '../../api/products.js';
+import {Baskets} from '../../api/products.js';
 import braintree from 'braintree-web'
 
 Template.paymentTemplate.onCreated(function(){
- this.loading=new ReactiveVar(false);
- this.setup= new ReactiveVar(null);
- this.clientToken = amplify.store(BRAINTREE_CLIENT_TOKEN);
- Session.set(ITEMS_IN_BASKET_SESSION,amplify.store(ITEMS_IN_BASKET_STORE));
- this.autorun(() => {
+   this.loading=new ReactiveVar(false);
+   this.setup= new ReactiveVar(null);
+   this.clientToken = amplify.store(BRAINTREE_CLIENT_TOKEN);
+   Session.set(ITEMS_IN_BASKET_SESSION,amplify.store(ITEMS_IN_BASKET_STORE));
+   this.basket = new ReactiveVar();
+   this.autorun(() => {
       Meteor.subscribe('inventory');
+      if((typeof amplify.store(BASKET_ID) !== "undefined") && amplify.store(BASKET_ID) !== null
+           && (typeof amplify.store(BASKET_SECRET) !== "undefined") && amplify.store(BASKET_SECRET) !== null){
+                Meteor.subscribe('baskets',amplify.store(BASKET_ID),amplify.store(BASKET_SECRET));
+           }
+      this.basket.set(Baskets.findOne({'_id' : amplify.store(BASKET_ID), 'secret' : amplify.store(BASKET_SECRET)}));
    });
 });
 
 Template.paymentTemplate.onRendered(function(){
    Session.set("DocumentTitle","Payment");
    var deliveryDetails = amplify.store('DELIVERY_INFO');
-   console.log(deliveryDetails);
    $("body").removeClass();
    $("body").addClass("body-shopping");
    $("#credit-card-number").prop('required',true);
    $("#payment-form" ).validate();
 
-        if((typeof this.clientToken !== "undefined") && this.clientToken !== null) {
+   if((typeof this.clientToken !== "undefined") && this.clientToken !== null) {
 
         var form = document.querySelector('#payment-form');
         var submit = document.querySelector('#credit-card-submit');
@@ -102,11 +108,8 @@ Template.paymentTemplate.onRendered(function(){
 
               else {
 
-                 console.log(field);
                 // Add helper text for an invalid card number
-                console.log(typeof event.emmitedBy);
                 if (event.emittedBy === 'number') {
-                  console.log(event);
                   $('#card-number').next('span').text('Please provide valid card');
                 }
               }
@@ -115,7 +118,6 @@ Template.paymentTemplate.onRendered(function(){
 
           hostedFieldsInstance.on('empty', function (event) {
             var field = event.fields[event.emittedBy];
-            console.log("is empty")
             if (field.isEmpty) {
                $(field.container).next('span').text('This field is required');
             }
@@ -136,12 +138,10 @@ Template.paymentTemplate.onRendered(function(){
                   // Handle error in Hosted Fields tokenization
                   switch (tokenizeErr.code) {
                         case 'HOSTED_FIELDS_FIELDS_EMPTY':
-                          console.error('All fields are empty! Please fill out the form.');
                           emptyMessageTrigger();
 //                          invalidMessageTrigger()
                           break;
                         case 'HOSTED_FIELDS_FIELDS_INVALID':
-                          console.error('Some fields are invalid:', tokenizeErr.details.invalidFieldKeys);
                           var array = tokenizeErr.details.invalidFieldKeys
                           invalidMessageTrigger(array);
                           break;
@@ -149,7 +149,6 @@ Template.paymentTemplate.onRendered(function(){
                           console.error('Tokenization failed server side. Is the card valid?');
                           break;
                         case 'HOSTED_FIELDS_TOKENIZATION_NETWORK_ERROR':
-                          console.error('Network error occurred when tokenizing.');
                           break;
                         default:
                           console.error('Something bad happened!', tokenizeErr);

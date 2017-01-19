@@ -1,39 +1,122 @@
-.landing-main {
-  background-image: url("images/background-landing.png"); 
-  width: 100%; 
-  overflow: hidden;
-  background-repeat: no-repeat;
-  background-size: cover;
+.sampleClass {
+	  background-image: url("images/landingPage/VEST_MASTERS_HOMEPAGE.jpg");
+       background-repeat:no-repeat;
+       background-size:cover;
+        background-position: top center;
+         width: 100%;
+      /*
+      width: 100%;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-size: cover;
+      */
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
 }
 
-.landing-container {
- float: left;
- width: 30%;
- 
+
+
+@font-face {
+    font-family: "PortagoITC TT";
+    src: url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.eot");
+    src: url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/686e78c6eb852178aca04393ac064b68.svg#PortagoITC TT") format("svg");
 }
 
-.logo {
-padding-top: 5%;
-padding-left: 27%;
-color: white;
-font-size: 60pt;
+.logo-text-landing p {
+  padding-top: 5%;
+  padding-left: 12%;
+  color: white;
+  font-size: 90px;
+  font-family: "PortagoITC TT";
 }
 
 .landing-menu {
-padding-top: 110%;
-padding-left: 27%;
-padding-bottom: 2%;
-font-size: 15pt;
-color: white;
+  padding-top: 30%;
+  padding-left: 12%;
+  padding-bottom: 2%;
+  font-size: 20px;
+  color: white;
+  position:fixed;
+  bottom:0;
 }
 
-.landing-art-text {
- float: left;
- width: 70%; 
- padding-top: 30%;
- padding-left: 40%;
- color: white;
- font-family: "Helvetica"
+.landing-menu a{
+   color:white;
 }
+
+.landing-intro p {
+   width: 38%;
+   padding-left: 12%;
+   margin-right:7%;
+   padding-top:5%;
+   color: white;
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size:16px;
+}
+
+
+/* Portrait and Landscape */
+@media screen
+  and (device-width: 360px)
+  and (device-height: 640px)
+  and (-webkit-device-pixel-ratio: 3) {
+        .logo-text-landing p{
+             font-size: 40px;
+        }
+
+       .landing-intro
+        {
+           display: none;
+        }
+
+
+}
+
+
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+          .logo-text-landing p{
+               font-size: 40px;
+          }
+
+         .landing-intro
+          {
+             display: none;
+          }
+}
+
+@media only screen and (max-device-width: 480px) {
+          .logo-text-landing p{
+               font-size: 40px;
+          }
+
+                   .landing-intro
+                    {
+                       display: none;
+                    }
+
+
+}
+
+@media only screen and (min-width:321px) and (max-width:768px){
+
+          .logo-text-landing p{
+               font-size: 40px;
+          }
+
+                   .landing-intro
+                    {
+                       display: none;
+                    }
+
+}
+
 
 

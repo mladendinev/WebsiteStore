@@ -8,34 +8,110 @@
 
 <body itemscope itemtype="http://schema.org/EmailMessage">
 
-<div id="confirmatonMessage">
-    <h>Thank you for your purchase</h>
+<div class="container">
+    <div id="confirmatonMessage">
+        <h align="center"><b>Thank you for your purchase</b></h>
+        <p>
+            Dear Friend, <br>
+
+            Here is your order. <br>
+
+        </p>
+
+    </div>
+
+    <div class="order-details">
+        <table>
+            <tr>
+                <td></td>
+                <td width="600">
+                    <table width="100%" style="border: 1px solid #eee;">
+
+                        <tr>
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
+                                Order id
+                            </th>
+                            <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">{{order_id}}
+                            </td>
+                        </tr>
+                        {{#products.itemsDetails}}
+                        <tr>
+
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
+                                {{item.product}}
+                            </th>
+                            <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">
+                                Size: {{item.size}}
+                                Price: {{item.price}}
+                            </td>
+
+                        </tr>
+                        {{/products.itemsDetails}}
+                        <tr>
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
+                                Delivery Info
+                            </th>
+                            <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">
+                                <pre>
+                                 First Name: {{products.deliveryInfo.first_name}}
+                                 Second Name: {{products.deliveryInfo.second_name}}
+                                 Email Address: {{products.deliveryInfo.email_addr}}
+                                </pre>
+
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
+                                Amount
+                            </th>
+                            <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">
+                                {{products.amount }} {{products.currency}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="contacts-email">
+        <p>
+            Thank you for choosing our line of products designed for men like you.<br>
+            <br>
+            Your Vest Masters clothes will be made with extreme care and under our supervision. Every detail is
+            important and every stitch is followed with passion.<br>
+            <br>
+            We will achieve them with care as quickly as possible ... but what is beautiful needs its time to be
+            born.<br>
+            <br>
+            When your Vest Masters items will be sent, you will receive an email with the trucking number to follow your
+            delivery.<br>
+            <br>
+            Now if you have any inquires about purchased items, delivery or anything else, please let us know by email
+            at <a>clients@2ffashiongroup.com</a> or calling us at <a>+359885200392</a> from 10 a.m. to 17 p.m. Bulgarian
+            time.<br>
+            <br>
+            Come back soon and find out all the new creations designed by Vest Masters.<br>
+            <br>
+            All the best<br>
+            <br>
+            Federico and Fabio<br>
+
+        </p>
+    </div>
 
 </div>
-<table>
-    <tr>
-        <td></td>
-        <td width="600">
-            <table width="100%" style="border: 1px solid #eee;">
 
-                <tr>
-                    <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
-                        Order id:
-                    </th>
-                    <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">{{order_id}}</td>
-                </tr>
+<script type="text/javascript">
+        $("body").addClass("body-main");
+
+</script>
 
 
-                <tr>
-                    <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
-                        Products
-                    </th>
-                    <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">{{products}}</td>
-                </tr>
-
-            </table>
-        </td>
-    </tr>
-</table>
 </body>
 </html>
+

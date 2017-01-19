@@ -16,7 +16,7 @@ Template.basketOverview.onCreated(function(){
       if((typeof amplify.store(BASKET_ID) !== "undefined") && amplify.store(BASKET_ID) !== null
          && (typeof amplify.store(BASKET_SECRET) !== "undefined") && amplify.store(BASKET_SECRET) !== null){
        Meteor.subscribe('baskets',amplify.store(BASKET_ID),amplify.store(BASKET_SECRET));
-       }
+      }
       this.basket.set(Baskets.findOne({'_id' : amplify.store(BASKET_ID), 'secret' : amplify.store(BASKET_SECRET)}));
   });
 });
@@ -48,7 +48,6 @@ Template.basketOverview.helpers({
     for (var i =0; i<result.length; i++){
       result[i]=i;
     }
-    console.log(result);
     return result;
   },
 

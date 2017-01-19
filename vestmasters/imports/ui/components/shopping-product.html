@@ -1,3 +1,10 @@
 <template name="shoppingProduct">
- <li><a href="/shopping-page?product={{productName}}">{{productName}}</a></li>
+ <!--{{#if equals productName 'dandy'}}-->
+    <!--<li><a href="/shopping-page?product={{productName}}"><b>{{productName}} </b> vest</a></li>-->
+    {{#if equals productName}}
+        <li><a href="/shopping-page?product={{productName}}&page=1"><b>{{checkVal productName}} </b> vests </a></li>
+    {{else}}
+            <li><a href="/shopping-page?product={{productName}}&page=1">{{productName}}</a></li>
+    {{/if}}
+
 </template>

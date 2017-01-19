@@ -8,6 +8,6 @@ export const Inventory = new Mongo.Collection('inventory');
 
 export const Orders = new Mongo.Collection('orders');
 
-export const Countries = new Mongo.Collection('countries');
+export const Countries = new Mongo.Collection('deliveryPrices');
 
 export const Baskets = new Mongo.Collection('baskets');

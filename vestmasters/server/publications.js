@@ -4,7 +4,7 @@ Meteor.publish('products', function() {
   return Products.find();
 });
 
-Meteor.publish('countries', function() {
+Meteor.publish('deliveryPrices', function() {
   return Countries.find();
 });
 

@@ -10,8 +10,16 @@
             <!---->
             <!-- User info form-->
             <!---->
+
+
             <legend align="center">Delivery Details</legend>
-            <div class="col-md-8">
+            <div class="col-md-4 summary-width col-md-push-8">
+                <div class="row">
+                    {{>summaryOrder}}
+                </div>
+            </div>
+
+            <div class="col-md-8 col-md-pull-4">
                 <div class="row">
                     <form class="form-horizontal" role="form" method="POST" id="user-info">
 
@@ -22,7 +30,7 @@
                                 <label class="col-sm-6 control-label" for="first_name">First Name</label>
 
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" value="Ivan" name="first_name"
+                                    <input type="text" class="form-control"  name="first_name" value="ddd"
                                            placeholder="First Name"
                                            required>
                                 </div>
@@ -32,7 +40,7 @@
                                 <label class="col-sm-6 control-label" for="second_name">Surname</label>
 
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" value="Petrov" data-minlength="10"
+                                    <input type="text" class="form-control" value="ddd"
                                            name="second_name"
                                            placeholder="Surname"
                                            required>
@@ -44,8 +52,8 @@
                                 <label class="col-sm-6 control-label" for="email_addr">Email Address</label>
 
                                 <div class="col-sm-6">
-                                    <input type="email" class="form-control" data-minlength="10"
-                                           value="f0rch0s3@gmail.com" name="email_addr"
+                                    <input type="email" class="form-control" value="mladenddinev@gmail.com"
+                                           name="email_addr"
                                            placeholder="Email Address"
                                            required>
                                 </div>
@@ -57,9 +65,10 @@
                                     code</label>
 
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" value="32131231" data-minlength="10"
+                                    <input type="text" class="form-control"
                                            name="phone_number"
-                                           placeholder="Phone Number with area code"
+                                           value="13213131"
+                                           placeholder="Phone Number with Area Code"
                                            required>
                                 </div>
                             </div>
@@ -71,8 +80,8 @@
                                 <div class="col-sm-6">
                                     <select class="form-control" id="countryDelivery" name="country_delivery">
                                         {{#each countries}}
-                                        <option value="" disabled selected hidden> Country</option>
-                                        <option>{{country}}</option>
+
+                                        <option>{{country}} </option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -83,20 +92,35 @@
                                 <label class="col-sm-6 control-label" for="city">City</label>
 
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" value="Sofia" data-minlength="10"
+                                    <input type="text" class="form-control"
                                            name="city"
+                                           value="ddd"
                                            placeholder="City"
                                            required>
                                 </div>
                             </div>
 
 
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label" for="zip">Post Code</label>
+
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control"
+                                           name="zip"
+                                           value="321312"
+                                           placeholder="ZIP"
+                                           required>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-sm-6 control-label" for="address_line_1">Address Line 1</label>
 
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" data-minlength="10" name="address_line_1"
-                                           value="dasdasd" placeholder="Address Line 1"
+                                    <input type="text" class="form-control" name="address_line_1"
+                                           placeholder="Address Line 1"
+                                           value="ddd"
                                            required>
                                 </div>
                             </div>
@@ -106,7 +130,7 @@
                                 <label class="col-sm-6 control-label" for="address_line_2">Address Line 2 </label>
 
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" data-minlength="10" name="address_line_2"
+                                    <input type="text" class="form-control"  name="address_line_2"
                                            placeholder="Address Line 2 (Optional)">
                                 </div>
                             </div>
@@ -114,7 +138,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-8 col-sm-9">
-                                    <button type="submit" class="continue-delivery btn btn-success">Continue</button>
+                                    <button type="submit" class="continue-customized btn btn-success">Continue</button>
                                 </div>
                             </div>
                         </fieldset>
@@ -123,19 +147,12 @@
             </div>
 
 
-            <div class="col-md-4 summary-width">
-                <div class="row">
-                    {{>summaryOrder}}
-                </div>
-            </div>
-
 
         </div>
     </div>
 
     <script type="text/javascript">
         $("body").addClass("payment-main");
-
     </script>
 
 </template>

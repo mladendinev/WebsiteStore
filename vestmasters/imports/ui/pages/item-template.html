@@ -2,20 +2,24 @@
     <div class="header">
         {{>navigationBarShop}}
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid padding-item-container">
         <div class="row">
             <div class='col-md-6'>
                 <div class="item-small-images">
                     <img class="img-responsive item-small-image" src="images/products/common/{{item.file}}"/>
                     {{#each img in item.additionalImages}}
-                    <img class="img-responsive item-small-image" src="images/products/additional/{{img}}"/>
+                    <div class="item-image-container">
+                        <img class="img-responsive item-small-image" src="images/products/additional/{{img}}"/>
+                    </div>
                     {{/each}}
                 </div>
+
+
                 <div class="item-main-image">
-
                     <img id="product-main-image" class="img-responsive" src="images/products/common/{{item.file}}"/>
-
                 </div>
+
+
                 <div class="clear-div" id="item-product-info">
                     <h4> INFO PRODUCT </h4>
 
@@ -29,10 +33,10 @@
             <div class="col-md-6 item-right-col">
                 <div>
                     <p align="center">
-                        {{item.product}} <br/>
-                        Mod. <b> {{item.productInfo.model}} </b> <br/>
-                        <b> {{item.price}}$</b> <br/>
+                        <b> {{item.productInfo.model}} </b> <br/>
+                        <b> € {{item.price}}</b> <br/>
                     </p>
+
                 </div>
                 <hr class="item-product-properties-separator"/>
 
@@ -49,6 +53,13 @@
                         {{/each}}
                     </select>
                 </div>
+
+                <div class="measurements" >
+                    <a name="{{item.measurement}}">Measurements</a>
+                </div>
+
+
+
                 <hr class="item-product-properties-separator"/>
                 {{/if}}
               
@@ -75,4 +86,27 @@
         </div>
     </div>
 
+
+</template>
+
+<template name="measurementModal">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 align="center" class="modal-title">Measurements</h4>
+                </div>
+
+                <div class="modal-body">
+                    <img src="{{linkImage}}" class="img-responsive">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </template>

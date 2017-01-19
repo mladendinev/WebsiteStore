@@ -4,28 +4,29 @@
         <div class="container-fluid background-black navbar-shop-website">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed hover-gray" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-toggle" id='basket-link-toggle' href="/basket">
-                    {{>numberOfBasketItems}}
-                    <img
-                            class='img-responsive' src='images/basket/shopping-cart.png'/></a>
-
-                <a class="navbar-toggle" id="logo-bar-toggle">
-                    <img class='img-responsive' src='images/white-logo-try.png'/>
-                </a>
+                <div id="navbar-container-toggle">
+                    <button type="button" class="navbar-toggle collapsed hover-gray" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span style="flex-grow:1"> </span>
+                    <div class="logo-image-container">
+                     <a href="/main"><img class="img-responsive" id="logo-bar-toggle" src="images/white-logo-try2.png"> </a>
+                    </div>
+                    <a class="navbar-toggle" id='basket-link-toggle' href="/basket">
+                        {{>numberOfBasketItems}}
+                        <img class='img-responsive' src='images/basket/shopping-cart.png'/></a>
+                </div>
             </div>
+
 
 
             <!-- Collect the nav links, forms, and other content for toggling -->
 
-            <div class="collapse navbar-collapse">
-
+            <div id="navbar-container">
 
                 <ul class="nav navbar-nav nav-bar-">
                     <li class="dropdown">
@@ -37,21 +38,35 @@
                     </li>
                 </ul>
 
-                <div align="center" id="logo-bar">
-                    <img class="img-responsive navbar-collapse" id="logo-image" src="images/white-logo-try.png">
+                <span style="flex-grow:1"> </span>
+                <div class="logo-image-container" style="height:79px">
+                <a href="/main"><img class="img-responsive navbar-collapse" id="logo-image" src="images/white-logo-try2.png">  </a>
                 </div>
-
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="promoLink"><a href="/main">MAIN</a></li>
+                    <li class="promoLink"><a href="/main">HOME</a></li>
                     <li class="mainLink"><a href="/contacts">CONTACTS</a></li>
                 </ul>
 
 
                 <a id='basket-link' href="/basket">
                     <img  src='images/basket/shopping-cart.png'/>
-                     {{>numberOfBasketItems}}
+                    {{>numberOfBasketItems}}
                 </a>
             </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav nav-bar-">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">PRODUCTS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        {{>dropdownProducts}}
+                    </ul>
+                </li>
+                <li class="promoLink"><a href="/main">HOME</a></li>
+                <li class="mainLink"><a href="/contacts">CONTACTS</a></li>
+            </ul>
         </div>
         <!-- /.navbar-collapse -->
         <!-- /.container-fluid -->

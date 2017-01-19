@@ -4,6 +4,7 @@ import '../imports/api/products.js';
 import {Orders} from '../imports/api/products.js';
 import {Baskets} from '../imports/api/products.js';
 import {Inventory} from '../imports/api/products.js';
+import {Countries} from '../imports/api/products.js';
 import './publications.js'
 
 var gateway;
@@ -14,7 +15,7 @@ Meteor.startup(() => {
 
   var env;
   // Pick Braintree environment based on environment defined in Meteor settings.
-  if (Meteor.settings.public.env === 'Production') {
+  if (Meteor.settings.public.braintree.env === 'Production') {
     env = Braintree.Environment.Production;
   } else {
     env = Braintree.Environment.Sandbox;
@@ -35,15 +36,34 @@ Meteor.methods({
     check(clientEmail,String);
     check(subjectEmail,String);
     check(emailData,Object); //TODO IMPORTANT check argument for security reasons
-    SSR.compileTemplate('htmlEmail',Assets.getText('emailToClient.html'));
+
+
+//    var html=Blaze.toHTMLWithData(Template.shareEmailContent,emailData);
+    SSR.compileTemplate('htmlEmail',Assets.getText('emailTemplate.html'));
 
     Email.send({
       to: clientEmail,
-      from: "clients@example.com",
+      from: "clients@vestmasters.com",
       subject: subjectEmail,
       html: SSR.render('htmlEmail', emailData),
+//      html: html,
     });
+
+    console.log('confirmation email sent');
   },
+
+    subscribeEmail: function(subscriber,subjectEmail){
+      check(subscriber,String);
+      check(subjectEmail,String);
+
+      Email.send({
+        to:"clients@2ffashiongroup.com",
+        from: subscriber,
+        subject: subjectEmail,
+        text: "User has subscribed"
+      });
+    },
+
 
    getClientToken: function () {
      var generateToken = Meteor.wrapAsync(gateway.clientToken.generate, gateway.clientToken);
@@ -88,8 +108,9 @@ Meteor.methods({
         })
      })
      items = Inventory.find({$or: queryArray}).fetch();
-     var totalAmountToPay = calculatePriceCallServer(items,itemsDict);
-
+     var deliveryPrice = (Countries.findOne({'country': deliveryDetails.country_delivery})).price;
+     console.log(deliveryPrice);
+     var totalAmountToPay = calculatePriceCallServer(items,itemsDict) + deliveryPrice;
      try {
      var result = gatewayTransactionSync({amount: totalAmountToPay,
                                          paymentMethodNonce: nonceFromTheClient,
@@ -97,6 +118,12 @@ Meteor.methods({
                                          submitForSettlement: true
                                          }
                                          });
+      if(!result.success){
+         Baskets.update(
+        {'_id': basketId},
+        update={$set: { 'status': 'active'}});
+       throw new Meteor.Error("TRANSACTION_FAULURE","Problem with transaction");
+      }
      } catch(transactionError){
          Baskets.update(
         {'_id': basketId},

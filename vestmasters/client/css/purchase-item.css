@@ -27,7 +27,7 @@
 
 #item-product-info {
    padding-top: 30px;
-   margin-left: 10%; 
+    margin-left: 6.5%;
    width: 80%;
 }
 
@@ -46,7 +46,7 @@
 }
 
 #size-container {
-  padding-left: 40%;
+  padding-left: 43%;
 }
 
 #item-checkbox-container {
@@ -85,4 +85,26 @@
     color: black;
     background-color: white;
     border-color: #adadad;
+ }
+
+ #size-container label{
+   padding-left:5%;
+ }
+
+ .measurements{
+    text-align: center;
+ }
+
+ .modal-footer{
+ text-align: center;
+ }
+
+
+ .modal-body p {
+   display: table-cell;
+   word-wrap: break-word;
+ }
+
+ .padding-item-container{
+ padding-bottom:3%;
  }

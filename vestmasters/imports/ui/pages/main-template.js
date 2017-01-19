@@ -5,6 +5,10 @@ import './main-template.html';
 import {scrollWin} from '../../api/scroll-function.js';
 import {Products}  from '../../api/products.js';
 
+
+
+
+
 Template.mainTemplate.onCreated(function(){
 
   this.autorun(() => {
@@ -22,7 +26,6 @@ Template.mainTemplate.helpers({
  },
 
  getClass(index,length){
-  console.log(length)
   var baseClass ="col-md-12 col-sm-4 shop-black-background"
   if(index === 0){
     return baseClass + " shop-content-thirds-height-margin shop-content-padding-right-top"
@@ -36,6 +39,33 @@ Template.mainTemplate.helpers({
 
 Template.mainTemplate.onRendered(function(){
    Session.set("DocumentTitle","Shop Online");
+   $("body").removeClass();
+
+     $("#mailing-list" ).validate({
+       rules: {
+         emailAddress: {
+           email: true,
+           required : true
+         }
+       },
+       messages: {
+         emailAddress: {
+           email: "Please use a valid email address!",
+           required: "An email address is required."
+         }
+       },
+
+
+       errorPlacement: function( error, element ) {
+         $( ".error-message" ).text( error[0].innerText );
+       },
+
+
+       success: function( error ) {
+         $( ".error-message" ).text( error[0].innerText );
+       },
+
+       });
 });
 
 Template.mainTemplate.events({
@@ -46,6 +76,13 @@ Template.mainTemplate.events({
 
   'click #bottom-button' (event) {
      scrollWin('#bottom-button', '#top-button' ,120)
-     console.log(amplify.store('top_button_clicked'));
    },
+
+   'click .button-email-subs'(e,template){
+     e.preventDefault();
+     var email =  template.find("[id='emailSubscribe']").value;
+     Meteor.call("subscribeEmail",email, "Subscription");
+     Modal.show('subscribeInfo');
+   }
+
 });

@@ -12,8 +12,7 @@
 }
 
 .button-container {
-  display: block;
-  text-align: center;
+  padding-left:20%;
 }
 
 .button {
@@ -82,14 +81,20 @@
  font-weight: bold;
 }
 
+.payment-container{
+   width:100%;
+   display:flex;
+   flex-direction: column;
+   align-items: center;
+  justify-content: flex-start;
+ }
+
 #card-payment-container{
   margin-top:6%;
   position: relative;
 }
 
-#paypal-payment-container{
-  padding-left: 29%;
-}
+
 
 .center-content{
   padding-left:7%;
@@ -97,12 +102,29 @@
   margin: 0 auto;
 }
 
-.payment-details{
+.payment-details {
   padding-left:29%;
 }
 
+#payment-form {
+  width:100%;
+}
+
+.legend-align {
+  text-align: center;
+}
 .form-horizontal .payment-details .control-label{
   /* text-align:right; */
   text-align:left;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+
+.payment-details {
+    padding-left:0;
+}
+
 }
 

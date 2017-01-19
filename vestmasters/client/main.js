@@ -30,12 +30,12 @@ function checkForExpirationClient(){
       }
       
       if (response.expired){
-            data = {message:"Your basket has expired!. You now will be redirected to the main page"};
+            data = {message:"Your basket has expired!. \n  You now will be redirected to the main page"};
             Modal.show('modalExpiry',data ,{backdrop: 'static',keyboard: false});
       		FlowRouter.go('/main');
       } else{
           if(response.warning){
-            data = {message:"Your basket is about to expire in less than 5 minutes. Please ensure that you checkout on time"};
+            data = {message:"Your basket is about to expire in less than 5 minutes.\n Please ensure that you checkout on time"};
             Modal.show('modalExpiry',data,{backdrop: 'static',keyboard: false});
           }
         }
