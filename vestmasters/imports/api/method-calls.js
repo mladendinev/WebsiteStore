@@ -36,7 +36,6 @@ export function updateBasket(item) {
           break;
       }
      };
-    console.log((new Date() - Session.get("time"))/1000)
     Session.set(LOADING_ADD_ITEM,false);
  });
 
@@ -102,6 +101,12 @@ export function createTransaction(nonce){
 
                   amplify.store(ORDER_ID,success);
                   //TODO replace the email with a real one
+
+                  Session.set(BASKET_ID_SESSION, null);
+                  Session.set(BASKET_SECRET_SESSION,null);
+                  Session.set(ORDER_INFO,null);
+
+
                   amplify.store(BRAINTREE_CLIENT_TOKEN,null);
                   Session.set(PAYMENT_ERROR,null);
                   FlowRouter.go('/confirmation');

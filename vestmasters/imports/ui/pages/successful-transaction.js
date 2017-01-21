@@ -10,15 +10,12 @@ Template.successPayment.onRendered(function(){
 
 
 Template.successPayment.onCreated(function(){
+//    Session.set(ORDER_INFO,null);
 	getOrder();
 });
 
 Template.successPayment.onRendered(function(){
 	 var delivery_info = amplify.store("DELIVERY_INFO");
-//	 console.log("ex1");
-//     emailData = {'order_id': Session.get(ORDER_INFO).transactionId, 'products': Session.get(ORDER_INFO)};
-//     Meteor.call("sendConfirmationEmail",delivery_info.email_addr, "Confirmation Email (Vest Masters)",emailData)
-//	 console.log("ex1");
 });
 
 

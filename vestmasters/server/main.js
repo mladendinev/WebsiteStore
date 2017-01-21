@@ -17,7 +17,7 @@ function sendConfirmationEmail(clientEmail,subjectEmail, emailData){
 
 //    var html=Blaze.toHTMLWithData(Template.shareEmailContent,emailData);
      SSR.compileTemplate('htmlEmail',Assets.getText('emailTemplate.html'));
-
+     console.log("sending");
      Email.send({
        to: clientEmail,
        from: "clients@vestmasters.com",
@@ -25,6 +25,7 @@ function sendConfirmationEmail(clientEmail,subjectEmail, emailData){
        html: SSR.render('htmlEmail', emailData),
 //      html: html,
       });
+      console.log("completed");
 }
 
 
@@ -123,14 +124,12 @@ Meteor.methods({
       }
      
       Meteor.defer(function(){
-         emailData = {'order_id': result.transactionId,
+          emailData = {'order_id': result.transaction.id,
                      'products': basket,
                      "deliveryInfo":deliveryDetails,
                       "amount" : result.transaction.amount,
                       "currency" :result.transaction.currencyIsoCode};
-         console.log(basket);
-         console.log(deliveryDetails);
-         sendConfirmationEmail(deliveryDetails.email_addr, "Confirmation Email (Vest Masters)",emailData);
+          sendConfirmationEmail(deliveryDetails.email_addr, "Confirmation Email (Vest Masters)",emailData);
 
           Baskets.remove({'_id': basketId });
           Inventory.update({'carted.cartId': basketId},

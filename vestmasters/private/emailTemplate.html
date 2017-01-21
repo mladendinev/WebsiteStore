@@ -3,7 +3,7 @@
         <div id="confirmatonMessage">
             <h align="center"><b>Thank you for your purchase</b></h>
             <p>
-                Dear {{deliveryInfo.firstName}}, <br>
+                Dear {{deliveryInfo.first_name}}, <br>
 
                 Here is your order. <br>
 
@@ -30,13 +30,13 @@
                             <tr>
 
                                 <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
-                                     {{item.product}}
+                                    {{item.product}}
                                 </th>
                                 <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">
-                                    <pre>
-                                    Size: {{item.size}}
-                                    Price: {{item.price}}
-                                    </pre>
+<pre>
+Size: {{item.size}}
+Price: {{item.price}}
+</pre>
                                 </td>
                             </tr>
                             {{/each}}
@@ -45,12 +45,12 @@
                                     Delivery Info
                                 </th>
                                 <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">
-                                <pre>
-                                 Address Line: {{deliveryInfo.address_line_1}}
-                                 City: {{deliveryInfo.city}}
-                                 Post code: {{deliveryInfo.zip}}
-                                 Country:{{deliveryInfo.country_delivery}}
-                                </pre>
+<pre>
+Address Line: {{deliveryInfo.address_line_1}}
+City: {{deliveryInfo.city}}
+Post code: {{deliveryInfo.zip}}
+Country:{{deliveryInfo.country_delivery}}
+</pre>
 
                                 </td>
                             </tr>
@@ -71,8 +71,10 @@
                                 </th>
 
                                 <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">
-                                    Email Address: {{deliveryInfo.email_addr}}
-                                    Phone Number: {{deliveryInfo.phone_number}}
+<pre>
+Email Address: {{deliveryInfo.email_addr}}
+Phone Number: {{deliveryInfo.phone_number}}
+</pre>
                                 </td>
                             </tr>
 
