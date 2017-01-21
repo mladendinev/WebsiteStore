@@ -10,7 +10,6 @@ Template.successPayment.onRendered(function(){
 
 
 Template.successPayment.onCreated(function(){
-    Session.set(ORDER_INFO,null);
 	getOrder();
 });
 
