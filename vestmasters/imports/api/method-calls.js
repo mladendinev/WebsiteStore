@@ -102,6 +102,9 @@ export function createTransaction(nonce){
 
                   amplify.store(ORDER_ID,success);
                   //TODO replace the email with a real one
+		   Session.set(BASKET_ID_SESSION,"");
+                   Session.set(BASKET_SECRET_SESSION,"");
+		   Session.set(ORDER_INFO,"");	
                   amplify.store(BRAINTREE_CLIENT_TOKEN,null);
                   Session.set(PAYMENT_ERROR,null);
                   FlowRouter.go('/confirmation');
