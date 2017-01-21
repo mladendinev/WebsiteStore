@@ -132,6 +132,7 @@ Meteor.methods({
      }
      
      Meteor.defer(function(){
+       //Email send here
       Baskets.remove({'_id': basketId });
         Inventory.update({'carted.cartId': basketId},
               {$pull: {'carted' :{'cartId': basketId}}},
