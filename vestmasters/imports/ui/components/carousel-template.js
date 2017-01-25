@@ -16,17 +16,11 @@ appendIndicators= function(size,el) {
 }
 
 Template.carouselTemplate.helpers({
-   carousel(){
+    carousel(){
      return Carousel.find({});
     },
 
    sizeList(){
      return Carousel.find({}).count();
    },
-   carouselStyleHelper(carouselStyle){
-    return Template.instance().style;
-   },
-   carouselSetStyle(carouselStyle){
-     Template.instance().style = carouselStyle;
-   }
 });

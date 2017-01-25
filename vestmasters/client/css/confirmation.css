@@ -1,0 +1,29 @@
+@media (max-width:400px) {
+
+ .confirmation-info {
+  font-size: 9pt;
+  font-weight:bold; 
+ }
+
+
+
+}
+
+
+@media (min-width:401px) and (max-width: 500px) {
+
+ .confirmation-info {
+  font-size: 9pt;
+  font-weight:bold;
+ }  
+
+}
+
+@media (min-width: 501px) {
+
+.confirmation-info {
+  font-size: 15pt;
+  font-weight:bold;
+ }
+
+}

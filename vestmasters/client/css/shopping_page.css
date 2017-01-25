@@ -25,7 +25,7 @@
   font-weight:bold;
 }
 
-@media (min-width: 630px) and (max-width: 991px){
+@media (min-width: 630px) and (max-width: 991.99px){
  
    .shopping-page-item-div{
      height:200px;
@@ -50,13 +50,13 @@
 
 }
 
-@media (min-width: 992px) and (max-width: 1200px){
+@media (min-width: 992px) and (max-width: 1300.99px){
         .shopping-page-item-div{
-        height:300px;
+        height:210px;
       }
 
       .item-link{
-        height:280px;
+        height:190px;
       }  
 
        .caption-div{
@@ -65,7 +65,7 @@
        }
 
         .thumbnail > img{
-        height:70%;
+        height:60%;
        }
        .sold-out-text {
           font-size:15pt;
@@ -73,7 +73,10 @@
 
 }
 
-@media (min-width: 1201px){
+
+@media (min-width: 1301px){
+      
+
       .shopping-page-item-div{
         height:300px;
       }
@@ -92,6 +95,16 @@
        }
        .sold-out-text {
           font-size:20pt;
+       }
+        
+       #shopping-page-content-wrapper {
+        display: flex;
+        justify-content: center;
+       } 
+
+       #shopping-page-content {
+         width:100%;
+         max-width: 1500px;
        }
 
 }

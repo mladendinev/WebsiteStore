@@ -1,16 +1,15 @@
 <template name="carouselTemplate">
 
- <div id="myCarousel" class="carousel slide" data-ride="carousel" style ={{carouselStyle}}>
+ <div id="myCarousel" class="carousel slide carousel-class" data-ride="carousel">
                         <!-- Indicators -->
 
 
-                        <div class="carousel-inner" role="listbox" style ={{carouselStyle}}>
-                            <div class="item active" style ={{carouselStyle}}>
+                        <div class="carousel-inner carousel-class" role="listbox" >
+                            <div class="item active carousel-class" >
                                 <img class="img-responsive" src="images/carousel/VEST_MASTERS_INDOSSATO_MILANO.jpeg" alt="Model" style="max-width: 100%;height: 100%;">
                             </div>
-                            {{carouselSetStyle carouselStyle}}
                             {{#each carousel}}
-                            <div class="item" style={{carouselStyleHelper carouselStyle}}>
+                            <div class="item carousel-class" >
                                 <a href={{link}}>
                                     <img class="img-responsive carousel-image" src="images/carousel/{{image}}"  alt="Model">
                                 </a>

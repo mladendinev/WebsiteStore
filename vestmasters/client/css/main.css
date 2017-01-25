@@ -2,13 +2,22 @@
   .shop-content-height-right {
   height: 547.97px;
   }
-
-  .jumbotron {
-    height:220px;
-  }
-
+   
   #main-content {
     height: 1642.94px;
+    display: flex;
+    justify-content: center;
+    max-width:530px;
+  }
+
+  .jumbotron-bg{
+    margin-top: 60px;
+   }
+
+  #jumbo-image-div{
+    margin: 0 auto; 
+    width:100%; 
+    max-width: 530px
   }
 
  .shop-content-padding-right-top {
@@ -41,10 +50,33 @@
 .shop-carousel-padding {
   padding: 2.5px 0px 2.5px 0px;
  }
+
+ .shop-padding {
+ padding-left: 0px;
+ padding-right: 0px;
 }
 
+}
+
+@media (min-width: 320px) and (max-width: 529.99px){
+
+ .jumbotron {
+    height:220px;
+  }
+}
+@media(min-width: 530px) and (max-width: 629.99px) {
+
+  .jumbotron {
+    height:300px;
+  }
+
+}
 
 @media (min-width: 630px) and (max-width: 991.99px){
+
+  .jumbotron-bg{
+    margin-top: 60px;
+   }
  
  .jumbotron {
     height: 380px;
@@ -83,9 +115,18 @@
    height: 547.97px;
  }
 
+ .shop-padding {
+ padding-left: 0.15%;
+ padding-right: 0.15%;
+}
+
 }
 
 @media (min-width: 992px) and (max-width: 1300.99px){
+
+  .jumbotron-bg{
+    margin-top: 70px;
+   }
 
   .jumbotron {
     height:550px;
@@ -120,16 +161,31 @@
  .shop-carousel-height {
    height: 547.97px;
  }
+
+ .shop-padding {
+ padding-left: 0.15%;
+ padding-right: 0.15%;
+}
   
 }
 
 @media (min-width: 1301px) {
+  .jumbotron-bg{
+    margin-top: 70px;
+   }
   .jumbotron{
     height:700px;
   }
   #main-content {
+    max-width:1300px;
     display: flex;
     justify-content: flex-center;
+  }
+
+  #jumbo-image-div{
+    margin: 0 auto; 
+    width:100%; 
+    max-width: 1300px
   }
  .shop-content-height-right {
   height: 547.97px;
@@ -168,7 +224,11 @@
  #left-products-container {
   padding-left: 0;
  } 
-
+  
+  .shop-padding {
+ padding-left: 0.15%;
+ padding-right: 0.15%;
+}
 }
 
 .products-container {
@@ -195,11 +255,6 @@
 .shop-content-padding-bottom{
   padding: 0px 0px 0px 0px;
  }
-
-.shop-padding {
- padding-left: 0.15%;
- padding-right: 0.15%;
-}
 
 .shop-white-background {
  background-color: white;
@@ -239,7 +294,6 @@
 
 .jumbotron-bg {
   max-height: 70vh;
-  margin-top: 70px;
   z-index: -1;
   position:fixed;
   width:100%;
@@ -283,7 +337,6 @@
 
 
 #main-content {
- max-width:1300px;
  width: 100%;
  line-height: 1.4;
  background-color: black;
