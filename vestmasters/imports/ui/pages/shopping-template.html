@@ -2,10 +2,11 @@
     <div class="header">
         {{>navigationBarShop}}
     </div>
-    <div class="container-fluid">
-        <div class="row carousel-height">
+    <div  class="container-fluid">
+        <div id="shopping-page-content-wrapper" class="row carousel-height">
+          <div id="shopping-page-content">
             <div class="col-md-offset-0 col-md-4 col-sm-offset-2 col-sm-8 col-xs-12 col-xs-offset-0 expand-div shopping-carousel-padding" >
-                {{>carouselTemplate carouselStyle="height:580px"}}
+                {{>carouselTemplate}}
             </div>
             <div class="col-md-8 col-md-offset-0 col-sm-offset-2 col-sm-8 col-xs-offset-0 col-xs-12 expand-div" >
 
@@ -39,6 +40,7 @@
                 {{/each}}
             </div>
          </div>
+     </div>
          <div class="row">
               <div class="col-xs-12">
                 <br class="clear-div"/>

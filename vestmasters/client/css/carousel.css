@@ -12,8 +12,11 @@
 
 .carousel-image{
 	min-height: 100%;
+	max-height:110%;
 
 }
+
+
 
 @media (max-width: 480px){
 
@@ -27,8 +30,30 @@
 
 }
 
-@media (max-width: 992px){
+@media (max-width: 991.99px) {
+  
+  #myCarousel {
+  	width:100%;
+  	display:flex;
+  	justify-content:center;
+  }
 
+  .carousel-class{
+	height:400px;
+	width:300px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1300.99px){
+  .carousel-class{
+	height:400px;
+  }
+}
+
+@media(min-width: 1301px) {
+.carousel-class{
+	height:580px;
+  }	
 }
 
 .carousel-control.left, .carousel-control.right {

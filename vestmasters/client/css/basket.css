@@ -1,6 +1,12 @@
 @media (max-width:400px) {
 
+  .basket-th {
+    font-size: 9pt;
+   }
+
+  
   .proceed-to-checkout-button {
+   font-weight:bold;
    font-size: 7pt;
    }
   .table-div {
@@ -11,8 +17,13 @@
 
 
 @media (min-width:401px) and (max-width: 500px) {
+
+.basket-th {
+  font-size: 10pt;
+ }
   
 .proceed-to-checkout-button {
+   font-weight: bold;
    font-size: 8pt;
    }
   .table-div {
@@ -22,9 +33,15 @@
 }
 
 @media (min-width: 501px) {
+
+  .basket-th {
+  font-size: 15pt;
+}
+
   
 .proceed-to-checkout-button {
    font-size: 13pt;
+   font-weight: bold;
    }
 
  .table-div {
@@ -47,16 +64,10 @@
 }
 
 .table-div {
-  font-size: 15pt;	
   margin-top:2px;
 }
 
-
-.basket-th {
-	font-size: 15pt;
-}
-
-.continue-customized, .proceed-to-checkout-button {
+.continue-customized {
    font-size: 12pt;
    font-weight:bold;
 }
